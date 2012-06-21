@@ -21,7 +21,7 @@
 #include <getopt.h>
 #include <limits.h>
 
-#include "libcvautomation-opencv.h"
+#include "libcvautomation.h"
 
 #include "cva-match.h"
 

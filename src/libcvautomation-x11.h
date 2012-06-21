@@ -33,7 +33,7 @@
  *  CV_TM_CCOEFF_NORMED
  */
 
-cvPoint matchSubImage_X11(IplImage); /* Match a sub image using the X11 root window as root */
-cvPoint matchSubImage_X11(char *, int=CV_TM_SQDIFF ); /* Match a sub image using X11 as root, from filename */
+CvPoint matchSubImage_X11( IplImage *subImage, int searchMethod, int threshold ); /* Match a sub image using the X11 root window as root */
+CvPoint matchSubImage_X11_location( char *rootImage_location, int search_method, int threshold ); /* Match a sub image using X11 as root, from filename */
 
 #endif /* LIBCVAUTOMATION_X11_H */
