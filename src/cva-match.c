@@ -47,7 +47,7 @@ int main( int argc, char** argv )
 	char *xDisplay;
 
 	/* Set up the linked list for slave images */
-	basic_list *list_head = NULL, *list_curr = NULL;
+	basic_list *list_head = NULL, *list_curr = NULL, *list_prev = NULL;
 
 	/* Start getopt */
 	while (1)
@@ -158,10 +158,16 @@ int main( int argc, char** argv )
 					result_point.x, separator, result_point.y );
 
 		/* With the way we allocate the list, we ensure that we always
-		 * have at least one element past the end of the list */
+		 * have at least one element past the end of the list.
+		 * Also, deconstruct the list as we go. */
+		list_prev = list_curr;
 		list_curr = list_curr->next;
+		free(list_prev);
 
 	} while ( list_curr->fileName != NULL );
+
+	/* And free the final element */
+	free(list_curr);
 
 	return 0;
 }
