@@ -19,55 +19,23 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <limits.h>
 
-#include "cv.h"
-#include "highgui.h"
+#include "libcvautomation-opencv.h"
 
-
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  usage
- *  Description:  
- * =====================================================================================
- */
-void usage ( )
-{
-	fprintf( stderr,
-	"cva-match -r <root_image> -s <sub_image> \n\
-\n\
-This program uses OpenCV in order to recognize an image within an image.\n\
-The return code is how many matches were found - return 0 for no matches,\n\
-1 for one match, etc.\n\
-\n\
-Usage: \n\
-\n\
-\t-h, --help:\tDisplay this usage message.\n\
-\t-u, --usage:\tDisplay this usage message.\n\
-\t-r, --root-image:\tLocation of the root image to compare against.\n\
-\t-s, --sub-image:\tLocation of the sub-image to find in root.\n\
-\t-p, --separator:\tSeparator of the X and Y coordinates.\n\
-\n\
-If you have any questions, comments, concerns, email bspeice@uncc.edu\n" );
-
-	exit (0);
-
-}		/* -----  end of function usage  ----- */
+#include "cva-match.h"
 
 int main( int argc, char** argv )
 {
-	IplImage	*root; /* The root image */
-	IplImage	*sub; /* The sub-image */
-	IplImage	*res;
-	CvPoint		minloc, maxloc; /* The location of our match */
-	double		minval, maxval;
-	int			root_width, root_height;
-	int			sub_width, sub_height;
-	int			res_width, res_height;
+	CvPoint result_point;
+	result_point.x = result_point.y = 0;
 
 	/* Set up everything for getopt */
 	char *separator = ",";
 	char *root_location = "root.png";
 	char *sub_location = "sub.png";
+	int threshold = INT_MAX;
+	int search_method = CV_TM_SQDIFF;
 
 	/* Start getopt */
 	while (1)
@@ -79,13 +47,15 @@ int main( int argc, char** argv )
 				{"root-image",	required_argument,	0,	'r'},
 				{"sub-image",	required_argument,	0,	's'},
 				{"separator",	required_argument,	0,	'p'},
+				{"search-method",required_argument,	0,	'm'},
+				{"threshold",	required_argument,	0,	't'},
 				{0, 0, 0, 0}
 		};
 
 		int option_index = 0;
 		opterr = 0;
 
-		int c = getopt_long (argc, argv, "hur:s:p:",
+		int c = getopt_long (argc, argv, "hur:s:p:m:t:",
 							long_options, &option_index);
 
 		/* We're done with parsing options */
@@ -117,6 +87,14 @@ int main( int argc, char** argv )
 				separator = optarg;
 				break;
 
+			case 'm':
+				search_method = atoi(optarg);
+				break;
+
+			case 't':
+				threshold = atoi(optarg);
+				break;
+
 			case '?':
 				/* Error routine */
 				break;
@@ -127,54 +105,53 @@ int main( int argc, char** argv )
 		};
 	}
 
+	/* Use INT_MAX for the threshold, due to the way CV_TM_SQDIFF is calculated */
+	result_point = matchSubImage_location( root_location, sub_location, search_method, threshold );
 
-	/* load reference image */
-	root = cvLoadImage( root_location, CV_LOAD_IMAGE_COLOR );
-
-	/* always check */
-	if( root == 0 ) {
-		fprintf( stderr, "Cannot load the root image %s!\n", root_location );
-		return 0; 
-	}
-
-	/* load sub image */
-	sub = cvLoadImage( sub_location, CV_LOAD_IMAGE_COLOR );
-
-	/* always check */
-	if( sub == 0 ) {
-		fprintf( stderr, "Cannot load the sub-image %s!\n", sub_location );
-		return 0;
-	}
-
-	/* get image's properties */
-	root_width  = root->width;
-	root_height = root->height;
-	sub_width  = sub->width;
-	sub_height = sub->height;
-	res_width  = root_width - sub_width + 1;
-	res_height = root_height - sub_height + 1;
-
-	/* create new image for template matching computation */
-	res = cvCreateImage( cvSize( res_width, res_height ), IPL_DEPTH_32F, 1 );
-
-	/* choose template matching method to be used */
-	cvMatchTemplate( root, sub, res, CV_TM_SQDIFF );
-	/*cvMatchTemplate( root, sub, res, CV_TM_SQDIFF_NORMED );
-	cvMatchTemplate( root, sub, res, CV_TM_CCORR );
-	cvMatchTemplate( root, sub, res, CV_TM_CCORR_NORMED );
-	cvMatchTemplate( root, sub, res, CV_TM_CCOEFF );
-	cvMatchTemplate( root, sub, res, CV_TM_CCOEFF_NORMED );*/
-
-	cvMinMaxLoc( res, &minval, &maxval, &minloc, &maxloc, 0 );
-
-	/* Output the match location */
-	printf ("%i%s%i\n", minloc.x, separator, minloc.y );
-
-	/* free memory */
-	cvReleaseImage( &root );
-	cvReleaseImage( &sub );
-	cvReleaseImage( &res );
+	if ( result_point.x != -1 && result_point.y != -1 )
+		/* Output the match location */
+		printf ("%i%s%i\n", result_point.x, separator, result_point.y );
 
 	return 0;
 }
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  usage
+ *  Description:  I really shouldn't need to write this
+ * =====================================================================================
+ */
+void usage ( )
+{
+	fprintf( stderr, "\n\
+cva-match -r <root_image> -s <sub_image> \n\
+\n\
+This program uses OpenCV in order to recognize an image within an image.\n\
+The return code is how many matches were found - return 0 for no matches,\n\
+1 for one match, etc.\n\
+\n\
+Usage: \n\
+\n\
+\t-h, --help:\t\tDisplay this usage message.\n\
+\t-u, --usage:\t\tDisplay this usage message.\n\
+\t-r, --root-image:\tLocation of the root image to compare against.\n\
+\t-s, --sub-image:\tLocation of the sub-image to find in root.\n\
+\t-p, --separator:\tSeparator of the X and Y coordinates.\n\
+\t-t, --threshold:\tSet how strict the match is - 50 is recommended lowest value.\n\
+\t\t\t\tNote: When using CCORR or CCOEFF threshold works in opposite direction,\n\
+\t\t\t\tso -50 is recommended highest value.\n\
+\t-m, --search-method:\tSet which method is used to search for sub-images.\n\
+\t\t\t\tMethods:\n\
+\t\t\t\t\tCV_TM_SQDIFF = 0\n\
+\t\t\t\t\tCV_TM_SQDIFF_NORMED = 1\n\
+\t\t\t\t\tCV_TM_CCORR = 2\n\
+\t\t\t\t\tCV_TM_CCORR_NORMED = 3\n\
+\t\t\t\t\tCV_TM_CCOEFF = 4\n\
+\t\t\t\t\tCV_TM_COEFF_NORMED = 5\n\
+\n\
+If you have any questions, comments, concerns, email bspeice@uncc.edu\n" );
+
+	exit (0);
+
+}		/* -----  end of function usage  ----- */
 
