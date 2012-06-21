@@ -25,6 +25,13 @@
 
 void usage ();
 
+struct list {
+	char *fileName;
+	struct list *next;
+};
+
+typedef struct list basic_list; 
+
 int main( int argc, char** argv )
 {
 	CvPoint result_point;
@@ -38,6 +45,9 @@ int main( int argc, char** argv )
 	int search_method = CV_TM_SQDIFF;
 	int useX = 0; /* bool useX = false; */
 	char *xDisplay;
+
+	/* Set up the linked list for slave images */
+	basic_list *list_head = NULL, *list_curr = NULL;
 
 	/* Start getopt */
 	while (1)
@@ -58,7 +68,7 @@ int main( int argc, char** argv )
 		int option_index = 0;
 		opterr = 0;
 
-		int c = getopt_long (argc, argv, "hur:s:p:m:t:x:",
+		int c = getopt_long (argc, argv, "hur:s:p:m:t:x::",
 							long_options, &option_index);
 
 		/* We're done with parsing options */
@@ -83,7 +93,14 @@ int main( int argc, char** argv )
 				break;
 
 			case 's':
-				sub_location = optarg;
+				if ( list_head == NULL )
+				{
+					list_head = (basic_list *) malloc (sizeof(basic_list));
+					list_curr = list_head;
+				}
+				list_curr->fileName = optarg;
+				list_curr->next = (basic_list *) malloc (sizeof(basic_list));
+				list_curr = list_curr->next;
 				break;
 
 			case 'p':
@@ -99,14 +116,12 @@ int main( int argc, char** argv )
 				break;
 
 			case 'x':
-				if (optarg) {
+				if ( optarg != NULL ) {
 					useX = 1;
 					xDisplay = optarg;
-					printf ("Using display %s", xDisplay);
 				} else {
 					useX = 1;
 					xDisplay = "";
-					printf ("Using display %s", xDisplay);
 				}
 				break;
 
@@ -121,14 +136,32 @@ int main( int argc, char** argv )
 		};
 	}
 
-	if (useX)
-		result_point = matchSubImage_X11_location( xDisplay, sub_location, search_method, threshold );
+	/* Make sure we have a linked list, 
+	 * and reset the linked list to go back through from the top */
+	if ( list_head == NULL )
+		return 1;
 	else
-		result_point = matchSubImage_location( root_location, sub_location, search_method, threshold );
+		list_curr = list_head;
 
-	if ( result_point.x != -1 && result_point.y != -1 )
-		/* Output the match location */
-		printf ("%i%s%i\n", result_point.x, separator, result_point.y );
+	do
+	{
+		sub_location = list_curr->fileName;
+
+		if (useX)
+			result_point = matchSubImage_X11_location( xDisplay, sub_location, search_method, threshold );
+		else
+			result_point = matchSubImage_location( root_location, sub_location, search_method, threshold );
+
+		if ( result_point.x != -1 && result_point.y != -1 )
+			/* Output the match location */
+			printf ("%s%s%i%s%i\n", list_curr->fileName, separator,
+					result_point.x, separator, result_point.y );
+
+		/* With the way we allocate the list, we ensure that we always
+		 * have at least one element past the end of the list */
+		list_curr = list_curr->next;
+
+	} while ( list_curr->fileName != NULL );
 
 	return 0;
 }
@@ -156,7 +189,7 @@ Usage: \n\
 \t-r, --root-image:\tLocation of the root image to compare against.\n\
 \t-s, --sub-image:\tLocation of the sub-image to find in root.\n\
 \t-p, --separator:\tSeparator of the X and Y coordinates.\n\
-\t-t, --threshold:\tSet how strict the match is - 50 is recommended lowest value.\n\
+\t-t, --threshold:\tSet how strict the match is - 100 is recommended lowest value.\n\
 \t\t\t\tNote: When using CCORR or CCOEFF threshold works in opposite direction,\n\
 \t\t\t\tso -50 is recommended highest value.\n\
 \t-m, --search-method:\tSet which method is used to search for sub-images.\n\
