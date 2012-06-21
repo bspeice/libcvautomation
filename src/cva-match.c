@@ -23,6 +23,8 @@
 
 #include "libcvautomation.h"
 
+void usage ();
+
 int main( int argc, char** argv )
 {
 	CvPoint result_point;
@@ -34,6 +36,8 @@ int main( int argc, char** argv )
 	char *sub_location = "sub.png";
 	int threshold = INT_MAX;
 	int search_method = CV_TM_SQDIFF;
+	int useX = 0; /* bool useX = false; */
+	char *xDisplay;
 
 	/* Start getopt */
 	while (1)
@@ -47,13 +51,14 @@ int main( int argc, char** argv )
 				{"separator",	required_argument,	0,	'p'},
 				{"search-method",required_argument,	0,	'm'},
 				{"threshold",	required_argument,	0,	't'},
+				{"x-root",		optional_argument,	0,	'x'},
 				{0, 0, 0, 0}
 		};
 
 		int option_index = 0;
 		opterr = 0;
 
-		int c = getopt_long (argc, argv, "hur:s:p:m:t:",
+		int c = getopt_long (argc, argv, "hur:s:p:m:t:x:",
 							long_options, &option_index);
 
 		/* We're done with parsing options */
@@ -93,6 +98,19 @@ int main( int argc, char** argv )
 				threshold = atoi(optarg);
 				break;
 
+			case 'x':
+				if (optarg) {
+					useX = 1;
+					xDisplay = optarg;
+					printf ("Using display %s", xDisplay);
+				} else {
+					useX = 1;
+					xDisplay = "";
+					printf ("Using display %s", xDisplay);
+				}
+				break;
+
+
 			case '?':
 				/* Error routine */
 				break;
@@ -103,8 +121,10 @@ int main( int argc, char** argv )
 		};
 	}
 
-	/* Use INT_MAX for the threshold, due to the way CV_TM_SQDIFF is calculated */
-	result_point = matchSubImage_location( root_location, sub_location, search_method, threshold );
+	if (useX)
+		result_point = matchSubImage_X11_location( xDisplay, sub_location, search_method, threshold );
+	else
+		result_point = matchSubImage_location( root_location, sub_location, search_method, threshold );
 
 	if ( result_point.x != -1 && result_point.y != -1 )
 		/* Output the match location */
@@ -123,6 +143,7 @@ void usage ( )
 {
 	fprintf( stderr, "\n\
 cva-match -r <root_image> -s <sub_image> \n\
+cva-match -s <sub_image> -x \n\
 \n\
 This program uses OpenCV in order to recognize an image within an image.\n\
 The return code is how many matches were found - return 0 for no matches,\n\
@@ -146,6 +167,11 @@ Usage: \n\
 \t\t\t\t\tCV_TM_CCORR_NORMED = 3\n\
 \t\t\t\t\tCV_TM_CCOEFF = 4\n\
 \t\t\t\t\tCV_TM_COEFF_NORMED = 5\n\
+\t-x, --x-root[=DISPLAY]:\tSet the root image to come from X11\n\
+\t\t\t\tThe DISPLAY variable is optional, not specifying it will cause X\n\
+\t\t\t\tto use the default display (not specifically :0.0)\n\
+\t\t\t\tPlease note also that the '-x' must come at the end\n\
+\t\t\t\tsince it is an optional argument.\n\
 \n\
 If you have any questions, comments, concerns, email bspeice@uncc.edu\n" );
 

@@ -18,6 +18,7 @@
 #ifndef LIBCVAUTOMATION_H
 #define LIBCVAUTOMATION_H
 
+#include <stdio.h>
 #include "libcvautomation-opencv.h"
 #include "libcvautomation-x11.h"
 
