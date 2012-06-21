@@ -23,8 +23,6 @@
 
 #include "libcvautomation.h"
 
-#include "cva-match.h"
-
 int main( int argc, char** argv )
 {
 	CvPoint result_point;
