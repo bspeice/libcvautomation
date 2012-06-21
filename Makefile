@@ -28,6 +28,8 @@ OBJ_DIR			= obj
 BIN_DIR			= bin
 LIB_DIR			= lib
 
+INSTALL_PREFIX	= /usr/local
+
 CV_FLAGS		= `pkg-config --cflags opencv`
 CV_LIBS			= `pkg-config --libs opencv`
 X11_FLAGS		= `pkg-config --cflags x11`
@@ -102,3 +104,7 @@ distclean:
 				rm -rf $(LIB_DIR)
 				rm .dirs
 
+install:
+				install bin/* /usr/local/bin -m 0755
+				install lib/* /usr/local/lib -m 0755
+				install src/*.h /usr/local/include -m 0755
