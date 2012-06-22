@@ -18,7 +18,7 @@
 #ifndef LIBCVAUTOMATION_OPENCV_H
 #define LIBCVAUTOMATION_OPENCV_H
 
-#include "libcvautomation.h"
+#include <libcvautomation/libcvautomation.h>
 
 /* It should be noted that the following are the macros for template matching:
  * 	CV_TM_SQDIFF (default)
@@ -33,12 +33,12 @@
 CvPoint matchSubImage ( IplImage *rootImage, IplImage *subImage, int searchMethod, double tolerance );
 
 /* Match a root image and sub image from filename */
-CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_location, int searchMethod, double tolerance );
+CvPoint matchSubImage_location ( const char *rootImage_location, const char *subImage_location, int searchMethod, double tolerance );
 
 /* Match a root image and sub images from an array of images */
 void matchSubImage_a ( IplImage *rootImage, cvautomationList *subImageArray, int listSize );
 
 /* Match a root image and sub images from an array of images */
-void matchSubImage_a_location ( char *rootImageFileName, cvautomationList *subImageArray, int listSize );
+void matchSubImage_a_location ( const char *rootImageFileName, cvautomationList *subImageArray, int listSize );
 
 #endif /* LIBCVAUTOMATION_OPENCV_H */

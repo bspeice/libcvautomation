@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 
-#include "libcvautomation-opencv.h"
+#include <libcvautomation/libcvautomation-opencv.h>
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -92,7 +92,7 @@ CvPoint matchSubImage ( IplImage *rootImage, IplImage *subImage, int searchMetho
  *  Description:  Match a root image and sub image from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_location, int searchMethod, double tolerance )
+CvPoint matchSubImage_location ( const char *rootImage_location, const char *subImage_location, int searchMethod, double tolerance )
 {
 	/* This is basically a wrapper for matchSubImage( IplImage, IplImage )
 	 * All we do is load the images from the given filenames, and then
@@ -170,7 +170,7 @@ void matchSubImage_a ( IplImage *rootImage, cvautomationList *subImageArray, int
  *  				searchMethod and threshold value.
  * =====================================================================================
  */
-void matchSubImage_a_location ( char *rootImageFileName, cvautomationList *subImageArray, int listSize )
+void matchSubImage_a_location ( const char *rootImageFileName, cvautomationList *subImageArray, int listSize )
 {
 	/* This is also a higher-end wrapper for matchSubImage, but is mostly aimed
 	 * at making python support for multiple images very easy. */

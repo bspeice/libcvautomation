@@ -45,7 +45,7 @@ typedef struct {
 /* Project component includes */
 /* The includes come here to make sure all function prototypes have access
  * to the cvautomationList struct */
-#include "libcvautomation-opencv.h"
-#include "libcvautomation-x11.h"
+#include <libcvautomation/libcvautomation-opencv.h>
+#include <libcvautomation/libcvautomation-x11.h>
 
 #endif /* LIBCVAUTOMATION_H */

@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 
-#include "libcvautomation-x11.h"
+#include <libcvautomation/libcvautomation-x11.h>
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -177,7 +177,7 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
  *  Description:  Match a sub image using the X11 root window as root, from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_location( char *displayLocation, char *subImage_location, int searchMethod, int tolerance )
+CvPoint matchSubImage_X11_location( char *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
 {
 	/* This is basically a wrapper for matchSubImage_X11( char *display, IplImage )
 	 * All we do is load the sub-image from the given filename, and then

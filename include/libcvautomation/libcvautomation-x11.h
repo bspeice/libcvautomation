@@ -19,7 +19,7 @@
 #ifndef LIBCVAUTOMATION_X11_H
 #define LIBCVAUTOMATION_X11_H
 
-#include "libcvautomation.h"
+#include <libcvautomation/libcvautomation.h>
 
 /* It should be noted that the following are the macros for template matching:
  * 	CV_TM_SQDIFF (default)
@@ -31,6 +31,6 @@
  */
 
 CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); /* Match a sub image using the X11 root window as root */
-CvPoint matchSubImage_X11_location( char *displayLocation, char *rootImage_location, int search_method, int tolerance ); /* Match a sub image using X11 as root, from filename */
+CvPoint matchSubImage_X11_location( char *displayLocation, const char *rootImage_location, int search_method, int tolerance ); /* Match a sub image using X11 as root, from filename */
 
 #endif /* LIBCVAUTOMATION_X11_H */

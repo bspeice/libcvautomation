@@ -21,7 +21,7 @@
 #include <getopt.h>
 #include <limits.h>
 
-#include "libcvautomation.h"
+#include <libcvautomation/libcvautomation.h>
 
 void usage ();
 
