@@ -19,5 +19,4 @@
 
 aclocal
 autoconf
-autoheader
 automake
