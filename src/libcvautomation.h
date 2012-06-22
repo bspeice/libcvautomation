@@ -18,11 +18,14 @@
 #ifndef LIBCVAUTOMATION_H
 #define LIBCVAUTOMATION_H
 
+/* C includes */
 #include <stdio.h>
 
+/* OpenCV includes */
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
+/* X11 includes */
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
@@ -38,5 +41,11 @@ typedef struct {
 	int tolerance;
 
 } cvautomationList;
+
+/* Project component includes */
+/* The includes come here to make sure all function prototypes have access
+ * to the cvautomationList struct */
+#include "libcvautomation-opencv.h"
+#include "libcvautomation-x11.h"
 
 #endif /* LIBCVAUTOMATION_H */

@@ -126,13 +126,13 @@ CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_locati
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  matchSubImage_list
- *  Description:  Match a root image and sub image from a list of sub-images.
+ *         Name:  matchSubImage_a
+ *  Description:  Match a root image and sub image from an array of sub-images.
  *  				The list contains an element for each sub-image to specify its own
  *  				searchMethod and threshold value.
  * =====================================================================================
  */
-void matchSubImage_list ( IplImage *rootImage, cvautomationList *subImageListHead, int listSize )
+void matchSubImage_a ( IplImage *rootImage, cvautomationList *subImageArray, int listSize )
 {
 	/* This is also a higher-end wrapper for matchSubImage, but is mostly aimed
 	 * at making python support for multiple images very easy. */
@@ -143,11 +143,19 @@ void matchSubImage_list ( IplImage *rootImage, cvautomationList *subImageListHea
 	int x = 0;
 	for ( x = 0; x < listSize; x++ )
 	{
-		curr = subImageList[x];
-		if ( subImageListHead[x].cvaImage != 0 )
+		curr = subImageArray[x];
+		if ( subImageArray[x].cvaImage != 0 )
 			resultPoint = matchSubImage ( rootImage, curr.cvaImage, curr.searchMethod, curr.tolerance );
 		else
-			resultPoint = matchSubImage ( rootImage, curr.fileName, curr.searchMethod, curr.tolerance );
+		{
+			/* We have a sub-image filename, go ahead and create the actual image. */
+			IplImage *subImage;
+			subImage = cvLoadImage( curr.fileName, CV_LOAD_IMAGE_COLOR );
+
+			resultPoint = matchSubImage ( rootImage, subImage, curr.searchMethod, curr.tolerance );
+
+			cvReleaseImage( &subImage );
+		}
 
 		curr.resultPoint = resultPoint;
 	}
@@ -157,12 +165,12 @@ void matchSubImage_list ( IplImage *rootImage, cvautomationList *subImageListHea
  * ===  FUNCTION  ======================================================================
  *         Name:  matchSubImage_list_location
  *  Description:  Match a root image from location, and sub image from
- *  				a list of sub-images.
+ *  				an array of sub-images.
  *  				The list contains an element for each sub-image to specify its own
  *  				searchMethod and threshold value.
  * =====================================================================================
  */
-void matchSubImage_list ( char *rootImageFileName, cvautomationList *subImageListHead, int listSize )
+void matchSubImage_a_location ( char *rootImageFileName, cvautomationList *subImageArray, int listSize )
 {
 	/* This is also a higher-end wrapper for matchSubImage, but is mostly aimed
 	 * at making python support for multiple images very easy. */
@@ -171,18 +179,28 @@ void matchSubImage_list ( char *rootImageFileName, cvautomationList *subImageLis
 	cvautomationList curr;
 
 	IplImage *rootImage;
-	rootImage = cvLoadImage ( rootImageFileName, CV_LOAD_IMAGE_COLOR );
+	rootImage = cvLoadImage( rootImageFileName, CV_LOAD_IMAGE_COLOR );
 
 	int x = 0;
 	for ( x = 0; x < listSize; x++ )
 	{
-		curr = subImageList[x];
-		if ( subImageListHead[x].cvaImage != 0 )
+		curr = subImageArray[x];
+		if ( subImageArray[x].cvaImage != 0 )
 			resultPoint = matchSubImage ( rootImage, curr.cvaImage, curr.searchMethod, curr.tolerance );
 		else
-			resultPoint = matchSubImage ( rootImage, curr.fileName, curr.searchMethod, curr.tolerance );
+		{
+			/* We have a sub-image filename, go ahead and create the actual image. */
+			IplImage *subImage;
+			subImage = cvLoadImage( curr.fileName, CV_LOAD_IMAGE_COLOR );
+
+			resultPoint = matchSubImage ( rootImage, subImage, curr.searchMethod, curr.tolerance );
+
+			cvReleaseImage( &subImage );
+		}
 
 		curr.resultPoint = resultPoint;
 	}
+
+	cvReleaseImage( &rootImage );
 }
 

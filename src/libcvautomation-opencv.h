@@ -35,7 +35,10 @@ CvPoint matchSubImage ( IplImage *rootImage, IplImage *subImage, int searchMetho
 /* Match a root image and sub image from filename */
 CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_location, int searchMethod, double tolerance );
 
-/* Match a root image and sub images from a list of images */
-void matchSubImage_list ( IplImage *rootImage, cvautomationList *subImageListHead, int listSize )
+/* Match a root image and sub images from an array of images */
+void matchSubImage_a ( IplImage *rootImage, cvautomationList *subImageArray, int listSize );
+
+/* Match a root image and sub images from an array of images */
+void matchSubImage_a_location ( char *rootImageFileName, cvautomationList *subImageArray, int listSize );
 
 #endif /* LIBCVAUTOMATION_OPENCV_H */
