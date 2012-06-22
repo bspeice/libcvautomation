@@ -30,7 +30,16 @@
  *  CV_TM_CCOEFF_NORMED
  */
 
-CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); /* Match a sub image using the X11 root window as root */
-CvPoint matchSubImage_X11_location( char *displayLocation, const char *rootImage_location, int search_method, int tolerance ); /* Match a sub image using X11 as root, from filename */
+/* Match a sub image using the X11 root window as root */
+CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
+
+/* Match a sub image using the X11 root window as root, return the center */
+CvPoint matchSubImage_X11_center( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
+
+/* Match a sub image using X11 as root, from filename */
+CvPoint matchSubImage_X11_location( char *displayLocation, const char *subImage_location, int search_method, int tolerance ); 
+
+/* Match a sub image using X11 as root, from filename, return the center */
+CvPoint matchSubImage_X11_location_center( char *displayLocation, const char *subImage_location, int search_method, int tolerance ); 
 
 #endif /* LIBCVAUTOMATION_X11_H */

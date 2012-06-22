@@ -19,10 +19,10 @@
 #      REVISION:  ---
 #===============================================================================
 
-CVAMATCH="`dirname $0`/../bin/cva-match"
+CVAMATCH=`which cva-match`
 
-if [ ! -x $CVAMATCH ]; then
-	echo "The cva-match binary was not found or is not executable. Please fix this!"
+if [ ! -x "$CVA_MATCH" ]; then
+	echo "Could not find the cva-match binary! Can't continue..."
 	exit 255
 fi
 

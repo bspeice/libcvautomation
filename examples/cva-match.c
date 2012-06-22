@@ -44,7 +44,11 @@ int main( int argc, char** argv )
 	int tolerance = INT_MAX;
 	int search_method = CV_TM_SQDIFF;
 	int useX = 0; /* bool useX = false; */
+	int useCenter = 0;
 	char *xDisplay;
+
+	/* Set the default display */
+	xDisplay = "";
 
 	/* Set up the linked list for slave images */
 	basic_list *list_head = NULL, *list_curr = NULL, *list_prev = NULL;
@@ -62,13 +66,14 @@ int main( int argc, char** argv )
 				{"search-method",required_argument,	0,	'm'},
 				{"tolerance",	required_argument,	0,	't'},
 				{"x-root",		optional_argument,	0,	'x'},
+				{"center",		no_argument,		0,	'c'},
 				{0, 0, 0, 0}
 		};
 
 		int option_index = 0;
 		opterr = 0;
 
-		int c = getopt_long (argc, argv, "hur:s:p:m:t:x::",
+		int c = getopt_long (argc, argv, "hur:s:p:m:t:x::c",
 							long_options, &option_index);
 
 		/* We're done with parsing options */
@@ -125,6 +130,8 @@ int main( int argc, char** argv )
 				}
 				break;
 
+			case 'c':
+				useCenter = 1;
 
 			case '?':
 				/* Error routine */
@@ -147,9 +154,13 @@ int main( int argc, char** argv )
 	{
 		sub_location = list_curr->fileName;
 
-		if (useX)
+		if (useX && useCenter)
+			result_point = matchSubImage_X11_location_center( xDisplay, sub_location, search_method, tolerance );
+		else if (useX && !useCenter)
 			result_point = matchSubImage_X11_location( xDisplay, sub_location, search_method, tolerance );
-		else
+		else if (!useX && useCenter)
+			result_point = matchSubImage_location_center( root_location, sub_location, search_method, tolerance );
+		else /* if (!useX && !useCenter) */
 			result_point = matchSubImage_location( root_location, sub_location, search_method, tolerance );
 
 		if ( result_point.x != -1 && result_point.y != -1 )
@@ -211,6 +222,8 @@ Usage: \n\
 \t\t\t\tto use the default display (not specifically :0.0)\n\
 \t\t\t\tPlease note also that the '-x' must come at the end\n\
 \t\t\t\tsince it is an optional argument.\n\
+\t-c, --center:\t\tThe output points should be centered on the sub-image, rather\n\
+\t\t\t\tthan the top-left corner.\n\
 \n\
 If you have any questions, comments, concerns, email bspeice@uncc.edu\n" );
 
