@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.62)
+AC_PREREQ(2.59)
 AC_INIT(libcvautomation, 0.1, bspeice@uncc.edu)
 AM_INIT_AUTOMAKE
 
