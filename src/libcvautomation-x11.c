@@ -24,7 +24,7 @@
  *  Description:  Match a sub image using the X11 root window as root
  * =====================================================================================
  */
-CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int threshold )
+CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
 {
 	/* First things first, grab the root X window and convert it to
 	 * the IplImage format.
@@ -159,7 +159,7 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
 	 * However, we don't want to do any more work than we have to - send our images off
 	 * to matchSubImage in libopencvautomation-opencv. */
 
-	resultPoint = matchSubImage ( X_IPL, subImage, searchMethod, threshold );
+	resultPoint = matchSubImage ( X_IPL, subImage, searchMethod, tolerance );
 
 	/* Clean up the CV image we created, as well as all X resources */
 	XDestroyImage( rootImage );
@@ -177,7 +177,7 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
  *  Description:  Match a sub image using the X11 root window as root, from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_location( char *displayLocation, char *subImage_location, int searchMethod, int threshold )
+CvPoint matchSubImage_X11_location( char *displayLocation, char *subImage_location, int searchMethod, int tolerance )
 {
 	/* This is basically a wrapper for matchSubImage_X11( char *display, IplImage )
 	 * All we do is load the sub-image from the given filename, and then
@@ -195,7 +195,7 @@ CvPoint matchSubImage_X11_location( char *displayLocation, char *subImage_locati
 		return return_point;
 	}
 
-	return_point = matchSubImage_X11( displayLocation, subImage, searchMethod, threshold );
+	return_point = matchSubImage_X11( displayLocation, subImage, searchMethod, tolerance );
 
 	/* Free up the memory we created */
 	cvReleaseImage( &subImage );

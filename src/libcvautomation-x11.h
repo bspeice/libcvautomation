@@ -19,12 +19,6 @@
 #ifndef LIBCVAUTOMATION_X11_H
 #define LIBCVAUTOMATION_X11_H
 
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
-
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-
 #include "libcvautomation.h"
 
 /* It should be noted that the following are the macros for template matching:
@@ -36,7 +30,7 @@
  *  CV_TM_CCOEFF_NORMED
  */
 
-CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int threshold ); /* Match a sub image using the X11 root window as root */
-CvPoint matchSubImage_X11_location( char *displayLocation, char *rootImage_location, int search_method, int threshold ); /* Match a sub image using X11 as root, from filename */
+CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); /* Match a sub image using the X11 root window as root */
+CvPoint matchSubImage_X11_location( char *displayLocation, char *rootImage_location, int search_method, int tolerance ); /* Match a sub image using X11 as root, from filename */
 
 #endif /* LIBCVAUTOMATION_X11_H */

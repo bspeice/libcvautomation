@@ -25,7 +25,7 @@
  * =====================================================================================
  */
 
-CvPoint matchSubImage ( IplImage *rootImage, IplImage *subImage, int searchMethod, double threshold )
+CvPoint matchSubImage ( IplImage *rootImage, IplImage *subImage, int searchMethod, double tolerance )
 {
 	/* We have the two OpenCV images we want, go ahead and find if there are any matches */
 	IplImage	*result;
@@ -71,14 +71,14 @@ CvPoint matchSubImage ( IplImage *rootImage, IplImage *subImage, int searchMetho
 	/* Return the match location */
 	if ( searchMethod == CV_TM_SQDIFF || searchMethod == CV_TM_SQDIFF_NORMED )
 	{
-		if ( minval < threshold )
+		if ( minval < tolerance )
 			return minloc;
 		else
 			return badpoint;
 	}
 	else
 	{
-		if ( maxval > threshold )
+		if ( maxval > tolerance )
 			return maxloc;
 		else
 			return badpoint;
@@ -92,7 +92,7 @@ CvPoint matchSubImage ( IplImage *rootImage, IplImage *subImage, int searchMetho
  *  Description:  Match a root image and sub image from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_location, int searchMethod, double threshold )
+CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_location, int searchMethod, double tolerance )
 {
 	/* This is basically a wrapper for matchSubImage( IplImage, IplImage )
 	 * All we do is load the images from the given filenames, and then
@@ -113,7 +113,7 @@ CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_locati
 		return return_point;
 	}
 
-	return_point = matchSubImage( rootImage, subImage, searchMethod, threshold );
+	return_point = matchSubImage( rootImage, subImage, searchMethod, tolerance );
 
 	/* Free up the memory we created */
 	cvReleaseImage( &rootImage );
@@ -123,3 +123,66 @@ CvPoint matchSubImage_location ( char *rootImage_location, char *subImage_locati
 	return return_point;
 
 }		/* -----  end of function matchSubImage  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  matchSubImage_list
+ *  Description:  Match a root image and sub image from a list of sub-images.
+ *  				The list contains an element for each sub-image to specify its own
+ *  				searchMethod and threshold value.
+ * =====================================================================================
+ */
+void matchSubImage_list ( IplImage *rootImage, cvautomationList *subImageListHead, int listSize )
+{
+	/* This is also a higher-end wrapper for matchSubImage, but is mostly aimed
+	 * at making python support for multiple images very easy. */
+
+	CvPoint resultPoint;
+	cvautomationList curr;
+
+	int x = 0;
+	for ( x = 0; x < listSize; x++ )
+	{
+		curr = subImageList[x];
+		if ( subImageListHead[x].cvaImage != 0 )
+			resultPoint = matchSubImage ( rootImage, curr.cvaImage, curr.searchMethod, curr.tolerance );
+		else
+			resultPoint = matchSubImage ( rootImage, curr.fileName, curr.searchMethod, curr.tolerance );
+
+		curr.resultPoint = resultPoint;
+	}
+}
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  matchSubImage_list_location
+ *  Description:  Match a root image from location, and sub image from
+ *  				a list of sub-images.
+ *  				The list contains an element for each sub-image to specify its own
+ *  				searchMethod and threshold value.
+ * =====================================================================================
+ */
+void matchSubImage_list ( char *rootImageFileName, cvautomationList *subImageListHead, int listSize )
+{
+	/* This is also a higher-end wrapper for matchSubImage, but is mostly aimed
+	 * at making python support for multiple images very easy. */
+
+	CvPoint resultPoint;
+	cvautomationList curr;
+
+	IplImage *rootImage;
+	rootImage = cvLoadImage ( rootImageFileName, CV_LOAD_IMAGE_COLOR );
+
+	int x = 0;
+	for ( x = 0; x < listSize; x++ )
+	{
+		curr = subImageList[x];
+		if ( subImageListHead[x].cvaImage != 0 )
+			resultPoint = matchSubImage ( rootImage, curr.cvaImage, curr.searchMethod, curr.tolerance );
+		else
+			resultPoint = matchSubImage ( rootImage, curr.fileName, curr.searchMethod, curr.tolerance );
+
+		curr.resultPoint = resultPoint;
+	}
+}
+

@@ -41,7 +41,7 @@ int main( int argc, char** argv )
 	char *separator = ",";
 	char *root_location = "root.png";
 	char *sub_location = "sub.png";
-	int threshold = INT_MAX;
+	int tolerance = INT_MAX;
 	int search_method = CV_TM_SQDIFF;
 	int useX = 0; /* bool useX = false; */
 	char *xDisplay;
@@ -60,7 +60,7 @@ int main( int argc, char** argv )
 				{"sub-image",	required_argument,	0,	's'},
 				{"separator",	required_argument,	0,	'p'},
 				{"search-method",required_argument,	0,	'm'},
-				{"threshold",	required_argument,	0,	't'},
+				{"tolerance",	required_argument,	0,	't'},
 				{"x-root",		optional_argument,	0,	'x'},
 				{0, 0, 0, 0}
 		};
@@ -112,7 +112,7 @@ int main( int argc, char** argv )
 				break;
 
 			case 't':
-				threshold = atoi(optarg);
+				tolerance = atoi(optarg);
 				break;
 
 			case 'x':
@@ -148,9 +148,9 @@ int main( int argc, char** argv )
 		sub_location = list_curr->fileName;
 
 		if (useX)
-			result_point = matchSubImage_X11_location( xDisplay, sub_location, search_method, threshold );
+			result_point = matchSubImage_X11_location( xDisplay, sub_location, search_method, tolerance );
 		else
-			result_point = matchSubImage_location( root_location, sub_location, search_method, threshold );
+			result_point = matchSubImage_location( root_location, sub_location, search_method, tolerance );
 
 		if ( result_point.x != -1 && result_point.y != -1 )
 			/* Output the match location */
@@ -195,8 +195,8 @@ Usage: \n\
 \t-r, --root-image:\tLocation of the root image to compare against.\n\
 \t-s, --sub-image:\tLocation of the sub-image to find in root.\n\
 \t-p, --separator:\tSeparator of the X and Y coordinates.\n\
-\t-t, --threshold:\tSet how strict the match is - 100 is recommended lowest value.\n\
-\t\t\t\tNote: When using CCORR or CCOEFF threshold works in opposite direction,\n\
+\t-t, --tolerance:\tSet how strict the match is - 100 is recommended lowest value.\n\
+\t\t\t\tNote: When using CCORR or CCOEFF tolerance works in opposite direction,\n\
 \t\t\t\tso -50 is recommended highest value.\n\
 \t-m, --search-method:\tSet which method is used to search for sub-images.\n\
 \t\t\t\tMethods:\n\
