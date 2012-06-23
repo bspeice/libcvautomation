@@ -27,7 +27,18 @@ AC_PATH_X
 #AC_CHECK_HEADER(opencv/highgui.h)
 #AC_CHECK_HEADER(X11/Xlib.h)
 #AC_CHECK_HEADER(X11/Xutil.h)
-PKG_CHECK_MODULES([OpenCV], [opencv >= 1.0.0])
+
+#Configure OpenCV - version 2+ breaks a lot of things
+PKG_CHECK_MODULES([OpenCV], [opencv >= 2.0.0], [use_opencv2=true], [use_opencv1=true])
+if test "$use_opencv2" != ""; then
+	AM_CONDITIONAL(USEOPENCV2, true)
+	AC_DEFINE(USEOPENCV2)
+fi
+if test "$use_opencv1" != ""; then
+	echo "could not find OpenCV version 2.0.0 or higher, checking for 1.0.0 or higher..."
+	PKG_CHECK_MODULES([OpenCV], [opencv >= 1.0.0])
+fi
+
 PKG_CHECK_MODULES([X11], [x11 >= 1.0.3])
 
 AC_ARG_WITH(examples, [  --with-examples         build example programs '['default=yes']'])
