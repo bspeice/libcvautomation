@@ -30,8 +30,8 @@ AC_PATH_X
 
 #Configure OpenCV - version 2+ breaks a lot of things
 PKG_CHECK_MODULES([OpenCV], [opencv >= 2.0.0], [use_opencv2=true], [use_opencv1=true])
+AM_CONDITIONAL(USEOPENCV2, [test "$use_opencv2" != ""])
 if test "$use_opencv2" != ""; then
-	AM_CONDITIONAL(USEOPENCV2, true)
 	AC_DEFINE(USEOPENCV2)
 fi
 if test "$use_opencv1" != ""; then
