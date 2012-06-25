@@ -47,7 +47,7 @@ AM_CONDITIONAL(BUILD_EXAMPLES, [test "$with_examples" != "no"])
 if test "$with_examples" != "no"; then
 	#Headers needed for cva-match
 	echo building examples
-	AC_CHECK_HEADERS([limits.h stdlib.h unistd.h math.h])
+	AC_CHECK_HEADERS([limits.h stdlib.h unistd.h])
 fi
 
 # Checks for typedefs, structures, and compiler characteristics.

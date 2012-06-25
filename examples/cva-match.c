@@ -20,7 +20,6 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <limits.h>
-#include <math.h>
 
 #include <libcvautomation/libcvautomation.h>
 
@@ -42,13 +41,10 @@ int main( int argc, char** argv )
 	char *separator = ",";
 	char *root_location = "root.png";
 	char *sub_location = "sub.png";
-	/* Note that this is a ridiculous value for the tolerance,
-	 * but ensures that you will *always* get a point back
-	 * for every sub-image supplied. */
 	int tolerance = INT_MAX;
 	int search_method = CV_TM_SQDIFF;
 	int useX = 0; /* bool useX = false; */
-	int useCenter = 0; /* bool useCenter = false */
+	int useCenter = 0;
 	char *xDisplay;
 
 	/* Set the default display */
@@ -122,7 +118,6 @@ int main( int argc, char** argv )
 
 			case 't':
 				tolerance = atoi(optarg);
-				tolerance = pow(1.2397076, tolerance);
 				break;
 
 			case 'x':
@@ -211,10 +206,9 @@ Usage: \n\
 \t-r, --root-image:\tLocation of the root image to compare against.\n\
 \t-s, --sub-image:\tLocation of the sub-image to find in root.\n\
 \t-p, --separator:\tSeparator of the X and Y coordinates.\n\
-\t-t, --tolerance=[1-100]:\tSet how strict the match is\n\
-\t\t\t\tNote: When using CCORR or CCOEFF\n\
-\t\t\t\ttolerance works in opposite direction,\n\
-\t\t\t\tso you set a low-end tolerance, rather than a high-end.\n\
+\t-t, --tolerance:\tSet how strict the match is - 100 is recommended lowest value.\n\
+\t\t\t\tNote: When using CCORR or CCOEFF tolerance works in opposite direction,\n\
+\t\t\t\tso -50 is recommended highest value.\n\
 \t-m, --search-method:\tSet which method is used to search for sub-images.\n\
 \t\t\t\tMethods:\n\
 \t\t\t\t\tCV_TM_SQDIFF = 0\n\
@@ -224,11 +218,12 @@ Usage: \n\
 \t\t\t\t\tCV_TM_CCOEFF = 4\n\
 \t\t\t\t\tCV_TM_COEFF_NORMED = 5\n\
 \t-x, --x-root[=DISPLAY]:\tSet the root image to come from X11\n\
-\t\t\t\tThe DISPLAY variable is optional,\n\
-\t\t\t\tnot specifying it will cause X to use the default display\n\
-\t\t\t\t(not specifically :0.0)\n\
-\t-c, --center:\t\tThe output points should be centered\n\
-\t\t\t\ton the sub-image, rather than the top-left corner.\n\
+\t\t\t\tThe DISPLAY variable is optional, not specifying it will cause X\n\
+\t\t\t\tto use the default display (not specifically :0.0)\n\
+\t\t\t\tPlease note also that the '-x' must come at the end\n\
+\t\t\t\tsince it is an optional argument.\n\
+\t-c, --center:\t\tThe output points should be centered on the sub-image, rather\n\
+\t\t\t\tthan the top-left corner.\n\
 \n\
 If you have any questions, comments, concerns, email bspeice@uncc.edu\n" );
 
