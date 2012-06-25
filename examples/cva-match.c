@@ -67,6 +67,7 @@ int main( int argc, char** argv )
 				{"tolerance",	required_argument,	0,	't'},
 				{"x-root",		optional_argument,	0,	'x'},
 				{"center",		no_argument,		0,	'c'},
+				{"sane-tolerance", required_argument, 0, 'o'},
 				{0, 0, 0, 0}
 		};
 
@@ -132,6 +133,13 @@ int main( int argc, char** argv )
 
 			case 'c':
 				useCenter = 1;
+
+			case 'o':
+				tolerance = atoi(optarg);
+				/* Provide a more sane way to configure tolerance:
+				 * --sane-tolerance=100 ~= INT_MAX */
+				tolerance = pow(1.2397076, tolerance);
+				break;
 
 			case '?':
 				/* Error routine */
@@ -224,6 +232,8 @@ Usage: \n\
 \t\t\t\tsince it is an optional argument.\n\
 \t-c, --center:\t\tThe output points should be centered on the sub-image, rather\n\
 \t\t\t\tthan the top-left corner.\n\
+\t-o, --sane-tolerance:\tSet the tolerance using a scale of 1-100,\n\
+\t\t\t\trather than INT_MIN to INT_MAX (100 ~= INT_MAX)\n\
 \n\
 If you have any questions, comments, concerns, email bspeice@uncc.edu\n" );
 
