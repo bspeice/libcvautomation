@@ -8,6 +8,7 @@ AM_INIT_AUTOMAKE
 #AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SUBDIRS([libcvautomation/] [examples/])
 
+#path intelc110		/opt/coe/intelc110
 # Checks for programs.
 AC_PROG_CC
 
@@ -40,6 +41,7 @@ if test "$use_opencv1" != ""; then
 fi
 
 PKG_CHECK_MODULES([X11], [x11 >= 1.0.3])
+PKG_CHECK_MODULES([XTest], [xtst >= 0.21])
 
 AC_ARG_WITH(examples, [  --with-examples         build example programs '['default=yes']'])
 
