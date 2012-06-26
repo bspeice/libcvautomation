@@ -23,7 +23,7 @@
 
 /* Make sure that the XTest extension is supported.
  * If it's not, return 0 (false) */
-int xte_xTestSupported ( Display *displayLocation );
+int xte_XTestSupported ( Display *displayLocation );
 
 /* Get the current location of the pointer */
 cvaPoint xte_pointerLocation ( Display *displayLocation );

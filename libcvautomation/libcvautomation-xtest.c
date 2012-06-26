@@ -18,6 +18,10 @@
 
 #include <libcvautomation/libcvautomation-xtest.h>
 
+/* Note: The XLib documentation says that we shouldn't need to XFlush,
+ * but I've found in testing that events don't get done correctly unless
+ * we do. I've included the XFlush() calls. */
+
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  xte_xTestSupported
@@ -71,6 +75,8 @@ void xte_clickMouse ( Display *displayLocation, int mouseButton )
 {
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -92,6 +98,8 @@ void xte_clickMouseXY ( Display *displayLocation, int xLocation, int yLocation, 
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime ); 
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -105,6 +113,8 @@ void xte_clickMouseRXY ( Display *displayLocation, int xIncrement, int yIncremen
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -124,6 +134,10 @@ void xte_clickMouseImage ( Display *displayLocation, IplImage *subImage, int mou
 
 	resultPoint = matchSubImage_X11 ( displayLocation, subImage, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 
@@ -135,6 +149,8 @@ void xte_clickMouseImage ( Display *displayLocation, IplImage *subImage, int mou
 	XTestFakeRelativeMotionEvent( displayLocation, movementX, movementY, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -150,6 +166,10 @@ void xte_clickMouseImage_location ( Display *displayLocation, const char *fileNa
 
 	resultPoint = matchSubImage_X11_location( displayLocation, fileName, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 
@@ -161,6 +181,8 @@ void xte_clickMouseImage_location ( Display *displayLocation, const char *fileNa
 	XTestFakeRelativeMotionEvent( displayLocation, movementX, movementY, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -180,6 +202,10 @@ void xte_clickMouseImage_center ( Display *displayLocation, IplImage *subImage, 
 
 	resultPoint = matchSubImage_X11_center ( displayLocation, subImage, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 
@@ -192,6 +218,7 @@ void xte_clickMouseImage_center ( Display *displayLocation, IplImage *subImage, 
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
 
+	XFlush( displayLocation );
 }
 
 /* 
@@ -207,6 +234,10 @@ void xte_clickMouseImage_location_center ( Display *displayLocation, const char 
 
 	resultPoint = matchSubImage_X11_location_center( displayLocation, fileName, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 	
@@ -218,6 +249,8 @@ void xte_clickMouseImage_location_center ( Display *displayLocation, const char 
 	XTestFakeRelativeMotionEvent( displayLocation, movementX, movementY, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
 	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -236,6 +269,8 @@ void xte_hoverMouseXY ( Display *displayLocation, int xLocation, int yLocation )
 	yIncrement = yLocation - pointerLocation.y;
 
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -248,6 +283,8 @@ void xte_hoverMouseXY ( Display *displayLocation, int xLocation, int yLocation )
 void xte_hoverMouseRXY ( Display *displayLocation, int xIncrement, int yIncrement )
 {
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -262,6 +299,10 @@ void xte_hoverMouseImage ( Display *displayLocation, IplImage *subImage, int sea
 	CvPoint resultPoint;
 	resultPoint = matchSubImage_X11( displayLocation, subImage, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 
@@ -270,6 +311,8 @@ void xte_hoverMouseImage ( Display *displayLocation, IplImage *subImage, int sea
 	yIncrement = resultPoint.y - pointerLocation.y;
 
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -284,6 +327,10 @@ void xte_hoverMouseImage_location ( Display *displayLocation, const char *fileNa
 	CvPoint resultPoint;
 	resultPoint = matchSubImage_X11_location( displayLocation, fileName, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 
@@ -292,6 +339,8 @@ void xte_hoverMouseImage_location ( Display *displayLocation, const char *fileNa
 	yIncrement = resultPoint.y - pointerLocation.y;
 
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -306,6 +355,10 @@ void xte_hoverMouseImage_center ( Display *displayLocation, IplImage *subImage, 
 	CvPoint resultPoint;
 	resultPoint = matchSubImage_X11_center( displayLocation, subImage, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 
@@ -314,6 +367,8 @@ void xte_hoverMouseImage_center ( Display *displayLocation, IplImage *subImage, 
 	yIncrement = resultPoint.y - pointerLocation.y;
 
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -328,6 +383,10 @@ void xte_hoverMouseImage_location_center ( Display *displayLocation, const char 
 	CvPoint resultPoint;
 	resultPoint = matchSubImage_X11_location_center( displayLocation, fileName, searchMethod, tolerance );
 
+	if (resultPoint.x == -1 && resultPoint.y == -1)
+		/* Match not found */
+		return;
+
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
 
@@ -336,6 +395,8 @@ void xte_hoverMouseImage_location_center ( Display *displayLocation, const char 
 	yIncrement = resultPoint.y - pointerLocation.y;
 
 	XTestFakeRelativeMotionEvent( displayLocation, xIncrement, yIncrement, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -347,6 +408,8 @@ void xte_hoverMouseImage_location_center ( Display *displayLocation, const char 
 void xte_mouseDown ( Display *displayLocation, int mouseButton )
 {
 	XTestFakeButtonEvent( displayLocation, mouseButton, 1, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -358,6 +421,8 @@ void xte_mouseDown ( Display *displayLocation, int mouseButton )
 void xte_mouseUp ( Display *displayLocation, int mouseButton )
 {
 	XTestFakeButtonEvent( displayLocation, mouseButton, False, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -370,6 +435,8 @@ void xte_mouseJiggle ( Display *displayLocation )
 {
 	XTestFakeRelativeMotionEvent( displayLocation, 1, 1, CurrentTime );
 	XTestFakeRelativeMotionEvent( displayLocation, -1, -1, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -393,6 +460,8 @@ void xte_clickKey ( Display *displayLocation, char *key )
 
 	XTestFakeKeyEvent( displayLocation, kc, True, CurrentTime );	
 	XTestFakeKeyEvent( displayLocation, kc, False, CurrentTime );	
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -425,6 +494,8 @@ void xte_keyDown ( Display *displayLocation, char *key )
 	kc = XKeysymToKeycode( displayLocation, ks );
 
 	XTestFakeKeyEvent( displayLocation, kc, True, CurrentTime );
+
+	XFlush( displayLocation );
 }
 
 /* 
@@ -445,4 +516,6 @@ void xte_keyUp ( Display *displayLocation, char *key )
 	kc = XKeysymToKeycode( displayLocation, ks );
 
 	XTestFakeKeyEvent( displayLocation, kc, True, CurrentTime );
+
+	XFlush( displayLocation );
 }
