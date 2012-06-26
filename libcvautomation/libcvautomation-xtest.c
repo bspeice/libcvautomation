@@ -357,7 +357,7 @@ void xte_mouseDown ( Display *displayLocation, int mouseButton )
  */
 void xte_mouseUp ( Display *displayLocation, int mouseButton )
 {
-	XTestFakeButtonEvent( displayLocation, mouseButton, 0, CurrentTime );
+	XTestFakeButtonEvent( displayLocation, mouseButton, False, CurrentTime );
 }
 
 /* 
@@ -378,9 +378,21 @@ void xte_mouseJiggle ( Display *displayLocation )
  *  Description:  Press and release a single key
  * =====================================================================================
  */
-void xte_clickKey ( Display *displayLocation, char key )
+void xte_clickKey ( Display *displayLocation, char *key )
 {
+	/* Part of this code based on xte from the xautomation source
+	 * available at http://hoopajoo.net/projects/xautomation.html */
+	KeyCode kc;
+	KeySym ks;
 
+	ks = XStringToKeysym( key );
+	if ( ks == NoSymbol )
+		return;
+
+	kc = XKeysymToKeycode( displayLocation, ks );
+
+	XTestFakeKeyEvent( displayLocation, kc, True, CurrentTime );	
+	XTestFakeKeyEvent( displayLocation, kc, False, CurrentTime );	
 }
 
 /* 
@@ -391,6 +403,7 @@ void xte_clickKey ( Display *displayLocation, char key )
  */
 void xte_clickKeyStr ( Display *displayLocation, const char *string )
 {
+	/* TODO: Code the function to convert a string to key presses */
 
 }
 
@@ -400,9 +413,18 @@ void xte_clickKeyStr ( Display *displayLocation, const char *string )
  *  Description:  Press a key down
  * =====================================================================================
  */
-void xte_keyDown ( Display *displayLocation, char key )
+void xte_keyDown ( Display *displayLocation, char *key )
 {
+	KeyCode kc;
+	KeySym ks;
 
+	ks = XStringToKeysym( key );
+	if ( ks == NoSymbol )
+		return;
+
+	kc = XKeysymToKeycode( displayLocation, ks );
+
+	XTestFakeKeyEvent( displayLocation, kc, True, CurrentTime );
 }
 
 /* 
@@ -411,7 +433,16 @@ void xte_keyDown ( Display *displayLocation, char key )
  *  Description:  Release a key
  * =====================================================================================
  */
-void xte_keyUp ( Display *displayLocation, char key )
+void xte_keyUp ( Display *displayLocation, char *key )
 {
+	KeyCode kc;
+	KeySym ks;
 
+	ks = XStringToKeysym( key );
+	if ( ks == NoSymbol )
+		return;
+
+	kc = XKeysymToKeycode( displayLocation, ks );
+
+	XTestFakeKeyEvent( displayLocation, kc, True, CurrentTime );
 }

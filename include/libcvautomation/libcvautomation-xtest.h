@@ -82,16 +82,17 @@ void xte_mouseUp ( Display *displayLocation, int mouseButton );
 /* Move the mouse a little bit */
 void xte_mouseJiggle ( Display *displayLocation );
 
-/* Press and release a single key */
-void xte_clickKey ( Display *displayLocation, char key );
+/* Press and release a key 
+ * Note that we use a string for *key, since keys like "space" are still valid. */
+void xte_clickKey ( Display *displayLocation, char *key );
 
 /* Press and release keys in a string */
 void xte_clickKeyStr ( Display *displayLocation, const char *string );
 
 /* Press a key down */
-void xte_keyDown ( Display *displayLocation, char key );
+void xte_keyDown ( Display *displayLocation, char *key );
 
 /* Release a key */
-void xte_keyUp ( Display *displayLocation, char key );
+void xte_keyUp ( Display *displayLocation, char *key );
 
 #endif /* LIBCVAUTOMATION_XTEST_H */
