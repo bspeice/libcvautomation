@@ -6,7 +6,6 @@ AC_INIT(libcvautomation, 0.1, bspeice@uncc.edu)
 AM_INIT_AUTOMAKE
 
 #AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_SUBDIRS([libcvautomation/] [examples/])
 
 #path intelc110		/opt/coe/intelc110
 # Checks for programs.

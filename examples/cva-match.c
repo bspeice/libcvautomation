@@ -45,10 +45,13 @@ int main( int argc, char** argv )
 	int search_method = CV_TM_SQDIFF;
 	int useX = 0; /* bool useX = false; */
 	int useCenter = 0;
-	char *xDisplay;
+	char *xDisplayLocation;
+	Display *display;
+	/* This line to suppress a compiler warning */
+	display = NULL;
 
 	/* Set the default display */
-	xDisplay = "";
+	xDisplayLocation = "";
 
 	/* Set up the linked list for slave images */
 	basic_list *list_head = NULL, *list_curr = NULL, *list_prev = NULL;
@@ -124,10 +127,12 @@ int main( int argc, char** argv )
 			case 'x':
 				if ( optarg != NULL ) {
 					useX = 1;
-					xDisplay = optarg;
+					xDisplayLocation = optarg;
+					display = XOpenDisplay(xDisplayLocation);
 				} else {
 					useX = 1;
-					xDisplay = "";
+					xDisplayLocation = "";
+					display = XOpenDisplay(xDisplayLocation);
 				}
 				break;
 
@@ -163,9 +168,9 @@ int main( int argc, char** argv )
 		sub_location = list_curr->fileName;
 
 		if (useX && useCenter)
-			result_point = matchSubImage_X11_location_center( xDisplay, sub_location, search_method, tolerance );
+			result_point = matchSubImage_X11_location_center( display, sub_location, search_method, tolerance );
 		else if (useX && !useCenter)
-			result_point = matchSubImage_X11_location( xDisplay, sub_location, search_method, tolerance );
+			result_point = matchSubImage_X11_location( display, sub_location, search_method, tolerance );
 		else if (!useX && useCenter)
 			result_point = matchSubImage_location_center( root_location, sub_location, search_method, tolerance );
 		else /* if (!useX && !useCenter) */
@@ -187,6 +192,10 @@ int main( int argc, char** argv )
 
 	/* And free the final element */
 	free(list_curr);
+
+	/* Clean up X */
+	if (useX)
+		XCloseDisplay(display);
 
 	return 0;
 }

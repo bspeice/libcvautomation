@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  libcvautomation-x11.c
+ *       Filename:  libcvautomation-xlib.c
  *
  *    Description:  
  *
@@ -16,7 +16,30 @@
  * =====================================================================================
  */
 
-#include <libcvautomation/libcvautomation-x11.h>
+#include <libcvautomation/libcvautomation-xlib.h>
+
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  cvaOpenDisplay
+ *  Description:  Custom wrapper for XOpenDisplay function
+ * =====================================================================================
+ */
+Display* cvaOpenDisplay ( char *displayName )
+{
+	return XOpenDisplay( displayName);
+}
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  cvaCloseDisplay
+ *  Description:  Custom wrapper for XOpenDisplay function
+ * =====================================================================================
+ */
+void cvaCloseDisplay ( Display *displayLocation )
+{
+	XCloseDisplay( displayLocation );
+}
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -24,7 +47,7 @@
  *  Description:  Match a sub image using the X11 root window as root
  * =====================================================================================
  */
-CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
+CvPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
 {
 	/* First things first, grab the root X window and convert it to
 	 * the IplImage format.
@@ -36,7 +59,6 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
 
 	XImage *rootImage;
 	XColor color;
-	Display *display;
 	Screen *screen;
 	unsigned long rmask, gmask, bmask;
 	unsigned long rshift, rbits,
@@ -48,18 +70,17 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
 	unsigned int width, height;
 
 	/* Setting up the X screengrab is the first order of business */
-	display = XOpenDisplay(displayLocation);
-	screen = DefaultScreenOfDisplay(display);
+	screen = DefaultScreenOfDisplay(displayLocation);
 	
 	width = screen->width;
 	height = screen->height;
 
-	rootImage = XGetImage( display, DefaultRootWindow(display),
+	rootImage = XGetImage( displayLocation, DefaultRootWindow(displayLocation),
 							startX, startY, width, height,
 							AllPlanes, ZPixmap );
 
 	/* Make sure that we're good to go before going any farther */
-	if ( rootImage == NULL || display == NULL || screen == NULL )
+	if ( rootImage == NULL || displayLocation == NULL || screen == NULL )
 	{
 		fprintf( stderr, "Couldn't grab the root window!" );
 		resultPoint.x = -1;
@@ -144,11 +165,11 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
 		/* I don't know how this works either. */
 		/* TODO: Figure out how this code works and document it */
 		Colormap colormap;
-		colormap = DefaultColormap( display, DefaultScreen ( display ));
+		colormap = DefaultColormap( displayLocation, DefaultScreen( displayLocation ));
 		for ( x = 0; x < rootImage->width; x++ ) {
 			for ( y = 0; y < rootImage->height; y++ ) {
 				color.pixel = XGetPixel ( rootImage, x, y );
-				XQueryColor( display, colormap, &color );
+				XQueryColor( displayLocation, colormap, &color );
 				CV_IMAGE_ELEM(X_IPL, uchar, y, x * X_IPL->nChannels) = color.blue;
 				CV_IMAGE_ELEM(X_IPL, uchar, y, x * X_IPL->nChannels + 1) = color.green;
 				CV_IMAGE_ELEM(X_IPL, uchar, y, x * X_IPL->nChannels + 2) = color.red;
@@ -164,7 +185,6 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
 
 	/* Clean up the CV image we created, as well as all X resources */
 	XDestroyImage( rootImage );
-	XCloseDisplay( display );
 	cvReleaseImage( &X_IPL );
 
 	/* Return and be done */
@@ -178,7 +198,7 @@ CvPoint matchSubImage_X11( char *displayLocation, IplImage *subImage, int search
  *  Description:  Match a sub image using the X11 root window as root, from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_location( char *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
+CvPoint matchSubImage_X11_location( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
 {
 	/* This is basically a wrapper for matchSubImage_X11( char *display, IplImage )
 	 * All we do is load the sub-image from the given filename, and then
@@ -218,7 +238,7 @@ CvPoint matchSubImage_X11_location( char *displayLocation, const char *subImage_
  *  				the top-left corner.
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_center( char *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
+CvPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
 {
 	/* First things first, grab the root X window and convert it to
 	 * the IplImage format.
@@ -230,7 +250,6 @@ CvPoint matchSubImage_X11_center( char *displayLocation, IplImage *subImage, int
 
 	XImage *rootImage;
 	XColor color;
-	Display *display;
 	Screen *screen;
 	unsigned long rmask, gmask, bmask;
 	unsigned long rshift, rbits,
@@ -242,18 +261,17 @@ CvPoint matchSubImage_X11_center( char *displayLocation, IplImage *subImage, int
 	unsigned int width, height;
 
 	/* Setting up the X screengrab is the first order of business */
-	display = XOpenDisplay(displayLocation);
-	screen = DefaultScreenOfDisplay(display);
+	screen = DefaultScreenOfDisplay(displayLocation);
 	
 	width = screen->width;
 	height = screen->height;
 
-	rootImage = XGetImage( display, DefaultRootWindow(display),
+	rootImage = XGetImage( displayLocation, DefaultRootWindow(displayLocation),
 							startX, startY, width, height,
 							AllPlanes, ZPixmap );
 
 	/* Make sure that we're good to go before going any farther */
-	if ( rootImage == NULL || display == NULL || screen == NULL )
+	if ( rootImage == NULL || displayLocation == NULL || screen == NULL )
 	{
 		fprintf( stderr, "Couldn't grab the root window!" );
 		resultPoint.x = -1;
@@ -338,11 +356,11 @@ CvPoint matchSubImage_X11_center( char *displayLocation, IplImage *subImage, int
 		/* I don't know how this works either. */
 		/* TODO: Figure out how this code works and document it */
 		Colormap colormap;
-		colormap = DefaultColormap( display, DefaultScreen ( display ));
+		colormap = DefaultColormap( displayLocation, DefaultScreen( displayLocation ));
 		for ( x = 0; x < rootImage->width; x++ ) {
 			for ( y = 0; y < rootImage->height; y++ ) {
 				color.pixel = XGetPixel ( rootImage, x, y );
-				XQueryColor( display, colormap, &color );
+				XQueryColor( displayLocation, colormap, &color );
 				CV_IMAGE_ELEM(X_IPL, uchar, y, x * X_IPL->nChannels) = color.blue;
 				CV_IMAGE_ELEM(X_IPL, uchar, y, x * X_IPL->nChannels + 1) = color.green;
 				CV_IMAGE_ELEM(X_IPL, uchar, y, x * X_IPL->nChannels + 2) = color.red;
@@ -354,11 +372,10 @@ CvPoint matchSubImage_X11_center( char *displayLocation, IplImage *subImage, int
 	 * However, we don't want to do any more work than we have to - send our images off
 	 * to matchSubImage in libopencvautomation-opencv. */
 
-	resultPoint = matchSubImage_center ( X_IPL, subImage, searchMethod, tolerance );
+	resultPoint = matchSubImage_center( X_IPL, subImage, searchMethod, tolerance );
 
 	/* Clean up the CV image we created, as well as all X resources */
 	XDestroyImage( rootImage );
-	XCloseDisplay( display );
 	cvReleaseImage( &X_IPL );
 
 	/* Return and be done */
@@ -372,7 +389,7 @@ CvPoint matchSubImage_X11_center( char *displayLocation, IplImage *subImage, int
  *  Description:  Match a sub image using the X11 root window as root, from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_location_center( char *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
+CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
 {
 	/* This is basically a wrapper for matchSubImage_X11( char *display, IplImage )
 	 * All we do is load the sub-image from the given filename, and then

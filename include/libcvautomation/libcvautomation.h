@@ -37,6 +37,7 @@
 /* X11 includes */
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+#include <X11/extensions/XTest.h>
 
 /* Define a basic structure to help us with using multiple-picture arguments
  * Yes, it's a hackish implementation, nobody said you had to use this one. */
@@ -51,10 +52,16 @@ typedef struct {
 
 } cvautomationList;
 
+/* Define another basic structure for points */
+typedef struct {
+	int x, y;
+} cvaPoint;
+
 /* Project component includes */
 /* The includes come here to make sure all function prototypes have access
  * to the cvautomationList struct */
 #include <libcvautomation/libcvautomation-opencv.h>
-#include <libcvautomation/libcvautomation-x11.h>
+#include <libcvautomation/libcvautomation-xlib.h>
+#include <libcvautomation/libcvautomation-xtest.h>
 
 #endif /* LIBCVAUTOMATION_H */
