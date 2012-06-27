@@ -25,6 +25,7 @@
 #include <libcvautomation/libcvautomation.h>
 
 void usage ();
+void checkXTEEnabled ();
 
 int main( int argc, char** argv )
 {
@@ -67,6 +68,7 @@ int main( int argc, char** argv )
 				{"mover-mousey",required_argument,	0,	's'},
 				{"movei-mouse",	required_argument,	0,	'i'},
 				{"keypress",	required_argument,	0,	'k'},
+				{"click",		optional_argument,	0,	'l'},
 				{"search-method",required_argument,	0,	'm'},
 				{"tolerance",	required_argument,	0,	't'},
 				{"button",		required_argument,	0,	'b'},
@@ -79,7 +81,7 @@ int main( int argc, char** argv )
 		int option_index = 0;
 		opterr = 0;
 
-		int c = getopt_long (argc, argv, "hux:y:r:s:i:k:", /* Use a single colon for required_argument,
+		int c = getopt_long (argc, argv, "hux:y:r:s:i:k:l::", /* Use a single colon for required_argument,
 												* double colon for optional_argument */
 							long_options, &option_index);
 
@@ -101,41 +103,76 @@ int main( int argc, char** argv )
 				break;
 
 			case 'd':
-				xDisplayLocation = optarg;
+				if (display == NULL)
+					display = XOpenDisplay( optarg );
+				else
+				{
+					XCloseDisplay( display );
+					XOpenDisplay( optarg );
+				}
 
 			case 'x':
 				if ( display == NULL )
 					display = XOpenDisplay( xDisplayLocation );
+				checkXTEEnabled( display );
+
 				currentLocation = xte_pointerLocation( display );
 
-				mouseXMovement = atoi(optarg) - currentLocation.x;
+				xte_hoverMouseXY( display, atoi(optarg), currentLocation.y );
 
 				break;
 
 			case 'y':
 				if ( display == NULL )
 					display = XOpenDisplay( xDisplayLocation );
+				checkXTEEnabled();
+
 				currentLocation = xte_pointerLocation( display );
 
-				mouseYMovement = atoi(optarg) - currentLocation.y;
+				xte_hoverMouseXY( display, currentLocation.x, atoi(optarg) );
 
 				break;
 
 			case 'r':
-				mouseXMovement = atoi(optarg);
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+				checkXTEEnabled();
+
+				currentLocation = xte_pointerLocation( display );
+
+				xte_hoverMouseRXY( display, atoi(optarg), 0 );
 				break;
 
 			case 's':
-				mouseYMovement = atoi(optarg);
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+				checkXTEEnabled();
+
+				currentLocation = xte_pointerLocation( display );
+
+				xte_hoverMouseRXY( display, 0, atoi(optarg) );
 				break;
 
 			case 'i':
-				useMouseImage = True;
-				mouseImage = optarg;
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+
+				checkXTEEnabled( display );
+
+				if (useCenter)
+					xte_clickMouseImage_location_center( display, optarg, mouseButton, searchMethod, tolerance );
+				else
+					xte_clickMouseImage_location( display, optarg, mouseButton, searchMethod, tolerance );
+
 				break;
 
 			case 'k':
-				keypress = optarg;
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+
+				checkXTEEnabled();
+
+				xte_clickKey( display, optarg );
 				break;
 
 			case 'm':
@@ -154,6 +191,14 @@ int main( int argc, char** argv )
 				useCenter = True;
 				break;
 
+			case 'l':
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+
+				checkXTEEnabled();
+
+				xte_clickMouse( display, mouseButton );
+
 			case '?':
 				/* Error routine */
 				break;
@@ -164,40 +209,8 @@ int main( int argc, char** argv )
 		};
 	}
 
-	/* If we haven't opened our display yet, do that now.
-	 * Note that we will only ever open one display due to
-	 * checks implemented in the optarg section. */
-	if (display == NULL)
-		display = XOpenDisplay( xDisplayLocation );
-
-	if (! xte_XTestSupported( display ))
-	{
-		printf("The XTest extension is not supported! Aborting...");
-		exit(255);
-	}
-	
-	if (useMouseImage)
-	{
-		if (useCenter)
-			xte_clickMouseImage_location( display, mouseImage, mouseButton, searchMethod, tolerance );
-		else
-			xte_clickMouseImage_location_center( display, mouseImage, mouseButton, searchMethod, tolerance );
-	}
-
-	else if (keypress != NULL)
-		xte_clickKey( display, keypress );
-
-	else 
-	{
-		if (mouseXMovement == INT_MAX)
-			mouseXMovement = 0;
-		if (mouseYMovement == INT_MAX)
-			mouseYMovement = 0;
-
-		printf("%i, %i\n", mouseXMovement, mouseYMovement);
-		xte_clickMouseRXY( display, mouseXMovement, mouseYMovement, mouseButton );
-	}
-
+	if ( display != NULL )
+		XCloseDisplay( display );
 
 	return 0;
 }
@@ -230,16 +243,30 @@ Usage: \n\
 \t\t\t\tBy default, the program will click the top-left corner of the image.\n\
 \t\t\t\tUse the \"-c\" switch to change this.\n\
 \t-k, --keypress:\t\tSpecify a key to press.\n\
-\t-m, --search-method:\tSpecify a method to search by. See \`cva-match --help\'\n\
+\t-m, --search-method:\tSpecify a method to search by. See `cva-match --help\'\n\
 \t\t\t\tfor more information on this.\n\
 \t-t, --tolerance:\tSpecify how strict the match is.\n\
 \t-b, --button:\t\tSpecify the mouse button to press (default 1).\n\
 \t-c, --center:\t\tInstead of matching the top-left corner of an image,\n\
 \t\t\t\tmatch the center of the image.\n\
 \n\
+This program works kind of like a mini-language using getopt. All options\n\
+are parsed left-to-right, and executed right there. Thus, specifying \"--display\"\n\
+at different places in the options will cause this program to use the most recent\n\
+given display.\n\
 If you have any questions, comments, concerns, email <bspeice@uncc.edu>.\n\n" );
 
 	exit (0);
 
 }		/* -----  end of function usage  ----- */
 
+void checkXTEEnabled ( Display *display )
+{
+	/* Make sure we have the XTest Extensions enabled.
+	 * This is a quick wrapper. */
+	if (! xte_XTestSupported( display ))
+	{
+		printf("The XTest extension is not supported! Aborting...");
+		exit(255);
+	}
+}
