@@ -73,6 +73,10 @@ int main( int argc, char** argv )
 				{"tolerance",	required_argument,	0,	't'},
 				{"button",		required_argument,	0,	'b'},
 				{"center",		no_argument,		0,	'c'},
+				{"jiggle",		no_argument,		0,	'j'},
+				{"string",		required_argument,	0,	'n'},
+				{"keydown",		required_argument,	0,	'o'},
+				{"keyup",		required_argument,	0,	'p'},
 				/* Other valid values are "optional_argument"
 				 * and "required_argument" */
 				{0, 0, 0, 0}
@@ -125,7 +129,7 @@ int main( int argc, char** argv )
 			case 'y':
 				if ( display == NULL )
 					display = XOpenDisplay( xDisplayLocation );
-				checkXTEEnabled();
+				checkXTEEnabled( display );
 
 				currentLocation = xte_pointerLocation( display );
 
@@ -136,7 +140,7 @@ int main( int argc, char** argv )
 			case 'r':
 				if ( display == NULL )
 					display = XOpenDisplay( xDisplayLocation );
-				checkXTEEnabled();
+				checkXTEEnabled( display );
 
 				currentLocation = xte_pointerLocation( display );
 
@@ -146,7 +150,7 @@ int main( int argc, char** argv )
 			case 's':
 				if ( display == NULL )
 					display = XOpenDisplay( xDisplayLocation );
-				checkXTEEnabled();
+				checkXTEEnabled( display );
 
 				currentLocation = xte_pointerLocation( display );
 
@@ -170,7 +174,7 @@ int main( int argc, char** argv )
 				if ( display == NULL )
 					display = XOpenDisplay( xDisplayLocation );
 
-				checkXTEEnabled();
+				checkXTEEnabled( display );
 
 				xte_clickKey( display, optarg );
 				break;
@@ -195,9 +199,41 @@ int main( int argc, char** argv )
 				if ( display == NULL )
 					display = XOpenDisplay( xDisplayLocation );
 
-				checkXTEEnabled();
+				checkXTEEnabled( display );
 
 				xte_clickMouse( display, mouseButton );
+
+			case 'j':
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+
+				checkXTEEnabled( display );
+
+				xte_mouseJiggle( display );
+
+			case 'n':
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+				
+				checkXTEEnabled( display );
+
+				xte_clickKeyStr ( display, optarg );
+
+			case 'o':
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+
+				checkXTEEnabled( display );
+
+				xte_keyDown( display, optarg );
+
+			case 'p':
+				if ( display == NULL )
+					display = XOpenDisplay( xDisplayLocation );
+
+				checkXTEEnabled( display );
+
+				xte_keyUp( display, optarg );
 
 			case '?':
 				/* Error routine */
