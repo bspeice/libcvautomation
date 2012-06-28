@@ -30,8 +30,6 @@ void checkXTEEnabled ();
 int main( int argc, char** argv )
 {
 	/* Set up for getopt */
-	Bool useMouseImage;
-		useMouseImage = False;
 	int mouseButton;
 		mouseButton = 1;
 	char *separator;
