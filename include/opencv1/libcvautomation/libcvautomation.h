@@ -22,18 +22,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef USEOPENCV2
-/* OpenCV2 includes - some filenames are different */
-#include <opencv2/core/core_c.h>
-#include <opencv2/highgui/highgui_c.h>
-#include <opencv2/imgproc/imgproc_c.h>
-
-#else
 /* OpenCV includes */
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
-
-#endif /* #ifdef OPENCV2 */
 
 /* X11 includes */
 #include <X11/Xlib.h>

@@ -31,9 +31,6 @@ AC_PATH_X
 #Configure OpenCV - version 2+ breaks a lot of things
 PKG_CHECK_MODULES([OpenCV], [opencv >= 2.0.0], [use_opencv2=true], [use_opencv1=true])
 AM_CONDITIONAL(USEOPENCV2, [test "$use_opencv2" != ""])
-if test "$use_opencv2" != ""; then
-	AC_DEFINE(USEOPENCV2)
-fi
 if test "$use_opencv1" != ""; then
 	echo "could not find OpenCV version 2.0.0 or higher, checking for 1.0.0 or higher..."
 	PKG_CHECK_MODULES([OpenCV], [opencv >= 1.0.0])
@@ -47,7 +44,6 @@ AC_ARG_WITH(examples, [  --with-examples         build example programs '['defau
 AM_CONDITIONAL(BUILD_EXAMPLES, [test "$with_examples" != "no"])
 if test "$with_examples" != "no"; then
 	#Headers needed for cva-match
-	echo building examples
 	AC_CHECK_HEADERS([limits.h stdlib.h unistd.h])
 fi
 

@@ -582,10 +582,7 @@ void xte_keyUp ( Display *displayLocation, char *key )
 cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance )
 {
 	/* Alright, this function bears a bit of talking about.
-	 * The way it works is that you give the **command two parameters:
-	 * 	[0]: The command
-	 * 	[1]: The command argument
-	 * And what happens is that I test here for the command, and pass it off.
+	 * What happens is that I test here for the command, and pass it off.
 	 * This functionality was inspired by xte from xautomation,
 	 * the original can be found at: http://hoopajoo.net/projects/xautomation.html 
 	 * Most of the code for parsing is the same, just easier to do it that way. */
@@ -593,9 +590,13 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	/* Note that most of the functions don't need mouseButton, searchMethod, or tolerance,
 	 * but they're here to make sure that they're available if needed. */
 
+	cvaPoint resultPoint;
+	resultPoint.x = -1;
+	resultPoint.y = -1;
+
 	/* Perform basic sanity checking */
 	if (commandString == NULL)
-		return;
+		return resultPoint;
 
 	/* And now we sanitize the input */
 	char *s_commandString;
@@ -733,10 +734,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 
 		free(keyString);
 	}
-
-	cvaPoint resultPoint;
-	resultPoint.x = -1;
-	resultPoint.y = -1;
 
 	return resultPoint;
 }
