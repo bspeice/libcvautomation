@@ -20,6 +20,7 @@
 
 /* C includes */
 #include <stdio.h>
+#include <string.h>
 
 #ifdef USEOPENCV2
 /* OpenCV2 includes - some filenames are different */
