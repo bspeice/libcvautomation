@@ -1,0 +1,371 @@
+#===============================================================================
+#          FILE: libcvautomation_funcs
+# 
+#         USAGE: . mosaic_testing_funcs 
+# 
+#   DESCRIPTION: 
+# 
+#       OPTIONS: ---
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: Bradlee Speice, bspeice@uncc.edu
+#  ORGANIZATION: 
+#       CREATED: 06/19/2012 11:35:20 AM EDT
+#      REVISION:  ---
+#===============================================================================
+
+
+#-------------------------------------------------------------------------------
+#  This script file is meant to be sourced and then used for driving libcvautomation.
+#  It provides access to a lot of common macros, like clicking
+#  an area of the screen based on an image.
+#-------------------------------------------------------------------------------
+
+#Make sure all the programs we will need are in the right place
+CVAMATCH=`which cva-match` || echo "Could not find the cva-match program..." &>2 #Needed for image recognition
+CVAINPUT=`which cva-input` || echo "Could not find the cva-input program..." &>2 #Needed to manipulate mouse and keyboard
+
+#Some program-wide configs
+SEARCH_METHOD=0 #CV_TM_SQDIFF
+TOLERANCE=2250000
+CENTER="--center"
+#Uncomment to disable center-of-image matching
+#CENTER=""
+
+
+#Quick trick to allow for easy redirection of output
+#OUTFILE=`mktemp`; echo "Logfile: " $OUTFILE
+OUTFILE=/dev/null
+#ERRFILE=`mktemp`; echo "Error file: " $ERRFILE
+ERRFILE=/dev/null
+out ()
+{
+	echo "`date`: $@" >> $OUTFILE
+}
+err ()
+{
+	echo "`date`: $@" >> $ERRFILE
+}
+
+
+#-------------------------------------------------------------------------------
+#  Begin testing macros
+#-------------------------------------------------------------------------------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  click
+#   DESCRIPTION:  Click the mouse where it is currently located
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+click ()
+{
+	$CVAINPUT -s 'mouseclick 1' >> $OUTFILE >> $OUTFILE
+}	# ----------  end of function click  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  click_xy
+#   DESCRIPTION:  Click a specific point on the screen
+#    PARAMETERS:  x-location, y-location
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+click_xy ()
+{
+	if [ -z "$1" ]; then
+		out "Did not specify an X location, assuming (0, 0)"
+		X_LOC=0
+		Y_LOC=0
+	else
+		X_LOC=$1
+	fi
+	if [ -z "$2" ]; then
+		out "Did not specify a Y location, assuming ($1, 0)"
+	else
+		Y_LOC=$2
+	fi
+
+	out "click_xy: " $X_LOC $Y_LOC
+
+	$CVAINPUT -s 'mousexy $X_LOC $Y_LOC' -s 'mouseclick 1' >> $OUTFILE
+
+}	# ----------  end of function click_xy  ----------
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  clickr_xy
+#   DESCRIPTION:  Click a point on the screen relative to where the mouse is at
+#    PARAMETERS:  X increment, Y increment
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+clickr_xy ()
+{
+	if [ -z "$1" ]; then
+		err "Did not specify an X increment..."
+		return 255
+	fi
+	if [ -z "$2" ]; then
+		err "Did not specify a Y increment..."
+		return 255
+	fi
+
+	out "clickr_xy: " $1 $2
+
+	$CVAINPUT -s 'mouserxy $1 $2' -s 'mouseclick 1' >> $OUTFILE
+}	# ----------  end of function clickr_xy  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  click_i
+#   DESCRIPTION:  Click a point based on a screenshot
+#    PARAMETERS:  Location of screenshot, optional index to use if multiple
+#					matches are found
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+click_i ()
+{
+	COMMAND_LINE=""
+	if [ -z "$1" ]; then
+		err "Did not give a base image..."
+		return 255
+	fi
+		
+	out "click_i: matching $@"
+
+	for x in $@
+	do
+		if [ x$CENTER != "x" ]; then
+			center="c"
+		else
+			center=""
+		fi
+		COMMAND_LINE+="-s 'i${center}mouseclick $x' "
+	done
+
+	eval $CVAINPUT --tolerance $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
+	return $?
+}	# ----------  end of function click_i  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  image_location
+#   DESCRIPTION:  Get the location of a subimage in root
+#    PARAMETERS:  PNG Filename of sub-image
+#       RETURNS:  "X_LOC,Y_LOC"
+#-------------------------------------------------------------------------------
+
+image_location ()
+{
+	COMMAND_LINE=""
+	if [ -z "$1" ]; then
+		err "Did not give a base image..."
+		return 255
+	fi
+
+	#Build the command line arguments
+	for x in $@
+	do
+		COMMAND_LINE+="-s $x "
+	done
+
+	#Find our sub-image
+	MATCH=`$CVAMATCH -t $TOLERANCE $CENTER --x-root $COMMAND_LINE`
+	RETURN_CODE=$?
+	out "$MATCH"
+	MATCH=`echo $MATCH | head -n1`
+
+	if [ x"$MATCH" == "x" ]; then
+		err "Could not find a match between \"$@\" and the root window."
+		return 255
+	fi
+
+	IMAGE_NAME=`echo "$MATCH" | cut -d',' -f1`
+	X_LOC=`echo "$MATCH" | cut -d',' -f2`
+	Y_LOC=`echo "$MATCH" | cut -d',' -f3`
+
+	out "image_location: \"$MATCH\" " "$X_LOC,$Y_LOC,$IMAGE_NAME"
+	echo "$X_LOC,$Y_LOC"
+	return $RETURN_CODE
+}	# ----------  end of function image_location  ----------
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  hover_xy
+#   DESCRIPTION:  Move the mouse to location X Y
+#    PARAMETERS:  X_LOC, Y_LOC
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+hover_xy ()
+{
+	if [ -z "$1" ]; then
+		out "Did not provide an X location, assuming 0..."
+		X_LOC=0
+	else
+		X_LOC=$1
+	fi
+
+	if [ -z "$2" ]; then
+		out "Did not provide a Y location, assuming 0..."
+		Y_LOC=0
+	else
+		Y_LOC=$2
+	fi
+
+	out "hover_xy: $X_LOC $Y_LOC"
+
+	$CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE
+}	# ----------  end of function hover_xy  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  hoverr_xy
+#   DESCRIPTION:  Move the mouse over X and up Y
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+hoverr_xy ()
+{
+	if [ -z "$1" ]; then
+		out "Did not provide an X increment, assuming 0..."
+		X_INC=0
+	else
+		X_INC=$1
+	fi
+
+	if [ -z "$2" ]; then
+		out "Did not provide a Y increment, assuming 0..."
+		Y_INC=0
+	else
+		Y_INC=$1
+	fi
+
+	out "hoverr_xy: $X_INC $Y_INC"
+
+	$CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE
+}	# ----------  end of function hoverr_xy  ----------
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  hover_i
+#   DESCRIPTION:  Move the mouse to the center of image on root window
+#    PARAMETERS:  PNG File name
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+hover_i ()
+{
+	COMMAND_LINE=""
+	if [ -z "$1" ]; then
+		err "Did not give a base image."
+		return 255
+	fi
+
+	for x in $@
+	do
+		if [ x$CENTER != "x" ]; then
+			center="c"
+		else
+			center=""
+		fi
+		COMMAND_LINE+="-s '${center}mouseimage $x' "
+	done
+
+	out "hover_i: $@"
+
+	eval $CVAINPUT --tolerance $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
+	return $?
+}	# ----------  end of function hover_i  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  jiggle_mouse
+#   DESCRIPTION:  Moves the mouse up-right 1 pixel, and then back - necessary
+#					for activation some widgets
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+jiggle_mouse ()
+{
+	out "jiggle_mouse"
+	$CVAINPUT -s 'mousejiggle' >> $OUTFILE
+}	# ----------  end of function jiggle_mouse  ----------
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  key_str
+#   DESCRIPTION:  Simulate pressing keys according to $1
+#    PARAMETERS:  String of text as $1
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+key_str ()
+{
+	COMMAND_LINE=""
+	if [ -z "$1" ]; then
+		err "Did not give me a string to enter..."
+		return 255
+	fi
+
+	for x in $@
+	do
+		COMMAND_LINE+="-s 'keystring $x' "
+	done
+
+	out "key_str: \"$@\""
+	$CVAINPUT $COMMAND_LINE >> $OUTFILE
+}	# ----------  end of function key_str  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  key_down
+#   DESCRIPTION:  Presses down a key - necessary for stuff like Alt-shortcuts
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+key_down ()
+{
+	if [ -z "$1" ]; then
+		err "Did not give me a key to press down..."
+		return 255
+	fi
+
+	out "key_down: $1"
+
+	$CVAINPUT -s "keydown $1" >> $OUTFILE
+}	# ----------  end of function key_down  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  key_up
+#   DESCRIPTION:  Lifts a key up - every key_down should have a key_up
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+key_up ()
+{
+	if [ -z "$1" ]; then
+		err "Did not give me a key to release..."
+	fi
+
+	out "key_up: $1"
+
+	$CVAINPUT -s "keyup $1" >> $OUTFILE
+}	# ----------  end of function key_up  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  key_click
+#   DESCRIPTION:  Clicks a single key
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+key_click ()
+{
+	if [ -z "$1" ]; then
+		err "Did not give me a key to press..."
+	fi
+
+	out "key_click: $1"
+	
+	$CVAINPUT -s "keyclick $1" >> $OUTFILE
+}	# ----------  end of function key_press  ----------
