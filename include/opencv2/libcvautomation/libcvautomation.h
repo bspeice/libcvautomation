@@ -59,3 +59,26 @@ typedef struct {
 #include <libcvautomation/libcvautomation-xtest.h>
 
 #endif /* LIBCVAUTOMATION_H */
+/* Doxygen information */
+/** \file libcvautomation.h
+ * \brief The top-level include for all projects involving libcvautomation
+ * \details This source file includes all other files needed for libcvautomation projects, and also defines the cvautomationList and cvaPoint structs to be used among libcvautomation functions. Please note that while the opencv2 version is being documented, there is no actual difference in usage for opencv version 1.
+ * \author Bradlee Speice
+ * \date 6/21/2012
+ */
+
+/** \struct cvautomationList
+ * \brief Implements a structure to build an array for methods like matchSubImage_a()
+ * \details This structure is a simple way to wrap up all needed information for matching sub images in one location.
+ * \param cvaImage An image in IplImage format
+ * \param fileName The file location of an image to be loaded
+ * \param resultPoint Holder for a result - for example, storing where this sub image was located in its root image
+ * \param searchMethod The search method to use when searching for this sub image in a root image
+ * \param tolerance The tolerance to use when searching for this sub image in a root image
+ * \see libcv_search_methods
+ */
+
+/** \struct cvaPoint
+ * \brief Very simple structure to standardize how points are used in libcvautomation
+ * \param x An X-coordinate
+ * \param y A Y-coordinate */

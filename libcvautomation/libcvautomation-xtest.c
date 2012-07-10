@@ -18,9 +18,6 @@
 
 #include <libcvautomation/libcvautomation-xtest.h>
 
-#define IS_CMD( x, y ) strncmp( x, y, strlen( y ) ) == 0
-#define COMMAND_STR_LEN 512
-
 /* Note: The XLib documentation says that we shouldn't need to XFlush,
  * but I've found in testing that events don't get done correctly unless
  * we do. I've included the XFlush() calls. */
@@ -498,8 +495,6 @@ void xte_mouseJiggle ( Display *displayLocation )
  */
 void xte_clickKey ( Display *displayLocation, char *key )
 {
-	/* Part of this code based on xte from the xautomation source
-	 * available at http://hoopajoo.net/projects/xautomation.html */
 	KeyCode kc;
 	KeySym ks;
 
@@ -737,3 +732,4 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 
 	return resultPoint;
 }
+

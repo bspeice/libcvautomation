@@ -170,7 +170,7 @@ void matchSubImage_a ( IplImage *rootImage, cvautomationList *subImageArray, int
  *  				searchMethod and threshold value.
  * =====================================================================================
  */
-void matchSubImage_a_location ( const char *rootImageFileName, cvautomationList *subImageArray, int listSize )
+void matchSubImage_a_location ( const char *rootImage_location, cvautomationList *subImageArray, int listSize )
 {
 	/* This is also a higher-end wrapper for matchSubImage, but is mostly aimed
 	 * at making python support for multiple images very easy. */
@@ -179,7 +179,7 @@ void matchSubImage_a_location ( const char *rootImageFileName, cvautomationList 
 	cvautomationList curr;
 
 	IplImage *rootImage;
-	rootImage = cvLoadImage( rootImageFileName, CV_LOAD_IMAGE_COLOR );
+	rootImage = cvLoadImage( rootImage_location, CV_LOAD_IMAGE_COLOR );
 
 	int x = 0;
 	for ( x = 0; x < listSize; x++ )
@@ -383,7 +383,7 @@ void matchSubImage_a_center ( IplImage *rootImage, cvautomationList *subImageArr
  *  				image, rather than the top-left corner.
  * =====================================================================================
  */
-void matchSubImage_a_location_center ( const char *rootImageFileName, cvautomationList *subImageArray, int listSize )
+void matchSubImage_a_location_center ( const char *rootImage_location, cvautomationList *subImageArray, int listSize )
 {
 	/* This is also a higher-end wrapper for matchSubImage, but is mostly aimed
 	 * at making python support for multiple images very easy. */
@@ -392,7 +392,7 @@ void matchSubImage_a_location_center ( const char *rootImageFileName, cvautomati
 	cvautomationList curr;
 
 	IplImage *rootImage;
-	rootImage = cvLoadImage( rootImageFileName, CV_LOAD_IMAGE_COLOR );
+	rootImage = cvLoadImage( rootImage_location, CV_LOAD_IMAGE_COLOR );
 
 	int x = 0;
 	for ( x = 0; x < listSize; x++ )
