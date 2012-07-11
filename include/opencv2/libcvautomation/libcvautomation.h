@@ -83,6 +83,23 @@ typedef struct {
  * \section questions Questions? Comments? Concerns?
  * Please send any feedback to <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>. Pull requests can be submitted to <a href="https://github.com/DjBushido/cvautomation">my github repository</a>.*/
 
+/** \page libcvautomation Libcvautomation
+ * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
+ * \date 7/11/2012
+ * \section intro Introduction
+ * Welcome to Libcvautomation!
+ * Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for <a href="http://sikuli.org">Sikuli</a> and <a href="https://wiki.ubuntu.com/Xpresser">Xpresser</a>. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our RHEL 5 systems, but also died, or didn't work, or something else. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it.
+ * \section how_it_works How Libcvautomation Works
+ * Libcvautomation represents two software products coming together - <a href="http://opencv.willowgarage.com/wiki/">OpenCV</a> and the <a href="http://www.x.org/docs/Xext/xtest.pdf">XTest extension</a> to the X11 server. OpenCV is used for image recognition, and XTest is used to actually drive the X server. You can dig into \ref libcvautomation-xtest.h to get an idea of what all this library is capable of. <br>
+ * Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like matchSubImage_X11() that allow you to match an image against the X11 root window in place. This means no more <tt>'xwd | convert "<out_name>"'</tt>.
+ * \section using Using Libcvautomation
+ * So how does one go about using libcvautomation? <br>
+ * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that cva-match and cva-input are installed). Python bindings are on their way too. <br>
+ * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that.
+ * \section questions Questions? Comments? Concerns?
+ * Please send any feedback to <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>. Pull requests can be submitted to <a href="https://github.com/DjBushido/cvautomation">my github repository</a>.
+ */
+
 /** \page writing_app_tests Writing Application Tests
  * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
  * \date 7/11/2012

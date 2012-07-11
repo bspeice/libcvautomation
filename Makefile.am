@@ -1,1 +1,1 @@
-SUBDIRS = libcvautomation examples
+SUBDIRS = libcvautomation examples docs
