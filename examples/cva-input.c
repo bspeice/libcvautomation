@@ -24,7 +24,7 @@
 #include <libcvautomation/libcvautomation.h>
 
 void usage ();
-void checkXTEEnabled ();
+void checkXTEEnabled (Display *display);
 
 int main( int argc, char** argv )
 {
@@ -201,3 +201,78 @@ void checkXTEEnabled ( Display *display )
 		exit(255);
 	}
 }
+
+/* Doxygen Information */
+/** \file cva-input.c
+ * \brief The cva-input program to demonstrate Libcvautomation's XTest functionality
+ * \author Bradlee Speice <bspeice@uncc.edu>
+ * \date 7/11/2012
+ */
+
+/* The biggest purpose of documenting this code is to trick doxygen into making a man page for it. */
+/** \page cva-input
+ *
+ * \author Bradlee Speice <bspeice@uncc.edu>
+ * \date 7/11/2012
+ * \section usage Usage:
+ * This program works kind of like a mini-language. All options are parsed left-to-right, and executed right there. Thus, specifying "--display" at different places in the options will cause this program to use the most recent given display.
+ * \section example Example Usage:
+ * Click the mouse:
+ *
+ * cva-input -s 'click 1'
+ * 
+ * Press key 'a':
+ *
+ * cva-input -s 'keyclick a'
+ *
+ * \section options Full Options:
+ *
+ * -h, --help:			Display this usage message.
+ *
+ * -u, --usage:			Display this usage message.
+ *
+ * -d, --display:		Specify the X display to use.
+ *
+ * -m, --search-method:	Specify a method to search by. See <tt>cva-match --help</tt> for more information on this.
+ *
+ * -t, --tolerance:		Specify how strict the match is.
+ *
+ * -b, --button:		Specify the mouse button to press (default 1).
+ *
+ * -c, --center:		Instead of matching the top-left corner of an image, match the center of the image.
+ *
+ * -s, --string:		Command string - see below.
+ *
+ *
+ * \section commands Full Command List:
+ * mouseclick:	Click the mouse in-place.
+ *
+ * imouseclick:	Click the mouse at an image's top-left corner.
+ *
+ * icmouseclick:	Click the mouse at an image's center.
+ *
+ * mousexy:	Move the mouse to the given coordinate.
+ *
+ * mouserxy:	Move the mouse by the given x and y values (relative motion).
+ *
+ * mouseimage:	Move the mouse to an image's top-left corner.
+ *
+ * cmouseimage:	Move the mouse to an image's center.
+ *
+ * mousedown:	Push and leave down a mouse button.
+ *
+ * mouseup:	Release a mouse button.
+ *
+ * mousejiggle:	Jiggle the mouse (helps to activate some widgets).
+ *
+ * keyclick:	Click a keyboard button.
+ *
+ * keydown:	Push and leave down a keyboard button.
+ *
+ * keyup:	Release a keyboard button.
+ *
+ * keystring:	Input a string of keys to X11.
+ *
+ * \section contact Contact Information:
+ * Questions? Comments? Concerns? Suggestions? Send all feedback to Bradlee Speice at <bspeice@uncc.edu>
+ */

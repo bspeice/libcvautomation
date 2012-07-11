@@ -32,12 +32,12 @@ AC_PATH_X
 PKG_CHECK_MODULES([OpenCV], [opencv >= 2.0.0], [use_opencv2=true], [use_opencv1=true])
 AM_CONDITIONAL(USEOPENCV2, [test "$use_opencv2" != ""])
 #Let doxygen know where our headers are at
-AC_SUBST(INPUT_PATH, "../include/opencv2")
+AC_SUBST(INPUT_PATH, "../include/opencv2 ../examples")
 if test "$use_opencv1" != ""; then
 	echo "could not find OpenCV version 2.0.0 or higher, checking for 1.0.0 or higher..."
 	PKG_CHECK_MODULES([OpenCV], [opencv >= 1.0.0])
 	#Update doxygen on where our headers are at
-	AC_SUBST(INPUT_PATH, "../include/opencv1")
+	AC_SUBST(INPUT_PATH, "../include/opencv1 ../examples")
 fi
 
 PKG_CHECK_MODULES([X11], [x11 >= 1.0.3])

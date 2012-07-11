@@ -256,3 +256,59 @@ If you have any questions, comments, concerns, email <%s>\n", LIBCVAUTOMATION_VE
 
 }		/* -----  end of function usage  ----- */
 
+/* Doxygen Information */
+/** \file cva-match.c
+ * \brief The cva-input program to demonstrate Libcvautomation's XTest functionality
+ * \author Bradlee Speice <bspeice@uncc.edu>
+ * \date 7/11/2012
+ */
+
+/* The biggest purpose of documenting this code is to trick doxygen into making a man page for it. */
+/** \page cva-match
+ *
+ * \author Bradlee Speice <bspeice@uncc.edu>
+ * \date 7/11/2012
+ * \section usage Usage:
+ * This program uses OpenCV in order to recognize an image within an image. The return code is how many matches were found - return 0 for no matches, 1 for one match, etc.
+ *
+ * \section example Example Usage:
+ * Match two images against the root X11 window:
+ *
+ * cva-match --x-root -s "<image_name>" -s "<image_name_2>"
+ *
+ * Match a root and sub image with a custom tolerance and search method
+ *
+ * cva-match -r "<root_image>" -s "<image_name>" -o 75 -m 1
+ *
+ * \section options Full Options:
+ * -h, --help:  Display this usage message.
+ *
+ * -u, --usage:  Display this usage message.
+ *
+ * -r, --root-image: Location of the root image to compare against.
+ *
+ * -s, --sub-image: Location of the sub-image to find in root.
+ *
+ * -p, --separator: Separator of the X and Y coordinates.
+ *
+ * -t, --tolerance: Set how strict the match is - 100 is recommended lowest value.
+ *
+ * \note When using CCORR or CCOEFF tolerance works in opposite direction, so -50 is recommended highest value.
+ *
+ * -m, --search-method: Set which method is used to search for sub-images.
+ *
+ * \note Search Methods: CV_TM_SQDIFF = 0, CV_TM_SQDIFF_NORMED = 1, CV_TM_CCORR = 2, CV_TM_CCORR_NORMED = 3, CV_TM_CCOEFF = 4, CV_TM_COEFF_NORMED = 5
+ *
+ * -x, --x-root[=DISPLAY]: Set the root image to come from X11
+ * 	
+ * \note The DISPLAY variable is optional, not specifying it will cause X to use the default display (not specifically :0.0)
+ *
+ * -c, --center:  The output points should be centered on the sub-image, rather than the top-left corner.
+ *
+ * -o, --sane-tolerance: Set the tolerance using a scale of 1-100, rather than INT_MIN to INT_MAX (100 ~= INT_MAX)
+ *
+ *
+ * \section contact Contact Information:
+ * Questions? Comments? Concerns? Suggestions? Send all feedback to Bradlee Speice at <bspeice@uncc.edu>
+
+ */
