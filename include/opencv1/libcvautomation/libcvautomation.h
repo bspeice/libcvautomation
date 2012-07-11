@@ -5,7 +5,6 @@
  *
  *    Description:  Include wrapper for libcvautomation subsections
  *
- *        Version:  1.0
  *        Created:  06/21/2012 12:20:43 PM
  *       Revision:  none
  *       Compiler:  gcc
@@ -17,6 +16,9 @@
  */
 #ifndef LIBCVAUTOMATION_H
 #define LIBCVAUTOMATION_H
+
+#define LIBCVAUTOMATION_VERSION "1.0"
+#define LIBCVAUTOMATION_BUGREPORT "bspeice@uncc.edu"
 
 /* C includes */
 #include <stdio.h>

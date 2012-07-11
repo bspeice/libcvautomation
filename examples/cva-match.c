@@ -63,6 +63,7 @@ int main( int argc, char** argv )
 		{
 				{"help",		no_argument,		0,	'h'},
 				{"usage",		no_argument,		0,	'u'},
+				{"version",		no_argument,		0,	'v'},
 				{"root-image",	required_argument,	0,	'r'},
 				{"sub-image",	required_argument,	0,	's'},
 				{"separator",	required_argument,	0,	'p'},
@@ -94,6 +95,10 @@ int main( int argc, char** argv )
 				break;
 
 			case 'u':
+				usage();
+				break;
+
+			case 'v':
 				usage();
 				break;
 
@@ -208,7 +213,8 @@ int main( int argc, char** argv )
  */
 void usage ( )
 {
-	fprintf( stderr, "\n\
+	fprintf( stderr, "\
+Libcvautomation version: %s\n\
 cva-match -r <root_image> -s <sub_image> \n\
 cva-match -s <sub_image> -x \n\
 \n\
@@ -244,7 +250,7 @@ Usage: \n\
 \t-o, --sane-tolerance:\tSet the tolerance using a scale of 1-100,\n\
 \t\t\t\trather than INT_MIN to INT_MAX (100 ~= INT_MAX)\n\
 \n\
-If you have any questions, comments, concerns, email bspeice@uncc.edu\n" );
+If you have any questions, comments, concerns, email <%s>\n", LIBCVAUTOMATION_VERSION, LIBCVAUTOMATION_BUGREPORT );
 
 	exit (0);
 

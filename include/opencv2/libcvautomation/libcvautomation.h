@@ -18,6 +18,9 @@
 #ifndef LIBCVAUTOMATION_H
 #define LIBCVAUTOMATION_H
 
+#define LIBCVAUTOMATION_VERSION "1.0"
+#define LIBCVAUTOMATION_BUGREPORT "bspeice@uncc.edu"
+
 /* C includes */
 #include <stdio.h>
 #include <string.h>

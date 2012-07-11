@@ -5,7 +5,6 @@
  *
  *    Description:  
  *
- *        Version:  1.0
  *        Created:  06/26/2012 09:09:05 AM
  *       Revision:  none
  *       Compiler:  gcc

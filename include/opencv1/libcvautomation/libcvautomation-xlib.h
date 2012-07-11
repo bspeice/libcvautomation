@@ -5,7 +5,6 @@
  *
  *    Description:  Function definitions for X11 operations
  *
- *        Version:  1.0
  *        Created:  06/21/2012 08:34:21 AM
  *       Revision:  none
  *       Compiler:  gcc

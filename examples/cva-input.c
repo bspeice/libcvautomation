@@ -6,7 +6,6 @@
  *    Description:  This is an example program to demonstrate the XTest and XInput
  *    				functionality in libcvautomation
  *
- *        Version:  1.0
  *        Created:  06/26/2012 09:20:20 AM
  *       Revision:  none
  *       Compiler:  gcc
@@ -50,6 +49,7 @@ int main( int argc, char** argv )
 		{
 				{"help",		no_argument,		0,	'h'},
 				{"usage",		no_argument,		0,	'u'},
+				{"version",		no_argument,		0,	'v'},
 				{"display",		required_argument,	0,	'd'},
 				{"search-method",required_argument,	0,	'm'},
 				{"tolerance",	required_argument,	0,	't'},
@@ -82,6 +82,10 @@ int main( int argc, char** argv )
 				break;
 
 			case 'u':
+				usage();
+				break;
+
+			case 'v':
 				usage();
 				break;
 
@@ -142,10 +146,9 @@ int main( int argc, char** argv )
  */
 void usage ( )
 {
-	fprintf( stderr, "\n\
-cva-input -i <image_file>\n\
-cva-input -x <x_location> -y <y_location>\n\
-cva-input -k <key>\n\
+	fprintf( stderr, "\
+Libcvautomation version: %s\n\
+cva-input -s <command_string>\n\
 \n\
 The cva-input program demonstrates the XTest section of libcvautomation.\n\
 \n\
@@ -182,7 +185,7 @@ Available commands:\n\
 \tkeyup:\tRelease a keyboard button.\n\
 \tkeystring:\tInput a string of keys to X11.\n\
 \n\
-If you have any questions, comments, concerns, email <bspeice@uncc.edu>.\n\n" );
+If you have any questions, comments, concerns, email <%s>.\n\n", LIBCVAUTOMATION_VERSION, LIBCVAUTOMATION_BUGREPORT );
 
 	exit (0);
 
