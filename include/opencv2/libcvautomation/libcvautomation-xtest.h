@@ -365,7 +365,6 @@ This page describes the various command strings available for the \ref xte_comma
 \section mouseclick Mouse Click
 \code 'mouseclick <button_number>' \endcode
 Click the mouse button \c <button_number> in-place.
-\warning This command has no arguments.
 
 \section imouseclick Image Mouse Click
 \code 'imouseclick <image_name>' \endcode
