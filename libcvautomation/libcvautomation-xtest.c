@@ -790,7 +790,7 @@ void xte_keyUp ( Display *displayLocation, char *key )
 
 	kc = XKeysymToKeycode( displayLocation, ks );
 
-	XTestFakeKeyEvent( displayLocation, kc, True, CurrentTime );
+	XTestFakeKeyEvent( displayLocation, kc, False, CurrentTime );
 
 	XFlush( displayLocation );
 }
