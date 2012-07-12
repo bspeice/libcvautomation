@@ -422,20 +422,20 @@ Scroll the mouse up 1 time - depending on window manager settings, etc., this ma
 
 \section keyclick Key Button Click
 \code 'keyclick <key_name>' \endcode
-Push and release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'Space'. Please see \ref XTest_key_strings for a full list of special keys.
+Push and release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of special keys.
 
 \section keydown Key Button Down
 \code 'keydown <key_name>' \endcode
-Push down <em>but do not release</em> a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'Space'. Please see \ref XTest_key_strings for a full list of special keys.
+Push down <em>but do not release</em> a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of special keys.
 
 \section keyup Key Button Up
 \code 'keyup <key_name>' \endcode
-Release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'Space'. Please see \ref XTest_key_strings for a full list of special keys.
+Release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of special keys.
 
 \section keystring Keyboard Input String
 \code 'keystring <string>' \endcode
 Input a string of text to the X11 server. For example, inputting 'Hello, world!" will act as if you typed 'Hello, world!' from the keyboard.
-\warning Unlike \ref keydown, \ref keyup, and \ref keyclick, this function can not handle special keys like 'Space'.
+\warning Unlike \ref keydown, \ref keyup, and \ref keyclick, this function can not handle special keys like 'space'.
 */
 
 /** \def IS_CMD (x, y)
@@ -608,7 +608,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
 
 /** \fn void xte_clickKey ( Display *displayLocation, char *key );
  * \brief Press and release a keyboard key
- * \details This method allows you to press and release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'Space'. Please see \ref XTest_key_strings for a full list of keys.
+ * \details This method allows you to press and release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of keys.
  * \param displayLocation The Display of which to click a key
  * \param key The key to click as a string
  * \see \ref XTest_key_strings
@@ -616,15 +616,14 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
 
 /** \fn void xte_clickKeyStr ( Display *displayLocation, char *string );
  * \brief Input a string of characters to the X Server
- * \details Instead of specifying a single character to enter at a time (\c 'a', \c 'Space') this function allows you to enter an entire string (\c 'Hello, World!') at a time.
+ * \details Instead of specifying a single character to enter at a time (\c 'a', \c 'space') this function allows you to enter an entire string (\c 'Hello, World!') at a time.
  * \param displayLocation The Display of which to enter a key string on
  * \param string The key string to input to the X Server
- * \warning This function is currently unimplemented, but is on its way.
  */
 
 /** \fn void xte_keyDown ( Display *displayLocation, char *key );
  * \brief Press a key down, but do not release it
- * \details This method allows you to push down a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'Space'. Please see \ref XTest_key_strings for a full list of keys.
+ * \details This method allows you to push down a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of keys.
  * \param displayLocation The Display of which to push down a key
  * \param key The key to click as a string
  * \see \ref XTest_key_strings
@@ -632,7 +631,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
 
 /** \fn void xte_keyUp ( Display *displayLocation, char *key );
  * \brief Release a key
- * \details This method allows you to release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'Space'. Please see \ref XTest_key_strings for a full list of keys.
+ * \details This method allows you to release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of keys.
  * \param displayLocation The Display of which to release a key
  * \param key The key to click as a string
  * \see \ref XTest_key_strings
