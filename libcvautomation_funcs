@@ -29,9 +29,13 @@ CVAINPUT=`which cva-input` || echo "Could not find the cva-input program..." &>2
 #Some program-wide configs
 SEARCH_METHOD=0 #CV_TM_SQDIFF
 TOLERANCE=2250000
-CENTER="--center"
+USE_SANE_TOLERANCE=""
+#Uncomment to enable sane tolerance matching
+#USE_SANE_TOLERANCE="yes"
+
+USE_CENTER="yes"
 #Uncomment to disable center-of-image matching
-#CENTER=""
+#USE_CENTER=""
 
 
 #Quick trick to allow for easy redirection of output
@@ -142,7 +146,13 @@ click_i ()
 		COMMAND_LINE+="-s 'i${center}mouseclick $x' "
 	done
 
-	eval $CVAINPUT --tolerance $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
+	if [ -n "$USE_SANE_TOLERANCE" ]; then
+		TOLERANCE_OPTION="-o"
+	else
+		TOLERANCE_OPTION="-t"
+	fi
+
+	eval $CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
 	return $?
 }	# ----------  end of function click_i  ----------
 
@@ -168,7 +178,18 @@ image_location ()
 	done
 
 	#Find our sub-image
-	MATCH=`$CVAMATCH -t $TOLERANCE $CENTER --x-root $COMMAND_LINE`
+	if [ -n "$SANE_TOLERANCE" ]; then
+		TOLERANCE_OPTION="-o"
+	else
+		TOLERANCE_OPTION="-t"
+	fi
+	if [ -n "$CENTER" ]; then
+		USE_CENTER="--center"
+	else
+		USE_CENTER=""
+	fi
+
+	MATCH=`$CVAMATCH $TOLERANCE_OPTION $TOLERANCE $USE_CENTER --x-root $COMMAND_LINE`
 	RETURN_CODE=$?
 	out "$MATCH"
 	MATCH=`echo $MATCH | head -n1`
@@ -213,7 +234,7 @@ hover_xy ()
 
 	out "hover_xy: $X_LOC $Y_LOC"
 
-	$CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE
+	eval $CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE
 }	# ----------  end of function hover_xy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -241,7 +262,7 @@ hoverr_xy ()
 
 	out "hoverr_xy: $X_INC $Y_INC"
 
-	$CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE
+	eval $CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE
 }	# ----------  end of function hoverr_xy  ----------
 
 
@@ -262,7 +283,7 @@ hover_i ()
 
 	for x in $@
 	do
-		if [ x$CENTER != "x" ]; then
+		if [ -n $CENTER ]; then
 			center="c"
 		else
 			center=""
@@ -272,7 +293,13 @@ hover_i ()
 
 	out "hover_i: $@"
 
-	eval $CVAINPUT --tolerance $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
+	if [ -n $USE_SANE_TOLERANCE ]; then
+		TOLERANCE_OPTION="-o"
+	else
+		TOLERANCE_OPTION="-t"
+	fi
+
+	eval $CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
 	return $?
 }	# ----------  end of function hover_i  ----------
 
