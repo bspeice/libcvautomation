@@ -66,7 +66,7 @@ err ()
 
 click ()
 {
-	$CVAINPUT -s 'mouseclick 1' >> $OUTFILE >> $OUTFILE
+	eval $CVAINPUT -s 'mouseclick 1' >> $OUTFILE >> $OUTFILE
 }	# ----------  end of function click  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -92,7 +92,7 @@ click_xy ()
 
 	out "click_xy: " $X_LOC $Y_LOC
 
-	$CVAINPUT -s 'mousexy $X_LOC $Y_LOC' -s 'mouseclick 1' >> $OUTFILE
+	eval $CVAINPUT -s 'mousexy $X_LOC $Y_LOC' -s 'mouseclick 1' >> $OUTFILE
 
 }	# ----------  end of function click_xy  ----------
 
@@ -116,7 +116,7 @@ clickr_xy ()
 
 	out "clickr_xy: " $1 $2
 
-	$CVAINPUT -s 'mouserxy $1 $2' -s 'mouseclick 1' >> $OUTFILE
+	eval $CVAINPUT -s 'mouserxy $1 $2' -s 'mouseclick 1' >> $OUTFILE
 }	# ----------  end of function clickr_xy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -314,7 +314,7 @@ hover_i ()
 jiggle_mouse ()
 {
 	out "jiggle_mouse"
-	$CVAINPUT -s 'mousejiggle' >> $OUTFILE
+	eval $CVAINPUT -s 'mousejiggle' >> $OUTFILE
 }	# ----------  end of function jiggle_mouse  ----------
 
 
@@ -339,7 +339,7 @@ key_str ()
 	done
 
 	out "key_str: \"$@\""
-	$CVAINPUT $COMMAND_LINE >> $OUTFILE
+	eval $CVAINPUT $COMMAND_LINE >> $OUTFILE
 }	# ----------  end of function key_str  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -358,7 +358,7 @@ key_down ()
 
 	out "key_down: $1"
 
-	$CVAINPUT -s "keydown $1" >> $OUTFILE
+	eval $CVAINPUT -s "keydown $1" >> $OUTFILE
 }	# ----------  end of function key_down  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -376,7 +376,7 @@ key_up ()
 
 	out "key_up: $1"
 
-	$CVAINPUT -s "keyup $1" >> $OUTFILE
+	eval $CVAINPUT -s "keyup $1" >> $OUTFILE
 }	# ----------  end of function key_up  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -394,5 +394,5 @@ key_click ()
 
 	out "key_click: $1"
 	
-	$CVAINPUT -s "keyclick $1" >> $OUTFILE
+	eval $CVAINPUT -s "keyclick $1" >> $OUTFILE
 }	# ----------  end of function key_press  ----------
