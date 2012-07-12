@@ -5,7 +5,6 @@
  *
  *    Description:  Include wrapper for libcvautomation subsections
  *
- *        Version:  1.0
  *        Created:  06/21/2012 12:20:43 PM
  *       Revision:  none
  *       Compiler:  gcc
@@ -265,14 +264,23 @@ typedef struct {
  * <li>First things first, run through the testing wrapper to make sure that everything is O.K.
  * <li>If you need to, some things you can do to tune the application test are as follows:
  * 		<ul>
+ * 		<li>Set the \c SEARCH_METHOD
+ * 			<ul>
+ * 			<li>This value adjusts how libcvautomation searches for sub-images. See \ref libcv_search_methods for more information on accepted values, and how each works.
+ * 			</ul>
  * 		<li>Set the \c TOLERANCE
  * 			<ul>
  * 			<li>This value adjusts how strict libcvautomation is when trying to find a sub-image. See \ref libcv_search_methods for more information on how to control how libcvautomation searches for images.
  * 			</ul>
- * 		<li>Set the \c CENTER
+ * 		<li>Set \c USE_SANE_TOLERANCE
  * 			<ul>
- * 			<li>By default, the wrapper will use the center of an image as opposed to the upper-left corner to click on. To change this behavior, set: \code CENTER="" \endcode
- * 			<li>To set the behavior back to using center-based matching, set: \code CENTER="c" \endcode
+ * 			<li>This value implements a more sane way of setting the tolerance value - Where normally the tolerance ranges from \c INT_MIN to \c INT_MAX, the sane tolerance accepts values of 1 - 100 (\f$ 1 \approx 0 \f$, and \f$ 100 \approx \c INT_MAX \f$)
+ * 			<li>To enable sane tolerance, set: \code USE_SANE_TOLERANCE="<any_value>" \endcode
+ * 			<li>To disable sane tolerance (the default) set: \code USE_SANE_TOLERANCE="" \endcode
+ * 		<li>Set \c USE_CENTER
+ * 			<ul>
+ * 			<li>By default, the wrapper will use the center of an image as opposed to the upper-left corner to click on. To disable this behavior, set: \code USE_CENTER="" \endcode
+ * 			<li>To set the behavior back to using center-based matching, set: \code USE_CENTER="<any_value>" \endcode
  * 			</ul>
  * 		<li>Set the \c OUTFILE and \c ERRFILE
  * 			<ul>

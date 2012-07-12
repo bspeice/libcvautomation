@@ -5,7 +5,6 @@
  *
  *    Description:  Function definitions for opencv functionality
  *
- *        Version:  1.0
  *        Created:  06/21/2012 08:34:21 AM
  *       Revision:  none
  *       Compiler:  gcc
@@ -65,10 +64,18 @@ void matchSubImage_a_location_center ( const char *rootImageFileName, cvautomati
 
 /** \page libcv_search_methods Libcv Search Methods
 This page describes the methods libcv uses to search for a sub image in a root image.
+\section tolerance Tolerance Values
+Tolerance values are used to control how strict each of the following search methods are. Acceptable values are from \c INT_MIN to \c INT_MAX.
+
+Additionally, each of the reference programs - \c cva-input and \c cva-match - have a "sane tolerance" built in. This is accessed by the "-o" switch, and allows you to specify a tolerance on scale of 1-100, where 1 is incredibly strict, and 100 is incredibly loose.
+\note The formula for calculating the sane tolerance is: \f$ T(x) = (10^{\frac{\log{INT\_MAX}}{\lambda}})^x \f$ where \f$ \lambda \f$ is the highest tolerance value (in our case, 100). Finally, we have to round down a little bit to ensure that we don't accidentally generate a value higher than \c INT_MAX. The formula used does mean that we will never be able to generate values lower than 0.
+\warning The "sane-tolerance" option doesn't know which search method you are using - Thus while 1 is an incredibly strict search for \ref SQDIFF and \ref SQDIFF_NORMED, it is fairly loose search for \ref CCORR, \ref CCORR_NORMED, \ref CCOEFF, and \ref CCOEFF_NORMED
+
 \section SQDIFF Squared Difference
 \code #define CV_TM_SQDIFF	0 \endcode
 Squared Difference is the default search method used by \c libcvautomation, as well as \c cva-match and \c cva-input.
 \par For this method, setting a low tolerance value results in a more strict match.
+
 Formula:
 \f$R(x,y) = \sum_{x',y'} (T(x',y') - I(x + x', y+y'))^2 \f$
 
@@ -76,6 +83,7 @@ Formula:
 \code #define CV_TM_SQDIFF_NORMED	1 \endcode
 This is a normalized version of the \ref SQDIFF search method.
 \par For this method, setting a low tolerance value results in a more strict match.
+
 Formula:
 \f$ R(x,y) = \frac{\sum_{x',y'}(T(x',y') - I(x + x', y + y'))^2}{ \sqrt{\sum_{x',y'}T(x',y')^2 \cdot \sum_{x',y'}I(x + x', y + y')^2}} \f$
 
