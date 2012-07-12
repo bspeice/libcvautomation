@@ -2,7 +2,7 @@ if BUILD_DOXYGEN
 
 EXTRA_DIST = html
 install-data-local:
-	$(MKDIR_P) $(DESTDIR)$(datadir)/$(PACKAGE)/html
+	$(mkdir_p) $(DESTDIR)$(datadir)/$(PACKAGE)/html
 	for f in html/*; do \
 		$(INSTALL_DATA) $(srcdir)/$$f \
 		$(DESTDIR)$(datadir)/$(PACKAGE)/html; done

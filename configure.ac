@@ -56,13 +56,14 @@ AC_ARG_WITH(docs, [  --with-documentation    build documentation for libcvautoma
 AC_ARG_ENABLE(man, [  --enable-man            enable building the 'man' pages for libcvautomation @<:@default=enable@:>@])
 AC_ARG_ENABLE(tex, [  --enable-tex            enable building the 'latex' pages for libcvautomation @<:@default=enable@:>@])
 if test "$with_docs" != "no"; then
-	AC_CHECK_PROGS([Doxygen], [doxygen])
+	AC_CHECK_PROGS([Doxygen], [doxygen], [true])
 	if test -z "$Doxygen"; then
 		AC_MSG_WARN([Doxygen not found - continuing without building documentation.])
+	else
+		AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"])
+		AC_CONFIG_FILES([docs/Doxyfile])
 	fi
 
-	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"])
-	AM_COND_IF(BUILD_DOXYGEN, [AC_CONFIG_FILES([docs/Doxyfile])])
 
 	#Check if we should generate man pages
 	if test "$enable_man" != "no"; then
