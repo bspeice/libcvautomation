@@ -84,6 +84,12 @@ void xte_mouseUp ( Display *displayLocation, int mouseButton );
 /* Move the mouse a little bit */
 void xte_mouseJiggle ( Display *displayLocation );
 
+/* Scroll the mouse up */
+void xte_mouseScrollUp ( Display *displayLocation );
+
+/* Scroll the mouse down */
+void xte_mouseScrollDown ( Display *displayLocation );
+
 /* Press and release a key 
  * Note that we use a string for *key, since keys like "space" are still valid. */
 void xte_clickKey ( Display *displayLocation, char *key );
@@ -403,6 +409,16 @@ Release  mouse button \c <button_number>
 \section mousejiggle Mouse Jiggle
 \code 'mousejiggle' \endcode
 Jiggle the mouse (helps to activate some widgets). Moves the mouse right and down 1 pixel, and then back.
+
+\section mousescrolld Mouse Scroll Down
+\code 'mousescrolld' \endcode
+Scroll the mouse down 1 time - depending on window manager settings, etc., this may be multiple lines.
+\note This is a wrapper function for clicking button 4 on the mouse
+
+\section mousescrollu Mouse Scroll Up
+\code 'mousescrollu' \endcode
+Scroll the mouse up 1 time - depending on window manager settings, etc., this may be multiple lines.
+\note This is a wrapper function for clicking button 5 on the mouse
 
 \section keyclick Key Button Click
 \code 'keyclick <key_name>' \endcode

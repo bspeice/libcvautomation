@@ -488,6 +488,34 @@ void xte_mouseJiggle ( Display *displayLocation )
 
 /* 
  * ===  FUNCTION  ======================================================================
+ *         Name:  xte_mouseScrollUp
+ *  Description:  Scroll the mouse up
+ * =====================================================================================
+ */
+void xte_mouseScrollUp ( Display *displayLocation )
+{
+	XTestFakeButtonEvent( displayLocation, 4, True, CurrentTime );
+	XTestFakeButtonEvent( displayLocation, 4, False, CurrentTime );
+
+	XFlush( displayLocation );
+}		/* -----  end of function xte_mouseScrollUp  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  xte_mouseScrollDown
+ *  Description:  Scroll the mouse down
+ * =====================================================================================
+ */
+void xte_mouseScrollDown ( Display *displayLocation )
+{
+	XTestFakeButtonEvent( displayLocation, 5, True, CurrentTime );
+	XTestFakeButtonEvent( displayLocation, 5, False, CurrentTime );
+
+	XFlush( displayLocation );
+}		/* -----  end of function xte_mouseScrollDown  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
  *         Name:  xte_clickKey
  *  Description:  Press and release a single key
  * =====================================================================================
@@ -687,6 +715,14 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	else if (IS_CMD( s_commandString, "mousejiggle" ))
 	{
 		xte_mouseJiggle( displayLocation );
+	}
+	else if (IS_CMD( s_commandString, "mousescrollu" ))
+	{
+		xte_mouseScrollUp( displayLocation );
+	}
+	else if (IS_CMD( s_commandString, "mousescrolld" ))
+	{
+		xte_mouseScrollDown( displayLocation );
 	}
 	else if (IS_CMD( s_commandString, "keyclick" ))
 	{
