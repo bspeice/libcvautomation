@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <limits.h>
+#include <math.h>
 
 #include <libcvautomation/libcvautomation.h>
 
@@ -55,6 +56,7 @@ int main( int argc, char** argv )
 				{"tolerance",	required_argument,	0,	't'},
 				{"button",		required_argument,	0,	'b'},
 				{"string",		required_argument,	0,	's'},
+				{"sane-tolerance", required_argument, 0,'o'},
 				{"print-format",required_argument,	0,	'p'},
 				/* Other valid values are "optional_argument"
 				 * and "required_argument" */
@@ -121,6 +123,13 @@ int main( int argc, char** argv )
 				else
 					printf("%s\n", optarg);
 				break;
+
+			case 'o':
+				tolerance = atoi(optarg);
+				/* Provide a more sane way to configure tolerance:
+				 * --sane-tolerance=100 ~= INT_MAX */
+				tolerance = pow(1.2397076, tolerance);
+				break;
 	
 			case '?':
 				/* Error routine */
@@ -163,6 +172,7 @@ Usage: \n\
 \t-b, --button:\t\tSpecify the mouse button to press (default 1).\n\
 \t-c, --center:\t\tInstead of matching the top-left corner of an image,\n\
 \t\t\t\tmatch the center of the image.\n\
+\t-o, --sane-tolerance:\tSet the tolerance using a scale of 1-100,\n\
 \t-s, --string:\t\tCommand string - see below.\n\
 \n\
 This program works kind of like a mini-language. All options\n\
@@ -240,6 +250,8 @@ void checkXTEEnabled ( Display *display )
  * -b, --button:		Specify the mouse button to press (default 1).
  *
  * -c, --center:		Instead of matching the top-left corner of an image, match the center of the image.
+ *
+ * -o, --sane-tolerance: Set the tolerance using a scale of 1-100, rather than INT_MIN to INT_MAX (100 ~= INT_MAX)
  *
  * -s, --string:		Command string - see below.
  *
