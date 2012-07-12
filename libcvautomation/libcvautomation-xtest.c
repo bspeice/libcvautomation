@@ -17,6 +17,16 @@
 
 #include <libcvautomation/libcvautomation-xtest.h>
 
+/* The following includes are used only by the code brought in with xautomation.
+ * As such, the rest of libcvautomation doesn't get access to them, which is why
+ * they are included here, rather than in the header (so that all of libcvautomation
+ * would end up including them). */
+#include <wchar.h>
+#include <stdint.h>
+#include <libcvautomation/xautomation_kbd.h>
+#include <libcvautomation/xautomation_keysym_map.h>
+#include <libcvautomation/xautomation_multikey_map.h>
+
 /* Note: The XLib documentation says that we shouldn't need to XFlush,
  * but I've found in testing that events don't get done correctly unless
  * we do. I've included the XFlush() calls. */
@@ -537,6 +547,125 @@ void xte_clickKey ( Display *displayLocation, char *key )
 	XFlush( displayLocation );
 }
 
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  xautomation_load_keycodes
+ *  Description:  load_keycodes function from xte in xautomation
+ * =====================================================================================
+ */
+void xautomation_load_keycodes ( Display *displayLocation )
+{
+	int i_min_keycode, i_max_keycode, keysyms_per_keycode,keycode_index,wrap_key_index,num_modifiers;
+	KeyCode min_keycode, max_keycode;
+    char *str;
+    KeySym *keysyms, keysym;
+    KeyCode keycode;
+
+    XDisplayKeycodes( displayLocation, &i_min_keycode, &i_max_keycode);
+	min_keycode = i_min_keycode;
+	max_keycode = i_max_keycode;
+    keysyms = XGetKeyboardMapping( displayLocation,
+        min_keycode, max_keycode + 1 - min_keycode,
+        &keysyms_per_keycode );
+
+    /* Clear tables */
+    for( keysym=0; keysym<MAX_KEYSYM; keysym++ ) {
+        keysym_to_modifier_map[keysym]=-1;
+        keysym_to_keycode_map[keysym]=0;
+    }
+
+    if( keysyms_per_keycode < NUM_KEY_MODIFIERS*2 ) {
+        num_modifiers = keysyms_per_keycode;
+    } else {
+        num_modifiers = NUM_KEY_MODIFIERS*2;
+    }
+
+    for( keycode_index = 0; keycode_index < ( max_keycode + 1 - min_keycode ); keycode_index++ ) {
+        keycode = keycode_index + min_keycode;
+        for( wrap_key_index = 0; wrap_key_index < num_modifiers; wrap_key_index++ ) {
+            str = XKeysymToString( keysyms[ keycode_index * keysyms_per_keycode + wrap_key_index ] );
+            if( str != NULL ) {
+                keysym = XStringToKeysym( str );
+
+                if( keysym < MAX_KEYSYM &&
+                        keysym_to_modifier_map[ keysym ] == -1 ) {
+                    keysym_to_modifier_map[ keysym ] = wrap_key_index;
+                    keysym_to_keycode_map[ keysym ] = keycode;
+                }
+            }
+        }
+    }
+
+    /* Free storage */
+    XFree(keysyms);
+
+}		/* -----  end of function xautomation_load_keycodes  ----- */
+
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  xautomation_send_char
+ *  Description:  
+ * =====================================================================================
+ */
+void xautomation_send_char ( Display *d, KeySym keysym )
+{
+	/* The following code lovingly (and with full permission) ripped from
+	 * the 'xte' program as part of xautomation, and massaged to work with
+	 * libcvautomation. Find the original code at:
+	 * http://hoopajoo.net/projects/xautomation.html */
+	
+	KeyCode keycode;
+    char *wrap_key = NULL;
+    int shift;
+
+    /* KeyCode and keyboard modifier lookup */
+    keycode  = keysym_to_keycode_map[keysym];
+    shift    = keysym_to_modifier_map[ keysym ]%2;
+    wrap_key = key_modifiers[ (keysym_to_modifier_map[ keysym ]-shift)/2 ];
+
+    /* Generate key events */
+    if( wrap_key != NULL )
+	{
+		KeySym wrap_keysym;
+		wrap_keysym = XStringToKeysym(wrap_key);
+		KeyCode wrap_keycode;
+		wrap_keycode = XKeysymToKeycode( d, wrap_keysym);
+        XTestFakeKeyEvent( d, wrap_keycode, True, CurrentTime );
+	}
+    if ( shift )
+	{
+		KeySym shift_keysym;
+		shift_keysym = XStringToKeysym(shift_key);
+		KeyCode shift_keycode;
+		shift_keycode = XKeysymToKeycode( d, shift_keysym );
+        XTestFakeKeyEvent( d, shift_keycode, True, CurrentTime );
+	}
+    XTestFakeKeyEvent( d, keycode, True, CurrentTime );
+    XTestFakeKeyEvent( d, keycode, False, CurrentTime );
+    if ( shift )
+	{
+		KeySym shift_keysym;
+		shift_keysym = XStringToKeysym(shift_key);
+		KeyCode shift_keycode;
+		shift_keycode = XKeysymToKeycode( d, shift_keysym);
+        XTestFakeKeyEvent( d, shift_keycode, False, CurrentTime );
+	}
+    if( wrap_key != NULL )
+	{
+		KeySym wrap_keysym;
+		wrap_keysym = XStringToKeysym(wrap_key);
+		KeyCode wrap_keycode;
+		wrap_keycode = XKeysymToKeycode( d, wrap_keysym);
+        XTestFakeKeyEvent( d, wrap_keycode, False, CurrentTime );
+	}
+
+    /* Flushing after every key, thanks thorsten@staerk.de */
+    XFlush( d );
+
+}		/* -----  end of function xautomation_send_char  ----- */
+
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  xte_clickKeyStr
@@ -545,9 +674,81 @@ void xte_clickKey ( Display *displayLocation, char *key )
  */
 void xte_clickKeyStr ( Display *displayLocation, char *string )
 {
-	/* TODO: Write the code to implement a function that allows you to enter a string
-	 * at a time to X, rather than a single character.*/
-	return;
+	/* The following code lovingly (and with full permission) ripped from
+	 * the 'xte' program as part of xautomation, and massaged to work with
+	 * libcvautomation. Find the original code at:
+	 * http://hoopajoo.net/projects/xautomation.html */
+	
+	static Bool didLoadKeyCodes = False;
+
+	if ( ! didLoadKeyCodes )
+	{
+		xautomation_load_keycodes( displayLocation );
+		didLoadKeyCodes = True;
+	}
+	
+	int i,j;
+
+    KeySym keysym[2];
+
+    wchar_t string_s[ COMMAND_STR_LEN ];
+    wchar_t wc_singlechar_str[2];
+
+    wmemset( string_s, L'\0', COMMAND_STR_LEN );
+    mbstowcs( string_s, string, COMMAND_STR_LEN );
+    wc_singlechar_str[ 1 ] = L'\0';
+    i = 0;
+    while( ( string[ i ] != L'\0' ) && ( i < COMMAND_STR_LEN ) ) {
+        wc_singlechar_str[ 0 ] = string[ i ];
+
+        /* KeySym lookup */
+		if (wc_singlechar_str[ 0] >= MAX_KEYSYM)
+			keysym[0] = 0;
+		else
+			keysym[0] = wc_singlechar_str[ 0 ];
+        keysym[1] = 0;
+        if ( (keysym[0] == 0) || (keysym_to_keycode_map[keysym[0]] == 0) ) {
+            // No keycode found -> try to find a Multi_key combination for this character
+            keysym[0] = 0;
+            for(j=0;j<MULTIKEY_MAP_SIZE;j++) {
+                if (wc_singlechar_str[ 0 ] == multikey_map_char[ j ]) {
+                    /* Found */
+					keysym[0] = multikey_map_first[j];
+					keysym[1] = multikey_map_first[j];
+
+                    if ((keysym_to_keycode_map[keysym[0]] == 0) || (keysym_to_keycode_map[keysym[1]] == 0)) {
+                        /* Character not supported */
+                        keysym[0] = 0;
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (keysym[0]) {
+            if (keysym[1]) {
+                /* Multi key sequence */
+				XTestFakeKeyEvent( displayLocation,
+						XKeysymToKeycode( displayLocation,
+								XStringToKeysym( "Multi_key" )),
+						True, CurrentTime );
+				XTestFakeKeyEvent( displayLocation,
+						XKeysymToKeycode( displayLocation,
+								XStringToKeysym( "Multi_key" )),
+						False, CurrentTime );
+
+                xautomation_send_char( displayLocation,keysym[0]);
+                xautomation_send_char( displayLocation,keysym[1]);
+            } else {
+                /* Single key */
+                xautomation_send_char( displayLocation,keysym[0]);
+            }
+        } else {
+            fprintf( stderr, "Character '%ls' is not supported by your keyboard layout.\n", wc_singlechar_str );
+        }
+
+        i++;
+    }
 }
 
 /* 
