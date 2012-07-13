@@ -138,7 +138,7 @@ click_i ()
 
 	for x in $@
 	do
-		if [ x$CENTER != "x" ]; then
+		if [ x$USE_CENTER != "x" ]; then
 			center="c"
 		else
 			center=""
@@ -183,13 +183,13 @@ image_location ()
 	else
 		TOLERANCE_OPTION="-t"
 	fi
-	if [ -n "$CENTER" ]; then
-		USE_CENTER="--center"
+	if [ -n "$USE_CENTER" ]; then
+		CENTER="--center"
 	else
-		USE_CENTER=""
+		CENTER=""
 	fi
 
-	MATCH=`$CVAMATCH $TOLERANCE_OPTION $TOLERANCE $USE_CENTER --x-root $COMMAND_LINE`
+	MATCH=`$CVAMATCH $TOLERANCE_OPTION $TOLERANCE $CENTER --x-root $COMMAND_LINE`
 	RETURN_CODE=$?
 	out "$MATCH"
 	MATCH=`echo $MATCH | head -n1`
