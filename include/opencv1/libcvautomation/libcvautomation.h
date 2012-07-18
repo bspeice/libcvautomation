@@ -17,7 +17,7 @@
 #ifndef LIBCVAUTOMATION_H
 #define LIBCVAUTOMATION_H
 
-#define LIBCVAUTOMATION_VERSION "1.2"
+#define LIBCVAUTOMATION_VERSION "1.3"
 #define LIBCVAUTOMATION_BUGREPORT "bspeice@uncc.edu"
 
 /* C includes */
