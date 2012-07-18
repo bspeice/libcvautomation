@@ -13,7 +13,7 @@ libcvautomation_la_SOURCES = libcvautomation-opencv.c libcvautomation-xlib.c lib
 
 #Lists the headers to distribute
 if USEOPENCV2
-pkginclude_HEADERS = $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation.h $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation-opencv.h $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation-xlib.h $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation-xtest.h
+pkginclude_HEADERS = $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation.h $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation-opencv.h $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation-xlib.h $(top_srcdir)/include/opencv2/libcvautomation/libcvautomation-xtest.h $(top_srcdir)/include/opencv2/libcvautomation/xautomation_kbd.h $(top_srcdir)/include/opencv2/libcvautomation/xautomation_keysym_map.h $(top_srcdir)/include/opencv2/libcvautomation/xautomation_multikey_map.h
 else
-pkginclude_HEADERS = $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation.h $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation-opencv.h $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation-xlib.h $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation-xtest.h
+pkginclude_HEADERS = $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation.h $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation-opencv.h $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation-xlib.h $(top_srcdir)/include/opencv1/libcvautomation/libcvautomation-xtest.h $(top_srcdir)/include/opencv1/libcvautomation/xautomation_kbd.h $(top_srcdir)/include/opencv1/libcvautomation/xautomation_keysym_map.h $(top_srcdir)/include/opencv1/libcvautomation/xautomation_multikey_map.h
 endif
