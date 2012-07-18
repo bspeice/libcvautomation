@@ -317,6 +317,33 @@ jiggle_mouse ()
 	eval '$CVAINPUT -s "mousejiggle" >> $OUTFILE'
 }	# ----------  end of function jiggle_mouse  ----------
 
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  mouse_scrollu
+#   DESCRIPTION:  Scroll the mouse wheel up one
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+mouse_scrollu ()
+{
+	out "mouse_scrollu"
+	eval '$CVAINPUT -s "mousescrollu" >> $OUTFILE'
+	
+}	# ----------  end of function mouse_scrollu  ----------
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  mouse_scrolld
+#   DESCRIPTION:  Scroll the mouse wheel down one
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+mouse_scrolld ()
+{
+	out "mouse_scrolld"
+	eval '$CVAINPUT -s "mousescrolld" >> $OUTFILE'
+}	# ----------  end of function mouse_scrolld  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  key_str

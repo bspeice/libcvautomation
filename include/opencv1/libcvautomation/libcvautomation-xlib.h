@@ -43,7 +43,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
 /* Doxygen information */
 /** \file libcvautomation-xlib.h
  * \brief The source code to access Xlib from inside libcvautomation
- * \details This source file builds in the necessary functionality to use libcv functions inside libcvautomation.
+ * \details This source file builds in the necessary functionality to use xlib functions inside libcvautomation.
  * \author Bradlee Speice
  * \date 6/21/2012
  */
@@ -71,7 +71,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \param subImage The sub image (in IplImage format) to search for in the root X11 window
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  * \returns The location of the sub image in root X11 window
  */
 
@@ -82,7 +82,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \param subImage The sub image (in IplImage format) to search for in the root X11 window
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  * \returns The center location of the sub image in the root X11 window
  */
 
@@ -93,7 +93,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \param subImage_location The location of the sub image to search for in the root X11 window
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  * \returns The center location of the sub image in the root X11 window
  */
 
@@ -104,7 +104,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \param subImage_location The location of the sub image to search for in the root X11 window
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  * \returns The center location of the sub image in the root X11 window
  */
 

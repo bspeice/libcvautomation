@@ -362,7 +362,7 @@ XF86AudioRaiseVolume
 XF86KbdBrightnessDown
 XF86MonBrightnessDown
 \endcode
-\warning Please note that each key string above is first translated into a key code, and then into the actual key click. Thus, while you might intend to press "dollar", it will actually come out as "4".
+\warning Please note that each key string above is first translated into a key code, and then into the actual key click. Thus, while you might intend to press "dollar", it will actually come out as "4". If you need a <tt>'$'</tt> to come out, use the <tt>'keystring $'</tt> command to \ref xte_commandString() or <tt>'key_str $'</tt> function in the BASH wrapper - see the \ref wrapper_functions.
  */
 
 /** \page XTest_command_strings xte_commandString() Command Strings

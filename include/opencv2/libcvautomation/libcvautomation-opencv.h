@@ -139,7 +139,7 @@ Formula:
  * \param subImage The sub image (in IplImage format) to search for in \c rootImage
  * \param searchMethod The search method to use when searching for \c subImage in \c rootImage.
  * \param tolerance The tolerance to use when searching for \c subImage in \c rootImage.
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  * \return The center location of the sub image in root image
  */
 
@@ -150,7 +150,7 @@ Formula:
  * \param subImage_location The location of the sub image to search for in \c rootImage
  * \param searchMethod The search method to use when searching for \c subImage in \c rootImage.
  * \param tolerance The tolerance to use when searching for \c subImage in \c rootImage.
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  * \return The location of the sub image in root image
  */
 
@@ -161,7 +161,7 @@ Formula:
  * \param subImage_location The location of the sub image to search for in \c rootImage
  * \param searchMethod The search method to use when searching for \c subImage in \c rootImage.
  * \param tolerance The tolerance to use when searching for \c subImage in \c rootImage.
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  * \return The center location of the sub image in root image
  */
 

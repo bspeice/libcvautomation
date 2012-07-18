@@ -25,12 +25,14 @@
 
 void usage ();
 
+/// \cond
 struct list {
 	char *fileName;
 	struct list *next;
 };
 
 typedef struct list basic_list; 
+/// \endcond
 
 int main( int argc, char** argv )
 {

@@ -190,6 +190,8 @@ Available commands:\n\
 \tmousedown:\tPush and leave down a mouse button.\n\
 \tmouseup:\tRelease a mouse button.\n\
 \tmousejiggle:\tJiggle the mouse (helps to activate some widgets).\n\
+\tmousescrollu:\tScroll the mouse wheel up.\n\
+\tmousescrolld:\tScroll the mouse wheel down.\n\
 \tkeyclick:\tClick a keyboard button.\n\
 \tkeydown:\tPush and leave down a keyboard button.\n\
 \tkeyup:\tRelease a keyboard button.\n\
@@ -257,33 +259,37 @@ void checkXTEEnabled ( Display *display )
  *
  *
  * \section commands Full Command List:
- * mouseclick:	Click the mouse in-place.
+ * \c mouseclick:	Click the mouse in-place.
  *
- * imouseclick:	Click the mouse at an image's top-left corner.
+ * \c imouseclick:	Click the mouse at an image's top-left corner.
  *
- * icmouseclick:	Click the mouse at an image's center.
+ * \c icmouseclick:	Click the mouse at an image's center.
  *
- * mousexy:	Move the mouse to the given coordinate.
+ * \c mousexy:	Move the mouse to the given coordinate.
  *
- * mouserxy:	Move the mouse by the given x and y values (relative motion).
+ * \c mouserxy:	Move the mouse by the given x and y values (relative motion).
  *
- * mouseimage:	Move the mouse to an image's top-left corner.
+ * \c mouseimage:	Move the mouse to an image's top-left corner.
  *
- * cmouseimage:	Move the mouse to an image's center.
+ * \c cmouseimage:	Move the mouse to an image's center.
  *
- * mousedown:	Push and leave down a mouse button.
+ * \c mousedown:	Push and leave down a mouse button.
  *
- * mouseup:	Release a mouse button.
+ * \c mouseup:	Release a mouse button.
  *
- * mousejiggle:	Jiggle the mouse (helps to activate some widgets).
+ * \c mousejiggle:	Jiggle the mouse (helps to activate some widgets).
  *
- * keyclick:	Click a keyboard button.
+ * \c mousescrollu: Scroll the mouse wheel up
  *
- * keydown:	Push and leave down a keyboard button.
+ * \c mousescrolld: Scroll the mouse wheel down
  *
- * keyup:	Release a keyboard button.
+ * \c keyclick:	Click a keyboard button.
  *
- * keystring:	Input a string of keys to X11.
+ * \c keydown:	Push and leave down a keyboard button.
+ *
+ * \c keyup:	Release a keyboard button.
+ *
+ * \c keystring:	Input a string of keys to X11.
  *
  * \section contact Contact Information:
  * Questions? Comments? Concerns? Suggestions? Send all feedback to Bradlee Speice at <bspeice@uncc.edu>

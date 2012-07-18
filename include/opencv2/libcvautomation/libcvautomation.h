@@ -30,6 +30,7 @@
 #include <opencv2/highgui/highgui_c.h>
 #include <opencv2/imgproc/imgproc_c.h>
 
+
 /* X11 includes */
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -74,33 +75,16 @@ typedef struct {
  * \date 7/11/2012
  * \section intro Introduction
  * Welcome to Libcvautomation!
- * Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for <a href="http://sikuli.org">Sikuli</a> and <a href="https://wiki.ubuntu.com/Xpresser">Xpresser</a>. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our RHEL 5 systems, but also died, or didn't work, or something else. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it.
+ * Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for <a href="http://sikuli.org">Sikuli</a> and <a href="https://wiki.ubuntu.com/Xpresser">Xpresser</a>. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our Prominent North American Enterprise Linux systems, but also didn't work or \c import correctly. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it.
  * \section how_it_works How Libcvautomation Works
  * Libcvautomation represents two software products coming together - <a href="http://opencv.willowgarage.com/wiki/">OpenCV</a> and the <a href="http://www.x.org/docs/Xext/xtest.pdf">XTest extension</a> to the X11 server. OpenCV is used for image recognition, and XTest is used to actually drive the X server. You can dig into \ref libcvautomation-xtest.h to get an idea of what all this library is capable of. <br>
  * Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like matchSubImage_X11() that allow you to match an image against the X11 root window in place. This means no more <tt>'xwd | convert "<out_name>"'</tt>.
- * \section using Jump in - Using Libcvautomation
+ * \section main_using Using Libcvautomation And Writing Application Tests
  * So how does one go about using libcvautomation? <br>
  * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that cva-match and cva-input are installed). Python bindings are on their way too. <br>
- * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that. I've provided code to give you a good idea of how they work.
+ * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that. I've provided code to give you a basic idea of how they work.
  * \section questions Questions? Comments? Concerns?
  * Please send any feedback to <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>. Pull requests can be submitted to <a href="https://github.com/DjBushido/cvautomation">my github repository</a>.*/
-
-/** \page libcvautomation Libcvautomation
- * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
- * \date 7/11/2012
- * \section intro Introduction
- * Welcome to Libcvautomation!
- * Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for <a href="http://sikuli.org">Sikuli</a> and <a href="https://wiki.ubuntu.com/Xpresser">Xpresser</a>. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our RHEL 5 systems, but also died, or didn't work, or something else. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it.
- * \section how_it_works How Libcvautomation Works
- * Libcvautomation represents two software products coming together - <a href="http://opencv.willowgarage.com/wiki/">OpenCV</a> and the <a href="http://www.x.org/docs/Xext/xtest.pdf">XTest extension</a> to the X11 server. OpenCV is used for image recognition, and XTest is used to actually drive the X server. You can dig into \ref libcvautomation-xtest.h to get an idea of what all this library is capable of. <br>
- * Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like matchSubImage_X11() that allow you to match an image against the X11 root window in place. This means no more <tt>'xwd | convert "<out_name>"'</tt>.
- * \section using Using Libcvautomation
- * So how does one go about using libcvautomation? <br>
- * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that cva-match and cva-input are installed). Python bindings are on their way too. <br>
- * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that.
- * \section questions Questions? Comments? Concerns?
- * Please send any feedback to <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>. Pull requests can be submitted to <a href="https://github.com/DjBushido/cvautomation">my github repository</a>.
- */
 
 /** \page writing_app_tests Writing Application Tests
  * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
@@ -307,8 +291,9 @@ typedef struct {
  * 		</ul>
  * <li>If you have questions, comments, concerns, suggestions, or feedback in general, feel free to let me know at <a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>.
  * </ul>
- *
- * \section wrapper_functions Appendix of Wrapper Functions
+ */
+/** \page wrapper_functions Appendix of Wrapper Functions
+ * \section appendix_click Click the mouse
  * \code click \endcode
  * Click the mouse where it is currently located
  * <br><br>
@@ -329,11 +314,7 @@ typedef struct {
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref testing_test_wrapper for more information on these.
  * <br><br>
  *
- * \code image_location <filename> \endcode
- * Get the location of an image on screen
- * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref testing_test_wrapper for more information on these.
- * <br><br>
- *
+ * \section appendix_move Move the mouse
  * \code hover_xy <x-coordinate> <y-increment> \endcode
  * Move the mouse to a location on screen using absolute positioning
  * <br><br>
@@ -348,6 +329,19 @@ typedef struct {
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref testing_test_wrapper for more information on these.
  * <br><br>
  *
+ * \code mouse_scrollu \endcode
+ * Scroll the mouse wheel up one
+ *
+ * \code mouse_scrolld \endcode
+ * Scroll the mouse wheel down one
+ *
+ * \section appendix_find Find an Image
+ * \code image_location <filename> \endcode
+ * Get the location of an image on screen
+ * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref testing_test_wrapper for more information on these.
+ * <br><br>
+ *
+ * \section appendix_keyboard Click the keyboard
  * \code key_str "<string>" \endcode
  * Enter a string of characters on the keyboard rather than a single character at a time.
  *  \warning This function <b>does not</b> accept key strings like "Space" as \c key_down, \c key_up, and \c key_click do. If you pass in "Space", that is exactly what will be typed.
@@ -368,6 +362,7 @@ typedef struct {
  *  \note This function accepts special keys like "Space" - see \ref XTest_key_strings for a full list of characters allowed.
  * <br><br>
  *
+ * \section appendix_utilities Useful extras
  * \code run_process "<process-name>" \endcode
  * Start a process on the system, background it, and return the PID of the created process.
  * <br><br>
@@ -375,6 +370,10 @@ typedef struct {
  * \code is_running "<process-name>" \endcode
  * \code is_running "<process-id>" \endcode
  * Check if a program name or PID is currently running
+ *
+ * \code notify "<string_to_display>" \endcode
+ * Display a notification to the user, and wait for a response
+ * \warning Uses \c zenity - if \c zenity isn't available, will return an error without pausing, and will not display anything.
  */
 
 /** \def LIBCVAUTOMATION_VERSION
@@ -393,7 +392,7 @@ typedef struct {
  * \param resultPoint Holder for a result - for example, storing where this sub image was located in its root image
  * \param searchMethod The search method to use when searching for this sub image in a root image
  * \param tolerance The tolerance to use when searching for this sub image in a root image
- * \see libcv_search_methods
+ * \see \ref libcv_search_methods
  */
 
 /** \struct cvaPoint
