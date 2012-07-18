@@ -44,7 +44,7 @@ int main( int argc, char** argv )
 	int tolerance = INT_MAX;
 	int search_method = CV_TM_SQDIFF;
 	int useX = 0; /* bool useX = false; */
-	int useCenter = 0;
+	Bool useCenter = False;
 	char *xDisplayLocation;
 	Display *display;
 	/* This line to suppress a compiler warning */
@@ -54,7 +54,8 @@ int main( int argc, char** argv )
 	xDisplayLocation = "";
 
 	/* Set up the linked list for slave images */
-	basic_list *list_head = NULL, *list_curr = NULL, *list_prev = NULL;
+	basic_list *list_head, *list_curr, *list_prev;
+	list_head = list_curr = list_prev = NULL;
 
 	/* Start getopt */
 	while (1)
@@ -114,6 +115,7 @@ int main( int argc, char** argv )
 				}
 				list_curr->fileName = optarg;
 				list_curr->next = (basic_list *) malloc (sizeof(basic_list));
+				list_curr->next->fileName = NULL;
 				list_curr = list_curr->next;
 				break;
 
@@ -142,7 +144,8 @@ int main( int argc, char** argv )
 				break;
 
 			case 'c':
-				useCenter = 1;
+				useCenter = True;
+				break;
 
 			case 'o':
 				tolerance = atoi(optarg);
@@ -196,7 +199,7 @@ int main( int argc, char** argv )
 	} while ( list_curr->fileName != NULL );
 
 	/* And free the final element */
-	free(list_curr);
+ 	free(list_curr);
 
 	/* Clean up X */
 	if (useX)
