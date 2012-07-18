@@ -1,0 +1,81 @@
+.TH "cva-input" 3 "18 Jul 2012" "Version 1.2" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cva-input \- \fBAuthor:\fP
+.RS 4
+Bradlee Speice <bspeice@uncc.edu> 
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+7/18/2012 
+.RE
+.PP
+.SH "Usage:"
+.PP
+This program works kind of like a mini-language. All options are parsed left-to-right, and executed right there. Thus, specifying '--display' at different places in the options will cause this program to use the most recent given display. 
+.SH "Example Usage:"
+.PP
+Click the mouse:
+.PP
+cva-input -s 'click 1'
+.PP
+Press key 'a':
+.PP
+cva-input -s 'keyclick a'
+.SH "Full Options:"
+.PP
+-h, --help: Display this usage message.
+.PP
+-u, --usage: Display this usage message.
+.PP
+-d, --display: Specify the X display to use.
+.PP
+-m, --search-method: Specify a method to search by. See \fCcva-match --help\fP for more information on this.
+.PP
+-t, --tolerance: Specify how strict the match is.
+.PP
+-b, --button: Specify the mouse button to press (default 1).
+.PP
+-c, --center: Instead of matching the top-left corner of an image, match the center of the image.
+.PP
+-o, --sane-tolerance: Set the tolerance using a scale of 1-100, rather than INT_MIN to INT_MAX (100 ~= INT_MAX)
+.PP
+-s, --string: Command string - see below.
+.SH "Full Command List:"
+.PP
+\fCmouseclick:\fP Click the mouse in-place.
+.PP
+\fCimouseclick:\fP Click the mouse at an image's top-left corner.
+.PP
+\fCicmouseclick:\fP Click the mouse at an image's center.
+.PP
+\fCmousexy:\fP Move the mouse to the given coordinate.
+.PP
+\fCmouserxy:\fP Move the mouse by the given x and y values (relative motion).
+.PP
+\fCmouseimage:\fP Move the mouse to an image's top-left corner.
+.PP
+\fCcmouseimage:\fP Move the mouse to an image's center.
+.PP
+\fCmousedown:\fP Push and leave down a mouse button.
+.PP
+\fCmouseup:\fP Release a mouse button.
+.PP
+\fCmousejiggle:\fP Jiggle the mouse (helps to activate some widgets).
+.PP
+\fCmousescrollu:\fP Scroll the mouse wheel up
+.PP
+\fCmousescrolld:\fP Scroll the mouse wheel down
+.PP
+\fCkeyclick:\fP Click a keyboard button.
+.PP
+\fCkeydown:\fP Push and leave down a keyboard button.
+.PP
+\fCkeyup:\fP Release a keyboard button.
+.PP
+\fCkeystring:\fP Input a string of keys to X11.
+.SH "Contact Information:"
+.PP
+Questions? Comments? Concerns? Suggestions? Send all feedback to Bradlee Speice at <bspeice@uncc.edu> 
