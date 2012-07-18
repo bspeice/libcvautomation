@@ -92,7 +92,7 @@ click_xy ()
 
 	out "click_xy: " $X_LOC $Y_LOC
 
-	eval $CVAINPUT -s 'mousexy $X_LOC $Y_LOC' -s 'mouseclick 1' >> $OUTFILE
+	eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" -s "mouseclick 1" >> $OUTFILE'
 
 }	# ----------  end of function click_xy  ----------
 
@@ -116,7 +116,7 @@ clickr_xy ()
 
 	out "clickr_xy: " $1 $2
 
-	eval $CVAINPUT -s 'mouserxy $1 $2' -s 'mouseclick 1' >> $OUTFILE
+	eval '$CVAINPUT -s "mouserxy $1 $2" -s "mouseclick 1" >> $OUTFILE'
 }	# ----------  end of function clickr_xy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -152,7 +152,7 @@ click_i ()
 		TOLERANCE_OPTION="-t"
 	fi
 
-	eval $CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
+	eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE"
 	return $?
 }	# ----------  end of function click_i  ----------
 
@@ -178,7 +178,7 @@ image_location ()
 	done
 
 	#Find our sub-image
-	if [ -n "$SANE_TOLERANCE" ]; then
+	if [ -n "$USE_SANE_TOLERANCE" ]; then
 		TOLERANCE_OPTION="-o"
 	else
 		TOLERANCE_OPTION="-t"
@@ -262,7 +262,7 @@ hoverr_xy ()
 
 	out "hoverr_xy: $X_INC $Y_INC"
 
-	eval $CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE
+	eval '$CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE'
 }	# ----------  end of function hoverr_xy  ----------
 
 
@@ -314,7 +314,7 @@ hover_i ()
 jiggle_mouse ()
 {
 	out "jiggle_mouse"
-	eval $CVAINPUT -s 'mousejiggle' >> $OUTFILE
+	eval '$CVAINPUT -s "mousejiggle" >> $OUTFILE'
 }	# ----------  end of function jiggle_mouse  ----------
 
 
@@ -358,7 +358,7 @@ key_down ()
 
 	out "key_down: $1"
 
-	eval $CVAINPUT -s "keydown $1" >> $OUTFILE
+	eval '$CVAINPUT -s "keydown $1" >> $OUTFILE'
 }	# ----------  end of function key_down  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -376,7 +376,7 @@ key_up ()
 
 	out "key_up: $1"
 
-	eval $CVAINPUT -s "keyup $1" >> $OUTFILE
+	eval '$CVAINPUT -s "keyup $1" >> $OUTFILE'
 }	# ----------  end of function key_up  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -394,5 +394,30 @@ key_click ()
 
 	out "key_click: $1"
 	
-	eval $CVAINPUT -s "keyclick $1" >> $OUTFILE
+	eval '$CVAINPUT -s "keyclick $1" >> $OUTFILE'
 }	# ----------  end of function key_press  ----------
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  notify
+#   DESCRIPTION:  Notify the user and pause
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+notify ()
+{
+	if [ -z "$1" ]; then
+		#Not given any text to display, return an error
+		return 255
+	fi
+
+	if [ -n "$DISPLAY" ]; then
+		which zenity &> /dev/null
+		if [ $? -eq 0 ]; then
+			zenity --info --text="$@"
+		fi
+	else
+		read -p "$@"
+	fi
+}	# ----------  end of function notify  ----------
