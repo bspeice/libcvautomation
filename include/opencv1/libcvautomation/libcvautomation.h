@@ -182,7 +182,7 @@ typedef struct {
  * \code
  * #!/bin/bash
  * #This is an application test involving libcvautomation and libreoffice
- * . libcvautomation_funcs
+ * . /usr/local/etc/libcvautomation_funcs
  *
  * #Changing any wrapper parameters should go here
  *
@@ -211,10 +211,10 @@ typedef struct {
  * \code
  * #!/bin/bash
  * #This is an application test involving libcvautomation and libreoffice
- * . libcvautomation_funcs
+ * . /usr/local/etc/libcvautomation_funcs
  * #Changing any wrapper parameters should go here
  * \endcode
- * <li>The purpose of these lines is just the standard BASH header. Additionally, we import a wrapper created for libcvautomation to make our job easier. Please note that the wrapper is included at the top of the source tree, you may need to copy it somewhere in order to use it. The wrapper itself is a handful of macros used to make our job easy.
+ * <li>The purpose of these lines is just the standard BASH header. Additionally, we import a wrapper created for libcvautomation to make our job easier. Please note that this is the default directory for the wrapper, your installation may be different. Use the command <tt>locate libcvautomation_funcs</tt> to find it on your computer. The wrapper itself is a handful of macros used to make our job easy.
  * <li>Changing any wrapper parameters should go after sourcing the wrapper functions. See below on \ref testing_test_wrapper for more information.
  * <br><br>
  * \code
