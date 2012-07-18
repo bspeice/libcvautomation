@@ -449,6 +449,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \brief Check if the XTest extension is supported
  * \param displayLocation The Display to check if XTest is supported on
  * \returns True if XTest is supported, False otherwise
+ * \warning The program using this library is responsible for checking to see if XTest is supported.
  */
 
 /** \fn cvaPoint xte_pointerLocation ( Display *displayLocation );
@@ -604,6 +605,18 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \brief Jiggle the mouse in place
  * \details This moves the mouse down and right one pixel, and then back. This may be needed to activate menu items, etc.
  * \param displayLocation The Display of which to move the mouse
+ */
+
+/** \fn void xte_mouseScrollUp ( Display *displayLocation );
+ * \brief Scroll the mouse up
+ * \details This moves the mouse scroll wheel up one rotation, which may be multiple lines. What this really does is click mouse button 4.
+ * \param displayLocation The Display of which to scroll the mouse
+ */
+
+/** \fn void void xte_mouseScrollDown ( Display *displayLocation );
+ * \brief Scroll the mouse down
+ * \details This moves the mouse scroll wheel down one rotation, which may be multiple lines. What this really does is click mouse button 5.
+ * \param displayLocation The Display of which to scroll the mouse
  */
 
 /** \fn void xte_clickKey ( Display *displayLocation, char *key );

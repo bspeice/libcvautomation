@@ -53,6 +53,8 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \details Currently this function literally just passes off to XOpenDisplay, but is designed to be used in the future if extra functionality is needed.
  * \param displayName The name of the display to open - '' is a valid name
  * \returns Pointer to the opened X11 Display
+ * \warning You must open a display to use any functions.
+ * \warning The program using this library is responsible to close the display as well.
  */
 
 /** \fn void cvaCloseDisplay ( Display *displayLocation );

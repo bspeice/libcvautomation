@@ -78,10 +78,10 @@ typedef struct {
  * \section how_it_works How Libcvautomation Works
  * Libcvautomation represents two software products coming together - <a href="http://opencv.willowgarage.com/wiki/">OpenCV</a> and the <a href="http://www.x.org/docs/Xext/xtest.pdf">XTest extension</a> to the X11 server. OpenCV is used for image recognition, and XTest is used to actually drive the X server. You can dig into \ref libcvautomation-xtest.h to get an idea of what all this library is capable of. <br>
  * Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like matchSubImage_X11() that allow you to match an image against the X11 root window in place. This means no more <tt>'xwd | convert "<out_name>"'</tt>.
- * \section using Using Libcvautomation
+ * \section using Jump in - Using Libcvautomation
  * So how does one go about using libcvautomation? <br>
  * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that cva-match and cva-input are installed). Python bindings are on their way too. <br>
- * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that.
+ * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that. I've provided code to give you a good idea of how they work.
  * \section questions Questions? Comments? Concerns?
  * Please send any feedback to <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>. Pull requests can be submitted to <a href="https://github.com/DjBushido/cvautomation">my github repository</a>.*/
 
@@ -376,6 +376,14 @@ typedef struct {
  * \code is_running "<process-id>" \endcode
  * Check if a program name or PID is currently running
  */
+
+/** \def LIBCVAUTOMATION_VERSION
+ * \brief Define what version of Libcvautomation we are using
+ * \details This define provides access to what version of Libcvautomation we're using. All times that you need to know what it is should use this.
+ */
+/** \def LIBCVAUTOMATION_BUGREPORT
+ * \brief Define who to send bug reports to for Libcvautomation
+ * \details This define provides access to who should be emailed in case of a Libcvautomation bug. All times that you need to know what it is should use this.*/
 
 /** \struct cvautomationList
  * \brief Implements a structure to build an array for methods like matchSubImage_a()
