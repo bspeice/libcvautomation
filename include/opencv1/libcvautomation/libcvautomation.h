@@ -64,12 +64,12 @@ typedef struct {
  * \brief The top-level include for all projects involving libcvautomation
  * \details This source file includes all other files needed for libcvautomation projects, and also defines the cvautomationList and cvaPoint structs to be used among libcvautomation functions. Please note that while the opencv2 version is being documented, there is no actual difference in usage for opencv version 1.
  * \author Bradlee Speice
- * \date 6/21/2012
+ * \date 7/18/2012
  */
 
 /** \mainpage Libcvautomation
  * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
- * \date 7/11/2012
+ * \date 7/18/2012
  * \section intro Introduction
  * Welcome to Libcvautomation!
  * Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for <a href="http://sikuli.org">Sikuli</a> and <a href="https://wiki.ubuntu.com/Xpresser">Xpresser</a>. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our Prominent North American Enterprise Linux systems, but also didn't work or \c import correctly. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it.
@@ -85,7 +85,7 @@ typedef struct {
 
 /** \page libcvautomation
  * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
- * \date 7/11/2012
+ * \date 7/18/2012
  * \section intro Introduction
  * Welcome to Libcvautomation!
  * Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for <a href="http://sikuli.org">Sikuli</a> and <a href="https://wiki.ubuntu.com/Xpresser">Xpresser</a>. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our Prominent North American Enterprise Linux systems, but also didn't work or \c import correctly. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it.
@@ -101,7 +101,7 @@ typedef struct {
 
 /** \page writing_app_tests Writing Application Tests
  * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
- * \date 7/11/2012
+ * \date 7/18/2012
  * \section audience Audience
  * <ul>
  * <li>This document was written for people with some intermediate knowledge of BASH.

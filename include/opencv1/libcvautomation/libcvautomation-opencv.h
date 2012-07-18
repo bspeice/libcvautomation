@@ -59,7 +59,7 @@ void matchSubImage_a_location_center ( const char *rootImageFileName, cvautomati
  * \brief The source code to access libcv from inside libcvautomation.
  * \details This source file builds in the necessary functionality to use libcv functions inside libcvautomation.
  * \author Bradlee Speice
- * \date 6/21/2012
+ * \date 7/18/2012
  */
 
 /** \page libcv_search_methods Libcv Search Methods

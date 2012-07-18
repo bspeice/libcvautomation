@@ -218,14 +218,14 @@ void checkXTEEnabled ( Display *display )
 /** \file cva-input.c
  * \brief The cva-input program to demonstrate Libcvautomation's XTest functionality
  * \author Bradlee Speice <bspeice@uncc.edu>
- * \date 7/11/2012
+ * \date 7/18/2012
  */
 
 /* The biggest purpose of documenting this code is to trick doxygen into making a man page for it. */
 /** \page cva-input
  *
  * \author Bradlee Speice <bspeice@uncc.edu>
- * \date 7/11/2012
+ * \date 7/18/2012
  * \section usage Usage:
  * This program works kind of like a mini-language. All options are parsed left-to-right, and executed right there. Thus, specifying "--display" at different places in the options will cause this program to use the most recent given display.
  * \section example Example Usage:
