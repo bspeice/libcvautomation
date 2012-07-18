@@ -8,7 +8,7 @@ AM_LIBS = -shared
 
 #Lists the libraries to build
 lib_LTLIBRARIES = libcvautomation.la
-libcvautomation_la_SOURCES = libcvautomation-opencv.c libcvautomation-opencv.h libcvautomation-xlib.c libcvautomation-xlib.h libcvautomation.h libcvautomation-xtest.c libcvautomation-xtest.h
+libcvautomation_la_SOURCES = libcvautomation-opencv.c libcvautomation-xlib.c libcvautomation-xtest.c
 #libcvautomation_CFLAGS = -shared -I$(top_srcdir)/include -I$(top_srcdir)/libcvautomation -I$(top_srcdir)/include/libcvautomation
 
 #Lists the headers to distribute
