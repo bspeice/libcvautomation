@@ -54,7 +54,7 @@ fi
 # Check for doxygen
 AC_ARG_WITH(docs, [  --with-docs             build documentation for libcvautomation @<:@default=no@:>@])
 AC_ARG_ENABLE(man, [  --enable-man            enable building the 'man' pages for libcvautomation - only works if --with-docs is enabled @<:@default=enable@:>@])
-AC_ARG_ENABLE(tex, [  --enable-tex            enable building the 'latex' pages for libcvautomation - only works if --with-docs is enabled @<:@default=enable@:>@])
+AC_ARG_ENABLE(tex, [  --enable-tex            enable building the 'latex' pages for libcvautomation - only works if --with-docs is enabled @<:@default=disable@:>@])
 
 if test "$with_docs" == "yes"; then
 	AC_CHECK_PROGS([Doxygen], [doxygen], [missing])
@@ -69,7 +69,7 @@ if test "$with_docs" == "yes"; then
 		AC_CONFIG_FILES([docs/Doxyfile])
 	fi
 else
-	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" == "yes"])
+	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" == "yes"]) #false
 	enable_man="no"
 	enable_tex="no"
 fi
@@ -80,16 +80,16 @@ if test "$enable_man" != "no"; then
 	AM_CONDITIONAL(BUILD_MAN, [test "$enable_man" != "no"])
 else
 	AC_SUBST(ENABLE_MAN, NO)
-	AM_CONDITIONAL(BUILD_MAN, [test "$enable_man" != "no"])
+	AM_CONDITIONAL(BUILD_MAN, [test "$enable_man" != "no"]) #false
 fi
 
 #Check if we should build Tex pages
-if test "$enable_tex" != "no"; then
+if test "$enable_tex" == "yes"; then
 	AC_SUBST(ENABLE_TEX, YES)
-	AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" != "no"])
+	AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" == "yes"])
 else
 	AC_SUBST(ENABLE_TEX, NO)
-	AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" != "no"])
+	AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" == "yes"]) #false
 fi
 
 # Checks for library functions.
