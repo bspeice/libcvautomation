@@ -110,4 +110,5 @@ AC_OUTPUT(
 [examples/Makefile]
 [docs/Makefile]
 [libcvautomation.pc]
+[rpm/libcvautomation.spec]
 )
