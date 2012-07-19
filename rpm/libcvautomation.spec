@@ -12,9 +12,43 @@ URL: http://djbushido.github.com/libcvautomation/
 Vendor: MOSAIC at University of North Carolina at Charlotte
 Packager: Bradlee Speice <bspeice@uncc.edu>
 License: BSD 2-clause
-Group: Development/Tools
+Group: Development/Libraries
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires: libXtst-devel
+BuildRequires: libX11-devel
+BuildRequires: opencv-devel
+BuildRequires: doxygen
+
+%package devel
+Summary: Library links and header files for libcvautomation application development
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}
+Requires: libXtst-devel
+Requires: libX11-devel
+Requires: opencv-devel
+
+%description devel
+libcvautomation-devel contains all files needed to build programs on top of libcvautomation.
+
+%package examples
+Summary: Example programs to demonstrate libcvautomation functionality
+Group: Development/Tools
+Requires: %{name} = %{version}-%{release}
+Requires: opencv
+Requires: libX11
+Requires: libXtst
+
+%description examples
+libcvautomation-examples contains programs designed to showcase the functionality of libcvautomation.
+
+%package doc
+Summary: HTML documentation for libcvautomation
+Group: Documentation
+Requires: %{name} = %{version}-%{release}
+
+%description doc
+libcvautomation-docs contains the HTML documentation for libcvautomation.
 
 %description
 Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for Sikuli and Xpresser. Each solution had large problems with crashing, and both refused to function on Red Hat Linux and Ubuntu 12.04. The author really liked the way each of these programs approached GUI automation, but they simply didn't work. As such, a simple library was designed to integrate OpenCV and XTest, which can be used by BASH to drive GUI testing and automation, and works on both new and old Linux distributions.
@@ -30,13 +64,21 @@ make %{?_smp_mflags}
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
-#The following section is a hack to get the RPM to build
-rm -rf $RPM_BUILD_ROOT/usr/share/* $RPM_BUILD_ROOT/usr/bin/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-/etc/*
-/usr/include/*
 /usr/lib64/*
+/usr/share/man/*
+
+%files devel
+/usr/include/*
+
+%files examples
+/usr/bin/*
+/etc/*
+
+%files doc
+/usr/share/libcvautomation/*
+
