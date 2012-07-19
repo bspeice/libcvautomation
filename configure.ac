@@ -52,12 +52,13 @@ if test "$with_examples" != "no"; then
 fi
 
 # Check for doxygen
-AC_ARG_WITH(docs, [  --with-documentation    build documentation for libcvautomation @<:@default=yes@:>@])
+AC_ARG_WITH(docs, [  --with-docs    build documentation for libcvautomation @<:@default=yes@:>@])
 AC_ARG_ENABLE(man, [  --enable-man            enable building the 'man' pages for libcvautomation @<:@default=enable@:>@])
 AC_ARG_ENABLE(tex, [  --enable-tex            enable building the 'latex' pages for libcvautomation @<:@default=enable@:>@])
+
 if test "$with_docs" != "no"; then
 	AC_CHECK_PROGS([Doxygen], [doxygen], [missing], [found])
-	echo "$Doxygen"
+
 	if test "$Doxygen" == "missing"; then
 		AC_MSG_WARN([Doxygen not found - continuing without building documentation.])
 		AM_CONDITIONAL(BUILD_DOXYGEN, [test "$Doxygen" != "missing"])
@@ -67,24 +68,28 @@ if test "$with_docs" != "no"; then
 		AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"])
 		AC_CONFIG_FILES([docs/Doxyfile])
 	fi
+else
+	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"])
+	enable_man="no"
+	enable_tex="no"
+fi
 
-	#Check if we should generate man pages
-	if test "$enable_man" != "no"; then
-		AC_SUBST(ENABLE_MAN, YES)
-		AM_CONDITIONAL(BUILD_MAN, [test "$enable_man" != "no"])
-	else
-		AC_SUBST(ENABLE_MAN, NO)
-		AM_CONDITIONAL(BUILD_MAN, [test "$enable_man" != "no"])
-	fi
+#Check if we should generate man pages
+if test "$enable_man" != "no"; then
+	AC_SUBST(ENABLE_MAN, YES)
+	AM_CONDITIONAL(BUILD_MAN, [test "$enable_man" != "no"])
+else
+	AC_SUBST(ENABLE_MAN, NO)
+	AM_CONDITIONAL(BUILD_MAN, [test "$enable_man" != "no"])
+fi
 
-	#Check if we should build Tex pages
-	if test "$enable_tex" != "no"; then
-		AC_SUBST(ENABLE_TEX, YES)
-		AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" != "no"])
-	else
-		AC_SUBST(ENABLE_TEX, NO)
-		AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" != "no"])
-	fi
+#Check if we should build Tex pages
+if test "$enable_tex" != "no"; then
+	AC_SUBST(ENABLE_TEX, YES)
+	AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" != "no"])
+else
+	AC_SUBST(ENABLE_TEX, NO)
+	AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" != "no"])
 fi
 
 # Checks for library functions.
