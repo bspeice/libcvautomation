@@ -53,8 +53,10 @@ fi
 
 # Check for doxygen
 AC_ARG_WITH(docs, [  --with-docs             build documentation for libcvautomation @<:@default=no@:>@])
-AC_ARG_ENABLE(man, [  --enable-man            enable building the 'man' pages for libcvautomation - only works if --with-docs is enabled @<:@default=enable@:>@])
-AC_ARG_ENABLE(tex, [  --enable-tex            enable building the 'latex' pages for libcvautomation - only works if --with-docs is enabled @<:@default=disable@:>@])
+AC_ARG_ENABLE(man, [  --enable-man            enable building the 'man' pages for libcvautomation
+                            only works if --with-docs is enabled @<:@default=enable@:>@])
+AC_ARG_ENABLE(tex, [  --enable-tex            enable building the 'latex' pages for libcvautomation
+                            only works if --with-docs is enabled @<:@default=disable@:>@])
 
 if test "$with_docs" == "yes"; then
 	AC_CHECK_PROGS([Doxygen], [doxygen], [missing])
