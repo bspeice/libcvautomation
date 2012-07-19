@@ -1,3 +1,4 @@
+if BUILD_EXAMPLES
 #Need to include the -Ilibcvautomation so that libcvautomation.h can find everything that it needs
 if USEOPENCV2
 AM_LDFLAGS = -L../libcvautomation/.libs -lcvautomation `pkg-config --libs x11` -lopencv_imgproc -lopencv_core -lopencv_highgui -lXtst
@@ -11,3 +12,4 @@ endif
 bin_PROGRAMS = cva-match cva-input
 cva_match_SOURCES = cva-match.c
 cva_input_SOURCES = cva-input.c
+endif
