@@ -30,19 +30,22 @@ AC_PATH_X
 
 #Configure OpenCV - version 2+ breaks a lot of things
 PKG_CHECK_MODULES([OpenCV], [opencv >= 2.0.0], [use_opencv2=true], [use_opencv1=true])
-#Let doxygen know where our headers are at
-AC_SUBST(CV_VERSION, "opencv2")
 AC_SUBST_FILE([cv_headers])
-cv_headers=$srcdir/include/opencv2_includes
-if test "$use_opencv1" != ""; then
+if test "$use_opencv2" == "true"; then
+	#Let doxygen know where our headers are at
+	AC_SUBST(CV_VERSION, "opencv2")
+	cv_headers=$srcdir/include/opencv2_includes
+	AC_SUBST(CV_CFLAGS, [`pkg-config --cflags opencv`])
+	AC_SUBST(CV_LIBS, ["-lopencv_core -lopencv_imgproc -lopencv_highgui"])
+else
 	echo "could not find OpenCV version 2.0.0 or higher, checking for 1.0.0 or higher..."
 	PKG_CHECK_MODULES([OpenCV], [opencv >= 1.0.0])
 	#Update doxygen on where our headers are at
 	AC_SUBST(CV_VERSION, "opencv1")
 	cv_headers=$srcdir/include/opencv1_includes
+	AC_SUBST(CV_CFLAGS, [`pkg-config --cflags opencv`])
+	AC_SUBST(CV_LIBS, [`pkg-config --libs opencv`])
 fi
-AC_SUBST(CV_CFLAGS, [`pkg-config --cflags opencv`])
-AC_SUBST(CV_LIBS, [`pkg-config --libs opencv`])
 
 PKG_CHECK_MODULES([X11], [x11 >= 1.0.3])
 AC_SUBST(X11_CFLAGS, [`pkg-config --cflags x11`])
