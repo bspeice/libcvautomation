@@ -17,18 +17,19 @@
 #ifndef LIBCVAUTOMATION_H
 #define LIBCVAUTOMATION_H
 
-#define LIBCVAUTOMATION_VERSION "1.3"
-#define LIBCVAUTOMATION_BUGREPORT "bspeice@uncc.edu"
+#define LIBCVAUTOMATION_VERSION "@PACKAGE_VERSION@"
+#define LIBCVAUTOMATION_BUGREPORT "@PACKAGE_BUGREPORT@"
 
 /* C includes */
 #include <stdio.h>
 #include <string.h>
 
-/* OpenCV2 includes - some filenames are different
- * from the OpenCV1 counterparts */
-#include <opencv2/core/core_c.h>
-#include <opencv2/highgui/highgui_c.h>
-#include <opencv2/imgproc/imgproc_c.h>
+/* Autoconf logic to select the correct OpenCV version */
+@CV_HEADERS_1@
+@CV_HEADERS_2@
+#@CV_HEADERS_3@
+#@CV_HEADERS_4@
+#@CV_HEADERS_5@
 
 /* X11 includes */
 #include <X11/Xlib.h>
