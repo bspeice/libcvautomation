@@ -25,11 +25,7 @@
 #include <string.h>
 
 /* Autoconf logic to select the correct OpenCV version */
-@CV_HEADERS_1@
-@CV_HEADERS_2@
-#@CV_HEADERS_3@
-#@CV_HEADERS_4@
-#@CV_HEADERS_5@
+@cv_headers@
 
 /* X11 includes */
 #include <X11/Xlib.h>

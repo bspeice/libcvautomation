@@ -32,21 +32,14 @@ AC_PATH_X
 PKG_CHECK_MODULES([OpenCV], [opencv >= 2.0.0], [use_opencv2=true], [use_opencv1=true])
 #Let doxygen know where our headers are at
 AC_SUBST(CV_VERSION, "opencv2")
-AC_SUBST(CV_HEADERS_1, ["/* OpenCV2 includes - some filenames are different"])
-AC_SUBST(CV_HEADERS_2, [" * from the OpenCV1 counterparts */"])
-AC_SUBST(CV_HEADERS_3, ["include <opencv2/core/core_c.h>"])
-AC_SUBST(CV_HEADERS_4, ["include <opencv2/highgui/highgui_c.h>"])
-AC_SUBST(CV_HEADERS_5, ["include <opencv2/imgproc/imgproc_c.h>"])
+AC_SUBST_FILE([cv_headers])
+cv_headers=$srcdir/include/opencv2_includes
 if test "$use_opencv1" != ""; then
 	echo "could not find OpenCV version 2.0.0 or higher, checking for 1.0.0 or higher..."
 	PKG_CHECK_MODULES([OpenCV], [opencv >= 1.0.0])
 	#Update doxygen on where our headers are at
 	AC_SUBST(CV_VERSION, "opencv1")
-	AC_SUBST(CV_HEADERS_1, ["/* OpenCV includes */"])
-	AC_SUBST(CV_HEADERS_2, [" " ])
-	AC_SUBST(CV_HEADERS_3, ["include <opencv/cv.h>"])
-	AC_SUBST(CV_HEADERS_4, ["include <opencv/highgui.h>"])
-	AC_SUBST(CV_HEADERS_5, ["define NEVER_USED"])
+	cv_headers=$srcdir/include/opencv1_includes
 fi
 AC_SUBST(CV_CFLAGS, [`pkg-config --cflags opencv`])
 AC_SUBST(CV_LIBS, [`pkg-config --libs opencv`])
