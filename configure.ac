@@ -32,16 +32,23 @@ AC_PATH_X
 PKG_CHECK_MODULES([OpenCV], [opencv >= 2.0.0], [use_opencv2=true], [use_opencv1=true])
 AM_CONDITIONAL(USEOPENCV2, [test "$use_opencv2" != ""])
 #Let doxygen know where our headers are at
-AC_SUBST(DOXYGEN_CV_VERSION, "opencv2")
+AC_SUBST(CV_VERSION, "opencv2")
 if test "$use_opencv1" != ""; then
 	echo "could not find OpenCV version 2.0.0 or higher, checking for 1.0.0 or higher..."
 	PKG_CHECK_MODULES([OpenCV], [opencv >= 1.0.0])
 	#Update doxygen on where our headers are at
-	AC_SUBST(DOXYGEN_CV_VERSION, "opencv1")
+	AC_SUBST(CV_VERSION, "opencv1")
 fi
+AC_SUBST(CV_CFLAGS, [`pkg-config --cflags opencv`])
+AC_SUBST(CV_LIBS, [`pkg-config --libs opencv`])
 
 PKG_CHECK_MODULES([X11], [x11 >= 1.0.3])
+AC_SUBST(X11_CFLAGS, [`pkg-config --cflags x11`])
+AC_SUBST(X11_LIBS, [`pkg-config --libs x11`])
+
 PKG_CHECK_MODULES([XTest], [xtst >= 0.21])
+AC_SUBST(XTEST_CFLAGS, [`pkg-config --cflags xtst`])
+AC_SUBST(XTEST_LIBS, [`pkg-config --libs xtst`])
 
 AC_ARG_WITH(examples, [  --with-examples         build example programs @<:@default=yes@:>@])
 
@@ -97,4 +104,10 @@ fi
 # Checks for library functions.
 AC_FUNC_MALLOC
 
-AC_OUTPUT([Makefile] [libcvautomation/Makefile] [examples/Makefile] [docs/Makefile])
+AC_OUTPUT(
+[Makefile]
+[libcvautomation/Makefile]
+[examples/Makefile]
+[docs/Makefile]
+[libcvautomation.pc]
+)

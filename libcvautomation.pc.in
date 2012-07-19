@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: Libcvautomation
+Description: GUI Automation and Testing tool based on OpenCV and XTest
+Version: @VERSION@
+Libs: -L${libdir} -lcvautomation @CV_LIBS@ @X11_LIBS@ @XTEST_LIBS@
+Cflags: -I${includedir} @CV_CFLAGS@ @X11_CFLAGS@ @XTEST_CFLAGS@

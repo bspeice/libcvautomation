@@ -6,3 +6,9 @@ endif
 
 #And the BASH macros
 dist_sysconf_DATA = libcvautomation_funcs
+
+#And the pkg-config files
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libcvautomation.pc
+
+DISTCLEANFILES = libcvautomation.pc
