@@ -905,7 +905,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
 		sscanf( s_commandString, "mouseimage %s", fileName );
 
-		cvaPoint resultPoint;
 		resultPoint = xte_hoverMouseImage_location( displayLocation, fileName, searchMethod, tolerance );
 
 		free(fileName);
@@ -928,7 +927,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
 		sscanf( s_commandString, "imouseclick %s", fileName );
 
-		cvaPoint resultPoint;
 		resultPoint = xte_clickMouseImage_location( displayLocation, fileName, mouseButton, searchMethod, tolerance );
 
 		free(fileName);
@@ -939,7 +937,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
 		sscanf( s_commandString, "icmouseclick %s", fileName );
 
-		cvaPoint resultPoint;
 		resultPoint = xte_clickMouseImage_location_center( displayLocation, fileName, mouseButton, searchMethod, tolerance );
 
 		free(fileName);
