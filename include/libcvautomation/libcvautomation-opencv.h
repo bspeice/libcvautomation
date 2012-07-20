@@ -62,7 +62,7 @@ void matchSubImage_a_location_center ( const char *rootImageFileName, cvautomati
  * \date 7/18/2012
  */
 
-/** \page libcv_search_methods Libcv Search Methods
+/** \page libcvautomation_search_methods Libcv Search Methods
 This page describes the methods libcv uses to search for a sub image in a root image.
 \section tolerance Tolerance Values
 Tolerance values are used to control how strict each of the following search methods are. Acceptable values are from \c INT_MIN to \c INT_MAX.
@@ -129,7 +129,7 @@ Formula:
  * \param subImage The sub image (in IplImage format) to search for in \c rootImage
  * \param searchMethod The search method to use when searching for \c subImage in \c rootImage.
  * \param tolerance The tolerance to use when searching for \c subImage in \c rootImage.
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \return The location of the sub image in root image
  */
 
@@ -139,7 +139,7 @@ Formula:
  * \param subImage The sub image (in IplImage format) to search for in \c rootImage
  * \param searchMethod The search method to use when searching for \c subImage in \c rootImage.
  * \param tolerance The tolerance to use when searching for \c subImage in \c rootImage.
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \return The center location of the sub image in root image
  */
 
@@ -150,7 +150,7 @@ Formula:
  * \param subImage_location The location of the sub image to search for in \c rootImage
  * \param searchMethod The search method to use when searching for \c subImage in \c rootImage.
  * \param tolerance The tolerance to use when searching for \c subImage in \c rootImage.
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \return The location of the sub image in root image
  */
 
@@ -161,7 +161,7 @@ Formula:
  * \param subImage_location The location of the sub image to search for in \c rootImage
  * \param searchMethod The search method to use when searching for \c subImage in \c rootImage.
  * \param tolerance The tolerance to use when searching for \c subImage in \c rootImage.
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \return The center location of the sub image in root image
  */
 

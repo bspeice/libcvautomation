@@ -262,11 +262,11 @@ typedef struct {
  * 		<ul>
  * 		<li>Set the \c SEARCH_METHOD
  * 			<ul>
- * 			<li>This value adjusts how libcvautomation searches for sub-images. See \ref libcv_search_methods for more information on accepted values, and how each works.
+ * 			<li>This value adjusts how libcvautomation searches for sub-images. See \ref libcvautomation_search_methods for more information on accepted values, and how each works.
  * 			</ul>
  * 		<li>Set the \c TOLERANCE
  * 			<ul>
- * 			<li>This value adjusts how strict libcvautomation is when trying to find a sub-image. See \ref libcv_search_methods for more information on how to control how libcvautomation searches for images.
+ * 			<li>This value adjusts how strict libcvautomation is when trying to find a sub-image. See \ref libcvautomation_search_methods for more information on how to control how libcvautomation searches for images.
  * 			</ul>
  * 		<li>Set \c USE_SANE_TOLERANCE
  * 			<ul>
@@ -361,17 +361,17 @@ typedef struct {
  *
  * \code key_down "<key-name>" \endcode
  * Press a key down and leave it down
- *  \note This function accepts special keys like "Space" - see \ref XTest_key_strings for a full list of characters allowed.
+ *  \note This function accepts special keys like "Space" - see \ref xtest_key_strings for a full list of characters allowed.
  * <br><br>
  *
  * \code key_up "<key-name>" \endcode
  * Release a key
- *  \note This function accepts special keys like "Space" - see \ref XTest_key_strings for a full list of characters allowed.
+ *  \note This function accepts special keys like "Space" - see \ref xtest_key_strings for a full list of characters allowed.
  * <br><br>
  *
  * \code key_click "<key-name>" \endcode
  * Press a key down and then release it immediately after
- *  \note This function accepts special keys like "Space" - see \ref XTest_key_strings for a full list of characters allowed.
+ *  \note This function accepts special keys like "Space" - see \ref xtest_key_strings for a full list of characters allowed.
  * <br><br>
  *
  * \section appendix_utilities Useful extras
@@ -404,7 +404,7 @@ typedef struct {
  * \param resultPoint Holder for a result - for example, storing where this sub image was located in its root image
  * \param searchMethod The search method to use when searching for this sub image in a root image
  * \param tolerance The tolerance to use when searching for this sub image in a root image
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  */
 
 /** \struct cvaPoint

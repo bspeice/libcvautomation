@@ -116,7 +116,7 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
  * \date 7/18/2012
  */
 
-/** \page XTest_key_strings XTest Key Strings
+/** \page xtest_key_strings XTest Key Strings
 This page describes the various extra key strings to use with X11.
 The following list is generated with this command:
 \code xmodmap -pke | cut -d'=' -f2 |  sed 's/ /\n/g' | tr -s '\n' | awk '{ print length(), $0 | "sort -n" }' | cut -d' ' -f2 | uniq \endcode
@@ -365,7 +365,7 @@ XF86MonBrightnessDown
 \warning Please note that each key string above is first translated into a key code, and then into the actual key click. Thus, while you might intend to press "dollar", it will actually come out as "4". If you need a <tt>'$'</tt> to come out, use the <tt>'keystring $'</tt> command to \ref xte_commandString() or <tt>'key_str $'</tt> function in the BASH wrapper - see the \ref wrapper_functions.
  */
 
-/** \page XTest_command_strings xte_commandString() Command Strings
+/** \page xtest_command_strings xte_commandString() Command Strings
 This page describes the various command strings available for the \ref xte_commandString() function.
 \section mouseclick Mouse Click
 \code 'mouseclick <button_number>' \endcode
@@ -422,15 +422,15 @@ Scroll the mouse up 1 time - depending on window manager settings, etc., this ma
 
 \section keyclick Key Button Click
 \code 'keyclick <key_name>' \endcode
-Push and release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of special keys.
+Push and release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of special keys.
 
 \section keydown Key Button Down
 \code 'keydown <key_name>' \endcode
-Push down <em>but do not release</em> a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of special keys.
+Push down <em>but do not release</em> a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of special keys.
 
 \section keyup Key Button Up
 \code 'keyup <key_name>' \endcode
-Release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of special keys.
+Release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of special keys.
 
 \section keystring Keyboard Input String
 \code 'keystring <string>' \endcode
@@ -491,7 +491,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param mouseButton The mouse button to click
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked.
  */
 
@@ -503,7 +503,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param mouseButton The mouse button to click
  * \param searchMethod The search method to use when searching for the sub image in the root X11 window
  * \param tolerance The tolerance to use when searching for the sub image in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked.
  */
 
@@ -515,7 +515,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param mouseButton The mouse button to click
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked.
  */
 
@@ -527,7 +527,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param mouseButton The mouse button to click
  * \param searchMethod The search method to use when searching for the sub image in the root X11 window
  * \param tolerance The tolerance to use when searching for the sub image in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked.
  */
 
@@ -552,7 +552,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param subImage The sub image (in IplImage format) to find in the root X11 window
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved.
  */
 
@@ -563,7 +563,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param filename The file name from which to load the sub-image
  * \param searchMethod The search method to use when searching for the sub image in the root X11 window
  * \param tolerance The tolerance to use when searching for the sub image in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved.
  */
 
@@ -574,7 +574,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param subImage The sub image (in IplImage format) to find in the root X11 window
  * \param searchMethod The search method to use when searching for \c subImage in the root X11 window
  * \param tolerance The tolerance to use when searching for \c subImage in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved.
  */
 
@@ -585,7 +585,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param fileName The file name from which to load the sub-image
  * \param searchMethod The search method to use when searching for the sub image in the root X11 window
  * \param tolerance The tolerance to use when searching for the sub image in the root X11 window
- * \see \ref libcv_search_methods
+ * \see \ref libcvautomation_search_methods
  * \returns The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved.
  */
 
@@ -621,10 +621,10 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
 
 /** \fn void xte_clickKey ( Display *displayLocation, char *key );
  * \brief Press and release a keyboard key
- * \details This method allows you to press and release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of keys.
+ * \details This method allows you to press and release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of keys.
  * \param displayLocation The Display of which to click a key
  * \param key The key to click as a string
- * \see \ref XTest_key_strings
+ * \see \ref xtest_key_strings
  */
 
 /** \fn void xte_clickKeyStr ( Display *displayLocation, char *string );
@@ -636,28 +636,28 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
 
 /** \fn void xte_keyDown ( Display *displayLocation, char *key );
  * \brief Press a key down, but do not release it
- * \details This method allows you to push down a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of keys.
+ * \details This method allows you to push down a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of keys.
  * \param displayLocation The Display of which to push down a key
  * \param key The key to click as a string
- * \see \ref XTest_key_strings
+ * \see \ref xtest_key_strings
  */
 
 /** \fn void xte_keyUp ( Display *displayLocation, char *key );
  * \brief Release a key
- * \details This method allows you to release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref XTest_key_strings for a full list of keys.
+ * \details This method allows you to release a key, where the key may be \c 'a', \c 'b', or maybe something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of keys.
  * \param displayLocation The Display of which to release a key
  * \param key The key to click as a string
- * \see \ref XTest_key_strings
+ * \see \ref xtest_key_strings
  */
 
 /** \fn cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance );
  * \brief Execute a command where the command is coming from a string
- * \details This function allows you to input a command to libcvautomation from a string. For example, to click a mouse button, you would use the \c command 'mouseclick'. Please note that some <tt>command</tt>s may need arguments to the string, and some may use function arguments. See \ref XTest_command_strings for a full list of command and arguments
+ * \details This function allows you to input a command to libcvautomation from a string. For example, to click a mouse button, you would use the \c command 'mouseclick'. Please note that some <tt>command</tt>s may need arguments to the string, and some may use function arguments. See \ref xtest_command_strings for a full list of command and arguments
  * \param displayLocation The Display of which to operate on
  * \param commandString The command string to execute - limit to \ref COMMAND_STR_LEN characters
  * \param mouseButton The mouse button to click if it is needed by the command being executed
  * \param searchMethod The search method to use if it is needed by the command being executed
  * \param tolerance The tolerance to use if it is needed by the command being executed
- * \see \ref XTest_command_strings
- * \see \ref libcv_search_methods
+ * \see \ref xtest_command_strings
+ * \see \ref libcvautomation_search_methods
  */
