@@ -12,3 +12,7 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libcvautomation.pc
 
 DISTCLEANFILES = libcvautomation.pc
+
+#Make sure to distribute some special files we need for building
+#the libcvautomation.h header
+EXTRA_DIST = include/opencv1_includes include/opencv2_includes
