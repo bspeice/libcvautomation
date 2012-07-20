@@ -48,9 +48,7 @@ int main( int argc, char** argv )
 	int useX = 0; /* bool useX = false; */
 	Bool useCenter = False;
 	char *xDisplayLocation;
-	Display *display;
-	/* This line to suppress a compiler warning */
-	display = NULL;
+	Display *display = NULL;
 
 	/* Set the default display */
 	xDisplayLocation = "";
@@ -58,6 +56,8 @@ int main( int argc, char** argv )
 	/* Set up the linked list for slave images */
 	basic_list *list_head, *list_curr, *list_prev;
 	list_head = list_curr = list_prev = NULL;
+
+	int returnCode = 1;
 
 	/* Start getopt */
 	while (1)
@@ -187,9 +187,12 @@ int main( int argc, char** argv )
 			result_point = matchSubImage_location( root_location, sub_location, search_method, tolerance );
 
 		if ( result_point.x != -1 && result_point.y != -1 )
+		{
 			/* Output the match location */
 			printf ("%s%s%i%s%i\n", list_curr->fileName, separator,
 					result_point.x, separator, result_point.y );
+			returnCode = 0;
+		}
 
 		/* With the way we allocate the list, we ensure that we always
 		 * have at least one element past the end of the list.
@@ -207,7 +210,7 @@ int main( int argc, char** argv )
 	if (useX)
 		XCloseDisplay(display);
 
-	return 0;
+	return returnCode;
 }
 
 /* 
@@ -224,8 +227,7 @@ cva-match -r <root_image> -s <sub_image> \n\
 cva-match -s <sub_image> -x \n\
 \n\
 This program uses OpenCV in order to recognize an image within an image.\n\
-The return code is how many matches were found - return 0 for no matches,\n\
-1 for one match, etc.\n\
+The return code is 0 for at least one successful match, and 1 otherwise.\n\
 \n\
 Usage: \n\
 \n\
@@ -274,7 +276,7 @@ If you have any questions, comments, concerns, email <%s>\n", LIBCVAUTOMATION_VE
  * \author Bradlee Speice <bspeice@uncc.edu>
  * \date 7/18/2012
  * \section usage Usage:
- * This program uses OpenCV in order to recognize an image within an image. The return code is how many matches were found - return 0 for no matches, 1 for one match, etc.
+ * This program uses OpenCV in order to recognize an image within an image. The return code is 0 for at least one successful match, and 1 otherwise.
  *
  * \section example Example Usage:
  * Match two images against the root X11 window:

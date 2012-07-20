@@ -781,6 +781,13 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	/* Note that most of the functions don't need mouseButton, searchMethod, or tolerance,
 	 * but they're here to make sure that they're available if needed. */
 
+	/* The returns also bear a bit of instruction.
+	 * A return of (0,0) or up is a success
+	 * A return of (-1,-1) is an error
+	 * A return of (-2,-2) indicates that the command didn't need to use the point -
+	 * 	This helps differentiate between errors and functions like keyclick that
+	 * 	don't use the resultPoint. */
+
 	cvaPoint resultPoint;
 	resultPoint.x = -1;
 	resultPoint.y = -1;
@@ -803,6 +810,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		sscanf( s_commandString, "mouseclick %i", &mouseButton );
 
 		xte_clickMouse( displayLocation, mouseButton );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "mousexy" ))
 	{
@@ -810,6 +819,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		sscanf( s_commandString, "mousexy %i %i", &xLocation, &yLocation );
 
 		xte_hoverMouseXY( displayLocation, xLocation, yLocation );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "mouserxy" ))
 	{
@@ -817,6 +828,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		sscanf( s_commandString, "mouserxy %i %i", &xIncrement, &yIncrement );
 
 		xte_hoverMouseRXY( displayLocation, xIncrement, yIncrement );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "mouseimage" ))
 	{
@@ -828,8 +841,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		resultPoint = xte_hoverMouseImage_location( displayLocation, fileName, searchMethod, tolerance );
 
 		free(fileName);
-
-		return resultPoint;
 	}
 	else if (IS_CMD( s_commandString, "cmouseimage" ))
 	{
@@ -840,6 +851,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		xte_hoverMouseImage_location_center( displayLocation, fileName, searchMethod, tolerance );
 
 		free(fileName);
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "imouseclick" ))
 	{
@@ -851,8 +864,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		resultPoint = xte_clickMouseImage_location( displayLocation, fileName, mouseButton, searchMethod, tolerance );
 
 		free(fileName);
-
-		return resultPoint;
 	}
 	else if (IS_CMD( s_commandString, "icmouseclick" ))
 	{
@@ -864,8 +875,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		resultPoint = xte_clickMouseImage_location_center( displayLocation, fileName, mouseButton, searchMethod, tolerance );
 
 		free(fileName);
-
-		return resultPoint;
 	}
 	else if (IS_CMD( s_commandString, "mousedown" ))
 	{
@@ -873,6 +882,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		sscanf( s_commandString, "mousedown %i", &mouseButton );
 
 		xte_mouseDown( displayLocation, mouseButton );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "mouseup" ))
 	{
@@ -880,18 +891,26 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		sscanf( s_commandString, "mouseup %i", &mouseButton );
 
 		xte_mouseUp( displayLocation, mouseButton );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "mousejiggle" ))
 	{
 		xte_mouseJiggle( displayLocation );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "mousescrollu" ))
 	{
 		xte_mouseScrollUp( displayLocation );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "mousescrolld" ))
 	{
 		xte_mouseScrollDown( displayLocation );
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "keyclick" ))
 	{
@@ -902,6 +921,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		xte_clickKey( displayLocation, key );
 
 		free(key);
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "keydown" ))
 	{
@@ -912,6 +933,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		xte_keyDown( displayLocation, key );
 
 		free(key);
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "keyup" ))
 	{
@@ -922,6 +945,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		xte_keyUp( displayLocation, key );
 
 		free(key);
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "keystring" ))
 	{
@@ -932,8 +957,12 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		xte_clickKeyStr( displayLocation, keyString );
 
 		free(keyString);
+
+		resultPoint.x = resultPoint.y = -2;
 	}
 
+	/* Note that we will return (-1,-1) implicitly
+	 * if we don't recognize the argument */
 	return resultPoint;
 }
 

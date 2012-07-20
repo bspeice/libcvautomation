@@ -43,6 +43,8 @@ int main( int argc, char** argv )
 	searchMethod = 0;
 	tolerance = INT_MAX;
 
+	int returnCode = 1;
+
 	/* Start getopt */
 	while (1)
 	{
@@ -119,9 +121,18 @@ int main( int argc, char** argv )
 				returnPoint = xte_commandString( display, optarg, mouseButton, searchMethod, tolerance );
 
 				if (returnPoint.x != -1 && returnPoint.y != -1)
+				{
 					printf("%s%s%i%s%i\n", optarg, separator, returnPoint.x, separator, returnPoint.y);
-				else
+					returnCode = 0;
+				}
+
+				else if (returnPoint.x == -2 && returnPoint.y == -2)
+				{
+					/* Not an error, just that the command didn't use returnPoint */
 					printf("%s\n", optarg);
+					returnCode = 0;
+				}
+
 				break;
 
 			case 'o':
@@ -144,7 +155,7 @@ int main( int argc, char** argv )
 	if ( display != NULL )
 		XCloseDisplay( display );
 
-	return 0;
+	return returnCode;
 }
 
 /* 
@@ -160,6 +171,8 @@ Libcvautomation version: %s\n\
 cva-input -s <command_string>\n\
 \n\
 The cva-input program demonstrates the XTest section of libcvautomation.\n\
+The return code is 1 if there are no commands given, or if all commands fail.\n\
+It is 0 otherwise.\n\
 \n\
 Usage: \n\
 \n\
@@ -228,6 +241,7 @@ void checkXTEEnabled ( Display *display )
  * \date 7/18/2012
  * \section usage Usage:
  * This program works kind of like a mini-language. All options are parsed left-to-right, and executed right there. Thus, specifying "--display" at different places in the options will cause this program to use the most recent given display.
+ * The return code is 1 if there are no commands given, or if all commands fail. It is 0 otherwise.
  * \section example Example Usage:
  * Click the mouse:
  *
