@@ -36,7 +36,7 @@ typedef struct list basic_list;
 
 int main( int argc, char** argv )
 {
-	CvPoint result_point;
+	cvaPoint result_point;
 	result_point.x = result_point.y = 0;
 
 	/* Set up everything for getopt */

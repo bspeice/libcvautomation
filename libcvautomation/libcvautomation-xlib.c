@@ -46,7 +46,7 @@ void cvaCloseDisplay ( Display *displayLocation )
  *  Description:  Match a sub image using the X11 root window as root
  * =====================================================================================
  */
-CvPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
+cvaPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
 {
 	/* First things first, grab the root X window and convert it to
 	 * the IplImage format.
@@ -54,7 +54,7 @@ CvPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int sea
 	 * 	http://opencv.willowgarage.com/wiki/ximage2opencvimage */
 	IplImage *X_IPL;
 	CvSize imageSize;
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 
 	XImage *rootImage;
 	XColor color;
@@ -197,7 +197,7 @@ CvPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int sea
  *  Description:  Match a sub image using the X11 root window as root, from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_location( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
+cvaPoint matchSubImage_X11_location( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
 {
 	/* This is basically a wrapper for matchSubImage_X11( char *display, IplImage )
 	 * All we do is load the sub-image from the given filename, and then
@@ -206,25 +206,25 @@ CvPoint matchSubImage_X11_location( Display *displayLocation, const char *subIma
 	IplImage *subImage;
 	subImage = cvLoadImage( subImage_location, CV_LOAD_IMAGE_COLOR );
 
-	CvPoint return_point;
-	return_point.x = -1;
-	return_point.y = -1;
+	cvaPoint resultPoint;
+	resultPoint.x = -1;
+	resultPoint.y = -1;
 
 	/* Make sure we have a good image */
 	if ( subImage == 0 )
 	{
 		/* Return error */
-		return return_point;
+		return resultPoint;
 	}
 
-	return_point = matchSubImage_X11( displayLocation, subImage, searchMethod, tolerance );
+	resultPoint = matchSubImage_X11( displayLocation, subImage, searchMethod, tolerance );
 
 	/* Free up the memory we created */
 	cvReleaseImage( &subImage );
 
-	/* Our return_point will already be bad if there's no match,
+	/* Our resultPoint will already be bad if there's no match,
 	 * we don't need to worry about setting it. */
-	return return_point;
+	return resultPoint;
 
 }		/* -----  end of function matchSubImage_X11_location  ----- */
 
@@ -237,7 +237,7 @@ CvPoint matchSubImage_X11_location( Display *displayLocation, const char *subIma
  *  				the top-left corner.
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
+cvaPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
 {
 	/* First things first, grab the root X window and convert it to
 	 * the IplImage format.
@@ -245,7 +245,7 @@ CvPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, 
 	 * 	http://opencv.willowgarage.com/wiki/ximage2opencvimage */
 	IplImage *X_IPL;
 	CvSize imageSize;
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 
 	XImage *rootImage;
 	XColor color;
@@ -388,7 +388,7 @@ CvPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, 
  *  Description:  Match a sub image using the X11 root window as root, from filename
  * =====================================================================================
  */
-CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
+cvaPoint matchSubImage_X11_location_center( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance )
 {
 	/* This is basically a wrapper for matchSubImage_X11( char *display, IplImage )
 	 * All we do is load the sub-image from the given filename, and then
@@ -397,24 +397,24 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
 	IplImage *subImage;
 	subImage = cvLoadImage( subImage_location, CV_LOAD_IMAGE_COLOR );
 
-	CvPoint return_point;
-	return_point.x = -1;
-	return_point.y = -1;
+	cvaPoint resultPoint;
+	resultPoint.x = -1;
+	resultPoint.y = -1;
 
 	/* Make sure we have a good image */
 	if ( subImage == 0 )
 	{
 		/* Return error */
-		return return_point;
+		return resultPoint;
 	}
 
-	return_point = matchSubImage_X11_center( displayLocation, subImage, searchMethod, tolerance );
+	resultPoint = matchSubImage_X11_center( displayLocation, subImage, searchMethod, tolerance );
 
 	/* Free up the memory we created */
 	cvReleaseImage( &subImage );
 
-	/* Our return_point will already be bad if there's no match,
+	/* Our resultPoint will already be bad if there's no match,
 	 * we don't need to worry about setting it. */
-	return return_point;
+	return resultPoint;
 
 }		/* -----  end of function matchSubImage_X11_location_center  ----- */

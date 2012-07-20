@@ -32,6 +32,11 @@
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
 
+/* Define another basic structure for points */
+typedef struct {
+	int x, y;
+} cvaPoint;
+
 /* Define a basic structure to help us with using multiple-picture arguments
  * Yes, it's a hackish implementation, nobody said you had to use this one. */
 typedef struct {
@@ -39,16 +44,11 @@ typedef struct {
 	IplImage *cvaImage;
 	char *fileName;
 
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 	int searchMethod;
 	int tolerance;
 
 } cvautomationList;
-
-/* Define another basic structure for points */
-typedef struct {
-	int x, y;
-} cvaPoint;
 
 /* Project component includes */
 /* The includes come here to make sure all function prototypes have access

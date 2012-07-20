@@ -139,17 +139,13 @@ cvaPoint xte_clickMouseImage ( Display *displayLocation, IplImage *subImage, int
 	 * 	Find where the cursor is currently at
 	 * 	Move the cursor to the given point using relative motion - 
 	 * 		This method is screen-agnostic */
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 
 	resultPoint = matchSubImage_X11 ( displayLocation, subImage, searchMethod, tolerance );
 
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
-
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -165,7 +161,7 @@ cvaPoint xte_clickMouseImage ( Display *displayLocation, IplImage *subImage, int
 
 	XFlush( displayLocation );
 
-	return result;
+	return resultPoint;
 }
 
 /* 
@@ -177,17 +173,13 @@ cvaPoint xte_clickMouseImage ( Display *displayLocation, IplImage *subImage, int
  */
 cvaPoint xte_clickMouseImage_location ( Display *displayLocation, const char *fileName, int mouseButton, int searchMethod, int tolerance )
 {
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 
 	resultPoint = matchSubImage_X11_location( displayLocation, fileName, searchMethod, tolerance );
 
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
-
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -203,7 +195,7 @@ cvaPoint xte_clickMouseImage_location ( Display *displayLocation, const char *fi
 
 	XFlush( displayLocation );
 
-	return result;
+	return resultPoint;
 }
 
 /* 
@@ -219,17 +211,13 @@ cvaPoint xte_clickMouseImage_center ( Display *displayLocation, IplImage *subIma
 	 * 	Find where the cursor is currently at
 	 * 	Move the cursor to the given point using relative motion - 
 	 * 		This method is screen-agnostic */
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 
 	resultPoint = matchSubImage_X11_center ( displayLocation, subImage, searchMethod, tolerance );
 
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
-
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -245,7 +233,7 @@ cvaPoint xte_clickMouseImage_center ( Display *displayLocation, IplImage *subIma
 
 	XFlush( displayLocation );
 
-	return result;
+	return resultPoint;
 }
 
 /* 
@@ -257,17 +245,13 @@ cvaPoint xte_clickMouseImage_center ( Display *displayLocation, IplImage *subIma
  */
 cvaPoint xte_clickMouseImage_location_center ( Display *displayLocation, const char *fileName, int mouseButton, int searchMethod, int tolerance )
 {
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 
 	resultPoint = matchSubImage_X11_location_center( displayLocation, fileName, searchMethod, tolerance );
 
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
-
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -283,7 +267,7 @@ cvaPoint xte_clickMouseImage_location_center ( Display *displayLocation, const c
 
 	XFlush( displayLocation );
 
-	return result;
+	return resultPoint;
 }
 
 /* 
@@ -329,16 +313,12 @@ void xte_hoverMouseRXY ( Display *displayLocation, int xIncrement, int yIncremen
  */
 cvaPoint xte_hoverMouseImage ( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
 {
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 	resultPoint = matchSubImage_X11( displayLocation, subImage, searchMethod, tolerance );
-
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
 
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -351,7 +331,7 @@ cvaPoint xte_hoverMouseImage ( Display *displayLocation, IplImage *subImage, int
 
 	XFlush( displayLocation );
 
-	return result;
+	return resultPoint;
 }
 
 /* 
@@ -363,16 +343,12 @@ cvaPoint xte_hoverMouseImage ( Display *displayLocation, IplImage *subImage, int
  */
 cvaPoint xte_hoverMouseImage_location ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance )
 {
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 	resultPoint = matchSubImage_X11_location( displayLocation, fileName, searchMethod, tolerance );
-
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
 
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -385,7 +361,7 @@ cvaPoint xte_hoverMouseImage_location ( Display *displayLocation, const char *fi
 
 	XFlush( displayLocation );
 
-	return result;
+	return resultPoint;
 }
 
 /* 
@@ -397,16 +373,12 @@ cvaPoint xte_hoverMouseImage_location ( Display *displayLocation, const char *fi
  */
 cvaPoint xte_hoverMouseImage_center ( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance )
 {
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 	resultPoint = matchSubImage_X11_center( displayLocation, subImage, searchMethod, tolerance );
-
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
 
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -419,7 +391,7 @@ cvaPoint xte_hoverMouseImage_center ( Display *displayLocation, IplImage *subIma
 
 	XFlush( displayLocation );
 
-	return result;
+	return resultPoint;
 }
 
 /* 
@@ -431,16 +403,12 @@ cvaPoint xte_hoverMouseImage_center ( Display *displayLocation, IplImage *subIma
  */
 cvaPoint xte_hoverMouseImage_location_center ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance )
 {
-	CvPoint resultPoint;
+	cvaPoint resultPoint;
 	resultPoint = matchSubImage_X11_location_center( displayLocation, fileName, searchMethod, tolerance );
-
-	cvaPoint result;
-	result.x = resultPoint.x;
-	result.y = resultPoint.y;
 
 	if (resultPoint.x == -1 && resultPoint.y == -1)
 		/* Match not found */
-		return result;
+		return resultPoint;
 
 	cvaPoint pointerLocation;
 	pointerLocation = xte_pointerLocation( displayLocation );
@@ -453,7 +421,7 @@ cvaPoint xte_hoverMouseImage_location_center ( Display *displayLocation, const c
 
 	XFlush( displayLocation );
 	
-	return result;
+	return resultPoint;
 }
 
 /* 

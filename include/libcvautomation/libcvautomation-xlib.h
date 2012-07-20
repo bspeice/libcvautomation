@@ -27,16 +27,16 @@ Display* cvaOpenDisplay ( char *displayName );
 void cvaCloseDisplay ( Display *displayLocation );
 
 /* Match a sub image using the X11 root window as root */
-CvPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
+cvaPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
 
 /* Match a sub image using the X11 root window as root, return the center */
-CvPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
+cvaPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
 
 /* Match a sub image using X11 as root, from filename */
-CvPoint matchSubImage_X11_location( Display *displayLocation, const char *subImage_location, int search_method, int tolerance ); 
+cvaPoint matchSubImage_X11_location( Display *displayLocation, const char *subImage_location, int search_method, int tolerance ); 
 
 /* Match a sub image using X11 as root, from filename, return the center */
-CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char *subImage_location, int search_method, int tolerance ); 
+cvaPoint matchSubImage_X11_location_center( Display *displayLocation, const char *subImage_location, int search_method, int tolerance ); 
 
 #endif /* LIBCVAUTOMATION_XLIB_H */
 
@@ -64,7 +64,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \returns Nothing
  */
 
-/** \fn CvPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
+/** \fn cvaPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
  * \brief Return the location of a sub image in the X11 root window
  * \details This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to matchSubImage()
  * \param displayLocation Pointer to the currently open X11 Display
@@ -75,7 +75,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \returns The location of the sub image in root X11 window
  */
 
-/** \fn CvPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
+/** \fn cvaPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance ); 
  * \brief Return the center of a sub image in root X11 window, rather than the top-left corner
  * \details This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to matchSubImage_center()
  * \param displayLocation Pointer to the currently open X11 Display
@@ -86,7 +86,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \returns The center location of the sub image in the root X11 window
  */
 
-/** \fn CvPoint matchSubImage_X11_location( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance ); 
+/** \fn cvaPoint matchSubImage_X11_location( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance ); 
  * \brief Return the location of a sub image in the X11 root window
  * \details This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to matchSubImage_location()
  * \param displayLocation Pointer to the currently open X11 Display
@@ -97,7 +97,7 @@ CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char 
  * \returns The center location of the sub image in the root X11 window
  */
 
-/** \fn CvPoint matchSubImage_X11_location_center( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance ); 
+/** \fn cvaPoint matchSubImage_X11_location_center( Display *displayLocation, const char *subImage_location, int searchMethod, int tolerance ); 
  * \brief Return the center of a sub image in the root X11 window, rather than the top-left corner
  * \details This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to matchSubImage_location_center()
  * \param displayLocation Pointer to the currently open X11 Display
