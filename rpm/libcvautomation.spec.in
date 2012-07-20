@@ -20,6 +20,13 @@ BuildRequires: libX11-devel
 BuildRequires: opencv-devel
 BuildRequires: doxygen
 
+Requires: opencv
+Requires: libXtst
+Requires: libX11
+
+%description
+Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for Sikuli and Xpresser. Each solution had large problems with crashing, and both refused to function on Red Hat Linux and Ubuntu 12.04. The author really liked the way each of these programs approached GUI automation, but they simply didn't work. As such, a simple library was designed to integrate OpenCV and XTest, which can be used by BASH to drive GUI testing and automation, and works on both new and old Linux distributions.
+
 %package devel
 Summary: Library links and header files for libcvautomation application development
 Group: Development/Libraries
@@ -49,9 +56,6 @@ Requires: %{name} = %{version}-%{release}
 
 %description doc
 libcvautomation-docs contains the HTML documentation for libcvautomation.
-
-%description
-Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for Sikuli and Xpresser. Each solution had large problems with crashing, and both refused to function on Red Hat Linux and Ubuntu 12.04. The author really liked the way each of these programs approached GUI automation, but they simply didn't work. As such, a simple library was designed to integrate OpenCV and XTest, which can be used by BASH to drive GUI testing and automation, and works on both new and old Linux distributions.
 
 %prep
 %setup -q
