@@ -508,7 +508,11 @@ waitfor ()
 
 	out "waitfor: $1"
 
-	eval '$CVAINPUT --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
+	if [ -n "$USE_SANE_TOLERANCE" ]; then
+		eval '$CVAINPUT -o $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
+	else
+		eval '$CVAINPUT -t $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
+	fi
 
 	return $?
 }	# ----------  end of function waitfor  ----------
