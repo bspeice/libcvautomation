@@ -194,6 +194,7 @@ Usage: \n\
 \t-o, --sane-tolerance:\tSet the tolerance using a scale of 1-100,\n\
 \t-s, --string:\t\tCommand string - see below.\n\
 \t-i, --timeout:\t\tSpecify the timeout to use when using the 'waitfor' function\n\
+\t\t\t\tPlease make sure to use the '-t' or '-o' options when using this.\n\
 \n\
 This program works kind of like a mini-language. All options\n\
 are parsed left-to-right, and executed right there. Thus, specifying \"--display\"\n\

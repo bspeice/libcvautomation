@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits.h>
 
 /* Autoconf logic to select the correct OpenCV version */
 @cv_headers@
@@ -297,6 +298,7 @@ typedef struct {
  * TIMEOUT \endcode
  * These control how the "waitfor" function is used. By default, all image-matching functions will wait for an image to appear, and then click on it. This way, it won't click randomly if it can or can't find an image, and provides very easy error recognition. The functions will wait for a period of \c TIMEOUT seconds before complaining.
  * To disable waiting before performing an action, set \code USE_WAIT="" \endcode
+ * \warning Without setting a tolerance value, the waitfor function becomes totally useless, as the first search will always find an image. <tt>Make sure to set the tolerance</tt> (or just leave it as the default value in the wrapper).
  *
  * \subsection appendix_output Output and Debugging
  * \code OUTFILE
