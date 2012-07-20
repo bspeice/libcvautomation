@@ -55,7 +55,7 @@ Group: Documentation
 Requires: %{name} = %{version}-%{release}
 
 %description doc
-libcvautomation-docs contains the HTML documentation for libcvautomation.
+libcvautomation-doc contains the HTML documentation for libcvautomation.
 
 %prep
 %setup -q
