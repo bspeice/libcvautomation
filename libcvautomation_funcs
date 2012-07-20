@@ -67,6 +67,7 @@ err ()
 click ()
 {
 	eval $CVAINPUT -s 'mouseclick 1' >> $OUTFILE >> $OUTFILE
+	return $?
 }	# ----------  end of function click  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -94,6 +95,7 @@ click_xy ()
 
 	eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" -s "mouseclick 1" >> $OUTFILE'
 
+	return $?
 }	# ----------  end of function click_xy  ----------
 
 
@@ -117,6 +119,8 @@ clickr_xy ()
 	out "clickr_xy: " $1 $2
 
 	eval '$CVAINPUT -s "mouserxy $1 $2" -s "mouseclick 1" >> $OUTFILE'
+
+	return $?
 }	# ----------  end of function clickr_xy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -153,6 +157,7 @@ click_i ()
 	fi
 
 	eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE"
+
 	return $?
 }	# ----------  end of function click_i  ----------
 
@@ -205,6 +210,7 @@ image_location ()
 
 	out "image_location: \"$MATCH\" " "$X_LOC,$Y_LOC,$IMAGE_NAME"
 	echo "$X_LOC,$Y_LOC"
+
 	return $RETURN_CODE
 }	# ----------  end of function image_location  ----------
 
@@ -235,6 +241,8 @@ hover_xy ()
 	out "hover_xy: $X_LOC $Y_LOC"
 
 	eval $CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE
+
+	return $?
 }	# ----------  end of function hover_xy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -263,6 +271,8 @@ hoverr_xy ()
 	out "hoverr_xy: $X_INC $Y_INC"
 
 	eval '$CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE'
+
+	return $?
 }	# ----------  end of function hoverr_xy  ----------
 
 
@@ -300,6 +310,7 @@ hover_i ()
 	fi
 
 	eval $CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
+
 	return $?
 }	# ----------  end of function hover_i  ----------
 
@@ -315,6 +326,8 @@ jiggle_mouse ()
 {
 	out "jiggle_mouse"
 	eval '$CVAINPUT -s "mousejiggle" >> $OUTFILE'
+
+	return $?
 }	# ----------  end of function jiggle_mouse  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -329,6 +342,7 @@ mouse_scrollu ()
 	out "mouse_scrollu"
 	eval '$CVAINPUT -s "mousescrollu" >> $OUTFILE'
 	
+	return $?
 }	# ----------  end of function mouse_scrollu  ----------
 
 
@@ -343,6 +357,8 @@ mouse_scrolld ()
 {
 	out "mouse_scrolld"
 	eval '$CVAINPUT -s "mousescrolld" >> $OUTFILE'
+
+	return $?
 }	# ----------  end of function mouse_scrolld  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -367,6 +383,8 @@ key_str ()
 
 	out "key_str: \"$@\""
 	eval $CVAINPUT $COMMAND_LINE >> $OUTFILE
+
+	return $?
 }	# ----------  end of function key_str  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -386,6 +404,8 @@ key_down ()
 	out "key_down: $1"
 
 	eval '$CVAINPUT -s "keydown $1" >> $OUTFILE'
+
+	return $?
 }	# ----------  end of function key_down  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -404,6 +424,8 @@ key_up ()
 	out "key_up: $1"
 
 	eval '$CVAINPUT -s "keyup $1" >> $OUTFILE'
+
+	return $?
 }	# ----------  end of function key_up  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -422,6 +444,8 @@ key_click ()
 	out "key_click: $1"
 	
 	eval '$CVAINPUT -s "keyclick $1" >> $OUTFILE'
+	
+	return $?
 }	# ----------  end of function key_press  ----------
 
 
@@ -441,6 +465,8 @@ notify ()
 
 	if [ -n "$DISPLAY" ]; then
 		which zenity &> /dev/null
+		#If zenity isn't found, we don't want to go to a read prompt -
+		#the user may not be running this from a terminal.
 		if [ $? -eq 0 ]; then
 			zenity --info --text="$@"
 		fi
