@@ -58,7 +58,7 @@ Libcvautomation is a GUI automation and testing tool based on image recognition 
 
 %build
 %configure \
-	--without-examples
+	--with-docs
 make %{?_smp_mflags}
 
 %install
