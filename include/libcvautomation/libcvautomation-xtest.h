@@ -103,8 +103,14 @@ void xte_keyDown ( Display *displayLocation, char *key );
 /* Release a key */
 void xte_keyUp ( Display *displayLocation, char *key );
 
+/* Wait for an image to show up on screen */
+cvaPoint xte_waitForImage ( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout );
+
+/* Wait for an image from file to show up on screen */
+cvaPoint xte_waitForImage_location ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout );
+
 /* Use one of the functions by command name */
-cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance );
+cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout );
 
 #endif /* LIBCVAUTOMATION_XTEST_H */
 
@@ -436,6 +442,10 @@ Release a keyboard key. This can be a key like \c 'a', \c 'b', or something fanc
 \code 'keystring <string>' \endcode
 Input a string of text to the X11 server. For example, inputting 'Hello, world!" will act as if you typed 'Hello, world!' from the keyboard.
 \warning Unlike \ref keydown, \ref keyup, and \ref keyclick, this function can not handle special keys like 'space'.
+
+\section waitfor Wait for Image
+\code 'waitfor <image_name>' \endcode
+Wait for an image to show up on screen. For example, this can be used to make sure a button exists before clicking it.
 */
 
 /** \def IS_CMD (x, y)
@@ -649,8 +659,29 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param key The key to click as a string
  * \see \ref xtest_key_strings
  */
+/** \fn cvaPoint xte_waitForImage ( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout );
+ * \brief Wait for an image to show up on screen
+ * \details This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy.
+ * \param displayLocation The Display of which to search for an image
+ * \param subImage The sub image to search for
+ * \param searchMethod The search method to use when searching for \c subImage
+ * \param tolerance The tolerance to use when searching for \c tolerance
+ * \param timeout The time (in seconds) to search for the image
+ * \see \ref libcvautomation_search_methods
+ */
 
-/** \fn cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance );
+/** \fn cvaPoint xte_waitForImage_location ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout );
+ * \brief Wait for an image from file to show up on screen
+ * \details This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy.
+ * \param displayLocation The Display of which to search for an image
+ * \param fileName The file to load an image from before searching
+ * \param searchMethod The search method to use when searching for \c subImage
+ * \param tolerance The tolerance to use when searching for \c tolerance
+ * \param timeout The time (in seconds) to search for the image
+ * \see \ref libcvautomation_search_methods
+ */
+
+/** \fn cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout );
  * \brief Execute a command where the command is coming from a string
  * \details This function allows you to input a command to libcvautomation from a string. For example, to click a mouse button, you would use the \c command 'mouseclick'. Please note that some <tt>command</tt>s may need arguments to the string, and some may use function arguments. See \ref xtest_command_strings for a full list of command and arguments
  * \param displayLocation The Display of which to operate on
@@ -658,6 +689,7 @@ Input a string of text to the X11 server. For example, inputting 'Hello, world!"
  * \param mouseButton The mouse button to click if it is needed by the command being executed
  * \param searchMethod The search method to use if it is needed by the command being executed
  * \param tolerance The tolerance to use if it is needed by the command being executed
+ * \param timeout The time in seconds to wait for an image to be displayed when using the \c waitfor command.
  * \see \ref xtest_command_strings
  * \see \ref libcvautomation_search_methods
  */

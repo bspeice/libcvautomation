@@ -39,9 +39,10 @@ int main( int argc, char** argv )
 	Display *display;
 		display = NULL;
 
-	int searchMethod, tolerance;
+	int searchMethod, tolerance, timeout;
 	searchMethod = 0;
 	tolerance = INT_MAX;
+	timeout = 5;
 
 	int returnCode = 1;
 
@@ -60,6 +61,7 @@ int main( int argc, char** argv )
 				{"string",		required_argument,	0,	's'},
 				{"sane-tolerance", required_argument, 0,'o'},
 				{"print-format",required_argument,	0,	'p'},
+				{"timeout",		required_argument,	0,	'i'},
 				/* Other valid values are "optional_argument"
 				 * and "required_argument" */
 				{0, 0, 0, 0}
@@ -118,7 +120,7 @@ int main( int argc, char** argv )
 				if (display == NULL)
 					display = XOpenDisplay( xDisplayLocation );
 				cvaPoint returnPoint;
-				returnPoint = xte_commandString( display, optarg, mouseButton, searchMethod, tolerance );
+				returnPoint = xte_commandString( display, optarg, mouseButton, searchMethod, tolerance, timeout );
 
 				if (returnPoint.x != -1 && returnPoint.y != -1)
 				{
@@ -140,6 +142,10 @@ int main( int argc, char** argv )
 				/* Provide a more sane way to configure tolerance:
 				 * --sane-tolerance=100 ~= INT_MAX */
 				tolerance = pow(1.2397076, tolerance);
+				break;
+
+			case 'i':
+				timeout = atoi(optarg);
 				break;
 	
 			case '?':
@@ -187,6 +193,7 @@ Usage: \n\
 \t\t\t\tmatch the center of the image.\n\
 \t-o, --sane-tolerance:\tSet the tolerance using a scale of 1-100,\n\
 \t-s, --string:\t\tCommand string - see below.\n\
+\t-i, --timeout:\t\tSpecify the timeout to use when using the 'waitfor' function\n\
 \n\
 This program works kind of like a mini-language. All options\n\
 are parsed left-to-right, and executed right there. Thus, specifying \"--display\"\n\
@@ -209,6 +216,7 @@ Available commands:\n\
 \tkeydown:\tPush and leave down a keyboard button.\n\
 \tkeyup:\tRelease a keyboard button.\n\
 \tkeystring:\tInput a string of keys to X11.\n\
+\twaitfor:\tWait for an image to be displayed.\n\
 \n\
 If you have any questions, comments, concerns, email <%s>.\n\n", LIBCVAUTOMATION_VERSION, LIBCVAUTOMATION_BUGREPORT );
 
@@ -271,6 +279,8 @@ void checkXTEEnabled ( Display *display )
  *
  * -s, --string:		Command string - see below.
  *
+ * -i, --timeout:		Specify the timeout to use when using the 'waitfor' command
+ *
  *
  * \section commands Full Command List:
  * \c mouseclick:	Click the mouse in-place.
@@ -304,6 +314,8 @@ void checkXTEEnabled ( Display *display )
  * \c keyup:	Release a keyboard button.
  *
  * \c keystring:	Input a string of keys to X11.
+ *
+ * \c waitfor:	Wait for an image to be displayed
  *
  * \section contact Contact Information:
  * Questions? Comments? Concerns? Suggestions? Send all feedback to Bradlee Speice at <bspeice@uncc.edu>

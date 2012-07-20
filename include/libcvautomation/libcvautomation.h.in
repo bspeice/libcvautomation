@@ -23,6 +23,7 @@
 /* C includes */
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 /* Autoconf logic to select the correct OpenCV version */
 @cv_headers@

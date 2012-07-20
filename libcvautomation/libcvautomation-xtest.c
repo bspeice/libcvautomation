@@ -763,6 +763,61 @@ void xte_keyUp ( Display *displayLocation, char *key )
 	XFlush( displayLocation );
 }
 
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  xte_waitForImage
+ *  Description:  Wait for an image to show up on screen
+ * =====================================================================================
+ */
+cvaPoint xte_waitForImage ( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout )
+{
+	cvaPoint resultPoint;
+	resultPoint.x = resultPoint.y = -1;
+
+	int localTime = 0;
+	while ( localTime < timeout )
+	{
+		resultPoint = matchSubImage_X11( displayLocation, subImage, searchMethod, tolerance );
+
+		if ( resultPoint.x != -1 && resultPoint.y != -1 )
+			return resultPoint;
+
+		sleep( 1 );
+		localTime++;
+	}
+
+	/* Return error, we couldn't find the image */
+	return resultPoint;
+}		/* -----  end of function xte_waitForImage  ----- */
+
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  xte_waitForImage_location
+ *  Description:  Wait for an image from file to show up on screen
+ * =====================================================================================
+ */
+cvaPoint xte_waitForImage_location ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout )
+{
+	cvaPoint resultPoint;
+	resultPoint.x = resultPoint.y = -1;
+
+	int localTime = 0;
+	while ( localTime < timeout )
+	{
+		resultPoint = matchSubImage_X11_location( displayLocation, fileName, searchMethod, tolerance );
+
+		if ( resultPoint.x != -1 && resultPoint.y != -1 )
+			return resultPoint;
+
+		sleep( 1 );
+		localTime++;
+	}
+
+	/* Return error, we couldn't find the image */
+	return resultPoint;
+}		/* -----  end of function xte_waitForImage_location  ----- */
+
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -770,7 +825,7 @@ void xte_keyUp ( Display *displayLocation, char *key )
  *  Description:  Use one of the functions by command name
  * =====================================================================================
  */
-cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance )
+cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout )
 {
 	/* Alright, this function bears a bit of talking about.
 	 * What happens is that I test here for the command, and pass it off.
@@ -778,7 +833,7 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	 * the original can be found at: http://hoopajoo.net/projects/xautomation.html 
 	 * Most of the code for parsing is the same, just easier to do it that way. */
 
-	/* Note that most of the functions don't need mouseButton, searchMethod, or tolerance,
+	/* Note that most of the functions don't need mouseButton, searchMethod, etc.
 	 * but they're here to make sure that they're available if needed. */
 
 	/* The returns also bear a bit of instruction.
@@ -959,6 +1014,16 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		free(keyString);
 
 		resultPoint.x = resultPoint.y = -2;
+	}
+	else if (IS_CMD( s_commandString, "waitfor" ))
+	{
+		char *fileName;
+		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
+		sscanf( s_commandString, "waitfor %s", fileName );
+
+		resultPoint = xte_waitForImage_location( displayLocation, fileName, searchMethod, tolerance, timeout );
+
+		free(fileName);
 	}
 
 	/* Note that we will return (-1,-1) implicitly
