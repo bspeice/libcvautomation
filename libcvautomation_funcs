@@ -159,7 +159,7 @@ click_i ()
 			TOLERANCE_OPTION="-t"
 		fi
 
-		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'waitfor $x' >> $OUTFILE"
+		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s 'waitfor $x' >> $OUTFILE"
 		CVA_RETURN=$?
 
 		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
@@ -322,7 +322,7 @@ hover_i ()
 			TOLERANCE_OPTION="-t"
 		fi
 	
-		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'waitfor $x' >> $OUTFILE"
+		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s 'waitfor $x' >> $OUTFILE"
 		CVA_RETURN=$?
 
 		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
@@ -488,7 +488,7 @@ waitfor ()
 
 	out "waitfor: $1"
 
-	eval '$CVAINPUT -s "waitfor $1" >> $OUTFILE'
+	eval '$CVAINPUT --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
 
 	return $?
 }	# ----------  end of function waitfor  ----------
