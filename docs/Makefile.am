@@ -12,7 +12,8 @@ uninstall-local:
 	-rmdir $(DESTDIR)$(datadir)/$(PACKAGE)/html
 
 doxyfile.stamp:
-	$(Doxygen) Doxyfile
+	$(Doxygen) Doxyfile_library
+	$(Doxygen) Doxyfile_example
 	echo Timestamp > doxyfile.stamp
 
 CLEANFILES = doxyfile.stamp
@@ -24,23 +25,24 @@ clean-local:
 endif
 
 if BUILD_MAN
-directory = $(top_srcdir)/docs/man/man3
+directory_1 = $(top_srcdir)/docs/man/man1
+directory_3 = $(top_srcdir)/docs/man/man3
 
-dist_man_MANS = $(directory)/cvaPoint.3 $(directory)/libcvautomation.h.3 $(directory)/libcvautomation-xlib.h.3 $(directory)/libcvautomation_search_methods.3 $(directory)/xtest_key_strings.3 $(directory)/cvautomationList.3 $(directory)/libcvautomation-opencv.h.3 $(directory)/libcvautomation-xtest.h.3 $(directory)/xtest_command_strings.3 $(directory)/libcvautomation.3 $(directory)/writing_app_tests.3 $(directory)/cva-match.3 $(directory)/cva-input.3
+dist_man_MANS = $(directory_3)/cvaPoint.3 $(directory_3)/libcvautomation.h.3 $(directory_3)/libcvautomation-xlib.h.3 $(directory_3)/libcvautomation_search_methods.3 $(directory_3)/xtest_key_strings.3 $(directory_3)/cvautomationList.3 $(directory_3)/libcvautomation-opencv.h.3 $(directory_3)/libcvautomation-xtest.h.3 $(directory_3)/xtest_command_strings.3 $(directory_3)/libcvautomation.3 $(directory_3)/writing_app_tests.3 $(directory_1)/cva-match.1 $(directory_1)/cva-input.1
 
-$(directory)/cvaPoint.3: doxyfile.stamp
-$(directory)/libcvautomation.h.3: doxyfile.stamp
-$(directory)/libcvautomation-xlib.h.3: doxyfile.stamp
-$(directory)/libcvautomation_search_methods.3: doxyfile.stamp
-$(directory)/xtest_key_strings.3: doxyfile.stamp
-$(directory)/cvautomationList.3: doxyfile.stamp
-$(directory)/libcvautomation-opencv.h.3: doxyfile.stamp
-$(directory)/libcvautomation-xtest.h.3: doxyfile.stamp
-$(directory)/xtest_command_strings.3: doxyfile.stamp
-$(directory)/libcvautomation.3: doxyfile.stamp
-$(directory)/writing_app_tests.3: doxyfile.stamp
-$(directory)/cva-match.3: doxyfile.stamp
-$(directory)/cva-input.3: doxyfile.stamp
+$(directory_3)/cvaPoint.3: doxyfile.stamp
+$(directory_3)/libcvautomation.h.3: doxyfile.stamp
+$(directory_3)/libcvautomation-xlib.h.3: doxyfile.stamp
+$(directory_3)/libcvautomation_search_methods.3: doxyfile.stamp
+$(directory_3)/xtest_key_strings.3: doxyfile.stamp
+$(directory_3)/cvautomationList.3: doxyfile.stamp
+$(directory_3)/libcvautomation-opencv.h.3: doxyfile.stamp
+$(directory_3)/libcvautomation-xtest.h.3: doxyfile.stamp
+$(directory_3)/xtest_command_strings.3: doxyfile.stamp
+$(directory_3)/libcvautomation.3: doxyfile.stamp
+$(directory_3)/writing_app_tests.3: doxyfile.stamp
+$(directory_1)/cva-match.1: doxyfile.stamp
+$(directory_1)/cva-input.1: doxyfile.stamp
 
 endif
 

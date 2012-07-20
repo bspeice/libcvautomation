@@ -80,7 +80,7 @@ if test "$with_docs" == "yes"; then
 		enable_tex="no"
 	else
 		AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" == "yes"])
-		AC_CONFIG_FILES([docs/Doxyfile])
+		AC_CONFIG_FILES([docs/Doxyfile_library] [docs/Doxyfile_example])
 	fi
 else
 	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" == "yes"]) #false
