@@ -37,6 +37,11 @@ USE_CENTER="yes"
 #Uncomment to disable center-of-image matching
 #USE_CENTER=""
 
+USE_WAIT="yes"
+#Uncomment to disable waiting before an action
+#USE_WAIT=""
+TIMEOUT=5
+
 
 #Quick trick to allow for easy redirection of output
 #OUTFILE=`mktemp`; echo "Logfile: " $OUTFILE
@@ -132,6 +137,7 @@ clickr_xy ()
 #-------------------------------------------------------------------------------
 click_i ()
 {
+	RETURN_CODE=255
 	COMMAND_LINE=""
 	if [ -z "$1" ]; then
 		err "Did not give a base image..."
@@ -142,23 +148,33 @@ click_i ()
 
 	for x in $@
 	do
-		if [ x$USE_CENTER != "x" ]; then
+		if [ -n $USE_CENTER ]; then
 			center="c"
 		else
 			center=""
 		fi
-		COMMAND_LINE+="-s 'i${center}mouseclick $x' "
+		if [ -n "$USE_SANE_TOLERANCE" ]; then
+			TOLERANCE_OPTION="-o"
+		else
+			TOLERANCE_OPTION="-t"
+		fi
+
+		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'waitfor $x' >> $OUTFILE"
+		CVA_RETURN=$?
+
+		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+			RETURN_CODE=$CVA_RETURN
+		fi
+
+		if [ $CVA_RETURN -eq 0 ]; then
+			#We found the image, click it
+			eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick $x' >> $OUTFILE"
+		fi
+
 	done
 
-	if [ -n "$USE_SANE_TOLERANCE" ]; then
-		TOLERANCE_OPTION="-o"
-	else
-		TOLERANCE_OPTION="-t"
-	fi
-
-	eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE"
-
-	return $?
+	
+	return $RETURN_CODE
 }	# ----------  end of function click_i  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -291,6 +307,8 @@ hover_i ()
 		return 255
 	fi
 
+	out "hover_i: $@"
+
 	for x in $@
 	do
 		if [ -n $CENTER ]; then
@@ -298,20 +316,27 @@ hover_i ()
 		else
 			center=""
 		fi
-		COMMAND_LINE+="-s '${center}mouseimage $x' "
+		if [ -n $USE_SANE_TOLERANCE ]; then
+			TOLERANCE_OPTION="-o"
+		else
+			TOLERANCE_OPTION="-t"
+		fi
+	
+		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'waitfor $x' >> $OUTFILE"
+		CVA_RETURN=$?
+
+		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+			RETURN_CODE=$CVA_RETURN
+		fi
+
+		if [ $CVA_RETURN -eq 0 ]; then
+			#We found the image, click it
+			eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
+		fi
+
 	done
 
-	out "hover_i: $@"
-
-	if [ -n $USE_SANE_TOLERANCE ]; then
-		TOLERANCE_OPTION="-o"
-	else
-		TOLERANCE_OPTION="-t"
-	fi
-
-	eval $CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD $COMMAND_LINE >> $OUTFILE
-
-	return $?
+	return $RETURN_CODE
 }	# ----------  end of function hover_i  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -448,7 +473,25 @@ key_click ()
 	return $?
 }	# ----------  end of function key_press  ----------
 
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  waitfor
+#   DESCRIPTION:  Wait for an image to be displayed
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
 
+waitfor ()
+{
+	if [ -z "$1" ]; then
+		err "Did not give me an image to find..."
+	fi
+
+	out "waitfor: $1"
+
+	eval '$CVAINPUT -s "waitfor $1" >> $OUTFILE'
+
+	return $?
+}	# ----------  end of function waitfor  ----------
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  notify
 #   DESCRIPTION:  Notify the user and pause
