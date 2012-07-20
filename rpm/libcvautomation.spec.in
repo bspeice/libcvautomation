@@ -70,12 +70,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 /usr/lib64/*
-/usr/share/man/*
+/usr/share/man/man3/*
 
 %files devel
 /usr/include/*
 
 %files examples
+/usr/share/man/man1/*
 /usr/bin/*
 /etc/*
 
