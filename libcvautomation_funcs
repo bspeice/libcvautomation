@@ -159,16 +159,27 @@ click_i ()
 			TOLERANCE_OPTION="-t"
 		fi
 
-		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s 'waitfor $x' >> $OUTFILE"
-		CVA_RETURN=$?
+		if [ -n "$USE_WAIT" ]; then
+			waitfor "$x"
+			CVA_RETURN=$?
 
-		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
-			RETURN_CODE=$CVA_RETURN
-		fi
+			if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+				RETURN_CODE=$CVA_RETURN
+			fi
 
-		if [ $CVA_RETURN -eq 0 ]; then
-			#We found the image, click it
+			if [ $CVA_RETURN -eq 0 ]; then
+				#We found the image, click it
+				eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick $x' >> $OUTFILE"
+			else
+				return $RETURN_CODE
+			fi
+		else
 			eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick $x' >> $OUTFILE"
+			CVA_RETURN=$?
+
+			if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+				RETURN_CODE=$CVA_RETURN
+			fi
 		fi
 
 	done
@@ -322,16 +333,25 @@ hover_i ()
 			TOLERANCE_OPTION="-t"
 		fi
 	
-		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s 'waitfor $x' >> $OUTFILE"
-		CVA_RETURN=$?
+		if [ -n "$USE_WAIT" ]; then
+			eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s 'waitfor $x' >> $OUTFILE"
+			CVA_RETURN=$?
 
-		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
-			RETURN_CODE=$CVA_RETURN
-		fi
+			if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+				RETURN_CODE=$CVA_RETURN
+			fi
 
-		if [ $CVA_RETURN -eq 0 ]; then
-			#We found the image, click it
+			if [ $CVA_RETURN -eq 0 ]; then
+				#We found the image, click it
+				eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
+			fi
+		else
 			eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
+			CVA_RETURN=$?
+
+			if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+				RETURN_CODE=$CVA_RETURN
+			fi
 		fi
 
 	done
