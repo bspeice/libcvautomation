@@ -64,13 +64,13 @@ if test "$with_examples" != "no"; then
 fi
 
 # Check for doxygen
-AC_ARG_WITH(docs, [  --with-docs             build documentation for libcvautomation @<:@default=no@:>@])
+AC_ARG_WITH(docs, [  --with-docs             build documentation for libcvautomation @<:@default=yes@:>@])
 AC_ARG_ENABLE(man, [  --enable-man            enable building the 'man' pages for libcvautomation
                             only works if --with-docs is enabled @<:@default=enable@:>@])
 AC_ARG_ENABLE(tex, [  --enable-tex            enable building the 'latex' pages for libcvautomation
                             only works if --with-docs is enabled @<:@default=disable@:>@])
 
-if test "$with_docs" == "yes"; then
+if test "$with_docs" != "no"; then
 	AC_CHECK_PROGS([Doxygen], [doxygen], [missing])
 
 	if test "$Doxygen" == "missing"; then
@@ -79,11 +79,11 @@ if test "$with_docs" == "yes"; then
 		enable_man="no"
 		enable_tex="no"
 	else
-		AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" == "yes"])
+		AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"])
 		AC_CONFIG_FILES([docs/Doxyfile_library] [docs/Doxyfile_example])
 	fi
 else
-	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" == "yes"]) #false
+	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"]) #false
 	enable_man="no"
 	enable_tex="no"
 fi
