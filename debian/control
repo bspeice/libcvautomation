@@ -2,14 +2,14 @@ Source: libcvautomation
 Section: devel
 Priority: extra
 Maintainer: Bradlee Speice <bspeice@uncc.edu>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, pkg-config, libpcre3, libx11-dev, libopencv-core-dev, libopencv-highgui-dev, libopencv-imgproc-dev, doxygen
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, pkg-config, libpcre3, libx11-dev, libxtst-dev, libopencv-core-dev, libopencv-highgui-dev, libopencv-imgproc-dev, doxygen
 Standards-Version: 3.9.3
 Homepage: http://djbushido.github.com/libcvautomation/
 
 Package: libcvautomation
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libxtst6, libx11, libopencv-core2.3, libopencv-highgui2.3, libopencv-imgproc2.3
-Description: Libcvautomation - GUI Automation and Testing Library
+Depends: ${shlibs:Depends}, ${misc:Depends}, libxtst-dev, libx11-dev, libopencv-core2.3, libopencv-highgui2.3, libopencv-imgproc2.3
+Description: GUI Automation and Testing Library
  Contains the Libcvautomation main library - libcvautomation is a GUI
  automation and testing tool based on image recognition and response. This
  program was designed as a direct replacement for Sikuli and Xpresser. Each
@@ -35,7 +35,7 @@ Description: development files for libcvautomation
  on top of libcvautomation
 
 Package: libcvautomation-examples
-Depends: ${shlibs:Depends}, ${misc:Depends}, libxtst6, libx11, libopencv-core2.3, libopencv-highgui2.3, libopencv-imgproc2.3
+Depends: ${shlibs:Depends}, ${misc:Depends}, libxtst-dev, libx11-dev, libopencv-core2.3, libopencv-highgui2.3, libopencv-imgproc2.3
 Architecture: any
 Description: Example programs to demonstrate libcvautomation functionality
  Contains programs designed to showcase the functionality of libcvautomation,
