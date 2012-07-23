@@ -2,7 +2,7 @@ Source: libcvautomation
 Section: devel
 Priority: extra
 Maintainer: Bradlee Speice <bspeice@uncc.edu>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, pkg-config, libpcre3, libx11-dev, libopencv-core-dev, libopencv-highgui-dev, libopencv-imgproc-dev
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, pkg-config, libpcre3, libx11-dev, libopencv-core-dev, libopencv-highgui-dev, libopencv-imgproc-dev, doxygen
 Standards-Version: 3.9.3
 Homepage: http://djbushido.github.com/libcvautomation/
 
@@ -10,7 +10,14 @@ Package: libcvautomation
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libxtst6, libx11, libopencv-core2.3, libopencv-highgui2.3, libopencv-imgproc2.3
 Description: Libcvautomation - GUI Automation and Testing Library
- Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for Sikuli and Xpresser. Each solution had large problems with crashing, and both refused to function on Red Hat Linux and Ubuntu 12.04. The author really liked the way each of these programs approached GUI automation, but they simply didn't work. As such, a simple library was designed to integrate OpenCV and XTest, which can be used by BASH to drive GUI testing and automation, and works on both new and old Linux distributions.
+ Libcvautomation is a GUI automation and testing tool based on image
+ recognition and response. This program was designed as a direct replacement
+ for Sikuli and Xpresser. Each solution had large problems with crashing, and
+ both refused to function on Red Hat Linux and Ubuntu 12.04. The author
+ really liked the way each of these programs approached GUI automation,
+ but they simply didn't work. As such, a simple library was designed to
+ integrate OpenCV and XTest, which can be used by BASH to drive GUI
+ testing and automation, and works on both new and old Linux distributions.
 
 Package: libcvautomation-doc
 Section: doc
@@ -19,13 +26,14 @@ Description: documentation for libcvautomation
  Contains the HTML documentation for libcvautomation.
 
 Package: libcvautomation-dev
-Depends: libcvautomation (= 1.3)
+Depends: libcvautomation (= ${binary:Version})
 Architecture: any
 Description: development files for libcvautomation
- Contains all files needed to build programs on top of libcvautomation
+ Contains all headers, and pkg-config files needed to build programs on top of libcvautomation
 
 Package: libcvautomation-examples
 Depends: ${shlibs:Depends}, ${misc:Depends}, libxtst6, libx11, libopencv-core2.3, libopencv-highgui2.3, libopencv-imgproc2.3
 Architecture: any
 Description: Example programs to demonstrate libcvautomation functionality
- Contains programs designed to showcase the functionality of libcvautomation, as well as a BASH wrapper to write application tests from BASH.
+ Contains programs designed to showcase the functionality of libcvautomation,
+ as well as a BASH wrapper to write application tests from BASH.
