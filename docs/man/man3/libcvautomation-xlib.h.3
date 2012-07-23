@@ -1,0 +1,211 @@
+.TH "libcvautomation-xlib.h" 3 "23 Jul 2012" "Version 1.3" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libcvautomation-xlib.h \- The source code to access Xlib from inside libcvautomation. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <libcvautomation/libcvautomation.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "Display * \fBcvaOpenDisplay\fP (char *displayName)"
+.br
+.RI "\fISimple wrapper for XOpenDisplay. \fP"
+.ti -1c
+.RI "void \fBcvaCloseDisplay\fP (Display *displayLocation)"
+.br
+.RI "\fISimple wrapper for XCloseDisplay. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage_X11\fP (Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance)"
+.br
+.RI "\fIReturn the location of a sub image in the X11 root window. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage_X11_center\fP (Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance)"
+.br
+.RI "\fIReturn the center of a sub image in root X11 window, rather than the top-left corner. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage_X11_location\fP (Display *displayLocation, const char *subImage_location, int search_method, int tolerance)"
+.br
+.RI "\fIReturn the location of a sub image in the X11 root window. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage_X11_location_center\fP (Display *displayLocation, const char *subImage_location, int search_method, int tolerance)"
+.br
+.RI "\fIReturn the center of a sub image in the root X11 window, rather than the top-left corner. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The source code to access Xlib from inside libcvautomation. 
+
+This source file builds in the necessary functionality to use xlib functions inside libcvautomation. 
+.PP
+\fBAuthor:\fP
+.RS 4
+Bradlee Speice 
+.RE
+.PP
+
+.PP
+Definition in file \fBlibcvautomation-xlib.h\fP.
+.SH "Function Documentation"
+.PP 
+.SS "Display * cvaOpenDisplay (char * displayName)"
+.PP
+Simple wrapper for XOpenDisplay. 
+.PP
+Currently this function literally just passes off to XOpenDisplay, but is designed to be used in the future if extra functionality is needed. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayName\fP The name of the display to open - '' is a valid name 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Pointer to the opened X11 Display 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+You must open a display to use any functions. 
+.PP
+The program using this library is responsible to close the display as well. 
+.RE
+.PP
+
+.SS "void cvaCloseDisplay (Display * displayLocation)"
+.PP
+Simple wrapper for XCloseDisplay. 
+.PP
+Currently this function literally just passes off to XCloseDisplay, but is designed to be used in the future if extra functionality is needed. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP Pointer to the display to close 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Nothing 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP matchSubImage_X11 (Display * displayLocation, IplImage * subImage, int searchMethod, int tolerance)"
+.PP
+Return the location of a sub image in the X11 root window. 
+.PP
+This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to \fBmatchSubImage()\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP Pointer to the currently open X11 Display 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to search for in the root X11 window 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of the sub image in root X11 window 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP matchSubImage_X11_center (Display * displayLocation, IplImage * subImage, int searchMethod, int tolerance)"
+.PP
+Return the center of a sub image in root X11 window, rather than the top-left corner. 
+.PP
+This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to \fBmatchSubImage_center()\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP Pointer to the currently open X11 Display 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to search for in the root X11 window 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The center location of the sub image in the root X11 window 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP matchSubImage_X11_location (Display * displayLocation, const char * subImage_location, int searchMethod, int tolerance)"
+.PP
+Return the location of a sub image in the X11 root window. 
+.PP
+This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to \fBmatchSubImage_location()\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP Pointer to the currently open X11 Display 
+.br
+\fIsubImage_location\fP The location of the sub image to search for in the root X11 window 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The center location of the sub image in the root X11 window 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP matchSubImage_X11_location_center (Display * displayLocation, const char * subImage_location, int searchMethod, int tolerance)"
+.PP
+Return the center of a sub image in the root X11 window, rather than the top-left corner. 
+.PP
+This function wraps grabbing the X11 root window, converting it to IplImage format, and then giving this to \fBmatchSubImage_location_center()\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP Pointer to the currently open X11 Display 
+.br
+\fIsubImage_location\fP The location of the sub image to search for in the root X11 window 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The center location of the sub image in the root X11 window 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcvautomation from the source code.
