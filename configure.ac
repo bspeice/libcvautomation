@@ -108,6 +108,9 @@ fi
 # Checks for library functions.
 AC_FUNC_MALLOC
 
+AC_SUBST_FILE(rpm_changelog)
+rpm_changelog=$srcdir/ChangeLog
+
 AC_OUTPUT(
 [Makefile]
 [libcvautomation/Makefile]
