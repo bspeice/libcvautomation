@@ -110,6 +110,10 @@ AC_FUNC_MALLOC
 
 AC_SUBST_FILE(rpm_changelog)
 rpm_changelog=$srcdir/ChangeLog
+AC_SUBST_FILE(deb_changelog)
+deb_changelog=$srcdir/ChangeLog
+AC_SUBST_FILE(deb_copyright)
+deb_copyright=$srcdir/COPYING
 
 AC_OUTPUT(
 [Makefile]
@@ -117,6 +121,8 @@ AC_OUTPUT(
 [examples/Makefile]
 [docs/Makefile]
 [libcvautomation.pc]
-[rpm/libcvautomation.spec]
 [include/libcvautomation/libcvautomation.h]
+[rpm/libcvautomation.spec]
+[debian/copyright]
+[debian/changelog]
 )
