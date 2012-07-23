@@ -1,5 +1,5 @@
-AM_CFLAGS = -Wall -Werror -O2 -I$(top_srcdir)/include/
-AM_LDFLAGS =
+AM_CFLAGS = -Wall -Werror -O2 -I$(top_srcdir)/include @X11_CFLAGS@ @XTEST_CFLAGS@ @CV_CFLAGS@
+AM_LDFLAGS = @X11_LIBS@ @XTEST_LIBS@ @CV_LIBS@
 AM_LIBS = -shared
 
 #Lists the libraries to build
