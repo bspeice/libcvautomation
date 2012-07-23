@@ -182,15 +182,15 @@ typedef struct {
  * \code
  * #!/bin/bash
  * #This is an application test involving libcvautomation and libreoffice
- * . /usr/local/etc/libcvautomation_funcs
+ * . /etc/libcvautomation_funcs
  *
  * #Changing any wrapper parameters should go here
  *
  *
  * start_libreoffice_writer ()
  * {
- *	click_i "screens/gnome-1_menu.png" "screens/kde-1_menu.png" && sleep 1
- *	click_i "screens/gnome-2_officeMenu.png" "screens/kde-2_officeMenu.png" && sleep 1
+ *	click_i "screens/gnome-1_menu.png" "screens/kde-1_menu.png"
+ *	click_i "screens/gnome-2_officeMenu.png" "screens/kde-2_officeMenu.png"
  *	hover_i "screens/gnome-3_LibreOfficeWriter.png" "screens/kde-3_LibreOfficeWriter.png"
  *	jiggle_mouse
  *	click
@@ -199,9 +199,9 @@ typedef struct {
  *
  * close_libreoffice_writer()
  * {
- * 	click_i "screens/gnome-4_fileMenu.png" "screens/kde-4_fileMenu.png" && sleep 1
- * 	click_i "screens/gnome-5_fileExit.png" "screens/kde-5_fileExit.png" && sleep 1
- * 	click_i "screens/gnome-6_discard.png" "screens/kde-6_discard.png" && sleep 1
+ * 	click_i "screens/gnome-4_fileMenu.png" "screens/kde-4_fileMenu.png"
+ * 	click_i "screens/gnome-5_fileExit.png" "screens/kde-5_fileExit.png"
+ * 	click_i "screens/gnome-6_discard.png" "screens/kde-6_discard.png"
  * }
  *
  * start_libreoffice_writer
@@ -211,17 +211,17 @@ typedef struct {
  * \code
  * #!/bin/bash
  * #This is an application test involving libcvautomation and libreoffice
- * . /usr/local/etc/libcvautomation_funcs
+ * . /etc/libcvautomation_funcs
  * #Changing any wrapper parameters should go here
  * \endcode
  * <li>The purpose of these lines is just the standard BASH header. Additionally, we import a wrapper created for libcvautomation to make our job easier. Please note that this is the default directory for the wrapper, your installation may be different. Use the command <tt>locate libcvautomation_funcs</tt> to find it on your computer. The wrapper itself is a handful of macros used to make our job easy.
- * <li>Changing any wrapper parameters should go after sourcing the wrapper functions. See the \ref wrapper_functions for more information.
+ * <li>Changing any wrapper parameters should go after sourcing the wrapper functions. See \ref appendix_variables for more information.
  * <br><br>
  * \code
  * start_libreoffice_writer ()
  * {
- *	click_i "screens/gnome-1_menu.png" "screens/kde-1_menu.png" && sleep 1
- *	click_i "screens/gnome-2_officeMenu.png" "screens/kde-2_officeMenu.png" && sleep 1
+ *	click_i "screens/gnome-1_menu.png" "screens/kde-1_menu.png"
+ *	click_i "screens/gnome-2_officeMenu.png" "screens/kde-2_officeMenu.png"
  *	hover_i "screens/gnome-3_LibreOfficeWriter.png" "screens/kde-3_LibreOfficeWriter.png"
  *	jiggle_mouse
  *	click
@@ -232,6 +232,7 @@ typedef struct {
  * <li>\c click_i is a function to click the mouse at an image - in this case, the gnome or kde menu.
  * 		<ul>
  *		<li>Because of how the cva-input program is designed, you can give it multiple images, and it will only select the one currently available. See the \ref wrapper_functions for more information on how to use this (\c TOLERANCE specifically)
+ *		<li>Additionally, the wrapper (by default) will wait for an image to appear before clicking on it. This way, you can string together click_i commands even when the program may need to wait a while on processing. Make sure to read up on the \c TIMEOUT option to learn how to use this.
  * 		<li>By using the function \c click_i, we make things a bit more readable - the full command line is <tt>cva-input -s 'icmouseclick <filename>'</tt>
  * 		<li>See the \ref wrapper_functions for a list of all functions available in the wrapper.
  * 		</ul>
@@ -241,9 +242,9 @@ typedef struct {
  * \code
  * close_libreoffice_writer()
  * {
- * 	click_i "screens/gnome-4_fileMenu.png" "screens/kde-4_fileMenu.png" && sleep 1
- * 	click_i "screens/gnome-5_fileExit.png" "screens/kde-5_fileExit.png" && sleep 1
- * 	click_i "screens/gnome-6_discard.png" "screens/kde-6_discard.png" && sleep 1
+ * 	click_i "screens/gnome-4_fileMenu.png" "screens/kde-4_fileMenu.png"
+ * 	click_i "screens/gnome-5_fileExit.png" "screens/kde-5_fileExit.png"
+ * 	click_i "screens/gnome-6_discard.png" "screens/kde-6_discard.png"
  * }
  * \endcode
  * <li>Use the \c click_i function to close down LibreOffice writer - Find the "File" menu, click "Exit", and then make sure to discard all changes.
