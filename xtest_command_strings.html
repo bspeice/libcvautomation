@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    
   </td>
@@ -77,10 +77,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title"><a class="el" href="libcvautomation-xtest_8h.html#a8c3574a6eff4b080840806dca53aa5b8" title="Execute a command where the command is coming from a string.">xte_commandString()</a> Command Strings </div>  </div>
+<div class="title"><a class="el" href="libcvautomation-xtest_8h.html#a7ea1430ed90d3166f8d9fbb4e240a28f" title="Execute a command where the command is coming from a string.">xte_commandString()</a> Command Strings </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This page describes the various command strings available for the <a class="el" href="libcvautomation-xtest_8h.html#a8c3574a6eff4b080840806dca53aa5b8">xte_commandString()</a> function. </p>
+<div class="textblock"><p>This page describes the various command strings available for the <a class="el" href="libcvautomation-xtest_8h.html#a7ea1430ed90d3166f8d9fbb4e240a28f">xte_commandString()</a> function. </p>
 <h2><a class="anchor" id="mouseclick"></a>
 Mouse Click</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;mouseclick &lt;button_number&gt;&#39;</span> 
@@ -137,20 +137,24 @@ Mouse Scroll Up</h2>
 <h2><a class="anchor" id="keyclick"></a>
 Key Button Click</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;keyclick &lt;key_name&gt;&#39;</span> 
-</pre></div><p> Push and release a keyboard key. This can be a key like <code>'a'</code>, <code>'b'</code>, or something fancy like <code>'space'</code>. Please see <a class="el" href="XTest_key_strings.html">XTest Key Strings</a> for a full list of special keys.</p>
+</pre></div><p> Push and release a keyboard key. This can be a key like <code>'a'</code>, <code>'b'</code>, or something fancy like <code>'space'</code>. Please see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of special keys.</p>
 <h2><a class="anchor" id="keydown"></a>
 Key Button Down</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;keydown &lt;key_name&gt;&#39;</span> 
-</pre></div><p> Push down <em>but do not release</em> a keyboard key. This can be a key like <code>'a'</code>, <code>'b'</code>, or something fancy like <code>'space'</code>. Please see <a class="el" href="XTest_key_strings.html">XTest Key Strings</a> for a full list of special keys.</p>
+</pre></div><p> Push down <em>but do not release</em> a keyboard key. This can be a key like <code>'a'</code>, <code>'b'</code>, or something fancy like <code>'space'</code>. Please see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of special keys.</p>
 <h2><a class="anchor" id="keyup"></a>
 Key Button Up</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;keyup &lt;key_name&gt;&#39;</span> 
-</pre></div><p> Release a keyboard key. This can be a key like <code>'a'</code>, <code>'b'</code>, or something fancy like <code>'space'</code>. Please see <a class="el" href="XTest_key_strings.html">XTest Key Strings</a> for a full list of special keys.</p>
+</pre></div><p> Release a keyboard key. This can be a key like <code>'a'</code>, <code>'b'</code>, or something fancy like <code>'space'</code>. Please see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of special keys.</p>
 <h2><a class="anchor" id="keystring"></a>
 Keyboard Input String</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;keystring &lt;string&gt;&#39;</span> 
 </pre></div><p> Input a string of text to the X11 server. For example, inputting 'Hello, world!" will act as if you typed 'Hello, world!' from the keyboard. </p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Unlike <a class="el" href="XTest_command_strings.html#keydown">Key Button Down</a>, <a class="el" href="XTest_command_strings.html#keyup">Key Button Up</a>, and <a class="el" href="XTest_command_strings.html#keyclick">Key Button Click</a>, this function can not handle special keys like 'space'. </dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Unlike <a class="el" href="xtest_command_strings.html#keydown">Key Button Down</a>, <a class="el" href="xtest_command_strings.html#keyup">Key Button Up</a>, and <a class="el" href="xtest_command_strings.html#keyclick">Key Button Click</a>, this function can not handle special keys like 'space'.</dd></dl>
+<h2><a class="anchor" id="waitfor"></a>
+Wait for Image</h2>
+<div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;waitfor &lt;image_name&gt;&#39;</span> 
+</pre></div><p> Wait for an image to show up on screen. For example, this can be used to make sure a button exists before clicking it. </p>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -169,7 +173,7 @@ Keyboard Input String</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 18 2012 14:10:15 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 23 2012 12:58:25 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    
   </td>
@@ -86,7 +86,7 @@ Tolerance Values</h2>
 <p>Tolerance values are used to control how strict each of the following search methods are. Acceptable values are from <code>INT_MIN</code> to <code>INT_MAX</code>.</p>
 <p>Additionally, each of the reference programs - <code>cva-input</code> and <code>cva-match</code> - have a "sane tolerance" built in. This is accessed by the "-o" switch, and allows you to specify a tolerance on scale of 1-100, where 1 is incredibly strict, and 100 is incredibly loose. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>The formula for calculating the sane tolerance is: \( T(x) = (10^{\frac{\log{INT\_MAX}}{\lambda}})^x \) where \( \lambda \) is the highest tolerance value (in our case, 100). Finally, we have to round down a little bit to ensure that we don't accidentally generate a value higher than <code>INT_MAX</code>. The formula used does mean that we will never be able to generate values lower than 0. </dd></dl>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>The "sane-tolerance" option doesn't know which search method you are using - Thus while 1 is an incredibly strict search for <a class="el" href="libcv_search_methods.html#SQDIFF">Squared Difference</a> and <a class="el" href="libcv_search_methods.html#SQDIFF_NORMED">Squared Difference (Normalized)</a>, it is fairly loose search for <a class="el" href="libcv_search_methods.html#CCORR">Cross Correlation</a>, <a class="el" href="libcv_search_methods.html#CCORR_NORMED">Cross Correlation (Normalized)</a>, <a class="el" href="libcv_search_methods.html#CCOEFF">Correlation Coefficient</a>, and <a class="el" href="libcv_search_methods.html#CCOEFF_NORMED">Correlation Coefficient (Normalized)</a></dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>The "sane-tolerance" option doesn't know which search method you are using - Thus while 1 is an incredibly strict search for <a class="el" href="libcvautomation_search_methods.html#SQDIFF">Squared Difference</a> and <a class="el" href="libcvautomation_search_methods.html#SQDIFF_NORMED">Squared Difference (Normalized)</a>, it is fairly loose search for <a class="el" href="libcvautomation_search_methods.html#CCORR">Cross Correlation</a>, <a class="el" href="libcvautomation_search_methods.html#CCORR_NORMED">Cross Correlation (Normalized)</a>, <a class="el" href="libcvautomation_search_methods.html#CCOEFF">Correlation Coefficient</a>, and <a class="el" href="libcvautomation_search_methods.html#CCOEFF_NORMED">Correlation Coefficient (Normalized)</a></dd></dl>
 <h2><a class="anchor" id="SQDIFF"></a>
 Squared Difference</h2>
 <div class="fragment"><pre class="fragment"><span class="preprocessor"> #define CV_TM_SQDIFF   0 </span>
@@ -96,7 +96,7 @@ Squared Difference</h2>
 <h2><a class="anchor" id="SQDIFF_NORMED"></a>
 Squared Difference (Normalized)</h2>
 <div class="fragment"><pre class="fragment"><span class="preprocessor"> #define CV_TM_SQDIFF_NORMED    1 </span>
-</pre></div><p> This is a normalized version of the <a class="el" href="libcv_search_methods.html#SQDIFF">Squared Difference</a> search method. </p>
+</pre></div><p> This is a normalized version of the <a class="el" href="libcvautomation_search_methods.html#SQDIFF">Squared Difference</a> search method. </p>
 <dl class="user"><dt><b>For this method, setting a low tolerance value results in a more strict match.</b></dt><dd></dd></dl>
 <p>Formula: \( R(x,y) = \frac{\sum_{x&#39;,y&#39;}(T(x&#39;,y&#39;) - I(x + x&#39;, y + y&#39;))^2}{ \sqrt{\sum_{x&#39;,y&#39;}T(x&#39;,y&#39;)^2 \cdot \sum_{x&#39;,y&#39;}I(x + x&#39;, y + y&#39;)^2}} \)</p>
 <h2><a class="anchor" id="CCORR"></a>
@@ -108,7 +108,7 @@ Cross Correlation</h2>
 <h2><a class="anchor" id="CCORR_NORMED"></a>
 Cross Correlation (Normalized)</h2>
 <div class="fragment"><pre class="fragment"><span class="preprocessor"> #define CV_TM_CCORR_NORMED 3 </span>
-</pre></div><p> This is the normalized version of the <a class="el" href="libcv_search_methods.html#CCORR">Cross Correlation</a> search method. </p>
+</pre></div><p> This is the normalized version of the <a class="el" href="libcvautomation_search_methods.html#CCORR">Cross Correlation</a> search method. </p>
 <dl class="user"><dt><b>For this method, setting a high tolerance value results in a more strict match.</b></dt><dd></dd></dl>
 <p>Formula: \( R(x,y)= \frac{\sum_{x&#39;,y&#39;} (T(x&#39;,y&#39;) \cdot I&#39;(x+x&#39;,y+y&#39;))}{\sqrt{\sum_{x&#39;,y&#39;}T(x&#39;,y&#39;)^2 \cdot \sum_{x&#39;,y&#39;} I(x+x&#39;,y+y&#39;)^2}} \)</p>
 <h2><a class="anchor" id="CCOEFF"></a>
@@ -120,7 +120,7 @@ Correlation Coefficient</h2>
 <h2><a class="anchor" id="CCOEFF_NORMED"></a>
 Correlation Coefficient (Normalized)</h2>
 <div class="fragment"><pre class="fragment"><span class="preprocessor"> #define CV_TM_CCOEFF_NORMED    5 </span>
-</pre></div><p> This is the normalized version of the <a class="el" href="libcv_search_methods.html#CCOEFF">Correlation Coefficient</a> search method. </p>
+</pre></div><p> This is the normalized version of the <a class="el" href="libcvautomation_search_methods.html#CCOEFF">Correlation Coefficient</a> search method. </p>
 <dl class="user"><dt><b>For this method, setting a high tolerance value results in a more strict match.</b></dt><dd></dd></dl>
 <p>Formula: \( R(x,y)= \frac{ \sum_{x&#39;,y&#39;} (T&#39;(x&#39;,y&#39;) \cdot I&#39;(x+x&#39;,y+y&#39;)) }{ \sqrt{\sum_{x&#39;,y&#39;}T&#39;(x&#39;,y&#39;)^2 \cdot \sum_{x&#39;,y&#39;} I&#39;(x+x&#39;,y+y&#39;)^2} } \) </p>
 </div></div><!-- contents -->
@@ -141,7 +141,7 @@ Correlation Coefficient (Normalized)</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 18 2012 14:10:15 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 23 2012 12:58:25 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

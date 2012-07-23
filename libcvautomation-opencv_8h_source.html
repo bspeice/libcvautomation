@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    
   </td>
@@ -117,16 +117,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00029"></a>00029 <span class="comment"> */</span>
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031 <span class="comment">/* Match a root image and sub image */</span>
-<a name="l00032"></a>00032 CvPoint <a class="code" href="libcvautomation-opencv_8h.html#ad37dfe0e025507d2437ea297232e8265" title="Return the location of a sub image in its root image.">matchSubImage</a> ( IplImage *rootImage, IplImage *subImage, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
+<a name="l00032"></a>00032 <a class="code" href="structcvaPoint.html" title="Very simple structure to standardize how points are used in libcvautomation.">cvaPoint</a> <a class="code" href="libcvautomation-opencv_8h.html#ad37dfe0e025507d2437ea297232e8265" title="Return the location of a sub image in its root image.">matchSubImage</a> ( IplImage *rootImage, IplImage *subImage, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
 <a name="l00033"></a>00033 
 <a name="l00034"></a>00034 <span class="comment">/* Match a root image and sub image, return the center */</span>
-<a name="l00035"></a>00035 CvPoint <a class="code" href="libcvautomation-opencv_8h.html#a0f847f63a736bddcc78ebf857be0813f" title="Return the center of a sub image in its root image, rather than the top-left corner.">matchSubImage_center</a> ( IplImage *rootImage, IplImage *subImage, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
+<a name="l00035"></a>00035 <a class="code" href="structcvaPoint.html" title="Very simple structure to standardize how points are used in libcvautomation.">cvaPoint</a> <a class="code" href="libcvautomation-opencv_8h.html#a0f847f63a736bddcc78ebf857be0813f" title="Return the center of a sub image in its root image, rather than the top-left corner.">matchSubImage_center</a> ( IplImage *rootImage, IplImage *subImage, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
 <a name="l00036"></a>00036 
 <a name="l00037"></a>00037 <span class="comment">/* Match a root image and sub image from filename */</span>
-<a name="l00038"></a>00038 CvPoint <a class="code" href="libcvautomation-opencv_8h.html#a938c40be84667f64b51c8f1fa3725b43" title="Return the location of a sub image in its root image.">matchSubImage_location</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *rootImage_location, <span class="keyword">const</span> <span class="keywordtype">char</span> *subImage_location, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
+<a name="l00038"></a>00038 <a class="code" href="structcvaPoint.html" title="Very simple structure to standardize how points are used in libcvautomation.">cvaPoint</a> <a class="code" href="libcvautomation-opencv_8h.html#a938c40be84667f64b51c8f1fa3725b43" title="Return the location of a sub image in its root image.">matchSubImage_location</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *rootImage_location, <span class="keyword">const</span> <span class="keywordtype">char</span> *subImage_location, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
 <a name="l00039"></a>00039 
 <a name="l00040"></a>00040 <span class="comment">/* Match a root image and sub image from filename, return the center */</span>
-<a name="l00041"></a>00041 CvPoint <a class="code" href="libcvautomation-opencv_8h.html#a0403ac35c77946e86f6436fd891fa6ac" title="Return the center of a sub image in its root image, rather than the top-left corner.">matchSubImage_location_center</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *rootImage_location, <span class="keyword">const</span> <span class="keywordtype">char</span> *subImage_location, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
+<a name="l00041"></a>00041 <a class="code" href="structcvaPoint.html" title="Very simple structure to standardize how points are used in libcvautomation.">cvaPoint</a> <a class="code" href="libcvautomation-opencv_8h.html#a0403ac35c77946e86f6436fd891fa6ac" title="Return the center of a sub image in its root image, rather than the top-left corner.">matchSubImage_location_center</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *rootImage_location, <span class="keyword">const</span> <span class="keywordtype">char</span> *subImage_location, <span class="keywordtype">int</span> searchMethod, <span class="keywordtype">double</span> tolerance );
 <a name="l00042"></a>00042 
 <a name="l00043"></a>00043 <span class="comment">/* Match a root image and sub images from an array of images */</span>
 <a name="l00044"></a>00044 <span class="keywordtype">void</span> <a class="code" href="libcvautomation-opencv_8h.html#a3facf18280800537b7b7694b5cd731cf" title="Parse an array of sub images and send them to matchSubImage()">matchSubImage_a</a> ( IplImage *rootImage, <a class="code" href="structcvautomationList.html" title="Implements a structure to build an array for methods like matchSubImage_a()">cvautomationList</a> *subImageArray, <span class="keywordtype">int</span> listSize );
@@ -161,7 +161,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 18 2012 14:10:15 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 23 2012 12:58:25 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

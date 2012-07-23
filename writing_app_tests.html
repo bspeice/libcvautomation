@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    
   </td>
@@ -208,15 +208,16 @@ This is where the BASH knowledge comes into play. We are going to write a script
 <li>
 The following is the (strongly) recommended process, but is not strictly necessary to follow this. The way I'm going to explain this is by giving an example test I wrote, and explain what is going on: <div class="fragment"><pre class="fragment"><span class="preprocessor"> #!/bin/bash</span>
 <span class="preprocessor"></span><span class="preprocessor"> #This is an application test involving libcvautomation and libreoffice</span>
-<span class="preprocessor"></span> . /usr/local/etc/libcvautomation_funcs
+<span class="preprocessor"></span> . /etc/libcvautomation_funcs
+ <span class="keyword">set</span> -o errexit
 
 <span class="preprocessor"> #Changing any wrapper parameters should go here</span>
 <span class="preprocessor"></span>
 
  start_libreoffice_writer ()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-1_menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-1_menu.png&quot;</span> &amp;&amp; sleep 1
-    click_i <span class="stringliteral">&quot;screens/gnome-2_officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-2_officeMenu.png&quot;</span> &amp;&amp; sleep 1
+    click_i <span class="stringliteral">&quot;screens/gnome-1_menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-1_menu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-2_officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-2_officeMenu.png&quot;</span>
     hover_i <span class="stringliteral">&quot;screens/gnome-3_LibreOfficeWriter.png&quot;</span> <span class="stringliteral">&quot;screens/kde-3_LibreOfficeWriter.png&quot;</span>
     jiggle_mouse
     click
@@ -225,9 +226,9 @@ The following is the (strongly) recommended process, but is not strictly necessa
 
  close_libreoffice_writer()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-4_fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-4_fileMenu.png&quot;</span> &amp;&amp; sleep 1
-    click_i <span class="stringliteral">&quot;screens/gnome-5_fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-5_fileExit.png&quot;</span> &amp;&amp; sleep 1
-    click_i <span class="stringliteral">&quot;screens/gnome-6_discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-6_discard.png&quot;</span> &amp;&amp; sleep 1
+    click_i <span class="stringliteral">&quot;screens/gnome-4_fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-4_fileMenu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-5_fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-5_fileExit.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-6_discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-6_discard.png&quot;</span>
  }
 
  start_libreoffice_writer
@@ -235,18 +236,22 @@ The following is the (strongly) recommended process, but is not strictly necessa
 </pre></div> <br/>
  <div class="fragment"><pre class="fragment"><span class="preprocessor"> #!/bin/bash</span>
 <span class="preprocessor"></span><span class="preprocessor"> #This is an application test involving libcvautomation and libreoffice</span>
-<span class="preprocessor"></span> . /usr/local/etc/libcvautomation_funcs
+<span class="preprocessor"></span> . /etc/libcvautomation_funcs
+ <span class="keyword">set</span> -o errexit
+
 <span class="preprocessor"> #Changing any wrapper parameters should go here</span>
 </pre></div> </li>
 <li>
 The purpose of these lines is just the standard BASH header. Additionally, we import a wrapper created for libcvautomation to make our job easier. Please note that this is the default directory for the wrapper, your installation may be different. Use the command <code>locate libcvautomation_funcs</code> to find it on your computer. The wrapper itself is a handful of macros used to make our job easy. </li>
 <li>
-Changing any wrapper parameters should go after sourcing the wrapper functions. See below on <a class="el" href="writing_app_tests.html#testing_test_wrapper">Testing the Testing Wrapper</a> for more information. <br/>
+The <code>set</code> line will abort the test if an error is ever encountered - for example, no images are found. </li>
+<li>
+Changing any wrapper parameters should go after sourcing the wrapper functions. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information. <br/>
 <br/>
  <div class="fragment"><pre class="fragment"> start_libreoffice_writer ()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-1_menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-1_menu.png&quot;</span> &amp;&amp; sleep 1
-    click_i <span class="stringliteral">&quot;screens/gnome-2_officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-2_officeMenu.png&quot;</span> &amp;&amp; sleep 1
+    click_i <span class="stringliteral">&quot;screens/gnome-1_menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-1_menu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-2_officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-2_officeMenu.png&quot;</span>
     hover_i <span class="stringliteral">&quot;screens/gnome-3_LibreOfficeWriter.png&quot;</span> <span class="stringliteral">&quot;screens/kde-3_LibreOfficeWriter.png&quot;</span>
     jiggle_mouse
     click
@@ -258,11 +263,13 @@ This is the actual body of work done by libcvautomation </li>
 <li>
 <code>click_i</code> is a function to click the mouse at an image - in this case, the gnome or kde menu. <ul>
 <li>
-Because of how the cva-input program is designed, you can give it multiple images, and it will only select the one currently available. See <a class="el" href="writing_app_tests.html#testing_test_wrapper">Testing the Testing Wrapper</a> for more information on how to use this (TOLERANCE specifically) </li>
+Because of how the cva-input program is designed, you can give it multiple images, and it will only select the one currently available. See the <a class="el" href="wrapper_functions.html">Appendix of Wrapper Functions and Environment Variables</a> for more information on how to use this (<code>TOLERANCE</code> specifically) </li>
+<li>
+Additionally, the wrapper (by default) will wait for an image to appear before clicking on it. This way, you can string together click_i commands even when the program may need to wait a while on processing. Make sure to read up on the <code>TIMEOUT</code> option to learn how to use this. </li>
 <li>
 By using the function <code>click_i</code>, we make things a bit more readable - the full command line is <code>cva-input -s 'icmouseclick &lt;filename&gt;'</code> </li>
 <li>
-See <a class="el" href="wrapper_functions.html">Appendix of Wrapper Functions</a> for a list of all functions available in the wrapper. </li>
+See the <a class="el" href="wrapper_functions.html">Appendix of Wrapper Functions and Environment Variables</a> for a list of all functions available in the wrapper. </li>
 </ul>
 </li>
 <li>
@@ -272,9 +279,9 @@ Then we jiggle the mouse to make sure that the item activates, click, and wait f
 <br/>
  <div class="fragment"><pre class="fragment"> close_libreoffice_writer()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-4_fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-4_fileMenu.png&quot;</span> &amp;&amp; sleep 1
-    click_i <span class="stringliteral">&quot;screens/gnome-5_fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-5_fileExit.png&quot;</span> &amp;&amp; sleep 1
-    click_i <span class="stringliteral">&quot;screens/gnome-6_discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-6_discard.png&quot;</span> &amp;&amp; sleep 1
+    click_i <span class="stringliteral">&quot;screens/gnome-4_fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-4_fileMenu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-5_fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-5_fileExit.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-6_discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-6_discard.png&quot;</span>
  }
 </pre></div> </li>
 <li>
@@ -288,7 +295,7 @@ Actually run the functions given. <br/>
 <br/>
  </li>
 <li>
-Please note that this is a fairly trivial example. The full list of commands available in the wrapper is given in <a class="el" href="wrapper_functions.html">Appendix of Wrapper Functions</a> </li>
+Please note that this is a fairly trivial example. The full list of commands available in the wrapper is given in <a class="el" href="wrapper_functions.html">Appendix of Wrapper Functions and Environment Variables</a> </li>
 </ul>
 <h3><a class="anchor" id="testing_test_wrapper"></a>
 Testing the Testing Wrapper</h3>
@@ -296,61 +303,12 @@ Testing the Testing Wrapper</h3>
 <li>
 First things first, run through the testing wrapper to make sure that everything is O.K. </li>
 <li>
-<p class="startli">If you need to, some things you can do to tune the application test are as follows: </p>
-<ul>
+If you need to, there are a few environment variables you can set to change how the wrapper works. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on how these work. </li>
 <li>
-Set the <code>SEARCH_METHOD</code> <ul>
-<li>
-This value adjusts how libcvautomation searches for sub-images. See <a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> for more information on accepted values, and how each works. </li>
-</ul>
-</li>
-<li>
-Set the <code>TOLERANCE</code> <ul>
-<li>
-This value adjusts how strict libcvautomation is when trying to find a sub-image. See <a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> for more information on how to control how libcvautomation searches for images. </li>
-</ul>
-</li>
-<li>
-Set <code>USE_SANE_TOLERANCE</code> <ul>
-<li>
-This value implements a more sane way of setting the tolerance value - Where normally the tolerance ranges from <code>INT_MIN</code> to <code>INT_MAX</code>, the sane tolerance accepts values of 1 - 100 ( \( 1 \approx 0 \), and \( 100 \approx INT\_MAX \)) </li>
-<li>
-To enable sane tolerance, set: <div class="fragment"><pre class="fragment"> USE_SANE_TOLERANCE=<span class="stringliteral">&quot;&lt;any_value&gt;&quot;</span> 
-</pre></div> </li>
-<li>
-To disable sane tolerance (the default) set: <div class="fragment"><pre class="fragment"> USE_SANE_TOLERANCE=<span class="stringliteral">&quot;&quot;</span> 
-</pre></div> </li>
-<li>
-Set <code>USE_CENTER</code> <ul>
-<li>
-By default, the wrapper will use the center of an image as opposed to the upper-left corner to click on. To disable this behavior, set: <div class="fragment"><pre class="fragment"> USE_CENTER=<span class="stringliteral">&quot;&quot;</span> 
-</pre></div> </li>
-<li>
-To set the behavior back to using center-based matching, set: <div class="fragment"><pre class="fragment"> USE_CENTER=<span class="stringliteral">&quot;&lt;any_value&gt;&quot;</span> 
-</pre></div> </li>
-</ul>
-</li>
-<li>
-Set the <code>OUTFILE</code> and <code>ERRFILE</code> <ul>
-<li>
-The application wrapper logs a whole lot of information about what it does to make debugging easy. However, to make sure that you're not overwhelmed by the output, the wrapper also directs the output to <code>/dev/null</code> by default. </li>
-<li>
-To redirect the output of <code>OUTFILE</code> and <code>ERRFILE</code>, set them to any file you want. For example, the following code will create a temporary file for OUTFILE and ERRFILE, and notify you of what they are: <div class="fragment"><pre class="fragment"> OUTFILE=`mktemp`
- ERRFILE=`mktemp`
- echo <span class="stringliteral">&quot;OUTFILE location: $OUTFILE&quot;</span>
- echo <span class="stringliteral">&quot;ERRFILE location: $ERRFILE&quot;</span>
-</pre></div> </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-A full list of commands provided by the wrapper is available at <a class="el" href="wrapper_functions.html">Appendix of Wrapper Functions</a> </li>
+A full list of commands provided by the wrapper is available at <a class="el" href="wrapper_functions.html#appendix_functions">Functions</a> </li>
 </ul>
 <dl class="note"><dt><b>Note:</b></dt><dd>These options are controlled using the testing script as demonstrated above. Any modifications to the following values should be done at the line: <div class="fragment"><pre class="fragment"><span class="preprocessor"> #Changing any wrapper parameters should go here </span>
-</pre></div> </dd></dl>
-</li>
-</ul>
+</pre></div>  </dd></dl>
 <h2><a class="anchor" id="wrapping_up"></a>
 Wrapping Up</h2>
 <ul>
@@ -381,7 +339,7 @@ If you have questions, comments, concerns, suggestions, or feedback in general, 
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 18 2012 14:10:15 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 23 2012 12:58:25 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

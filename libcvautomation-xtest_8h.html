@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    
   </td>
@@ -153,8 +153,12 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Press a key down, but do not release it.  <a href="#ad1d7153af9ed5cb2ba3b6d2a89c4ec75"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a6af5c14f862dd91fec682fde44a10e23">xte_keyUp</a> (Display *displayLocation, char *key)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a key.  <a href="#a6af5c14f862dd91fec682fde44a10e23"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a8c3574a6eff4b080840806dca53aa5b8">xte_commandString</a> (Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a command where the command is coming from a string.  <a href="#a8c3574a6eff4b080840806dca53aa5b8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#abfbad79445cce59c95940649210f1b31">xte_waitForImage</a> (Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an image to show up on screen.  <a href="#abfbad79445cce59c95940649210f1b31"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a3f474b9f3ae44e2fcf8997a2a806139e">xte_waitForImage_location</a> (Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an image from file to show up on screen.  <a href="#a3f474b9f3ae44e2fcf8997a2a806139e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a7ea1430ed90d3166f8d9fbb4e240a28f">xte_commandString</a> (Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a command where the command is coming from a string.  <a href="#a7ea1430ed90d3166f8d9fbb4e240a28f"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The source code to access the XTest extension inside libcvautomation. </p>
@@ -442,7 +446,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. </dd></dl>
 
 </div>
@@ -502,7 +506,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. </dd></dl>
 
 </div>
@@ -562,7 +566,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. </dd></dl>
 
 </div>
@@ -622,7 +626,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. </dd></dl>
 
 </div>
@@ -761,7 +765,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. </dd></dl>
 
 </div>
@@ -814,7 +818,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. </dd></dl>
 
 </div>
@@ -867,7 +871,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. </dd></dl>
 
 </div>
@@ -920,7 +924,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. </dd></dl>
 
 </div>
@@ -1101,7 +1105,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Press and release a keyboard key. </p>
-<p>This method allows you to press and release a key, where the key may be <code>'a'</code>, <code>'b'</code>, or maybe something fancy like <code>'space'</code>. Please see <a class="el" href="XTest_key_strings.html">XTest Key Strings</a> for a full list of keys. </p>
+<p>This method allows you to press and release a key, where the key may be <code>'a'</code>, <code>'b'</code>, or maybe something fancy like <code>'space'</code>. Please see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of keys. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">displayLocation</td><td>The Display of which to click a key </td></tr>
@@ -1109,7 +1113,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="XTest_key_strings.html">XTest Key Strings</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="xtest_key_strings.html">XTest Key Strings</a> </dd></dl>
 
 </div>
 </div>
@@ -1176,7 +1180,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Press a key down, but do not release it. </p>
-<p>This method allows you to push down a key, where the key may be <code>'a'</code>, <code>'b'</code>, or maybe something fancy like <code>'space'</code>. Please see <a class="el" href="XTest_key_strings.html">XTest Key Strings</a> for a full list of keys. </p>
+<p>This method allows you to push down a key, where the key may be <code>'a'</code>, <code>'b'</code>, or maybe something fancy like <code>'space'</code>. Please see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of keys. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">displayLocation</td><td>The Display of which to push down a key </td></tr>
@@ -1184,7 +1188,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="XTest_key_strings.html">XTest Key Strings</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="xtest_key_strings.html">XTest Key Strings</a> </dd></dl>
 
 </div>
 </div>
@@ -1214,7 +1218,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Release a key. </p>
-<p>This method allows you to release a key, where the key may be <code>'a'</code>, <code>'b'</code>, or maybe something fancy like <code>'space'</code>. Please see <a class="el" href="XTest_key_strings.html">XTest Key Strings</a> for a full list of keys. </p>
+<p>This method allows you to release a key, where the key may be <code>'a'</code>, <code>'b'</code>, or maybe something fancy like <code>'space'</code>. Please see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of keys. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">displayLocation</td><td>The Display of which to release a key </td></tr>
@@ -1222,16 +1226,134 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="XTest_key_strings.html">XTest Key Strings</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="xtest_key_strings.html">XTest Key Strings</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a8c3574a6eff4b080840806dca53aa5b8"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_commandString" ref="a8c3574a6eff4b080840806dca53aa5b8" args="(Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance)" -->
+<a class="anchor" id="abfbad79445cce59c95940649210f1b31"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_waitForImage" ref="abfbad79445cce59c95940649210f1b31" args="(Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#a8c3574a6eff4b080840806dca53aa5b8">xte_commandString</a> </td>
+          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#abfbad79445cce59c95940649210f1b31">xte_waitForImage</a> </td>
+          <td>(</td>
+          <td class="paramtype">Display *&#160;</td>
+          <td class="paramname"><em>displayLocation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IplImage *&#160;</td>
+          <td class="paramname"><em>subImage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>searchMethod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tolerance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Wait for an image to show up on screen. </p>
+<p>This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">displayLocation</td><td>The Display of which to search for an image </td></tr>
+    <tr><td class="paramname">subImage</td><td>The sub image to search for </td></tr>
+    <tr><td class="paramname">searchMethod</td><td>The search method to use when searching for <code>subImage</code> </td></tr>
+    <tr><td class="paramname">tolerance</td><td>The tolerance to use when searching for <code>tolerance</code> </td></tr>
+    <tr><td class="paramname">timeout</td><td>The time (in seconds) to search for the image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3f474b9f3ae44e2fcf8997a2a806139e"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_waitForImage_location" ref="a3f474b9f3ae44e2fcf8997a2a806139e" args="(Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#a3f474b9f3ae44e2fcf8997a2a806139e">xte_waitForImage_location</a> </td>
+          <td>(</td>
+          <td class="paramtype">Display *&#160;</td>
+          <td class="paramname"><em>displayLocation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>searchMethod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tolerance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Wait for an image from file to show up on screen. </p>
+<p>This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">displayLocation</td><td>The Display of which to search for an image </td></tr>
+    <tr><td class="paramname">fileName</td><td>The file to load an image from before searching </td></tr>
+    <tr><td class="paramname">searchMethod</td><td>The search method to use when searching for <code>subImage</code> </td></tr>
+    <tr><td class="paramname">tolerance</td><td>The tolerance to use when searching for <code>tolerance</code> </td></tr>
+    <tr><td class="paramname">timeout</td><td>The time (in seconds) to search for the image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7ea1430ed90d3166f8d9fbb4e240a28f"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_commandString" ref="a7ea1430ed90d3166f8d9fbb4e240a28f" args="(Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#a7ea1430ed90d3166f8d9fbb4e240a28f">xte_commandString</a> </td>
           <td>(</td>
           <td class="paramtype">Display *&#160;</td>
           <td class="paramname"><em>displayLocation</em>, </td>
@@ -1258,7 +1380,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>tolerance</em>&#160;</td>
+          <td class="paramname"><em>tolerance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1270,7 +1398,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Execute a command where the command is coming from a string. </p>
-<p>This function allows you to input a command to libcvautomation from a string. For example, to click a mouse button, you would use the <code>command</code> 'mouseclick'. Please note that some <code>command</code>s may need arguments to the string, and some may use function arguments. See <a class="el" href="XTest_command_strings.html">xte_commandString() Command Strings</a> for a full list of command and arguments </p>
+<p>This function allows you to input a command to libcvautomation from a string. For example, to click a mouse button, you would use the <code>command</code> 'mouseclick'. Please note that some <code>command</code>s may need arguments to the string, and some may use function arguments. See <a class="el" href="xtest_command_strings.html">xte_commandString() Command Strings</a> for a full list of command and arguments </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">displayLocation</td><td>The Display of which to operate on </td></tr>
@@ -1278,12 +1406,13 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mouseButton</td><td>The mouse button to click if it is needed by the command being executed </td></tr>
     <tr><td class="paramname">searchMethod</td><td>The search method to use if it is needed by the command being executed </td></tr>
     <tr><td class="paramname">tolerance</td><td>The tolerance to use if it is needed by the command being executed </td></tr>
+    <tr><td class="paramname">timeout</td><td>The time in seconds to wait for an image to be displayed when using the <code>waitfor</code> command. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="XTest_command_strings.html">xte_commandString() Command Strings</a> </dd>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="xtest_command_strings.html">xte_commandString() Command Strings</a> </dd>
 <dd>
-<a class="el" href="libcv_search_methods.html">Libcv Search Methods</a> </dd></dl>
+<a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
 
 </div>
 </div>
@@ -1305,7 +1434,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 18 2012 14:10:15 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 23 2012 12:58:25 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

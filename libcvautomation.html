@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    
   </td>
@@ -84,7 +84,7 @@ Introduction</h2>
 <h2><a class="anchor" id="how_it_works"></a>
 How Libcvautomation Works</h2>
 <p>Libcvautomation represents two software products coming together - <a href="http://opencv.willowgarage.com/wiki/">OpenCV</a> and the <a href="http://www.x.org/docs/Xext/xtest.pdf">XTest extension</a> to the X11 server. OpenCV is used for image recognition, and XTest is used to actually drive the X server. You can dig into <a class="el" href="libcvautomation-xtest_8h.html">libcvautomation-xtest.h</a> to get an idea of what all this library is capable of. <br/>
- Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like <a class="el" href="libcvautomation-xlib_8h.html#ad2932b004e600388764778f2b837e6ae" title="Return the location of a sub image in the X11 root window.">matchSubImage_X11()</a> that allow you to match an image against the X11 root window in place. This means no more <code>'xwd | convert "&lt;out_name&gt;"'</code>. </p>
+ Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like <a class="el" href="libcvautomation-xlib_8h.html#abdedf5cd2aceeda00f665747bf1eeece" title="Return the location of a sub image in the X11 root window.">matchSubImage_X11()</a> that allow you to match an image against the X11 root window in place. This means no more <code>'xwd | convert "&lt;out_name&gt;"'</code>. </p>
 <h2><a class="anchor" id="main_using"></a>
 Using Libcvautomation And Writing Application Tests</h2>
 <p>So how does one go about using libcvautomation? <br/>
@@ -111,7 +111,7 @@ Questions? Comments? Concerns?</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 18 2012 14:10:15 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 23 2012 12:58:25 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

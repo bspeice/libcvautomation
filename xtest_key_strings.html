@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>libcvautomation: $title</title>
+<title>libcvautomation: XTest Key Strings</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    
   </td>
@@ -75,36 +75,254 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">XTest Key Strings </div>  </div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="author"><dt><b>Author:</b></dt><dd>Bradlee Speice &lt;<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>&gt; </dd></dl>
-<dl class="date"><dt><b>Date:</b></dt><dd>7/18/2012 </dd></dl>
-<h2><a class="anchor" id="usage"></a>
-Usage:</h2>
-<p>This program uses OpenCV in order to recognize an image within an image. The return code is how many matches were found - return 0 for no matches, 1 for one match, etc.</p>
-<h2><a class="anchor" id="example"></a>
-Example Usage:</h2>
-<p>Match two images against the root X11 window:</p>
-<p>cva-match --x-root -s "&lt;image_name&gt;" -s "&lt;image_name_2&gt;"</p>
-<p>Match a root and sub image with a custom tolerance and search method</p>
-<p>cva-match -r "&lt;root_image&gt;" -s "&lt;image_name&gt;" -o 75 -m 1</p>
-<h2><a class="anchor" id="options"></a>
-Full Options:</h2>
-<p>-h, --help: Display this usage message.</p>
-<p>-u, --usage: Display this usage message.</p>
-<p>-r, --root-image: Location of the root image to compare against.</p>
-<p>-s, --sub-image: Location of the sub-image to find in root.</p>
-<p>-p, --separator: Separator of the X and Y coordinates.</p>
-<p>-t, --tolerance: Set how strict the match is - 100 is recommended lowest value.</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>When using CCORR or CCOEFF tolerance works in opposite direction, so -50 is recommended highest value.</dd></dl>
-<p>-m, --search-method: Set which method is used to search for sub-images.</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>Search Methods: CV_TM_SQDIFF = 0, CV_TM_SQDIFF_NORMED = 1, CV_TM_CCORR = 2, CV_TM_CCORR_NORMED = 3, CV_TM_CCOEFF = 4, CV_TM_COEFF_NORMED = 5</dd></dl>
-<p>-x, --x-root[=DISPLAY]: Set the root image to come from X11</p>
-<dl class="note"><dt><b>Note:</b></dt><dd>The DISPLAY variable is optional, not specifying it will cause X to use the default display (not specifically :0.0)</dd></dl>
-<p>-c, --center: The output points should be centered on the sub-image, rather than the top-left corner.</p>
-<p>-o, --sane-tolerance: Set the tolerance using a scale of 1-100, rather than INT_MIN to INT_MAX (100 ~= INT_MAX)</p>
-<h2><a class="anchor" id="contact"></a>
-Contact Information:</h2>
-<p>Questions? Comments? Concerns? Suggestions? Send all feedback to Bradlee Speice at &lt;<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>&gt; </p>
+<div class="textblock"><p>This page describes the various extra key strings to use with X11. The following list is generated with this command: </p>
+<div class="fragment"><pre class="fragment"> xmodmap -pke | cut -d<span class="charliteral">&#39;=&#39;</span> -f2 |  sed <span class="stringliteral">&#39;s/ /\n/g&#39;</span> | tr -s <span class="charliteral">&#39;\n&#39;</span> | awk <span class="stringliteral">&#39;{ print length(), $0 | &quot;sort -n&quot; }&#39;</span> | cut -d<span class="charliteral">&#39; &#39;</span> -f2 | uniq 
+</pre></div> <div class="fragment"><pre class="fragment">0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+a
+A
+b
+B
+c
+C
+d
+D
+e
+E
+f
+F
+g
+G
+h
+H
+i
+I
+j
+J
+k
+K
+l
+L
+m
+M
+n
+N
+o
+O
+p
+P
+q
+Q
+r
+R
+s
+S
+t
+T
+u
+U
+v
+V
+w
+W
+x
+X
+y
+Y
+z
+Z
+at
+F1
+F2
+F3
+F4
+F5
+F6
+F7
+F8
+F9
+Up
+bar
+End
+F10
+F11
+F12
+Tab
+Down
+Home
+KP_0
+KP_1
+KP_2
+KP_3
+KP_4
+KP_5
+KP_6
+KP_7
+KP_8
+KP_9
+Left
+less
+Menu
+Next
+plus
+Alt_L
+Break
+colon
+comma
+equal
+grave
+KP_Up
+minus
+Pause
+Print
+Prior
+Right
+slash
+space
+aacute
+Aacute
+dagger
+Delete
+dollar
+eacute
+Eacute
+Escape
+exclam
+iacute
+Iacute
+Insert
+KP_Add
+KP_End
+Meta_L
+oacute
+Oacute
+period
+Return
+uacute
+Uacute
+greater
+Hyper_L
+KP_Down
+KP_Home
+KP_Left
+KP_Next
+percent
+Shift_L
+Shift_R
+Super_L
+Super_R
+Sys_Req
+XF86WWW
+asterisk
+KP_Begin
+KP_Enter
+KP_Equal
+KP_Prior
+KP_Right
+NoSymbol
+Num_Lock
+question
+quotedbl
+XF86Back
+XF86Mail
+XF86Stop
+XF86WLAN
+ampersand
+backslash
+BackSpace
+braceleft
+brokenbar
+Caps_Lock
+Control_L
+Control_R
+KP_Delete
+KP_Divide
+KP_Insert
+parenleft
+semicolon
+XF86Eject
+XF86Sleep
+adiaeresis
+Adiaeresis
+apostrophe
+asciitilde
+braceright
+ediaeresis
+Ediaeresis
+idiaeresis
+KP_Decimal
+numbersign
+odiaeresis
+Odiaeresis
+parenright
+udiaeresis
+Udiaeresis
+underscore
+XF86Reload
+XF86Search
+XF86WakeUp
+asciicircum
+bracketleft
+KP_Multiply
+KP_Subtract
+Mode_switch
+Scroll_Lock
+XF86Battery
+XF86Display
+XF86Forward
+XF86_Ungrab
+bracketright
+doubledagger
+ISO_Left_Tab
+XF86PowerOff
+XF86AudioMute
+XF86AudioNext
+XF86AudioPrev
+XF86AudioStop
+XF86Favorites
+XF86AudioMedia
+XF86AudioPause
+XF86Calculator
+XF86_ClearGrab
+XF86MyComputer
+XF86_Next_VMode
+XF86_Prev_VMode
+ISO_Level3_Shift
+Terminate_Server
+XF86_Switch_VT_1
+XF86_Switch_VT_2
+XF86_Switch_VT_3
+XF86_Switch_VT_4
+XF86_Switch_VT_5
+XF86_Switch_VT_6
+XF86_Switch_VT_7
+XF86_Switch_VT_8
+XF86_Switch_VT_9
+XF86KbdLightOnOff
+XF86_Switch_VT_10
+XF86_Switch_VT_11
+XF86_Switch_VT_12
+Pointer_EnableKeys
+XF86KbdBrightnessUp
+XF86MonBrightnessUp
+XF86AudioLowerVolume
+XF86AudioRaiseVolume
+XF86KbdBrightnessDown
+XF86MonBrightnessDown
+</pre></div> <dl class="warning"><dt><b>Warning:</b></dt><dd>Please note that each key string above is first translated into a key code, and then into the actual key click. Thus, while you might intend to press "dollar", it will actually come out as "4". If you need a <code>'$'</code> to come out, use the <code>'keystring $'</code> command to <a class="el" href="libcvautomation-xtest_8h.html#a7ea1430ed90d3166f8d9fbb4e240a28f">xte_commandString()</a> or <code>'key_str $'</code> function in the BASH wrapper - see the <a class="el" href="wrapper_functions.html">Appendix of Wrapper Functions and Environment Variables</a>. </dd></dl>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -123,7 +341,7 @@ Contact Information:</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 18 2012 14:10:15 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 23 2012 12:58:25 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

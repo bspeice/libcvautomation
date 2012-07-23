@@ -9,7 +9,7 @@ var searchData=
   ['xte_5fclickmouseimage_5flocation_5fcenter',['xte_clickMouseImage_location_center',['../libcvautomation-xtest_8h.html#a40ca9d0d71b8f7cc513c27a9b0171995',1,'libcvautomation-xtest.h']]],
   ['xte_5fclickmouserxy',['xte_clickMouseRXY',['../libcvautomation-xtest_8h.html#a54df9f6d2278b6c840299f1f8ff94576',1,'libcvautomation-xtest.h']]],
   ['xte_5fclickmousexy',['xte_clickMouseXY',['../libcvautomation-xtest_8h.html#a808386f36914966032aa2e15fd5ef60b',1,'libcvautomation-xtest.h']]],
-  ['xte_5fcommandstring',['xte_commandString',['../libcvautomation-xtest_8h.html#a8c3574a6eff4b080840806dca53aa5b8',1,'libcvautomation-xtest.h']]],
+  ['xte_5fcommandstring',['xte_commandString',['../libcvautomation-xtest_8h.html#a7ea1430ed90d3166f8d9fbb4e240a28f',1,'libcvautomation-xtest.h']]],
   ['xte_5fhovermouseimage',['xte_hoverMouseImage',['../libcvautomation-xtest_8h.html#a657631e704e31818b42587ef50724930',1,'libcvautomation-xtest.h']]],
   ['xte_5fhovermouseimage_5fcenter',['xte_hoverMouseImage_center',['../libcvautomation-xtest_8h.html#a72f049ae7ade76344e47d01ba451e8f1',1,'libcvautomation-xtest.h']]],
   ['xte_5fhovermouseimage_5flocation',['xte_hoverMouseImage_location',['../libcvautomation-xtest_8h.html#ad274843eaaed7af192f09310caa9e5b2',1,'libcvautomation-xtest.h']]],
@@ -24,5 +24,7 @@ var searchData=
   ['xte_5fmousescrollup',['xte_mouseScrollUp',['../libcvautomation-xtest_8h.html#a18f5cc7307329ce2e13ceb25b274822b',1,'libcvautomation-xtest.h']]],
   ['xte_5fmouseup',['xte_mouseUp',['../libcvautomation-xtest_8h.html#a317610586ac31c5c501290099b7ebf63',1,'libcvautomation-xtest.h']]],
   ['xte_5fpointerlocation',['xte_pointerLocation',['../libcvautomation-xtest_8h.html#afe460d54f6977c431d1c37d42b0264be',1,'libcvautomation-xtest.h']]],
+  ['xte_5fwaitforimage',['xte_waitForImage',['../libcvautomation-xtest_8h.html#abfbad79445cce59c95940649210f1b31',1,'libcvautomation-xtest.h']]],
+  ['xte_5fwaitforimage_5flocation',['xte_waitForImage_location',['../libcvautomation-xtest_8h.html#a3f474b9f3ae44e2fcf8997a2a806139e',1,'libcvautomation-xtest.h']]],
   ['xte_5fxtestsupported',['xte_XTestSupported',['../libcvautomation-xtest_8h.html#af5b751f28a87f6ca4c1b3969c2ddb7f4',1,'libcvautomation-xtest.h']]]
 ];
