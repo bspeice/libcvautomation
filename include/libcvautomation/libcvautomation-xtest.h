@@ -119,7 +119,6 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
  * \brief The source code to access the XTest extension inside libcvautomation
  * \details This source file builds in the necessary functionality to drive the X11 server in libcvautomation
  * \author Bradlee Speice
- * \date 7/18/2012
  */
 
 /** \page xtest_key_strings XTest Key Strings

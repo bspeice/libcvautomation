@@ -267,14 +267,12 @@ If you have any questions, comments, concerns, email <%s>\n", LIBCVAUTOMATION_VE
 /** \file cva-match.c
  * \brief The cva-input program to demonstrate Libcvautomation's XTest functionality
  * \author Bradlee Speice <bspeice@uncc.edu>
- * \date 7/18/2012
  */
 
 /* The biggest purpose of documenting this code is to trick doxygen into making a man page for it. */
 /** \page cva-match
  *
  * \author Bradlee Speice <bspeice@uncc.edu>
- * \date 7/18/2012
  * \section usage Usage:
  * This program uses OpenCV in order to recognize an image within an image. The return code is 0 for at least one successful match, and 1 otherwise.
  *

@@ -45,7 +45,6 @@ cvaPoint matchSubImage_X11_location_center( Display *displayLocation, const char
  * \brief The source code to access Xlib from inside libcvautomation
  * \details This source file builds in the necessary functionality to use xlib functions inside libcvautomation.
  * \author Bradlee Speice
- * \date 7/18/2012
  */
 
 /** \fn Display* cvaOpenDisplay ( char *displayName );
