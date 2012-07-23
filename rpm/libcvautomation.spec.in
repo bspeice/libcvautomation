@@ -86,6 +86,3 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc
 /usr/share/libcvautomation/*
-
-%changelog
-@rpm_changelog@
