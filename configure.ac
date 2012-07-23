@@ -3,11 +3,10 @@
 
 AC_PREREQ(2.59)
 AC_INIT(libcvautomation, 1.3, bspeice@uncc.edu)
+AC_SUBST(LIBTOOL_VERSION, 1:3)
 #AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
 
-
-#path intelc110		/opt/coe/intelc110
 # Checks for programs.
 AC_PROG_CC
 
