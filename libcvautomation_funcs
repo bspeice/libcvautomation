@@ -148,7 +148,7 @@ click_i ()
 
 	for x in $@
 	do
-		if [ -n $USE_CENTER ]; then
+		if [ -n "$USE_CENTER" ]; then
 			center="c"
 		else
 			center=""
@@ -322,12 +322,12 @@ hover_i ()
 
 	for x in $@
 	do
-		if [ -n $CENTER ]; then
+		if [ -n "$CENTER" ]; then
 			center="c"
 		else
 			center=""
 		fi
-		if [ -n $USE_SANE_TOLERANCE ]; then
+		if [ -n "$USE_SANE_TOLERANCE" ]; then
 			TOLERANCE_OPTION="-o"
 		else
 			TOLERANCE_OPTION="-t"
