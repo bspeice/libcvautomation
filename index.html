@@ -81,7 +81,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="author"><dt><b>Author:</b></dt><dd>Bradlee Speice &lt;<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>&gt; </dd></dl>
-<dl class="date"><dt><b>Date:</b></dt><dd>7/18/2012 </dd></dl>
 <h2><a class="anchor" id="intro"></a>
 Introduction</h2>
 <p>Welcome to Libcvautomation! Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for <a href="http://sikuli.org">Sikuli</a> and <a href="https://wiki.ubuntu.com/Xpresser">Xpresser</a>. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our Prominent North American Enterprise Linux systems, but also didn't work or <code>import</code> correctly. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it. </p>
@@ -89,7 +88,46 @@ Introduction</h2>
 How Libcvautomation Works</h2>
 <p>Libcvautomation represents two software products coming together - <a href="http://opencv.willowgarage.com/wiki/">OpenCV</a> and the <a href="http://www.x.org/docs/Xext/xtest.pdf">XTest extension</a> to the X11 server. OpenCV is used for image recognition, and XTest is used to actually drive the X server. You can dig into <a class="el" href="libcvautomation-xtest_8h.html">libcvautomation-xtest.h</a> to get an idea of what all this library is capable of. <br/>
  Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like <a class="el" href="libcvautomation-xlib_8h.html#abdedf5cd2aceeda00f665747bf1eeece" title="Return the location of a sub image in the X11 root window.">matchSubImage_X11()</a> that allow you to match an image against the X11 root window in place. This means no more <code>'xwd | convert "&lt;out_name&gt;"'</code>. </p>
-<h2><a class="anchor" id="main_using"></a>
+<h2><a class="anchor" id="main_installing"></a>
+Installing Libcvautomation</h2>
+<p>Installing Libcvautomation is easy. You can either manually install packages, add the Libcvautomation repository, or install from tarball (the first option is recommended). </p>
+<h3><a class="anchor" id="main_rpm"></a>
+Install Libcvautomation RPM Repository</h3>
+<p>If you want to make sure that you're using the latest (stable) version of Libcvautomation, you can add the Libcvautomation repository to yum. First, a new configuration file for the Libcvautomation repository: </p>
+<div class="fragment"><pre class="fragment"> sudo vim /etc/yum.repos.d/libcvautomation.repo 
+</pre></div><p> After you have the file open, put the following content in it: </p>
+<div class="fragment"><pre class="fragment"> [libcvautomation]
+ name=Libcvautomation RPM repository
+ baseurl=http:<span class="comment">//djbushido.github.com/libcvautomation/rpm</span>
+ enabled=1
+ gpgcheck=0 
+</pre></div><p> And once this is done, clean out the cache, and you should be good to go! </p>
+<div class="fragment"><pre class="fragment"> sudo yum clean all 
+</pre></div><p> Finally, if you want to begin developing application tests, you will need the following packages: <code>libcvautomation</code>, and <code>libcvautomation-examples</code>. </p>
+<h3><a class="anchor" id="main_apt"></a>
+Install Libcvautomation APT Repository</h3>
+<p>If you want to make sure that you're using the latest (stable) version of Libcvautomation, you can add the Libcvautomation repository to APT. First, open up your <code>sources.list</code> </p>
+<div class="fragment"><pre class="fragment"> sudo vim /etc/apt/sources.list 
+</pre></div><p> Add the following content at the end: </p>
+<div class="fragment"><pre class="fragment"><span class="preprocessor"> #Libcvautomation Repository</span>
+<span class="preprocessor"></span> deb http:<span class="comment">//djbushido.github.com/libcvautomation/apt libcvautomation/</span>
+ deb-src http:<span class="comment">//djbushido.github.com/libcvautomation/apt libcvautomation-source/ </span>
+</pre></div><p> Run an update to make sure your packages refresh, and then you should be good to go! </p>
+<div class="fragment"><pre class="fragment"> sudo apt-<span class="keyword">get</span> update 
+</pre></div><p> Finally, if you want to begin developing application tests, you will need the following packages: <code>libcvautomation-dev</code>, and <code>libcvautomation-examples</code>. </p>
+<h3><a class="anchor" id="main_download"></a>
+Manual Download Packages</h3>
+<p>If you want to manually download the packages, see the Github downloads page for libcvautomation: <a href="https://github.com/DjBushido/libcvautomation/downloads">https://github.com/DjBushido/libcvautomation/downloads</a> </p>
+<h3><a class="anchor" id="main_tarball"></a>
+Manual Tarball Installation</h3>
+<p>If you want to install Libcvautomation via tarball, you can do that too. Download a release tarball from the Downloads page on Github: <a href="https://github.com/DjBushido/libcvautomation/downloads">https://github.com/DjBushido/libcvautomation/downloads</a> The source itself uses autotools, so it's incredibly easy to work with: </p>
+<div class="fragment"><pre class="fragment"> cd &lt;location_of_tarball&gt;
+ tar xf &lt;tarball_file&gt;
+ cd libcvautomation-&lt;release_number&gt;
+ ./configure
+ make
+ sudo make install 
+</pre></div><h2><a class="anchor" id="main_using"></a>
 Using Libcvautomation And Writing Application Tests</h2>
 <p>So how does one go about using libcvautomation? <br/>
  I'm so glad you asked! I've provided a few reference programs - <code>cva-match</code> and <code>cva-input</code> - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that <code>cva-match</code> and <code>cva-input</code> are installed). Python bindings are on their way too. <br/>
@@ -115,7 +153,7 @@ Questions? Comments? Concerns?</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 23 2012 12:58:26 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 24 2012 09:24:56 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
