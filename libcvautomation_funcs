@@ -322,7 +322,7 @@ hover_i ()
 
 	for x in $@
 	do
-		if [ -n "$CENTER" ]; then
+		if [ -n "$USE_CENTER" ]; then
 			center="c"
 		else
 			center=""
