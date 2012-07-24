@@ -915,11 +915,9 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
 		sscanf( s_commandString, "cmouseimage %s", fileName );
 
-		xte_hoverMouseImage_location_center( displayLocation, fileName, searchMethod, tolerance );
+		resultPoint = xte_hoverMouseImage_location_center( displayLocation, fileName, searchMethod, tolerance );
 
 		free(fileName);
-
-		resultPoint.x = resultPoint.y = -2;
 	}
 	else if (IS_CMD( s_commandString, "imouseclick" ))
 	{
