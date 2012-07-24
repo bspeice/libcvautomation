@@ -1,7 +1,7 @@
 #Specfile for Libcvautomation
 #This specfile builds the library and headers for Libcvautomation
 %global VERSION @PACKAGE_VERSION@
-%global PATCHLEVEL 1
+%global PATCHLEVEL @PATCHLEVEL@
 
 Summary: GUI Automation and Testing tool based on OpenCV and XTest
 Name: libcvautomation
