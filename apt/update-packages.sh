@@ -15,5 +15,5 @@
 #      REVISION:  ---
 #===============================================================================
 
-dpkg-scanpackages libcvautomation /dev/null | gzip -9c > libcvauotomation/Packages.gz
+dpkg-scanpackages libcvautomation /dev/null | gzip -9c > libcvautomation/Packages.gz
 dpkg-scansources libcvautomation-source /dev/null | gzip -9c > libcvautomation-source/Sources.gz
