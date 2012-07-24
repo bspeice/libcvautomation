@@ -334,41 +334,53 @@ hover_i ()
 
 	out "hover_i: $@"
 
-	for x in $@
-	do
-		if [ -n "$USE_CENTER" ]; then
-			center="c"
-		else
-			center=""
-		fi
-		if [ -n "$USE_SANE_TOLERANCE" ]; then
-			TOLERANCE_OPTION="-o"
-		else
-			TOLERANCE_OPTION="-t"
-		fi
+	if [ -n "$USE_CENTER" ]; then
+		center="c"
+	else
+		center=""
+	fi
+	if [ -n "$USE_SANE_TOLERANCE" ]; then
+		TOLERANCE_OPTION="-o"
+	else
+		TOLERANCE_OPTION="-t"
+	fi
 	
-		if [ -n "$USE_WAIT" ]; then
-			eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s 'waitfor $x' >> $OUTFILE"
-			CVA_RETURN=$?
+	if [ -n "$USE_WAIT" ]; then
+		#Alternate between each image until a match is found, or we loop $TIMEOUT times
+		#This is a bit weird, since we need to lower the TIMEOUT value for the "waitfor"
+		#function, and then restore it at the end.
+		OLD_TIMEOUT=$TIMEOUT
+		TIMEOUT=1
 
-			if [ $CVA_RETURN -lt $RETURN_CODE ]; then
-				RETURN_CODE=$CVA_RETURN
-			fi
+		for loop in {1..$OLD_TIMEOUT}
+		do
 
-			if [ $CVA_RETURN -eq 0 ]; then
-				#We found the image, click it
-				eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
-			fi
-		else
-			eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
-			CVA_RETURN=$?
+			for x in $@
+			do
+				waitfor "$x"
+				CVA_RETURN=$?
 
-			if [ $CVA_RETURN -lt $RETURN_CODE ]; then
-				RETURN_CODE=$CVA_RETURN
-			fi
+				if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+					RETURN_CODE=$CVA_RETURN
+				fi
+
+				if [ $CVA_RETURN -eq 0 ]; then
+					#We found the image, click it
+					eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
+
+					TIMEOUT=$OLD_TIMEOUT
+					return $?
+				fi
+			done
+		done
+	else
+		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
+		CVA_RETURN=$?
+
+		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
+			RETURN_CODE=$CVA_RETURN
 		fi
-
-	done
+	fi
 
 	return $RETURN_CODE
 }	# ----------  end of function hover_i  ----------
