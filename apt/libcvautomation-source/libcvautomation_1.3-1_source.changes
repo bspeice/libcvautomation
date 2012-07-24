@@ -1,0 +1,45 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Mon, 23 Jul 2012 09:06:46 -0400
+Source: libcvautomation
+Binary: libcvautomation-dev libcvautomation-doc libcvautomation-examples
+Architecture: source
+Version: 1.3-1
+Distribution: precise
+Urgency: low
+Maintainer: Bradlee Speice <bspeice@uncc.edu>
+Changed-By: Bradlee Speice <bspeice@uncc.edu>
+Description: 
+ libcvautomation-dev - GUI Automation and Testing Library
+ libcvautomation-doc - documentation for libcvautomation
+ libcvautomation-examples - Example programs to demonstrate libcvautomation functionality
+Changes: 
+ libcvautomation (1.3-1) precise; urgency=low
+ .
+   * Initial release of libcvautomation version 1.3-1
+Checksums-Sha1: 
+ fc0e9ce657b321266940e66bb030993859746c54 1693 libcvautomation_1.3-1.dsc
+ 3e9ed295f0a93d83b32c1502a3a129a63c784e1f 511829 libcvautomation_1.3.orig.tar.gz
+ aa618107c2d57438c9bc491d5ef9591d9fe901b6 2706 libcvautomation_1.3-1.debian.tar.gz
+Checksums-Sha256: 
+ e392f5034cb9ea9e5bf400ff091c7a02dafe4ef012c30e9b646a84d56d7765df 1693 libcvautomation_1.3-1.dsc
+ f8d3fd189dc2a188b455ee4b86cddfdeddb5c686bbf8895a0d900c99edcef363 511829 libcvautomation_1.3.orig.tar.gz
+ 2822ef9850e14174750c6b863a293bbc73216fdad0ae6dca47e33e899ba1e177 2706 libcvautomation_1.3-1.debian.tar.gz
+Files: 
+ 7245a771afb867173005392fa5eec432 1693 devel extra libcvautomation_1.3-1.dsc
+ 756f9bd43ca1f8dce475ea3a375ff2fa 511829 devel extra libcvautomation_1.3.orig.tar.gz
+ c4a98c3fef7e28ec060ab7f8dba0f397 2706 devel extra libcvautomation_1.3-1.debian.tar.gz
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iQEcBAEBAgAGBQJQDph0AAoJEOwnvCHfYiWqJikH+wVr0QRmjLoJI3rVU+Qj9t9S
+fCyE1hgxgWUyS7ePT7YGSu7Z+fcePQ6HmOLlE7ZCm2Mb0zKNWndOl5huoT02v+an
+DVHuO2GxM/RoZsGcTCbJRmXukZX3hv+7Wctpzl+1JxMlyPrItgop3NWRECS7XpZP
+znodcTle/0STgEjkBmWfiFYacpGTUCzddQFi9Yx3nX35E4PIQ4Gae01+BotCCxLH
++Rz/Wl1EFW6YObHHRf/2CV3UxWFMHD2RDxCCWTiYDH3vNfCjuFd98yirMdg5IEoN
+Rehepr/qRqUZxN1Tliaw1cwN2F84kW/gsPBWGxNjDyvyaU3DurAtieo3PBkEFiI=
+=Umx6
+-----END PGP SIGNATURE-----
