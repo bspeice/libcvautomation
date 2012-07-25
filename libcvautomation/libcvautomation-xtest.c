@@ -46,11 +46,11 @@ Bool xte_XTestSupported ( Display *displayLocation )
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  xte_pointerLocation
- *  Description:  Return the current location of the pointer
+ *         Name:  xte_mouseLocation
+ *  Description:  Return the current location of the mouse
  * =====================================================================================
  */
-cvaPoint xte_pointerLocation ( Display *displayLocation )
+cvaPoint xte_mouseLocation ( Display *displayLocation )
 {
 	/* The next few variables we discard, but need them for the function call */
 	Window root, child;
@@ -98,7 +98,7 @@ void xte_clickMouseXY ( Display *displayLocation, int xLocation, int yLocation, 
 {
 	/* To avoid specifying the screen number we're using, calculate the pointer's
 	 * current location, and move to the new wanted location using relative motion */
-	cvaPoint pointerLocation = xte_pointerLocation( displayLocation );
+	cvaPoint pointerLocation = xte_mouseLocation( displayLocation );
 
 	int xIncrement, yIncrement;
 	xIncrement = xLocation - pointerLocation.x;
@@ -148,7 +148,7 @@ cvaPoint xte_clickMouseImage ( Display *displayLocation, IplImage *subImage, int
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int movementX, movementY;
 
@@ -182,7 +182,7 @@ cvaPoint xte_clickMouseImage_location ( Display *displayLocation, const char *fi
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int movementX, movementY;
 
@@ -220,7 +220,7 @@ cvaPoint xte_clickMouseImage_center ( Display *displayLocation, IplImage *subIma
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int movementX, movementY;
 
@@ -254,7 +254,7 @@ cvaPoint xte_clickMouseImage_location_center ( Display *displayLocation, const c
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 	
 	int movementX, movementY;
 
@@ -279,7 +279,7 @@ cvaPoint xte_clickMouseImage_location_center ( Display *displayLocation, const c
 void xte_hoverMouseXY ( Display *displayLocation, int xLocation, int yLocation )
 {
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int xIncrement, yIncrement;
 	xIncrement = xLocation - pointerLocation.x;
@@ -321,7 +321,7 @@ cvaPoint xte_hoverMouseImage ( Display *displayLocation, IplImage *subImage, int
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int xIncrement, yIncrement;
 	xIncrement = resultPoint.x - pointerLocation.x;
@@ -351,7 +351,7 @@ cvaPoint xte_hoverMouseImage_location ( Display *displayLocation, const char *fi
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int xIncrement, yIncrement;
 	xIncrement = resultPoint.x - pointerLocation.x;
@@ -381,7 +381,7 @@ cvaPoint xte_hoverMouseImage_center ( Display *displayLocation, IplImage *subIma
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int xIncrement, yIncrement;
 	xIncrement = resultPoint.x - pointerLocation.x;
@@ -411,7 +411,7 @@ cvaPoint xte_hoverMouseImage_location_center ( Display *displayLocation, const c
 		return resultPoint;
 
 	cvaPoint pointerLocation;
-	pointerLocation = xte_pointerLocation( displayLocation );
+	pointerLocation = xte_mouseLocation( displayLocation );
 
 	int xIncrement, yIncrement;
 	xIncrement = resultPoint.x - pointerLocation.x;
@@ -889,7 +889,7 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 		if (sscanf( s_commandString, "mousexy %i %i", &xLocation, &yLocation ) != 2)
 		{
 			cvaPoint pointerLocation;
-			pointerLocation = xte_pointerLocation( displayLocation );
+			pointerLocation = xte_mouseLocation( displayLocation );
 			xLocation = pointerLocation.x;
 			yLocation = pointerLocation.y;
 		}

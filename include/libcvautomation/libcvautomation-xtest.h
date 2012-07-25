@@ -27,8 +27,8 @@
  * If it's not, return 0 (false) */
 Bool xte_XTestSupported ( Display *displayLocation );
 
-/* Get the current location of the pointer */
-cvaPoint xte_pointerLocation ( Display *displayLocation );
+/* Get the current location of the mouse */
+cvaPoint xte_mouseLocation ( Display *displayLocation );
 
 /* Click the mouse where it is currently at */
 void xte_clickMouse ( Display *displayLocation, int mouseButton );
@@ -461,10 +461,10 @@ Wait for an image to show up on screen. For example, this can be used to make su
  * \warning The program using this library is responsible for checking to see if XTest is supported.
  */
 
-/** \fn cvaPoint xte_pointerLocation ( Display *displayLocation );
- * \brief Grab the current location of the pointer
- * \param displayLocation The Display of which to grab the pointer location from
- * \returns cvaPoint with the current location of the pointer
+/** \fn cvaPoint xte_mouseLocation ( Display *displayLocation );
+ * \brief Grab the current location of the mouse
+ * \param displayLocation The Display of which to grab the mouse location from
+ * \returns cvaPoint with the current location of the mouse
  */
 
 /** \fn void xte_clickMouse ( Display *displayLocation, int mouseButton );
