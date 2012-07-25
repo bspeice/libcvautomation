@@ -172,8 +172,7 @@ click_i ()
 			for x in $@
 			do
 					
-				waitfor "$x"
-				CVA_RETURN=$?
+				CVA_RETURN=`waitfor "$x"`
 
 				if [ $CVA_RETURN -lt $RETURN_CODE ]; then
 					RETURN_CODE=$CVA_RETURN
@@ -357,8 +356,7 @@ hover_i ()
 		do
 			for x in $@
 			do
-				waitfor "$x"
-				CVA_RETURN=$?
+				CVA_RETURN=`waitfor "$x"`
 
 				if [ $CVA_RETURN -lt $RETURN_CODE ]; then
 					RETURN_CODE=$CVA_RETURN
@@ -543,7 +541,12 @@ waitfor ()
 		eval '$CVAINPUT -t $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
 	fi
 
-	return $?
+	RETURN_CODE=$?
+	echo $RETURN_CODE
+
+	#We don't return here, but rather just pass the return code up -
+	#This makes sure that if the user sets errexit, we don't abort because
+	#multiple images were used, while still keeping the return code.
 }	# ----------  end of function waitfor  ----------
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  notify

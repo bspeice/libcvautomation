@@ -874,8 +874,10 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	/* And now to test for all of our options */
 	if (IS_CMD( s_commandString, "mouseclick" ))
 	{
+		/* The integer argument is optional */
 		int mouseButton;
-		sscanf( s_commandString, "mouseclick %i", &mouseButton );
+		if (sscanf( s_commandString, "mouseclick %i", &mouseButton ) != 1)
+			mouseButton = 1;
 
 		xte_clickMouse( displayLocation, mouseButton );
 
@@ -884,7 +886,13 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	else if (IS_CMD( s_commandString, "mousexy" ))
 	{
 		int xLocation, yLocation;
-		sscanf( s_commandString, "mousexy %i %i", &xLocation, &yLocation );
+		if (sscanf( s_commandString, "mousexy %i %i", &xLocation, &yLocation ) != 2)
+		{
+			cvaPoint pointerLocation;
+			pointerLocation = xte_pointerLocation( displayLocation );
+			xLocation = pointerLocation.x;
+			yLocation = pointerLocation.y;
+		}
 
 		xte_hoverMouseXY( displayLocation, xLocation, yLocation );
 
@@ -893,7 +901,11 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	else if (IS_CMD( s_commandString, "mouserxy" ))
 	{
 		int xIncrement, yIncrement;
-		sscanf( s_commandString, "mouserxy %i %i", &xIncrement, &yIncrement );
+		if (sscanf( s_commandString, "mouserxy %i %i", &xIncrement, &yIncrement ) != 2)
+		{
+			xIncrement = 0;
+			yIncrement = 0;
+		}
 
 		xte_hoverMouseRXY( displayLocation, xIncrement, yIncrement );
 
@@ -903,9 +915,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *fileName;
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "mouseimage %s", fileName );
-
-		resultPoint = xte_hoverMouseImage_location( displayLocation, fileName, searchMethod, tolerance );
+		if (sscanf( s_commandString, "mouseimage %s", fileName ) == 1 )
+			resultPoint = xte_hoverMouseImage_location( displayLocation, fileName, searchMethod, tolerance );
 
 		free(fileName);
 	}
@@ -913,9 +924,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *fileName;
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "cmouseimage %s", fileName );
-
-		resultPoint = xte_hoverMouseImage_location_center( displayLocation, fileName, searchMethod, tolerance );
+		if (sscanf( s_commandString, "cmouseimage %s", fileName ) == 1)
+			resultPoint = xte_hoverMouseImage_location_center( displayLocation, fileName, searchMethod, tolerance );
 
 		free(fileName);
 	}
@@ -923,9 +933,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *fileName;
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "imouseclick %s", fileName );
-
-		resultPoint = xte_clickMouseImage_location( displayLocation, fileName, mouseButton, searchMethod, tolerance );
+		if (sscanf( s_commandString, "imouseclick %s", fileName ) == 1)
+			resultPoint = xte_clickMouseImage_location( displayLocation, fileName, mouseButton, searchMethod, tolerance );
 
 		free(fileName);
 	}
@@ -933,16 +942,17 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *fileName;
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "icmouseclick %s", fileName );
-
-		resultPoint = xte_clickMouseImage_location_center( displayLocation, fileName, mouseButton, searchMethod, tolerance );
+		if (sscanf( s_commandString, "icmouseclick %s", fileName ) == 1)
+			resultPoint = xte_clickMouseImage_location_center( displayLocation, fileName, mouseButton, searchMethod, tolerance );
 
 		free(fileName);
 	}
 	else if (IS_CMD( s_commandString, "mousedown" ))
 	{
+		/* The integer argument is optional */
 		int mouseButton;
-		sscanf( s_commandString, "mousedown %i", &mouseButton );
+		if (sscanf( s_commandString, "mousedown %i", &mouseButton ) != 1)
+			mouseButton = 1;
 
 		xte_mouseDown( displayLocation, mouseButton );
 
@@ -950,8 +960,10 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	}
 	else if (IS_CMD( s_commandString, "mouseup" ))
 	{
+		/* The integer argument is optional */
 		int mouseButton;
-		sscanf( s_commandString, "mouseup %i", &mouseButton );
+		if (sscanf( s_commandString, "mouseup %i", &mouseButton ) != 1)
+			mouseButton = 1;
 
 		xte_mouseUp( displayLocation, mouseButton );
 
@@ -979,9 +991,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *key;
 		key = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "keyclick %s", key );
-
-		xte_clickKey( displayLocation, key );
+		if (sscanf( s_commandString, "keyclick %s", key ) == 1)
+			xte_clickKey( displayLocation, key );
 
 		free(key);
 
@@ -991,9 +1002,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *key;
 		key = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "keydown %s", key );
-
-		xte_keyDown( displayLocation, key );
+		if (sscanf( s_commandString, "keydown %s", key ) == 1)
+			xte_keyDown( displayLocation, key );
 
 		free(key);
 
@@ -1003,9 +1013,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *key;
 		key = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "keyup %s", key );
-
-		xte_keyUp( displayLocation, key );
+		if (sscanf( s_commandString, "keyup %s", key ) == 1)
+			xte_keyUp( displayLocation, key );
 
 		free(key);
 
@@ -1015,9 +1024,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *keyString;
 		keyString = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "keystring %s", keyString );
-
-		xte_clickKeyStr( displayLocation, keyString );
+		if (sscanf( s_commandString, "keystring %s", keyString ) == 1)
+			xte_clickKeyStr( displayLocation, keyString );
 
 		free(keyString);
 
@@ -1027,9 +1035,8 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *fileName;
 		fileName = malloc(COMMAND_STR_LEN * sizeof(char));
-		sscanf( s_commandString, "waitfor %s", fileName );
-
-		resultPoint = xte_waitForImage_location( displayLocation, fileName, searchMethod, tolerance, timeout );
+		if (sscanf( s_commandString, "waitfor %s", fileName ) == 1)
+			resultPoint = xte_waitForImage_location( displayLocation, fileName, searchMethod, tolerance, timeout );
 
 		free(fileName);
 	}
