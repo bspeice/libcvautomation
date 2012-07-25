@@ -16,6 +16,7 @@ OpenCV is used for image processing, and XTestExtension is used for driving X11.
 ## Installation Instructions ##
 #### RPM ####
 Place the following content into a file named `/etc/yum.repos.d/libcvautomation.repo`:
+
 	[libcvautomation]
 	name=Libcvautomation RPM repository
 	baseurl=http://djbushido.github.com/libcvautomation/rpm
@@ -24,6 +25,7 @@ Place the following content into a file named `/etc/yum.repos.d/libcvautomation.
 
 #### APT ####
 Place the following lines into your `/etc/apt/sources.list`:
+
 	#Libcvautomation Repository
 	deb http://djbushido.github.com/libcvautomation/apt libcvautomation/
 	deb-src http://djbushido.github.com/libcvautomation/apt libcvautomation-source/ 
