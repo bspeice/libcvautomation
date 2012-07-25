@@ -201,6 +201,88 @@ click_i ()
 	return $RETURN_CODE
 }	# ----------  end of function click_i  ----------
 
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  doubleclick
+#   DESCRIPTION:  Click the mouse twice
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+doubleclick ()
+{
+	click && click
+}	# ----------  end of function doubleclick  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  doubleclick_xy
+#   DESCRIPTION:  Click the mouse twice on a specific location
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+doubleclick_xy ()
+{
+	if [ -z "$1" ]; then
+		out "Did not specify an X location, assuming (0, 0)"
+		X_LOC=0
+		Y_LOC=0
+	else
+		X_LOC=$1
+	fi
+	if [ -z "$2" ]; then
+		out "Did not specify a Y location, assuming ($1, 0)"
+	else
+		Y_LOC=$2
+	fi
+
+	out "doubleclick_xy $X_LOC $Y_LOC"
+
+	click_xy "$X_LOC" "$Y_LOC" && click
+
+	return $?
+}	# ----------  end of function doubleclick_xy  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  doubleclickr_xy
+#   DESCRIPTION:  Click the mouse twice on a relative location
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+doubleclickr_xy ()
+{
+	if [ -z "$1" ]; then
+		err "Did not specify an X increment..."
+		return 255
+	fi
+	if [ -z "$2" ]; then
+		err "Did not specify a Y increment..."
+		return 255
+	fi
+
+	out "doubleclickr_xy: $1 $2"
+
+	clickr_xy "$1" "$2" && click
+
+	return $?
+}	# ----------  end of function doubleclickr_xy  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  doubleclick_i
+#   DESCRIPTION:  Double-click an image - moves to image first and then
+#					executes a double-click to make sure that it is
+#					compatible with multiple image arguments
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+doubleclick_i ()
+{
+	hover_i $@ && click && click
+}	# ----------  end of function doubleclick_i  ----------
+
+
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  image_location
 #   DESCRIPTION:  Get the location of a subimage in root
