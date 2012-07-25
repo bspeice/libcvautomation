@@ -166,7 +166,8 @@ click_i ()
 		OLD_TIMEOUT=$TIMEOUT
 		TIMEOUT=1
 
-		for loop in {1..$OLD_TIMEOUT}
+		#I don't like this syntax, but 'for loop in {1..$OLD_TIMEOUT}' doesn't work
+		for loop in `seq 1 $OLD_TIMEOUT`
 		do
 			for x in $@
 			do
@@ -188,8 +189,7 @@ click_i ()
 		done
 
 		#We'll get here if we don't find a match
-		OLD_TIMEOUT=$TIMEOUT
-		TIMEOUT=1
+		TIMEOUT=$OLD_TIMEOUT
 	else
 		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick $x' >> $OUTFILE"
 		CVA_RETURN=$?
@@ -352,9 +352,9 @@ hover_i ()
 		OLD_TIMEOUT=$TIMEOUT
 		TIMEOUT=1
 
-		for loop in {1..$OLD_TIMEOUT}
+		#I don't like this syntax, but 'for loop in {1..$OLD_TIMEOUT}' doesn't work
+		for loop in `seq 1 $OLD_TIMEOUT`
 		do
-
 			for x in $@
 			do
 				waitfor "$x"
@@ -373,6 +373,9 @@ hover_i ()
 				fi
 			done
 		done
+
+		#We'll get here if we didn't find a match
+		TIMEOUT=$OLD_TIMEOUT
 	else
 		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
 		CVA_RETURN=$?
