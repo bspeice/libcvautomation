@@ -279,7 +279,7 @@ doubleclickr_xy ()
 
 doubleclick_i ()
 {
-	hover_i $@ && click && click
+	hover_i "$@" && click && click
 }	# ----------  end of function doubleclick_i  ----------
 
 
@@ -407,6 +407,8 @@ hoverr_xy ()
 
 hover_i ()
 {
+	RETURN_CODE=255
+
 	COMMAND_LINE=""
 	if [ -z "$1" ]; then
 		err "Did not give a base image."
