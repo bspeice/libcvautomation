@@ -1,0 +1,176 @@
+.TH "xtest_command_strings" 3 "27 Jul 2012" "Version 1.3" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+xtest_command_strings \- xte_commandString() Command Strings
+This page describes the various command strings available for the \fBxte_commandString()\fP function. 
+.SH "Mouse Click"
+.PP
+.PP
+.nf
+ 'mouseclick <button_number>' 
+.fi
+.PP
+ Click the mouse button \fC\fP <button_number> in-place.
+.SH "Image Mouse Click"
+.PP
+.PP
+.nf
+ 'imouseclick <image_name>' 
+.fi
+.PP
+ Click the mouse at an image's top-left corner.
+.SH "Image Mouse Click (Centered)"
+.PP
+.PP
+.nf
+ 'icmouseclick <image_name>' 
+.fi
+.PP
+ Click the mouse at an image's center.
+.SH "Mouse XY Move"
+.PP
+.PP
+.nf
+ 'mousexy <x-coord> <y-coord>' 
+.fi
+.PP
+ Move the mouse to an absolute coordinate. 
+.PP
+\fBWarning:\fP
+.RS 4
+The \fC<x-coord>\fP and \fC<y-coord>\fP are expected to be integers.
+.RE
+.PP
+.SH "Mouse XY Move (Relative)"
+.PP
+.PP
+.nf
+ 'mouserxy <x-increment> <y-increment>' 
+.fi
+.PP
+ Move the mouse by the given x and y values (relative motion). 
+.PP
+\fBA positive X increment will move the mouse to the right, and a positive Y increment will move the mouse down.\fP.RS 4
+
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+The \fC<x-increment>\fP and \fC<y-increment>\fP are expected to be integers.
+.RE
+.PP
+.SH "Mouse Image Move"
+.PP
+.PP
+.nf
+ 'mouseimage <image_name>' 
+.fi
+.PP
+ Move the mouse to an image's top-left corner.
+.SH "Mouse Image Move (Centered)"
+.PP
+.PP
+.nf
+ 'cmouseimage <image_name>' 
+.fi
+.PP
+ Move the mouse to an image's center.
+.SH "Mouse Button Down"
+.PP
+.PP
+.nf
+ 'mousedown <button_number>' 
+.fi
+.PP
+ Push and leave down a mouse button.
+.SH "Mouse Button Up"
+.PP
+.PP
+.nf
+ 'mouseup <button_number>' 
+.fi
+.PP
+ Release mouse button \fC\fP <button_number>
+.SH "Mouse Jiggle"
+.PP
+.PP
+.nf
+ 'mousejiggle' 
+.fi
+.PP
+ Jiggle the mouse (helps to activate some widgets). Moves the mouse right and down 1 pixel, and then back.
+.SH "Mouse Scroll Down"
+.PP
+.PP
+.nf
+ 'mousescrolld' 
+.fi
+.PP
+ Scroll the mouse down 1 time - depending on window manager settings, etc., this may be multiple lines. 
+.PP
+\fBNote:\fP
+.RS 4
+This is a wrapper function for clicking button 4 on the mouse
+.RE
+.PP
+.SH "Mouse Scroll Up"
+.PP
+.PP
+.nf
+ 'mousescrollu' 
+.fi
+.PP
+ Scroll the mouse up 1 time - depending on window manager settings, etc., this may be multiple lines. 
+.PP
+\fBNote:\fP
+.RS 4
+This is a wrapper function for clicking button 5 on the mouse
+.RE
+.PP
+.SH "Key Button Click"
+.PP
+.PP
+.nf
+ 'keyclick <key_name>' 
+.fi
+.PP
+ Push and release a keyboard key. This can be a key like \fC'a'\fP, \fC'b'\fP, or something fancy like \fC'space'\fP. Please see \fBXTest Key Strings\fP for a full list of special keys.
+.SH "Key Button Down"
+.PP
+.PP
+.nf
+ 'keydown <key_name>' 
+.fi
+.PP
+ Push down \fIbut do not release\fP a keyboard key. This can be a key like \fC'a'\fP, \fC'b'\fP, or something fancy like \fC'space'\fP. Please see \fBXTest Key Strings\fP for a full list of special keys.
+.SH "Key Button Up"
+.PP
+.PP
+.nf
+ 'keyup <key_name>' 
+.fi
+.PP
+ Release a keyboard key. This can be a key like \fC'a'\fP, \fC'b'\fP, or something fancy like \fC'space'\fP. Please see \fBXTest Key Strings\fP for a full list of special keys.
+.SH "Keyboard Input String"
+.PP
+.PP
+.nf
+ 'keystring <string>' 
+.fi
+.PP
+ Input a string of text to the X11 server. For example, inputting 'Hello, world!' will act as if you typed 'Hello, world!' from the keyboard. 
+.PP
+\fBWarning:\fP
+.RS 4
+Unlike \fBKey Button Down\fP, \fBKey Button Up\fP, and \fBKey Button Click\fP, this function can not handle special keys like 'space'.
+.RE
+.PP
+.SH "Wait for Image"
+.PP
+.PP
+.nf
+ 'waitfor <image_name>' 
+.fi
+.PP
+ Wait for an image to show up on screen. For example, this can be used to make sure a button exists before clicking it. 

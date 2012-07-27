@@ -1,0 +1,86 @@
+.TH "libcvautomation.h" 3 "27 Jul 2012" "Version 1.3" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libcvautomation.h \- The top-level include for all projects involving libcvautomation. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio.h>\fP
+.br
+\fC#include <string.h>\fP
+.br
+\fC#include <unistd.h>\fP
+.br
+\fC#include <limits.h>\fP
+.br
+\fC#include <opencv/cv.h>\fP
+.br
+\fC#include <opencv/highgui.h>\fP
+.br
+\fC#include <X11/Xlib.h>\fP
+.br
+\fC#include <X11/Xutil.h>\fP
+.br
+\fC#include <X11/extensions/XTest.h>\fP
+.br
+\fC#include <libcvautomation/libcvautomation-opencv.h>\fP
+.br
+\fC#include <libcvautomation/libcvautomation-xlib.h>\fP
+.br
+\fC#include <libcvautomation/libcvautomation-xtest.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcvaPoint\fP"
+.br
+.RI "\fIVery simple structure to standardize how points are used in libcvautomation. \fP"
+.ti -1c
+.RI "struct \fBcvautomationList\fP"
+.br
+.RI "\fIImplements a structure to build an array for methods like \fBmatchSubImage_a()\fP. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBLIBCVAUTOMATION_VERSION\fP   '1.3'"
+.br
+.RI "\fIDefine what version of Libcvautomation we are using. \fP"
+.ti -1c
+.RI "#define \fBLIBCVAUTOMATION_BUGREPORT\fP   'bspeice@uncc.edu'"
+.br
+.RI "\fIDefine who to send bug reports to for Libcvautomation. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The top-level include for all projects involving libcvautomation. 
+
+This source file includes all other files needed for libcvautomation projects, and also defines the \fBcvautomationList\fP and \fBcvaPoint\fP structs to be used among libcvautomation functions. 
+.PP
+\fBAuthor:\fP
+.RS 4
+Bradlee Speice 
+.RE
+.PP
+
+.PP
+Definition in file \fBlibcvautomation.h\fP.
+.SH "Define Documentation"
+.PP 
+.SS "#define LIBCVAUTOMATION_VERSION   '1.3'"
+.PP
+Define what version of Libcvautomation we are using. 
+.PP
+This define provides access to what version of Libcvautomation we're using. All times that you need to know what it is should use this. 
+.SS "#define LIBCVAUTOMATION_BUGREPORT   'bspeice@uncc.edu'"
+.PP
+Define who to send bug reports to for Libcvautomation. 
+.PP
+This define provides access to who should be emailed in case of a Libcvautomation bug. All times that you need to know what it is should use this. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcvautomation from the source code.

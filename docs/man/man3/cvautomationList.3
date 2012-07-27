@@ -1,0 +1,62 @@
+.TH "cvautomationList" 3 "27 Jul 2012" "Version 1.3" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cvautomationList \- Implements a structure to build an array for methods like \fBmatchSubImage_a()\fP.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <libcvautomation.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "IplImage * \fBcvaImage\fP"
+.br
+.ti -1c
+.RI "char * \fBfileName\fP"
+.br
+.ti -1c
+.RI "\fBcvaPoint\fP \fBresultPoint\fP"
+.br
+.ti -1c
+.RI "int \fBsearchMethod\fP"
+.br
+.ti -1c
+.RI "int \fBtolerance\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implements a structure to build an array for methods like \fBmatchSubImage_a()\fP. 
+
+This structure is a simple way to wrap up all needed information for matching sub images in one location. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcvaImage\fP An image in IplImage format 
+.br
+\fIfileName\fP The file location of an image to be loaded 
+.br
+\fIresultPoint\fP Holder for a result - for example, storing where this sub image was located in its root image 
+.br
+\fIsearchMethod\fP The search method to use when searching for this sub image in a root image 
+.br
+\fItolerance\fP The tolerance to use when searching for this sub image in a root image 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+
+.PP
+Definition at line 47 of file libcvautomation.h.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcvautomation from the source code.

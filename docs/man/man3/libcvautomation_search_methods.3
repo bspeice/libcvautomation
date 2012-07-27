@@ -1,0 +1,106 @@
+.TH "libcvautomation_search_methods" 3 "27 Jul 2012" "Version 1.3" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libcvautomation_search_methods \- Libcv Search Methods
+This page describes the methods libcv uses to search for a sub image in a root image. 
+.SH "Tolerance Values"
+.PP
+Tolerance values are used to control how strict each of the following search methods are. Acceptable values are from \fCINT_MIN\fP to \fCINT_MAX\fP.
+.PP
+Additionally, each of the reference programs - \fCcva-input\fP and \fCcva-match\fP - have a 'sane tolerance' built in. This is accessed by the '-o' switch, and allows you to specify a tolerance on scale of 1-100, where 1 is incredibly strict, and 100 is incredibly loose. 
+.PP
+\fBNote:\fP
+.RS 4
+The formula for calculating the sane tolerance is: $ T(x) = (10^{\frac{\log{INT\_MAX}}{\lambda}})^x $ where $ \lambda $ is the highest tolerance value (in our case, 100). Finally, we have to round down a little bit to ensure that we don't accidentally generate a value higher than \fCINT_MAX\fP. The formula used does mean that we will never be able to generate values lower than 0. 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+The 'sane-tolerance' option doesn't know which search method you are using - Thus while 1 is an incredibly strict search for \fBSquared Difference\fP and \fBSquared Difference (Normalized)\fP, it is fairly loose search for \fBCross Correlation\fP, \fBCross Correlation (Normalized)\fP, \fBCorrelation Coefficient\fP, and \fBCorrelation Coefficient (Normalized)\fP
+.RE
+.PP
+.SH "Squared Difference"
+.PP
+.PP
+.nf
+ #define CV_TM_SQDIFF   0 
+.fi
+.PP
+ Squared Difference is the default search method used by \fClibcvautomation\fP, as well as \fCcva-match\fP and \fCcva-input\fP. 
+.PP
+\fBFor this method, setting a low tolerance value results in a more strict match.\fP.RS 4
+
+.RE
+.PP
+Formula: $R(x,y) = \sum_{x',y'} (T(x',y') - I(x + x', y+y'))^2 $
+.SH "Squared Difference (Normalized)"
+.PP
+.PP
+.nf
+ #define CV_TM_SQDIFF_NORMED    1 
+.fi
+.PP
+ This is a normalized version of the \fBSquared Difference\fP search method. 
+.PP
+\fBFor this method, setting a low tolerance value results in a more strict match.\fP.RS 4
+
+.RE
+.PP
+Formula: $ R(x,y) = \frac{\sum_{x',y'}(T(x',y') - I(x + x', y + y'))^2}{ \sqrt{\sum_{x',y'}T(x',y')^2 \cdot \sum_{x',y'}I(x + x', y + y')^2}} $
+.SH "Cross Correlation"
+.PP
+.PP
+.nf
+ #define CV_TM_CCORR    2 
+.fi
+.PP
+ This is the Cross Correlation search method. 
+.PP
+\fBFor this method, setting a high tolerance value results in a more strict match.\fP.RS 4
+
+.RE
+.PP
+Formula: $ R(x,y)= \sum _{x',y'} (T(x',y') \cdot I(x+x',y+y')) $
+.SH "Cross Correlation (Normalized)"
+.PP
+.PP
+.nf
+ #define CV_TM_CCORR_NORMED 3 
+.fi
+.PP
+ This is the normalized version of the \fBCross Correlation\fP search method. 
+.PP
+\fBFor this method, setting a high tolerance value results in a more strict match.\fP.RS 4
+
+.RE
+.PP
+Formula: $ R(x,y)= \frac{\sum_{x',y'} (T(x',y') \cdot I'(x+x',y+y'))}{\sqrt{\sum_{x',y'}T(x',y')^2 \cdot \sum_{x',y'} I(x+x',y+y')^2}} $
+.SH "Correlation Coefficient"
+.PP
+.PP
+.nf
+ #define CV_TM_CCOEFF   4 
+.fi
+.PP
+ This is the Correlation Coefficient search method. 
+.PP
+\fBFor this method, setting a high tolerance value results in a more strict match.\fP.RS 4
+
+.RE
+.PP
+Formula: $ R(x,y)= \sum _{x',y'} (T'(x',y') \cdot I(x+x',y+y')) $ where: $ \begin{array}{l} T'(x',y')=T(x',y') - 1/(w \cdot h) \cdot \sum _{x'',y''} T(x'',y'') \\ I'(x+x',y+y')=I(x+x',y+y') - 1/(w \cdot h) \cdot \sum _{x'',y''} I(x+x'',y+y'') \end{array} $
+.SH "Correlation Coefficient (Normalized)"
+.PP
+.PP
+.nf
+ #define CV_TM_CCOEFF_NORMED    5 
+.fi
+.PP
+ This is the normalized version of the \fBCorrelation Coefficient\fP search method. 
+.PP
+\fBFor this method, setting a high tolerance value results in a more strict match.\fP.RS 4
+
+.RE
+.PP
+Formula: $ R(x,y)= \frac{ \sum_{x',y'} (T'(x',y') \cdot I'(x+x',y+y')) }{ \sqrt{\sum_{x',y'}T'(x',y')^2 \cdot \sum_{x',y'} I'(x+x',y+y')^2} } $ 
