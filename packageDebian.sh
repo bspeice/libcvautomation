@@ -40,11 +40,10 @@ make dist
 BUILD_DIR=`mktemp -d`
 TARBALL="${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz"
 cp $TARBALL $BUILD_DIR
-cd $BUILD_DIR
-
-cp $TARBALL `echo $TARBALL | sed 's/-/_/g;s/tar/orig.tar/'`
-tar xf $TARBALL
-cd $PACKAGE_NAME-$PACKAGE_VERSION/debian
+cp $TARBALL $BUILD_DIR/`echo $TARBALL | sed 's/-/_/g;s/tar/orig.tar/'`
+tar xf $TARBALL -C $BUILD_DIR
+cp debian $PACKAGE_NAME-$PACKAGE_VERSION -r
+cd $BUILD_DIR/$PACKAGE_NAME-$PACKAGE_VERSION
 
 if [ -z "$1" ]; then
 	debuild
