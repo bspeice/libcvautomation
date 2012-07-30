@@ -10,7 +10,7 @@ Release: %{PATCHLEVEL}
 Source: https://github.com/DjBushido/libcvautomation/%{name}-%{VERSION}.tar.gz
 URL: http://djbushido.github.com/libcvautomation/
 Vendor: MOSAIC at University of North Carolina at Charlotte
-Packager: Bradlee Speice <bspeice@uncc.edu>
+Packager: @PACKAGER <@PACKAGE_BUGREPORT@>
 License: BSD 2-clause
 Group: Development/Libraries
 
@@ -20,12 +20,15 @@ BuildRequires: libX11-devel
 BuildRequires: opencv-devel
 BuildRequires: doxygen
 
-Requires: opencv
-Requires: libXtst
-Requires: libX11
-
 %description
-Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for Sikuli and Xpresser. Each solution had large problems with crashing, and both refused to function on Red Hat Linux and Ubuntu 12.04. The author really liked the way each of these programs approached GUI automation, but they simply didn't work. As such, a simple library was designed to integrate OpenCV and XTest, which can be used by BASH to drive GUI testing and automation, and works on both new and old Linux distributions.
+Libcvautomation is a GUI automation and testing tool based on image
+recognition and response. This program was designed as a direct replacement
+for Sikuli and Xpresser. Each solution had large problems with crashing, and
+both refused to function on Red Hat Linux and Ubuntu 12.04. The author really
+liked the way each of these programs approached GUI automation, but they simply
+didn't work. As such, a simple library was designed to integrate OpenCV and
+XTest, which can be used by BASH to drive GUI testing and automation, and works
+on both new and old Linux distributions.
 
 %package devel
 Summary: Library links and header files for libcvautomation application development
@@ -36,18 +39,17 @@ Requires: libX11-devel
 Requires: opencv-devel
 
 %description devel
-libcvautomation-devel contains all files needed to build programs on top of libcvautomation.
+libcvautomation-devel contains all files needed to build programs
+on top of libcvautomation.
 
 %package examples
 Summary: Example programs to demonstrate libcvautomation functionality
 Group: Development/Tools
 Requires: %{name} = %{version}-%{release}
-Requires: opencv
-Requires: libX11
-Requires: libXtst
 
 %description examples
-libcvautomation-examples contains programs designed to showcase the functionality of libcvautomation.
+libcvautomation-examples contains programs designed to showcase the
+functionality of libcvautomation.
 
 %package doc
 Summary: HTML documentation for libcvautomation
@@ -62,27 +64,38 @@ libcvautomation-doc contains the HTML documentation for libcvautomation.
 
 %build
 %configure \
-	--with-docs
+	--disable-static
 make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
+%post -p /sbin/ldconfig
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%postun -p /sbin/ldconfig
+
 %files
-/usr/lib64/*
-/usr/share/man/man3/*
+%attr(755, root, root) /usr/lib64/*.la
+%attr(755, root, root) /usr/lib64/*.so*
+%attr(644, root, root) /usr/share/man/man3/*
 
 %files devel
-/usr/include/*
+%attr(644, root, root) /usr/lib64/pkgconfig/*
+%attr(644, root, root) /usr/include/libcvautomation/*
 
 %files examples
-/usr/share/man/man1/*
-/usr/bin/*
-/etc/*
+%attr(644, root, root) /usr/share/man/man1/*
+%attr(755, root, root) /usr/bin/*
+%attr(755, root, root) /etc/*
 
 %files doc
-/usr/share/libcvautomation/*
+%attr(644, root, root) /usr/share/libcvautomation/html/*
+%attr(755, root, root) /usr/share/libcvautomation/html/installdox
+
+%changelog
+* Mon Jul 30 2012 Bradlee Speice <bspeice@uncc.edu> 1.4-1
+- Release version 1.4 of libcvautomation
