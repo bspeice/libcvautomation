@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.3</span>
+   &#160;<span id="projectnumber">1.4</span>
    </div>
    
   </td>
@@ -116,24 +116,38 @@ Output and Debugging</h3>
 Functions</h2>
 <h3><a class="anchor" id="appendix_click"></a>
 Click the mouse</h3>
-<div class="fragment"><pre class="fragment"> click 
-</pre></div><p> Click the mouse where it is currently located <br/>
+<div class="fragment"><pre class="fragment"> click [mouse-button] 
+</pre></div><p> Click the mouse where it is currently located Optionally specify a mouse button to click <br/>
 <br/>
 </p>
-<div class="fragment"><pre class="fragment"> click_xy &lt;x-coordinate&gt; &lt;y-coordinate&gt; 
-</pre></div><p> Click the mouse on an absolute point on screen </p>
+<div class="fragment"><pre class="fragment"> click_xy &lt;x-coordinate&gt; &lt;y-coordinate&gt; [mouse-button] 
+</pre></div><p> Click the mouse on an absolute point on screen Optionally specify a mouse button to click </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>The actual process is to move the mouse to the given location, then click there. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> clickr_xy &lt;x-increment&gt; &lt;y-increment&gt; 
-</pre></div><p> Click the mouse on the screen relative to where the mouse is at </p>
+<div class="fragment"><pre class="fragment"> clickr_xy &lt;x-increment&gt; &lt;y-increment&gt; [mouse-button] 
+</pre></div><p> Click the mouse on the screen relative to where the mouse is at Optionally specify a mouse button to click </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>The actual process is to move the mouse the given distance, then click there. </dd>
 <dd>
 Also, note that a positive <code>x-increment</code> moves the mouse to the right, and a positive <code>y-increment</code> moves the mouse down. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> click_i &lt;filename&gt; 
-</pre></div><p> Click the mouse on a screenshot from <code>filename</code> </p>
+<div class="fragment"><pre class="fragment"> click_i &lt;filename&gt; [filename-2] ... [filename-n] 
+</pre></div><p> Click the mouse on a screenshot from <code>filename</code> Optionally specify multiple files to search in. </p>
+<dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>CENTER</code>, <code>TOLERANCE</code>, and <code>SEARCH_METHOD</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these. <br/>
+<br/>
+</dd></dl>
+<div class="fragment"><pre class="fragment"> doubleclick [mouse-button] 
+</pre></div><p> Click the mouse twice Optionally specify a mouse button to click <br/>
+<br/>
+</p>
+<div class="fragment"><pre class="fragment"> doubleclick_xy [mouse-button] 
+</pre></div><p> Click the mouse twice on an absolute point on screen Optionally specify a mouse button to click </p>
+<dl class="note"><dt><b>Note:</b></dt><dd>The actual process is to move the mouse to the given location, then click there. <br/>
+<br/>
+</dd></dl>
+<div class="fragment"><pre class="fragment"> doubleclick_i &lt;filename&gt; [filename-2] ... [filename-n] 
+</pre></div><p> Click the mouse twice on a screenshot from <code>filename</code> Optionally specify multiple files to search in. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>CENTER</code>, <code>TOLERANCE</code>, and <code>SEARCH_METHOD</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these. <br/>
 <br/>
 </dd></dl>
@@ -148,11 +162,15 @@ Move the mouse</h3>
 <dl class="note"><dt><b>Note:</b></dt><dd>Note that a positive <code>x-increment</code> moves the mouse to the right, and a positive <code>y-increment</code> moves the mouse down. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> hover_i &lt;filename&gt; 
-</pre></div><p> Move the mouse to a location on screen based on screenshot </p>
+<div class="fragment"><pre class="fragment"> hover_i &lt;filename&gt; [filename-2] ... [filename-n] 
+</pre></div><p> Move the mouse to a location on screen based on screenshot Optionally specify multiple files to search in. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>CENTER</code>, <code>TOLERANCE</code>, and <code>SEARCH_METHOD</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these. <br/>
 <br/>
 </dd></dl>
+<div class="fragment"><pre class="fragment"> jiggle_mouse 
+</pre></div><p> Very simple wrapper to move the mouse 1 pixel right and 1 pixel down - useful for activating menu items. <br/>
+<br/>
+</p>
 <div class="fragment"><pre class="fragment"> mouse_scrollu 
 </pre></div><p> Scroll the mouse wheel up one</p>
 <div class="fragment"><pre class="fragment"> mouse_scrolld 
@@ -165,7 +183,7 @@ Find an Image</h3>
 <br/>
 </dd></dl>
 <div class="fragment"><pre class="fragment"> waitfor &lt;filename&gt; 
-</pre></div><p> Wait for an image to display on screen </p>
+</pre></div><p> Wait for an image to display on screen, and then return </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>TOLERANCE</code>, <code>SEARCH_METHOD</code>, and <code>TIMEOUT</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these.</dd></dl>
 <h3><a class="anchor" id="appendix_keyboard"></a>
 Click the keyboard</h3>
@@ -219,7 +237,7 @@ Useful extras</h3>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 24 2012 09:24:56 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 30 2012 12:42:34 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

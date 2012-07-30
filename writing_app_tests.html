@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.3</span>
+   &#160;<span id="projectnumber">1.4</span>
    </div>
    
   </td>
@@ -81,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="author"><dt><b>Author:</b></dt><dd>Bradlee Speice &lt;<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>&gt; </dd></dl>
-<dl class="date"><dt><b>Date:</b></dt><dd>7/23/2012 </dd></dl>
+<dl class="date"><dt><b>Date:</b></dt><dd>7/30/2012 </dd></dl>
 <h2><a class="anchor" id="audience"></a>
 Audience</h2>
 <ul>
@@ -212,23 +212,23 @@ The following is the (strongly) recommended process, but is not strictly necessa
  <span class="keyword">set</span> -o errexit
 
 <span class="preprocessor"> #Changing any wrapper parameters should go here</span>
-<span class="preprocessor"></span>
+<span class="preprocessor"></span> TIMEOUT=30
+
 
  start_libreoffice_writer ()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-1_menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-1_menu.png&quot;</span>
-    click_i <span class="stringliteral">&quot;screens/gnome-2_officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-2_officeMenu.png&quot;</span>
-    hover_i <span class="stringliteral">&quot;screens/gnome-3_LibreOfficeWriter.png&quot;</span> <span class="stringliteral">&quot;screens/kde-3_LibreOfficeWriter.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-menu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-officeMenu.png&quot;</span>
+    hover_i <span class="stringliteral">&quot;screens/gnome-LibreOfficeWriter.png&quot;</span> <span class="stringliteral">&quot;screens/kde-LibreOfficeWriter.png&quot;</span>
     jiggle_mouse
     click
-    sleep 30
  }
 
  close_libreoffice_writer()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-4_fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-4_fileMenu.png&quot;</span>
-    click_i <span class="stringliteral">&quot;screens/gnome-5_fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-5_fileExit.png&quot;</span>
-    click_i <span class="stringliteral">&quot;screens/gnome-6_discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-6_discard.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-fileMenu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-fileExit.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-discard.png&quot;</span>
  }
 
  start_libreoffice_writer
@@ -240,22 +240,22 @@ The following is the (strongly) recommended process, but is not strictly necessa
  <span class="keyword">set</span> -o errexit
 
 <span class="preprocessor"> #Changing any wrapper parameters should go here</span>
+<span class="preprocessor"> TIMEOUT=30</span>
 </pre></div> </li>
 <li>
 The purpose of these lines is just the standard BASH header. Additionally, we import a wrapper created for libcvautomation to make our job easier. Please note that this is the default directory for the wrapper, your installation may be different. Use the command <code>locate libcvautomation_funcs</code> to find it on your computer. The wrapper itself is a handful of macros used to make our job easy. </li>
 <li>
 The <code>set</code> line will abort the test if an error is ever encountered - for example, no images are found. </li>
 <li>
-Changing any wrapper parameters should go after sourcing the wrapper functions. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information. <br/>
+Changing any wrapper parameters should go after sourcing the wrapper functions. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information. We set the TIMEOUT to 30 seconds here, so that the wrapper will wait 30 seconds (max) for an image to appear before giving up. This way if LibreOffice takes 30 seconds to load, we will wait 30 seconds. If it takes only 5 seconds to load, we will click after those 5 seconds. <br/>
 <br/>
  <div class="fragment"><pre class="fragment"> start_libreoffice_writer ()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-1_menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-1_menu.png&quot;</span>
-    click_i <span class="stringliteral">&quot;screens/gnome-2_officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-2_officeMenu.png&quot;</span>
-    hover_i <span class="stringliteral">&quot;screens/gnome-3_LibreOfficeWriter.png&quot;</span> <span class="stringliteral">&quot;screens/kde-3_LibreOfficeWriter.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-menu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-menu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-officeMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-officeMenu.png&quot;</span>
+    hover_i <span class="stringliteral">&quot;screens/gnome-LibreOfficeWriter.png&quot;</span> <span class="stringliteral">&quot;screens/kde-LibreOfficeWriter.png&quot;</span>
     jiggle_mouse
     click
-    sleep 30
  }
 </pre></div> </li>
 <li>
@@ -279,9 +279,9 @@ Then we jiggle the mouse to make sure that the item activates, click, and wait f
 <br/>
  <div class="fragment"><pre class="fragment"> close_libreoffice_writer()
  {
-    click_i <span class="stringliteral">&quot;screens/gnome-4_fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-4_fileMenu.png&quot;</span>
-    click_i <span class="stringliteral">&quot;screens/gnome-5_fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-5_fileExit.png&quot;</span>
-    click_i <span class="stringliteral">&quot;screens/gnome-6_discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-6_discard.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-fileMenu.png&quot;</span> <span class="stringliteral">&quot;screens/kde-fileMenu.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-fileExit.png&quot;</span> <span class="stringliteral">&quot;screens/kde-fileExit.png&quot;</span>
+    click_i <span class="stringliteral">&quot;screens/gnome-discard.png&quot;</span> <span class="stringliteral">&quot;screens/kde-discard.png&quot;</span>
  }
 </pre></div> </li>
 <li>
@@ -339,7 +339,7 @@ If you have questions, comments, concerns, suggestions, or feedback in general, 
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 24 2012 09:24:56 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 30 2012 12:42:34 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

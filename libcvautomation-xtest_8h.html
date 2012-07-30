@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.3</span>
+   &#160;<span id="projectnumber">1.4</span>
    </div>
    
   </td>
@@ -107,8 +107,8 @@ Defines</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#af5b751f28a87f6ca4c1b3969c2ddb7f4">xte_XTestSupported</a> (Display *displayLocation)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the XTest extension is supported.  <a href="#af5b751f28a87f6ca4c1b3969c2ddb7f4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#afe460d54f6977c431d1c37d42b0264be">xte_pointerLocation</a> (Display *displayLocation)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Grab the current location of the pointer.  <a href="#afe460d54f6977c431d1c37d42b0264be"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#aaa6da04691328c02b3fc3442eaa9bb44">xte_mouseLocation</a> (Display *displayLocation)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Grab the current location of the mouse.  <a href="#aaa6da04691328c02b3fc3442eaa9bb44"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a8a95419cacd3a0efbd4bb6274567e284">xte_clickMouse</a> (Display *displayLocation, int mouseButton)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Click the mouse in its current location.  <a href="#a8a95419cacd3a0efbd4bb6274567e284"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a808386f36914966032aa2e15fd5ef60b">xte_clickMouseXY</a> (Display *displayLocation, int xLocation, int yLocation, int mouseButton)</td></tr>
@@ -143,8 +143,8 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Jiggle the mouse in place.  <a href="#ad4a4b4739bf494478dccb520d6946fbd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a18f5cc7307329ce2e13ceb25b274822b">xte_mouseScrollUp</a> (Display *displayLocation)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll the mouse up.  <a href="#a18f5cc7307329ce2e13ceb25b274822b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a9630d64e7c2e9206c88e61c0cf8813db">xte_mouseScrollDown</a> (Display *displayLocation)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll the mouse down.  <a href="#a9630d64e7c2e9206c88e61c0cf8813db"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a5942cc208d0adc9ac8f74175803466b5">xte_mouseScrollDown</a> (Display *displayLocation)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll the mouse down.  <a href="#a5942cc208d0adc9ac8f74175803466b5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#aa5d0f5167ac455ac88d063450b8aaac6">xte_clickKey</a> (Display *displayLocation, char *key)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Press and release a keyboard key.  <a href="#aa5d0f5167ac455ac88d063450b8aaac6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a1411973d9245ac1d610988a965ceb5a7">xte_clickKeyStr</a> (Display *displayLocation, char *string)</td></tr>
@@ -225,12 +225,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afe460d54f6977c431d1c37d42b0264be"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_pointerLocation" ref="afe460d54f6977c431d1c37d42b0264be" args="(Display *displayLocation)" -->
+<a class="anchor" id="aaa6da04691328c02b3fc3442eaa9bb44"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_mouseLocation" ref="aaa6da04691328c02b3fc3442eaa9bb44" args="(Display *displayLocation)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#afe460d54f6977c431d1c37d42b0264be">xte_pointerLocation</a> </td>
+          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#aaa6da04691328c02b3fc3442eaa9bb44">xte_mouseLocation</a> </td>
           <td>(</td>
           <td class="paramtype">Display *&#160;</td>
           <td class="paramname"><em>displayLocation</em></td><td>)</td>
@@ -240,14 +240,14 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Grab the current location of the pointer. </p>
+<p>Grab the current location of the mouse. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">displayLocation</td><td>The Display of which to grab the pointer location from </td></tr>
+    <tr><td class="paramname">displayLocation</td><td>The Display of which to grab the mouse location from </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd><a class="el" href="structcvaPoint.html" title="Very simple structure to standardize how points are used in libcvautomation.">cvaPoint</a> with the current location of the pointer </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><a class="el" href="structcvaPoint.html" title="Very simple structure to standardize how points are used in libcvautomation.">cvaPoint</a> with the current location of the mouse </dd></dl>
 
 </div>
 </div>
@@ -1052,12 +1052,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9630d64e7c2e9206c88e61c0cf8813db"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_mouseScrollDown" ref="a9630d64e7c2e9206c88e61c0cf8813db" args="(Display *displayLocation)" -->
+<a class="anchor" id="a5942cc208d0adc9ac8f74175803466b5"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_mouseScrollDown" ref="a5942cc208d0adc9ac8f74175803466b5" args="(Display *displayLocation)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void void <a class="el" href="libcvautomation-xtest_8h.html#a9630d64e7c2e9206c88e61c0cf8813db">xte_mouseScrollDown</a> </td>
+          <td class="memname">void <a class="el" href="libcvautomation-xtest_8h.html#a5942cc208d0adc9ac8f74175803466b5">xte_mouseScrollDown</a> </td>
           <td>(</td>
           <td class="paramtype">Display *&#160;</td>
           <td class="paramname"><em>displayLocation</em></td><td>)</td>
@@ -1433,7 +1433,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 24 2012 09:24:56 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 30 2012 12:42:34 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

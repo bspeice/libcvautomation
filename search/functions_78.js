@@ -20,10 +20,10 @@ var searchData=
   ['xte_5fkeyup',['xte_keyUp',['../libcvautomation-xtest_8h.html#a6af5c14f862dd91fec682fde44a10e23',1,'libcvautomation-xtest.h']]],
   ['xte_5fmousedown',['xte_mouseDown',['../libcvautomation-xtest_8h.html#acca8cce58009ce177265bea29e8223e8',1,'libcvautomation-xtest.h']]],
   ['xte_5fmousejiggle',['xte_mouseJiggle',['../libcvautomation-xtest_8h.html#ad4a4b4739bf494478dccb520d6946fbd',1,'libcvautomation-xtest.h']]],
-  ['xte_5fmousescrolldown',['xte_mouseScrollDown',['../libcvautomation-xtest_8h.html#a9630d64e7c2e9206c88e61c0cf8813db',1,'libcvautomation-xtest.h']]],
+  ['xte_5fmouselocation',['xte_mouseLocation',['../libcvautomation-xtest_8h.html#aaa6da04691328c02b3fc3442eaa9bb44',1,'libcvautomation-xtest.h']]],
+  ['xte_5fmousescrolldown',['xte_mouseScrollDown',['../libcvautomation-xtest_8h.html#a5942cc208d0adc9ac8f74175803466b5',1,'libcvautomation-xtest.h']]],
   ['xte_5fmousescrollup',['xte_mouseScrollUp',['../libcvautomation-xtest_8h.html#a18f5cc7307329ce2e13ceb25b274822b',1,'libcvautomation-xtest.h']]],
   ['xte_5fmouseup',['xte_mouseUp',['../libcvautomation-xtest_8h.html#a317610586ac31c5c501290099b7ebf63',1,'libcvautomation-xtest.h']]],
-  ['xte_5fpointerlocation',['xte_pointerLocation',['../libcvautomation-xtest_8h.html#afe460d54f6977c431d1c37d42b0264be',1,'libcvautomation-xtest.h']]],
   ['xte_5fwaitforimage',['xte_waitForImage',['../libcvautomation-xtest_8h.html#abfbad79445cce59c95940649210f1b31',1,'libcvautomation-xtest.h']]],
   ['xte_5fwaitforimage_5flocation',['xte_waitForImage_location',['../libcvautomation-xtest_8h.html#a3f474b9f3ae44e2fcf8997a2a806139e',1,'libcvautomation-xtest.h']]],
   ['xte_5fxtestsupported',['xte_XTestSupported',['../libcvautomation-xtest_8h.html#af5b751f28a87f6ca4c1b3969c2ddb7f4',1,'libcvautomation-xtest.h']]]
