@@ -1,0 +1,276 @@
+.TH "libcvautomation-opencv.h" 3 "30 Jul 2012" "Version 1.4" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libcvautomation-opencv.h \- The source code to access libcv from inside libcvautomation. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <libcvautomation/libcvautomation.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage\fP (IplImage *rootImage, IplImage *subImage, int searchMethod, double tolerance)"
+.br
+.RI "\fIReturn the location of a sub image in its root image. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage_center\fP (IplImage *rootImage, IplImage *subImage, int searchMethod, double tolerance)"
+.br
+.RI "\fIReturn the center of a sub image in its root image, rather than the top-left corner. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage_location\fP (const char *rootImage_location, const char *subImage_location, int searchMethod, double tolerance)"
+.br
+.RI "\fIReturn the location of a sub image in its root image. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBmatchSubImage_location_center\fP (const char *rootImage_location, const char *subImage_location, int searchMethod, double tolerance)"
+.br
+.RI "\fIReturn the center of a sub image in its root image, rather than the top-left corner. \fP"
+.ti -1c
+.RI "void \fBmatchSubImage_a\fP (IplImage *rootImage, \fBcvautomationList\fP *subImageArray, int listSize)"
+.br
+.RI "\fIParse an array of sub images and send them to \fBmatchSubImage()\fP. \fP"
+.ti -1c
+.RI "void \fBmatchSubImage_a_center\fP (IplImage *rootImage, \fBcvautomationList\fP *subImageArray, int listSize)"
+.br
+.RI "\fIParse an array of sub images and send them to \fBmatchSubImage_center()\fP. \fP"
+.ti -1c
+.RI "void \fBmatchSubImage_a_location\fP (const char *rootImageFileName, \fBcvautomationList\fP *subImageArray, int listSize)"
+.br
+.RI "\fIParse an array of sub images and send them to \fBmatchSubImage()\fP. \fP"
+.ti -1c
+.RI "void \fBmatchSubImage_a_location_center\fP (const char *rootImageFileName, \fBcvautomationList\fP *subImageArray, int listSize)"
+.br
+.RI "\fIParse an array of sub images and send them to \fBmatchSubImage_center()\fP. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The source code to access libcv from inside libcvautomation. 
+
+This source file builds in the necessary functionality to use libcv functions inside libcvautomation. 
+.PP
+\fBAuthor:\fP
+.RS 4
+Bradlee Speice 
+.RE
+.PP
+
+.PP
+Definition in file \fBlibcvautomation-opencv.h\fP.
+.SH "Function Documentation"
+.PP 
+.SS "CvPoint matchSubImage (IplImage * rootImage, IplImage * subImage, int searchMethod, double tolerance)"
+.PP
+Return the location of a sub image in its root image. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage\fP The root image (in IplImage format) to search in 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to search for in \fCrootImage\fP 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of the sub image in root image 
+.RE
+.PP
+
+.SS "CvPoint matchSubImage_center (IplImage * rootImage, IplImage * subImage, int searchMethod, double tolerance)"
+.PP
+Return the center of a sub image in its root image, rather than the top-left corner. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage\fP The root image (in IplImage format) to search in 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to search for in \fCrootImage\fP 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The center location of the sub image in root image 
+.RE
+.PP
+
+.SS "CvPoint matchSubImage_location (const char * rootImage_location, const char * subImage_location, int searchMethod, double tolerance)"
+.PP
+Return the location of a sub image in its root image. 
+.PP
+The difference that this function has over \fBmatchSubImage()\fP is that \fIrootImage_location\fP and \fIsubImage_location\fP are from files, rather than an IplImage format image. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage_location\fP The location of the root image 
+.br
+\fIsubImage_location\fP The location of the sub image to search for in \fCrootImage\fP 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of the sub image in root image 
+.RE
+.PP
+
+.SS "CvPoint matchSubImage_location_center (const char * rootImage_location, const char * subImage_location, int searchMethod, double tolerance)"
+.PP
+Return the center of a sub image in its root image, rather than the top-left corner. 
+.PP
+The difference that this function has over \fBmatchSubImage_center()\fP is that \fIrootImage_location\fP and \fIsubImage_location\fP are from files, rather than an IplImage format image. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage_location\fP The location of the root image 
+.br
+\fIsubImage_location\fP The location of the sub image to search for in \fCrootImage\fP 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in \fCrootImage\fP. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The center location of the sub image in root image 
+.RE
+.PP
+
+.SS "void matchSubImage_a (IplImage * rootImage, \fBcvautomationList\fP * subImageArray, int listSize)"
+.PP
+Parse an array of sub images and send them to \fBmatchSubImage()\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage\fP The root image (in IplImage format) to search in 
+.br
+\fIsubImageArray\fP The sub image array to search for in \fCrootImage\fP - Note that the contents of \fCsubImageArray\fP are modified during execution of this routine 
+.br
+\fIlistSize\fP The number of sub images to search for in subImageArray 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBcvautomationList\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+This function returns void, and modifies the contents of subImageArray 
+.RE
+.PP
+
+.SS "void matchSubImage_a_center (IplImage * rootImage, \fBcvautomationList\fP * subImageArray, int listSize)"
+.PP
+Parse an array of sub images and send them to \fBmatchSubImage_center()\fP. 
+.PP
+Uses the \fBcvautomationList.cvaImage\fP parameter to find a \fCsubImage\fP in \fCrootImage\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage\fP The root image (in IplImage format) to search in 
+.br
+\fIsubImageArray\fP The sub image array to search for in \fCrootImage\fP - Note that the contents of \fCsubImageArray\fP are modified during execution of this routine 
+.br
+\fIlistSize\fP The number of sub images to search for in subImageArray 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBcvautomationList\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+This function returns void, and modifies the contents of subImageArray 
+.RE
+.PP
+
+.SS "void matchSubImage_a_location (const char * rootImage_location, \fBcvautomationList\fP * subImageArray, int listSize)"
+.PP
+Parse an array of sub images and send them to \fBmatchSubImage()\fP. 
+.PP
+The difference between this and \fBmatchSubImage_a()\fP is that this uses a root image from filename, rather than from an IplImage format. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage_location\fP The location of the root image 
+.br
+\fIsubImageArray\fP The sub image array to search for in \fCrootImage_location\fP - Note that the contents of \fCsubImageArray\fP are modified during execution of this routine 
+.br
+\fIlistSize\fP The number of sub images to search for in subImageArray 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBcvautomationList\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+This function returns void, and modifies the contents of subImageArray 
+.RE
+.PP
+
+.SS "void matchSubImage_a_location_center (const char * rootImage_location, \fBcvautomationList\fP * subImageArray, int listSize)"
+.PP
+Parse an array of sub images and send them to \fBmatchSubImage_center()\fP. 
+.PP
+The difference that this function has over \fBmatchSubImage_a_center()\fP is that \fCrootImage_location\fP is from a file 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrootImage_location\fP The location of the root image 
+.br
+\fIsubImageArray\fP The sub image array to search for in \fCrootImage_location\fP - Note that the contents of \fCsubImageArray\fP are modified during execution of this routine 
+.br
+\fIlistSize\fP The number of sub images to search for in subImageArray 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBcvautomationList\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+This function returns void, and modifies the contents of subImageArray 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcvautomation from the source code.

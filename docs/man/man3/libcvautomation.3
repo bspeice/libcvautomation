@@ -1,0 +1,27 @@
+.TH "libcvautomation" 3 "30 Jul 2012" "Version 1.4" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libcvautomation \- \fBAuthor:\fP
+.RS 4
+Bradlee Speice <\fCbspeice@uncc.edu\fP> 
+.RE
+.PP
+.SH "Introduction"
+.PP
+Welcome to Libcvautomation! Libcvautomation is a GUI automation and testing tool based on image recognition and response. This program was designed as a direct replacement for \fCSikuli\fP and \fCXpresser\fP. I was having incredible difficulty getting either of these solutions to work - Sikuli would crash whenever I tried to take a screenshot, and Xpresser was both too new for our Prominent North American Enterprise Linux systems, but also didn't work or \fCimport\fP correctly. I really liked the way each of these programs approached GUI automation, but they simply didn't work. Additionally, I wanted to create a simple solution - it does what you want it to, and that's it. 
+.SH "How Libcvautomation Works"
+.PP
+Libcvautomation represents two software products coming together - \fCOpenCV\fP and the \fCXTest extension\fP to the X11 server. OpenCV is used for image recognition, and XTest is used to actually drive the X server. You can dig into \fBlibcvautomation-xtest.h\fP to get an idea of what all this library is capable of. 
+.br
+ Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like \fBmatchSubImage_X11()\fP that allow you to match an image against the X11 root window in place. This means no more \fC'xwd | convert '<out_name>''\fP. 
+.SH "Using Libcvautomation And Writing Application Tests"
+.PP
+So how does one go about using libcvautomation? 
+.br
+ I'm so glad you asked! I've provided a few reference programs - \fCcva-match\fP and \fCcva-input\fP - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that cva-match and cva-input are installed). Python bindings are on their way too. 
+.br
+ Finally, if you want to know how to write your own application tests, please see \fBWriting Application Tests\fP for more information on that. I've provided code to give you a basic idea of how they work. 
+.SH "Questions? Comments? Concerns?"
+.PP
+Please send any feedback to <\fCbspeice@uncc.edu\fP>. Pull requests can be submitted to \fCmy github repository\fP. 
