@@ -147,7 +147,7 @@ int main( int argc, char** argv )
 			case 'i':
 				timeout = atoi(optarg);
 				break;
-	
+
 			case '?':
 				/* Error routine */
 				break;
@@ -192,8 +192,8 @@ Usage: \n\
 \t-c, --center:\t\tInstead of matching the top-left corner of an image,\n\
 \t\t\t\tmatch the center of the image.\n\
 \t-o, --sane-tolerance:\tSet the tolerance using a scale of 1-100,\n\
-\t-s, --string:\t\tCommand string - see below.\n\
 \t-i, --timeout:\t\tSpecify the timeout to use when using the 'waitfor' function\n\
+\t-s, --string:\t\tCommand string - see below.\n\
 \t\t\t\tPlease make sure to use the '-t' or '-o' options when using this.\n\
 \n\
 This program works kind of like a mini-language. All options\n\
@@ -213,6 +213,7 @@ Available commands:\n\
 \tmousejiggle:\tJiggle the mouse (helps to activate some widgets).\n\
 \tmousescrollu:\tScroll the mouse wheel up.\n\
 \tmousescrolld:\tScroll the mouse wheel down.\n\
+\tmouselocation:\tReturn the location of the mouse.\n\
 \tkeyclick:\tClick a keyboard button.\n\
 \tkeydown:\tPush and leave down a keyboard button.\n\
 \tkeyup:\tRelease a keyboard button.\n\
@@ -305,6 +306,8 @@ void checkXTEEnabled ( Display *display )
  * \c mousescrollu: Scroll the mouse wheel up
  *
  * \c mousescrolld: Scroll the mouse wheel down
+ *
+ * \c mouselocation: Return the current location of the mouse
  *
  * \c keyclick:	Click a keyboard button.
  *

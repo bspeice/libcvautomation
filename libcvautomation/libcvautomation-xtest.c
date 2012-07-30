@@ -1040,6 +1040,10 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 
 		free(fileName);
 	}
+	else if (IS_CMD( s_commandString, "mouselocation" ))
+	{
+		resultPoint = xte_mouseLocation( displayLocation );
+	}
 
 	/* Note that we will return (-1,-1) implicitly
 	 * if we don't recognize the argument */

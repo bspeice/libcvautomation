@@ -372,7 +372,7 @@ XF86MonBrightnessDown
 
 /** \page xtest_command_strings xte_commandString() Command Strings
 This page describes the various command strings available for the \ref xte_commandString() function.
-\section mouseclick Mouse Click
+\section mousefunctions Mouse Functions
 \code 'mouseclick <button_number>' \endcode
 Click the mouse button \c <button_number> in-place.
 
@@ -425,7 +425,11 @@ Scroll the mouse down 1 time - depending on window manager settings, etc., this 
 Scroll the mouse up 1 time - depending on window manager settings, etc., this may be multiple lines.
 \note This is a wrapper function for clicking button 5 on the mouse
 
-\section keyclick Key Button Click
+\section mouselocation Mouse Location
+\code 'mouselocation' \endcode
+Return the current location of the mouse pointer.
+
+\section keyboard_functions Keyboard Functions
 \code 'keyclick <key_name>' \endcode
 Push and release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of special keys.
 
@@ -622,7 +626,7 @@ Wait for an image to show up on screen. For example, this can be used to make su
  * \param displayLocation The Display of which to scroll the mouse
  */
 
-/** \fn void void xte_mouseScrollDown ( Display *displayLocation );
+/** \fn void xte_mouseScrollDown ( Display *displayLocation );
  * \brief Scroll the mouse down
  * \details This moves the mouse scroll wheel down one rotation, which may be multiple lines. What this really does is click mouse button 5.
  * \param displayLocation The Display of which to scroll the mouse

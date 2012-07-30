@@ -71,7 +71,11 @@ err ()
 
 click ()
 {
-	eval $CVAINPUT -s 'mouseclick 1' >> $OUTFILE >> $OUTFILE
+	if [ -n "$1" ]; then
+		eval $CVAINPUT -s 'mouseclick $1' >> $OUTFILE >> $OUTFILE
+	else
+		eval $CVAINPUT -s 'mouseclick 1' >> $OUTFILE >> $OUTFILE
+	fi
 	return $?
 }	# ----------  end of function click  ----------
 
@@ -98,7 +102,11 @@ click_xy ()
 
 	out "click_xy: " $X_LOC $Y_LOC
 
-	eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" -s "mouseclick 1" >> $OUTFILE'
+	if [ -n "$3" ]; then
+		eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" -s "mouseclick $3" >> $OUTFILE'
+	else
+		eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" -s "mouseclick 1" >> $OUTFILE'
+	fi
 
 	return $?
 }	# ----------  end of function click_xy  ----------
@@ -113,17 +121,26 @@ click_xy ()
 clickr_xy ()
 {
 	if [ -z "$1" ]; then
-		err "Did not specify an X increment..."
-		return 255
+		out "Did not specify an X increment, assuming (0, 0)"
+		X_INC=0
+		Y_INC=0
+	else
+		X_INC=$1
 	fi
+
 	if [ -z "$2" ]; then
-		err "Did not specify a Y increment..."
-		return 255
+		out "Did not specify a Y increment, assuming ($X_INC, 0)"
+	else
+		Y_INC=$2
 	fi
 
 	out "clickr_xy: " $1 $2
 
-	eval '$CVAINPUT -s "mouserxy $1 $2" -s "mouseclick 1" >> $OUTFILE'
+	if [ -n "$3" ]; then
+		eval '$CVAINPUT -s "mouserxy $1 $2" -s "mouseclick 1" >> $OUTFILE'
+	else
+		eval '$CVAINPUT -s "mouserxy $1 $2" -s "mouseclick 1" >> $OUTFILE'
+	fi
 
 	return $?
 }	# ----------  end of function clickr_xy  ----------
@@ -211,7 +228,11 @@ click_i ()
 
 doubleclick ()
 {
-	click && click
+	if [ -n "$1" ]; then
+		click $1 && click $1
+	else
+		click && click
+	fi
 }	# ----------  end of function doubleclick  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -238,7 +259,11 @@ doubleclick_xy ()
 
 	out "doubleclick_xy $X_LOC $Y_LOC"
 
-	click_xy "$X_LOC" "$Y_LOC" && click
+	if [ -n "$3" ]; then
+		click_xy "$X_LOC" "$Y_LOC" "$3" && click "$3"
+	else
+		click_xy "$X_LOC" "$Y_LOC" && click
+	fi
 
 	return $?
 }	# ----------  end of function doubleclick_xy  ----------
@@ -253,17 +278,26 @@ doubleclick_xy ()
 doubleclickr_xy ()
 {
 	if [ -z "$1" ]; then
-		err "Did not specify an X increment..."
-		return 255
+		out "Did not specify an X increment, assuming (0, 0)"
+		X_INC=0
+		Y_INC=0
+	else
+		X_INC=$1
 	fi
+
 	if [ -z "$2" ]; then
-		err "Did not specify a Y increment..."
-		return 255
+		out "Did not specify a Y increment, assuming ($X_INC, 0)"
+	else
+		Y_INC=$2
 	fi
 
-	out "doubleclickr_xy: $1 $2"
+	out "doubleclickr_xy: $X_INC $Y_INC"
 
-	clickr_xy "$1" "$2" && click
+	if [ -n "$3" ]; then
+		clickr_xy "$X_INC" "$Y_INC" "$3" && click "$3"
+	else
+		clickr_xy "$1" "$2" && click
+	fi
 
 	return $?
 }	# ----------  end of function doubleclickr_xy  ----------
