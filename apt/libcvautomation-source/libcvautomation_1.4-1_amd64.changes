@@ -1,0 +1,55 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Mon, 30 Jul 2012 12:43:00 -0400
+Source: libcvautomation
+Binary: libcvautomation-dev libcvautomation-doc libcvautomation-examples
+Architecture: source amd64 all
+Version: 1.4-1
+Distribution: precise
+Urgency: low
+Maintainer: Bradlee Speice <bspeice@uncc.edu>
+Changed-By: Bradlee Speice <bspeice@uncc.edu>
+Description: 
+ libcvautomation-dev - GUI Automation and Testing Library
+ libcvautomation-doc - documentation for libcvautomation
+ libcvautomation-examples - Example programs to demonstrate libcvautomation functionality
+Changes: 
+ libcvautomation (1.4-1) precise; urgency=low
+ .
+   * Release version 1.4-1 of libcvautomation
+   * Lots of bugfixes, and add functions for double clicks
+Checksums-Sha1: 
+ aacaa62dabfa869fa69be31ca4f1a91c4ef60d68 1693 libcvautomation_1.4-1.dsc
+ 1d371fac6f73523515fd1a313b0214ac88459ec3 518671 libcvautomation_1.4.orig.tar.gz
+ 61075b109476fdcfb5eedbf15de5453ad1712599 2774 libcvautomation_1.4-1.debian.tar.gz
+ 3b9902bc9c976847c819eb28142b83de3820515f 80396 libcvautomation-dev_1.4-1_amd64.deb
+ 8a3c593f6c7a5b5ebc7872ddeda9c75e2575d81b 89878 libcvautomation-doc_1.4-1_all.deb
+ 31ee61e01c332107c16e6add508d32423361d52c 14350 libcvautomation-examples_1.4-1_amd64.deb
+Checksums-Sha256: 
+ 4c146d88dee5d3bad92d7b913ef4e8a21206a91204a00138cfb54c1878d97899 1693 libcvautomation_1.4-1.dsc
+ 50233b8fc324b2aa560da7336e879dfec394f01d21e5a410caa4aa7ea5860e43 518671 libcvautomation_1.4.orig.tar.gz
+ 056c43f65d6d4be4cba962617c82f6782a87bb01fcc38754cb26233cdea3a25b 2774 libcvautomation_1.4-1.debian.tar.gz
+ 1d6e6dd6211414505e2dbb27f7578385a495021301502fee2bfd548708800da9 80396 libcvautomation-dev_1.4-1_amd64.deb
+ 933c523a3eefd438d7e5919ba31260d110441b0e127f12a1e33efbf37c3a8df0 89878 libcvautomation-doc_1.4-1_all.deb
+ 7f8a1f2f4f8ccc0029f22c19f24cea85cfe17c6e5066c747fa95177a7e3f79a7 14350 libcvautomation-examples_1.4-1_amd64.deb
+Files: 
+ b0d54fb9da3a14a27e501e2739f7b0d7 1693 devel extra libcvautomation_1.4-1.dsc
+ 472f3b6cff347863dc1326975005f7f9 518671 devel extra libcvautomation_1.4.orig.tar.gz
+ 661db0086b9fa4dad566cbba95b4e93e 2774 devel extra libcvautomation_1.4-1.debian.tar.gz
+ df82f6290b07d44c51090d7cbd7add4c 80396 libdevel extra libcvautomation-dev_1.4-1_amd64.deb
+ 641d94313a07223b57049486adfa2731 89878 doc extra libcvautomation-doc_1.4-1_all.deb
+ e266404e5452bf73e4898df9032e9c48 14350 devel extra libcvautomation-examples_1.4-1_amd64.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iQEcBAEBAgAGBQJQFruhAAoJEOwnvCHfYiWqjgcH/ipLy/aTjg3nSCBFoHrv8zJV
+m8aitIsn/FoGbr69OGssaOtVRTGOzfolO0P1W4clVSRiZ3o/STdjHRC9O86EAwSs
+wkj8BBsHmSfuX675D2P+uv/yFJSv8wOwTX4N9BJxiuL3lbXday2feU4boRxCcPck
+bNf3p0eCCRhW2ceUKtmrtioMJRMiDo6GzKSdyoryI/Q0m28nBoarMn1mNmKakG5D
+2reahbR49jY+m2DJd0QIdQgKizWOijylljVw0kzAVj/QTCFkAcH8x4r5fqVnq6az
+rG7TVOR5Lsrp+XYZdQAlna90RoGsVN5WnFkohsIvgSIhpPL6mJorpt/g8VhXKQA=
+=uMDW
+-----END PGP SIGNATURE-----
