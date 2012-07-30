@@ -137,7 +137,7 @@ typedef struct {
 
 /** \page writing_app_tests Writing Application Tests
  * \author Bradlee Speice <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>
- * \date 7/23/2012
+ * \date 7/30/2012
  * \section audience Audience
  * <ul>
  * <li>This document was written for people with some intermediate knowledge of BASH.
@@ -221,23 +221,23 @@ typedef struct {
  * set -o errexit
  *
  * #Changing any wrapper parameters should go here
+ * TIMEOUT=30
  *
  *
  * start_libreoffice_writer ()
  * {
- *	click_i "screens/gnome-1_menu.png" "screens/kde-1_menu.png"
- *	click_i "screens/gnome-2_officeMenu.png" "screens/kde-2_officeMenu.png"
- *	hover_i "screens/gnome-3_LibreOfficeWriter.png" "screens/kde-3_LibreOfficeWriter.png"
+ *	click_i "screens/gnome-menu.png" "screens/kde-menu.png"
+ *	click_i "screens/gnome-officeMenu.png" "screens/kde-officeMenu.png"
+ *	hover_i "screens/gnome-LibreOfficeWriter.png" "screens/kde-LibreOfficeWriter.png"
  *	jiggle_mouse
  *	click
- *	sleep 30
  * }
  *
  * close_libreoffice_writer()
  * {
- * 	click_i "screens/gnome-4_fileMenu.png" "screens/kde-4_fileMenu.png"
- * 	click_i "screens/gnome-5_fileExit.png" "screens/kde-5_fileExit.png"
- * 	click_i "screens/gnome-6_discard.png" "screens/kde-6_discard.png"
+ * 	click_i "screens/gnome-fileMenu.png" "screens/kde-fileMenu.png"
+ * 	click_i "screens/gnome-fileExit.png" "screens/kde-fileExit.png"
+ * 	click_i "screens/gnome-discard.png" "screens/kde-discard.png"
  * }
  *
  * start_libreoffice_writer
@@ -251,20 +251,20 @@ typedef struct {
  * set -o errexit
  *
  * #Changing any wrapper parameters should go here
+ * TIMEOUT=30
  * \endcode
  * <li>The purpose of these lines is just the standard BASH header. Additionally, we import a wrapper created for libcvautomation to make our job easier. Please note that this is the default directory for the wrapper, your installation may be different. Use the command <tt>locate libcvautomation_funcs</tt> to find it on your computer. The wrapper itself is a handful of macros used to make our job easy.
  * <li>The \c set line will abort the test if an error is ever encountered - for example, no images are found.
- * <li>Changing any wrapper parameters should go after sourcing the wrapper functions. See \ref appendix_variables for more information.
+ * <li>Changing any wrapper parameters should go after sourcing the wrapper functions. See \ref appendix_variables for more information. We set the TIMEOUT to 30 seconds here, so that the wrapper will wait 30 seconds (max) for an image to appear before giving up. This way if LibreOffice takes 30 seconds to load, we will wait 30 seconds. If it takes only 5 seconds to load, we will click after those 5 seconds.
  * <br><br>
  * \code
  * start_libreoffice_writer ()
  * {
- *	click_i "screens/gnome-1_menu.png" "screens/kde-1_menu.png"
- *	click_i "screens/gnome-2_officeMenu.png" "screens/kde-2_officeMenu.png"
- *	hover_i "screens/gnome-3_LibreOfficeWriter.png" "screens/kde-3_LibreOfficeWriter.png"
+ *	click_i "screens/gnome-menu.png" "screens/kde-menu.png"
+ *	click_i "screens/gnome-officeMenu.png" "screens/kde-officeMenu.png"
+ *	hover_i "screens/gnome-LibreOfficeWriter.png" "screens/kde-LibreOfficeWriter.png"
  *	jiggle_mouse
  *	click
- *	sleep 30
  * }
  * \endcode
  * <li>This is the actual body of work done by libcvautomation
@@ -281,9 +281,9 @@ typedef struct {
  * \code
  * close_libreoffice_writer()
  * {
- * 	click_i "screens/gnome-4_fileMenu.png" "screens/kde-4_fileMenu.png"
- * 	click_i "screens/gnome-5_fileExit.png" "screens/kde-5_fileExit.png"
- * 	click_i "screens/gnome-6_discard.png" "screens/kde-6_discard.png"
+ * 	click_i "screens/gnome-fileMenu.png" "screens/kde-fileMenu.png"
+ * 	click_i "screens/gnome-fileExit.png" "screens/kde-fileExit.png"
+ * 	click_i "screens/gnome-discard.png" "screens/kde-discard.png"
  * }
  * \endcode
  * <li>Use the \c click_i function to close down LibreOffice writer - Find the "File" menu, click "Exit", and then make sure to discard all changes.
@@ -350,23 +350,44 @@ typedef struct {
  *
  * \section appendix_functions Functions
  * \subsection appendix_click Click the mouse
- * \code click \endcode
+ * \code click [mouse-button] \endcode
  * Click the mouse where it is currently located
+ * Optionally specify a mouse button to click
  * <br><br>
  *
- * \code click_xy <x-coordinate> <y-coordinate> \endcode
+ * \code click_xy <x-coordinate> <y-coordinate> [mouse-button] \endcode
  * Click the mouse on an absolute point on screen
+ * Optionally specify a mouse button to click
  * 	\note The actual process is to move the mouse to the given location, then click there.
  * <br><br>
  *
- * \code clickr_xy <x-increment> <y-increment> \endcode
+ * \code clickr_xy <x-increment> <y-increment> [mouse-button] \endcode
  * Click the mouse on the screen relative to where the mouse is at
+ * Optionally specify a mouse button to click
  *  \note The actual process is to move the mouse the given distance, then click there.
  *  \note Also, note that a positive \c x-increment moves the mouse to the right, and a positive \c y-increment moves the mouse down.
  * <br><br>
  *
- * \code click_i <filename> \endcode
+ * \code click_i <filename> [filename-2] ... [filename-n] \endcode
  * Click the mouse on a screenshot from \c filename
+ * Optionally specify multiple files to search in.
+ * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref appendix_variables for more information on these.
+ * <br><br>
+ *
+ * \code doubleclick [mouse-button] \endcode
+ * Click the mouse twice
+ * Optionally specify a mouse button to click
+ * <br><br>
+ *
+ * \code doubleclick_xy [mouse-button] \endcode
+ * Click the mouse twice on an absolute point on screen
+ * Optionally specify a mouse button to click
+ * 	\note The actual process is to move the mouse to the given location, then click there.
+ * <br><br>
+ *
+ * \code doubleclick_i <filename> [filename-2] ... [filename-n] \endcode
+ * Click the mouse twice on a screenshot from \c filename
+ * Optionally specify multiple files to search in.
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref appendix_variables for more information on these.
  * <br><br>
  *
@@ -380,9 +401,14 @@ typedef struct {
  *  \note Note that a positive \c x-increment moves the mouse to the right, and a positive \c y-increment moves the mouse down.
  * <br><br>
  *
- * \code hover_i <filename> \endcode
+ * \code hover_i <filename> [filename-2] ... [filename-n] \endcode
  * Move the mouse to a location on screen based on screenshot
+ * Optionally specify multiple files to search in.
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref appendix_variables for more information on these.
+ * <br><br>
+ *
+ * \code jiggle_mouse \endcode
+ * Very simple wrapper to move the mouse 1 pixel right and 1 pixel down - useful for activating menu items.
  * <br><br>
  *
  * \code mouse_scrollu \endcode
@@ -398,7 +424,7 @@ typedef struct {
  * <br><br>
  *
  * \code waitfor <filename> \endcode
- * Wait for an image to display on screen
+ * Wait for an image to display on screen, and then return
  *  \note This is affected by the \c TOLERANCE, \c SEARCH_METHOD, and \c TIMEOUT variables. See \ref appendix_variables for more information on these.
  *
  * \subsection appendix_keyboard Click the keyboard
