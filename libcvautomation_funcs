@@ -641,10 +641,10 @@ key_str ()
 		return 255
 	fi
 
-	COMMAND_LINE="-s 'keystring $*' "
+	COMMAND_LINE="-s 'keystring $*'"
 
 	out "key_str: \"$*\""
-	eval '$CVAINPUT $COMMAND_LINE >> $OUTFILE'
+	eval "$CVAINPUT $COMMAND_LINE >> $OUTFILE"
 
 	return $?
 }	# ----------  end of function key_str  ----------
@@ -665,7 +665,7 @@ key_down ()
 
 	out "key_down: $1"
 
-	eval '$CVAINPUT -s "keydown $1" >> $OUTFILE'
+	eval "$CVAINPUT -s 'keydown $1' >> $OUTFILE"
 
 	return $?
 }	# ----------  end of function key_down  ----------
@@ -685,7 +685,7 @@ key_up ()
 
 	out "key_up: $1"
 
-	eval '$CVAINPUT -s "keyup $1" >> $OUTFILE'
+	eval "$CVAINPUT -s 'keyup $1' >> $OUTFILE"
 
 	return $?
 }	# ----------  end of function key_up  ----------
@@ -705,7 +705,7 @@ key_click ()
 
 	out "key_click: $1"
 	
-	eval '$CVAINPUT -s "keyclick $1" >> $OUTFILE'
+	eval "$CVAINPUT -s 'keyclick $1' >> $OUTFILE"
 	
 	return $?
 }	# ----------  end of function key_press  ----------
