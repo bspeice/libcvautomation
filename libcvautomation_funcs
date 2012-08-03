@@ -567,12 +567,9 @@ key_str ()
 		return 255
 	fi
 
-	for x in $@
-	do
-		COMMAND_LINE+="-s 'keystring $x' "
-	done
+	COMMAND_LINE="-s 'keystring $*' "
 
-	out "key_str: \"$@\""
+	out "key_str: \"$*\""
 	eval $CVAINPUT $COMMAND_LINE >> $OUTFILE
 
 	return $?
