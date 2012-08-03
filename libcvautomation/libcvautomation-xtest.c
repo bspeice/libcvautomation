@@ -1024,7 +1024,7 @@ cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int 
 	{
 		char *keyString;
 		keyString = malloc(COMMAND_STR_LEN * sizeof(char));
-		if (sscanf( s_commandString, "keystring %s", keyString ) == 1)
+		if (sscanf( s_commandString, "keystring %[^\t\n]", keyString ) == 1)
 			xte_clickKeyStr( displayLocation, keyString );
 
 		free(keyString);
