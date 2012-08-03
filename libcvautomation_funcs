@@ -31,16 +31,16 @@ CVAINPUT=`which cva-input` || echo "Could not find the cva-input program..." &>2
 SEARCH_METHOD=0 #CV_TM_SQDIFF
 TOLERANCE=2250000
 USE_SANE_TOLERANCE=""
-#Uncomment to enable sane tolerance matching
-#USE_SANE_TOLERANCE="yes"
+#Set to non-null to enable sane tolerance matching
+#ex: USE_SANE_TOLERANCE="yes"
 
 USE_CENTER="yes"
-#Uncomment to disable center-of-image matching
-#USE_CENTER=""
+#Set to null to disable center-of-image matching
+#ex: USE_CENTER=""
 
 USE_WAIT="yes"
-#Uncomment to disable waiting before an action
-#USE_WAIT=""
+#Set to null to disable waiting before an action
+#ex: USE_WAIT=""
 TIMEOUT=5
 
 
@@ -551,6 +551,35 @@ mouse_scrolld ()
 
 	return $?
 }	# ----------  end of function mouse_scrolld  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  dragndrop
+#   DESCRIPTION:  Drag one image to another image
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+dragndrop ()
+{
+	if [ -z "$1" ]; then
+		err "dragndrop: Did not give me an image to drag!"
+		return 255
+	elif [ -z "$2" ]; then
+		err "dragndrop: Did not give me an image to drag to!"
+		return 255
+	fi
+
+	#We have our images to find, hover over the first, mousedown, and then
+	#hover over the other one, and mouseup.
+	hover_i "$1" 
+	if [ $? -ne 0 ]; then
+		err "dragndrop: Could not find image to drag!"
+	else
+		mousedown 1
+		hover_i "$2" || err "dragndrop: Could not find image to drag to!"
+		mouseup
+	fi
+}	# ----------  end of function dragndrop  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  key_str
