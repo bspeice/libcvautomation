@@ -122,16 +122,16 @@ int main( int argc, char** argv )
 				cvaPoint returnPoint;
 				returnPoint = xte_commandString( display, optarg, mouseButton, searchMethod, tolerance, timeout );
 
-				if (returnPoint.x != -1 && returnPoint.y != -1)
-				{
-					printf("%s%s%i%s%i\n", optarg, separator, returnPoint.x, separator, returnPoint.y);
-					returnCode = 0;
-				}
-
-				else if (returnPoint.x == -2 && returnPoint.y == -2)
+				if (returnPoint.x == -2 && returnPoint.y == -2)
 				{
 					/* Not an error, just that the command didn't use returnPoint */
 					printf("%s\n", optarg);
+					returnCode = 0;
+				}
+
+				else if (returnPoint.x != -1 && returnPoint.y != -1)
+				{
+					printf("%s%s%i%s%i\n", optarg, separator, returnPoint.x, separator, returnPoint.y);
 					returnCode = 0;
 				}
 
