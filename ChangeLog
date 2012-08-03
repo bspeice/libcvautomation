@@ -3,6 +3,8 @@ libcvautomation (1.4-2) precise; urgency=low
   * Release version 1.4-2 of libcvautomation
   * Contains many small bugfixes, bash 'eval' syntax fixes
 
+ -- Bradlee Speice <bspeice@uncc.edu> Fri, 03 Aug 2012 2:53:00 -0400
+
 libcvautomation (1.4-1) precise; urgency=low
 
   * Release version 1.4-1 of libcvautomation
