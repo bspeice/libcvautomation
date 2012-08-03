@@ -107,9 +107,9 @@ mouseup ()
 click ()
 {
 	if [ -n "$1" ]; then
-		eval $CVAINPUT -s 'mouseclick $1' >> $OUTFILE >> $OUTFILE
+		eval '$CVAINPUT -s "mouseclick $1" >> $OUTFILE >> $OUTFILE'
 	else
-		eval $CVAINPUT -s 'mouseclick 1' >> $OUTFILE >> $OUTFILE
+		eval '$CVAINPUT -s "mouseclick 1" >> $OUTFILE >> $OUTFILE'
 	fi
 	return $?
 }	# ----------  end of function click  ----------
@@ -253,6 +253,17 @@ click_i ()
 	return $RETURN_CODE
 }	# ----------  end of function click_i  ----------
 
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  rightclick_i
+#   DESCRIPTION:  Exactly like click_i, but click the right mouse button
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+rightclick_i ()
+{
+	hover_i $@ && click 3
+}	# ----------  end of function rightclick_i  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  doubleclick
@@ -431,7 +442,7 @@ hover_xy ()
 
 	out "hover_xy: $X_LOC $Y_LOC"
 
-	eval $CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE
+	eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE'
 
 	return $?
 }	# ----------  end of function hover_xy  ----------
@@ -633,7 +644,7 @@ key_str ()
 	COMMAND_LINE="-s 'keystring $*' "
 
 	out "key_str: \"$*\""
-	eval $CVAINPUT $COMMAND_LINE >> $OUTFILE
+	eval '$CVAINPUT $COMMAND_LINE >> $OUTFILE'
 
 	return $?
 }	# ----------  end of function key_str  ----------
