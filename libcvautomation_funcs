@@ -64,6 +64,40 @@ err ()
 #-------------------------------------------------------------------------------
 
 #---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  mousedown
+#   DESCRIPTION:  Push the mouse button down, and leave it there.
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+mousedown ()
+{
+	if [ -n "$1" ]; then
+		eval $CVAINPUT -s 'mousedown $1' >> $OUTFILE >> $OUTFILE
+	else
+		eval $CVAINPUT -s 'mousedown 1' >> $OUTFILE >> $OUTFILE
+	fi
+	return $?
+}	# ----------  end of function mousedown  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  mouseup
+#   DESCRIPTION:  Release a mouse button
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+mouseup ()
+{
+	if [ -n "$1" ]; then
+		eval $CVAINPUT -s 'mouseup $1' >> $OUTFILE >> $OUTFILE
+	else
+		eval $CVAINPUT -s 'mouseup 1' >> $OUTFILE >> $OUTFILE
+	fi
+	return $?
+}	# ----------  end of function mouseup  ----------
+
+#---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  click
 #   DESCRIPTION:  Click the mouse where it is currently located
 #    PARAMETERS:  
