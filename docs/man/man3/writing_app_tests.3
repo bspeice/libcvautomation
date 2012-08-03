@@ -1,0 +1,321 @@
+.TH "writing_app_tests" 3 "3 Aug 2012" "Version 1.4" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+writing_app_tests \- Writing Application Tests
+\fBAuthor:\fP
+.RS 4
+Bradlee Speice <\fCbspeice@uncc.edu\fP> 
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+7/30/2012 
+.RE
+.PP
+.SH "Audience"
+.PP
+.PD 0
+.IP "\(bu" 2
+This document was written for people with some intermediate knowledge of BASH. 
+.IP "\(bu" 2
+Screenshot experience is required - being able to create screenshots of windows using \fCGIMP\fP, the \fCimport\fP command from \fCImageMagick\fP, or something similar. 
+.br
+ 
+.IP "\(bu" 2
+Required for working with libcvautomation internals (not needed strictly for writing application testing): 
+.PD 0
+
+.IP "  \(bu" 4
+Intermediate-level C knowledge required for interfacing with libcvautomation. There isn't much complicated going on with libcvautomation itself, but you need to know to use \fBcvaOpenDisplay()\fP for grabbing a display and then \fBcvaCloseDisplay()\fP for closing it later for example. 
+.IP "  \(bu" 4
+C++ is available, but currently only as \fCextern 'C'\fP style bindings. 
+.IP "  \(bu" 4
+Python bindings are in progress as of time-of-writing 
+.PP
+
+.PP
+.SH "Purpose"
+.PP
+.PD 0
+.IP "\(bu" 2
+This document is intended to outline the libcvautomation testing library for GUI applications and its two reference programs \fCcva-match\fP and \fCcva-input\fP 
+.IP "\(bu" 2
+These programs allow you to automate mouse and keyboard events in response to what appears on screen - for example, clicking a button based on an image of that button on screen. 
+.PP
+.SH "Using Libcvautomation"
+.PP
+.PD 0
+.IP "\(bu" 2
+Since libcvautomation is a shared-object library intended to bundle a lot of functionality in one area, we must use external programs to agin access to the functions of libcvautomation. 
+.IP "\(bu" 2
+Two reference programs have been included to make this easy - \fCcva-match\fP and \fCcva-input\fP 
+.IP "\(bu" 2
+The reference programs are fairly full-featured, and expose most of libcvautomation: 
+.PD 0
+
+.IP "  \(bu" 4
+\fCcva-match\fP allows you to match multiple image files against a root image providing very fine control over how specific the match is 
+.IP "  \(bu" 4
+\fCcva-input\fP allows you to drive the X11 server using the XTest extension - for example, clicking on a button from image, clicking a key on the keyboard, and more. 
+.PP
+
+.IP "\(bu" 2
+These two programs should implement all functionality needed for GUI automation. Please contact \fCbspeice@uncc.edu\fP if you have suggestions for extra functionality, patches, comments, etc. 
+.IP "\(bu" 2
+Finally, if you want to write your own programs using libcvautomation, the headers are located on your system. Use: 
+.PP
+.nf
+ #include <libcvautomation/libcvautomation.h> 
+
+.fi
+.PP
+ to include all necessary header files. See the 'Files' tab above to get an idea of what functionality exists. 
+.PP
+\fBNote:\fP
+.RS 4
+Intermediate C or C++ knowledge is required for programming with libcvautomation. C++ is currently only supported through \fCextern 'C'\fP, and full C++ bindings are not currently planned. Libcvautomation itself is incredibly simple, but interfaces with a few API's (Xlib, libcv) that it is helpful to have an idea of how to use.
+.RE
+.PP
+
+.PP
+.SH "Application Testing"
+.PP
+Now we get into the good stuff. The basic process for application testing is as follows: 
+.PD 0
+
+.IP "\(bu" 2
+Create a sequence of screenshots for all mouse-clicks 
+.IP "\(bu" 2
+Create a testing wrapper in BASH for automating the application 
+.IP "\(bu" 2
+Test the wrapper and tune any necessary options 
+.PP
+.SS "Creating the Screenshot Sequence"
+.PD 0
+.IP "\(bu" 2
+This process creates a set of screenshots by which libcvautomation can drive the X11 server 
+.IP "\(bu" 2
+The process is simple - create a screenshot of all buttons you would like to click in an application test, or location where you would like to move the mouse, etc. 
+.IP "\(bu" 2
+This can be accomplished a number of different ways - using GIMP, the \fCimport\fP command, or any other screenshot program. Additionally, libcvautomation will support any image format that OpenCV does. At the time of writing, these are: 
+.PD 0
+
+.IP "  \(bu" 4
+Windows bitmaps - \fC*.bmp\fP, \fC*.dib\fP 
+.IP "  \(bu" 4
+JPEG files - \fC*.jpeg\fP, \fC*.jpg\fP, \fC*.jpe\fP 
+.IP "  \(bu" 4
+JPEG 2000 files - \fC*.jp2\fP 
+.IP "  \(bu" 4
+Portable Network Graphics - \fC*.png\fP 
+.IP "  \(bu" 4
+Portable image format - \fC*.pbm\fP, \fC*.pgm\fP, \fC*.ppm\fP 
+.IP "  \(bu" 4
+Sun rasters - \fC*.sr\fP, \fC*.ras\fP 
+.IP "  \(bu" 4
+TIFF files - \fC*.tiff\fP, \fC*.tif\fP 
+.PP
+
+.br
+ 
+.IP "\(bu" 2
+Some tips on creating screenshots: 
+.PD 0
+
+.IP "  \(bu" 4
+Use as distinct an image as possible in a screenshot. For example, the following images look very similar, but can do very different things:  
+.br
+  
+.PD 0
+
+.IP "    \(bu" 6
+The large amount of grey-space in each of the images can be very confusing. While the text itself is different, the overwhelming amount of grey space can result in a false positive. Limiting the space of the screenshot can be useful:  
+.br
+  
+.IP "    \(bu" 6
+Limiting the button size in this case helps the program identify what button you want to click, but in general you want to include as much detail as possible. 
+.PP
+
+.br
+ 
+.IP "  \(bu" 4
+Be careful of where an image may appear multiple times in a screenshot. For example, a 'Help' button on a dialog may get confused with the 'Help' menu at the top of the screen. 
+.PP
+.PP
+
+.PP
+.SS "Create a Testing Wrapper"
+.PD 0
+.IP "\(bu" 2
+This is where the BASH knowledge comes into play. We are going to write a script that will run your application test, to make sure that the GUI is functioning correctly. 
+.IP "\(bu" 2
+The following is the (strongly) recommended process, but is not strictly necessary to follow this. The way I'm going to explain this is by giving an example test I wrote, and explain what is going on: 
+.PP
+.nf
+ #!/bin/bash
+ #This is an application test involving libcvautomation and libreoffice
+ . /etc/libcvautomation_funcs
+ set -o errexit
+
+ #Changing any wrapper parameters should go here
+ TIMEOUT=30
+
+
+ start_libreoffice_writer ()
+ {
+    click_i 'screens/gnome-menu.png' 'screens/kde-menu.png'
+    click_i 'screens/gnome-officeMenu.png' 'screens/kde-officeMenu.png'
+    hover_i 'screens/gnome-LibreOfficeWriter.png' 'screens/kde-LibreOfficeWriter.png'
+    jiggle_mouse
+    click
+ }
+
+ close_libreoffice_writer()
+ {
+    click_i 'screens/gnome-fileMenu.png' 'screens/kde-fileMenu.png'
+    click_i 'screens/gnome-fileExit.png' 'screens/kde-fileExit.png'
+    click_i 'screens/gnome-discard.png' 'screens/kde-discard.png'
+ }
+
+ start_libreoffice_writer
+ close_libreoffice_writer
+
+.fi
+.PP
+ 
+.br
+ 
+.PP
+.nf
+ #!/bin/bash
+ #This is an application test involving libcvautomation and libreoffice
+ . /etc/libcvautomation_funcs
+ set -o errexit
+
+ #Changing any wrapper parameters should go here
+ TIMEOUT=30
+
+.fi
+.PP
+ 
+.IP "\(bu" 2
+The purpose of these lines is just the standard BASH header. Additionally, we import a wrapper created for libcvautomation to make our job easier. Please note that this is the default directory for the wrapper, your installation may be different. Use the command \fClocate libcvautomation_funcs\fP to find it on your computer. The wrapper itself is a handful of macros used to make our job easy. 
+.IP "\(bu" 2
+The \fCset\fP line will abort the test if an error is ever encountered - for example, no images are found. 
+.IP "\(bu" 2
+Changing any wrapper parameters should go after sourcing the wrapper functions. See \fBEnvironment Variables\fP for more information. We set the TIMEOUT to 30 seconds here, so that the wrapper will wait 30 seconds (max) for an image to appear before giving up. This way if LibreOffice takes 30 seconds to load, we will wait 30 seconds. If it takes only 5 seconds to load, we will click after those 5 seconds. 
+.br
+
+.br
+ 
+.PP
+.nf
+ start_libreoffice_writer ()
+ {
+    click_i 'screens/gnome-menu.png' 'screens/kde-menu.png'
+    click_i 'screens/gnome-officeMenu.png' 'screens/kde-officeMenu.png'
+    hover_i 'screens/gnome-LibreOfficeWriter.png' 'screens/kde-LibreOfficeWriter.png'
+    jiggle_mouse
+    click
+ }
+
+.fi
+.PP
+ 
+.IP "\(bu" 2
+This is the actual body of work done by libcvautomation 
+.IP "\(bu" 2
+\fCclick_i\fP is a function to click the mouse at an image - in this case, the gnome or kde menu. 
+.PD 0
+
+.IP "  \(bu" 4
+Because of how the cva-input program is designed, you can give it multiple images, and it will only select the one currently available. See the \fBAppendix of Wrapper Functions and Environment Variables\fP for more information on how to use this (\fCTOLERANCE\fP specifically) 
+.IP "  \(bu" 4
+Additionally, the wrapper (by default) will wait for an image to appear before clicking on it. This way, you can string together click_i commands even when the program may need to wait a while on processing. Make sure to read up on the \fCTIMEOUT\fP option to learn how to use this. 
+.IP "  \(bu" 4
+By using the function \fCclick_i\fP, we make things a bit more readable - the full command line is \fCcva-input -s 'icmouseclick <filename>'\fP 
+.IP "  \(bu" 4
+See the \fBAppendix of Wrapper Functions and Environment Variables\fP for a list of all functions available in the wrapper. 
+.PP
+
+.IP "\(bu" 2
+\fChover_i\fP is a function to move the mouse to an image - in this case, move it over the LibreOffice menu item. 
+.IP "\(bu" 2
+Then we jiggle the mouse to make sure that the item activates, click, and wait for the program to start up. 
+.br
+
+.br
+ 
+.PP
+.nf
+ close_libreoffice_writer()
+ {
+    click_i 'screens/gnome-fileMenu.png' 'screens/kde-fileMenu.png'
+    click_i 'screens/gnome-fileExit.png' 'screens/kde-fileExit.png'
+    click_i 'screens/gnome-discard.png' 'screens/kde-discard.png'
+ }
+
+.fi
+.PP
+ 
+.IP "\(bu" 2
+Use the \fCclick_i\fP function to close down LibreOffice writer - Find the 'File' menu, click 'Exit', and then make sure to discard all changes. 
+.br
+
+.br
+ 
+.PP
+.nf
+ start_libreoffice_writer
+ close_libreoffice_writer
+
+.fi
+.PP
+ 
+.IP "\(bu" 2
+Actually run the functions given. 
+.br
+
+.br
+ 
+.IP "\(bu" 2
+Please note that this is a fairly trivial example. The full list of commands available in the wrapper is given in \fBAppendix of Wrapper Functions and Environment Variables\fP 
+.PP
+.SS "Testing the Testing Wrapper"
+.PD 0
+.IP "\(bu" 2
+First things first, run through the testing wrapper to make sure that everything is O.K. 
+.IP "\(bu" 2
+If you need to, there are a few environment variables you can set to change how the wrapper works. See \fBEnvironment Variables\fP for more information on how these work. 
+.IP "\(bu" 2
+A full list of commands provided by the wrapper is available at \fBFunctions\fP 
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+These options are controlled using the testing script as demonstrated above. Any modifications to the following values should be done at the line:
+.PP
+.nf
+ #Changing any wrapper parameters should go here 
+
+.fi
+.PP
+  
+.RE
+.PP
+.SH "Wrapping Up"
+.PP
+.PD 0
+.IP "\(bu" 2
+At this point you should have all the information you need to write your own application tests. The libcvautomation library and reference programs were designed to be simple and powerful, but if you invest the time to learn them and some expert BASH scripting, you can do some very complex things. 
+.PD 0
+
+.IP "  \(bu" 4
+For example, integrating a \fCTest Anything Protocol\fP wrapper into your scripts as well. 
+.PP
+
+.IP "\(bu" 2
+If you have questions, comments, concerns, suggestions, or feedback in general, feel free to let me know at \fCbspeice@uncc.edu\fP. 
+.PP
+
