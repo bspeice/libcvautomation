@@ -350,9 +350,15 @@ typedef struct {
  *
  * \section appendix_functions Functions
  * \subsection appendix_click Click the mouse
+ * \code mousedown [mouse-button] \endcode
+ * Push the mouse button down where it is currently located, and leave it down.
+ * Optionally specify a mouse button to push down
+ * <br><br>
+ *
+ * \code mouseup [mouse-button] \endcode
  * \code click [mouse-button] \endcode
- * Click the mouse where it is currently located
- * Optionally specify a mouse button to click
+ * Release the mouse button
+ * Optionally specify a mouse button to release
  * <br><br>
  *
  * \code click_xy <x-coordinate> <y-coordinate> [mouse-button] \endcode
