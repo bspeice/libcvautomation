@@ -42,9 +42,10 @@ TARBALL="${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz"
 cp $TARBALL $BUILD_DIR
 cp $TARBALL $BUILD_DIR/`echo $TARBALL | sed 's/-/_/g;s/tar/orig.tar/'`
 tar xf $TARBALL -C $BUILD_DIR
-cp debian $PACKAGE_NAME-$PACKAGE_VERSION -r
+cp debian $BUILD_DIR/$PACKAGE_NAME-$PACKAGE_VERSION -r
 cd $BUILD_DIR/$PACKAGE_NAME-$PACKAGE_VERSION
 
+echo "Beginning build process..."
 if [ -z "$1" ]; then
 	debuild
 else
