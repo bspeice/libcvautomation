@@ -417,6 +417,10 @@ typedef struct {
  * \code mouse_scrolld \endcode
  * Scroll the mouse wheel down one
  *
+ * \code dragndrop \endcode
+ * Drag one image to another - i.e. drag a file to a folder.
+ * \warning This function accepts only two arguments unlike other image functions - the first argument is the image to drag, the second is the image to drag to.
+ *
  * \subsection appendix_find Find an Image
  * \code image_location <filename> \endcode
  * Get the location of an image on screen
