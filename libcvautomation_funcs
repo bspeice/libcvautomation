@@ -27,6 +27,8 @@
 CVAMATCH=`which cva-match` || echo "Could not find the cva-match program..." &>2 #Needed for image recognition
 CVAINPUT=`which cva-input` || echo "Could not find the cva-input program..." &>2 #Needed to manipulate mouse and keyboard
 
+INT_MAX=2147483647
+
 #Some program-wide configs
 SEARCH_METHOD=0 #CV_TM_SQDIFF
 TOLERANCE=2250000
@@ -210,6 +212,9 @@ click_i ()
 		TOLERANCE_OPTION="-t"
 	fi
 
+	if [ -z "$TOLERANCE" ]; then
+		TOLERANCE=$INT_MAX
+	fi
 
 	if [ -n "$USE_WAIT" ]; then
 		#Alternate between each image until a match is found, or we loop $TIMEOUT times
@@ -390,6 +395,11 @@ image_location ()
 	else
 		TOLERANCE_OPTION="-t"
 	fi
+
+	if [ -z "$TOLERANCE" ]; then
+		TOLERANCE=$INT_MAX
+	fi
+
 	if [ -n "$USE_CENTER" ]; then
 		CENTER="--center"
 	else
@@ -507,7 +517,9 @@ hover_i ()
 	else
 		TOLERANCE_OPTION="-t"
 	fi
-	
+	if [ -z "$TOLERANCE" ]; then
+		TOLERANCE=$INT_MAX
+	fi
 	if [ -n "$USE_WAIT" ]; then
 		#Alternate between each image until a match is found, or we loop $TIMEOUT times
 		#This is a bit weird, since we need to lower the TIMEOUT value for the "waitfor"
@@ -726,8 +738,14 @@ waitfor ()
 	out "waitfor: $1"
 
 	if [ -n "$USE_SANE_TOLERANCE" ]; then
+		if [ -z "$TOLERANCE" ]; then
+			TOLERANCE=$INT_MAX
+		fi
 		eval '$CVAINPUT -o $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
 	else
+		if [ -z "$TOLERANCE" ]; then
+			TOLERANCE=$INT_MAX
+		fi
 		eval '$CVAINPUT -t $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
 	fi
 
