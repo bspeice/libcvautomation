@@ -1,8 +1,16 @@
 if BUILD_DOXYGEN
-SUBDIRS = libcvautomation examples docs
-else
-SUBDIRS = libcvautomation examples
+  DOCS_ENABLE = docs
 endif
+
+if BUILD_PYTHON
+  PYTHON_ENABLE = python
+endif
+
+if BUILD_EXAMPLES
+  EXAMPLES_ENABLE = examples
+endif
+
+SUBDIRS = libcvautomation $(EXAMPLES_ENABLE) $(PYTHON_ENABLE) $(DOCS_ENABLE)
 
 #And the BASH macros
 dist_sysconf_DATA = libcvautomation_funcs

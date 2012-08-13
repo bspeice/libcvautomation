@@ -80,7 +80,7 @@ if test "$with_docs" != "no"; then
 		enable_tex="no"
 	else
 		AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"])
-		AC_CONFIG_FILES([docs/Doxyfile_library] [docs/Doxyfile_example])
+		AC_CONFIG_FILES([docs/Doxyfile_library] [docs/Doxyfile_example] [docs/Makefile])
 	fi
 else
 	AM_CONDITIONAL(BUILD_DOXYGEN, [test "$with_docs" != "no"]) #false
@@ -106,6 +106,14 @@ else
 	AM_CONDITIONAL(BUILD_TEX, [test "$enable_tex" == "yes"]) #false
 fi
 
+AC_ARG_WITH(python, [  --with-python           Install python support for libcvautomation])
+#Check if we should distribute Python
+if test "$with_python" != "no"; then
+	AC_CHECK_PROGS([Python], [python], [missing])
+	AC_CONFIG_FILES([python/Makefile] [python/setup.py])
+fi
+AM_CONDITIONAL(BUILD_PYTHON, [test "$with_python" != "no"]) #true unless --without-python
+
 # Checks for library functions.
 AC_FUNC_MALLOC
 
@@ -120,7 +128,6 @@ AC_OUTPUT(
 [Makefile]
 [libcvautomation/Makefile]
 [examples/Makefile]
-[docs/Makefile]
 [libcvautomation.pc]
 [include/libcvautomation/libcvautomation.h]
 [rpm/libcvautomation.spec]
