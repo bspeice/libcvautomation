@@ -1,3 +1,12 @@
+libcvautomation (1.5-1) precise; urgency=low
+
+  * Release version 1.5-1 of libcvautomation
+  * Lots of bugfixes
+  * Add a function for drag-and-drop
+  * Documentation update
+ 
+ -- Bradlee Speice <bspeice@uncc.edu> Mon, 13 Aug 2012 09:05:00 -0500
+
 libcvautomation (1.4-1) precise; urgency=low
 
   * Release version 1.4-1 of libcvautomation
