@@ -97,8 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755, root, root) /usr/share/libcvautomation/html/installdox
 
 %changelog
+* Mon Aug 13 2012 Bradlee Speice <bspeice@uncc.edu> 1.5-1
+- Release version 1.5 of libcvautomation
+
 * Mon Jul 30 2012 Bradlee Speice <bspeice@uncc.edu> 1.4-1
 - Release version 1.4 of libcvautomation
 
-* Mon Aug 13 2012 Bradlee Speice <bspeice@uncc.edu> 1.5-1
-- Release version 1.5 of libcvautomation
