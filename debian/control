@@ -34,3 +34,11 @@ Architecture: any
 Description: Example programs to demonstrate libcvautomation functionality
  Contains programs designed to showcase the functionality of libcvautomation,
  as well as a BASH wrapper to write application tests from BASH.
+
+Package: libcvautomation-python
+Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7
+Architecture: all
+Description: Python bindings for libcvautomation
+ Contains the python libcvautomation module to allow python code to interface
+ with libcvautomation.
+ To use, all that is needed is `import libcvautomation`.
