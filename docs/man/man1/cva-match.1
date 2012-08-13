@@ -1,0 +1,60 @@
+.TH "cva-match" 1 "13 Aug 2012" "Version 1.5" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cva-match \- \fBAuthor:\fP
+.RS 4
+Bradlee Speice <bspeice@uncc.edu> 
+.RE
+.PP
+.SH "Usage:"
+.PP
+This program uses OpenCV in order to recognize an image within an image. The return code is 0 for at least one successful match, and 1 otherwise.
+.SH "Example Usage:"
+.PP
+Match two images against the root X11 window:
+.PP
+cva-match --x-root -s '<image_name>' -s '<image_name_2>'
+.PP
+Match a root and sub image with a custom tolerance and search method
+.PP
+cva-match -r '<root_image>' -s '<image_name>' -o 75 -m 1
+.SH "Full Options:"
+.PP
+-h, --help: Display this usage message.
+.PP
+-u, --usage: Display this usage message.
+.PP
+-r, --root-image: Location of the root image to compare against.
+.PP
+-s, --sub-image: Location of the sub-image to find in root.
+.PP
+-p, --separator: Separator of the X and Y coordinates.
+.PP
+-t, --tolerance: Set how strict the match is - 100 is recommended lowest value.
+.PP
+\fBNote:\fP
+.RS 4
+When using CCORR or CCOEFF tolerance works in opposite direction, so -50 is recommended highest value.
+.RE
+.PP
+-m, --search-method: Set which method is used to search for sub-images.
+.PP
+\fBNote:\fP
+.RS 4
+Search Methods: CV_TM_SQDIFF = 0, CV_TM_SQDIFF_NORMED = 1, CV_TM_CCORR = 2, CV_TM_CCORR_NORMED = 3, CV_TM_CCOEFF = 4, CV_TM_COEFF_NORMED = 5
+.RE
+.PP
+-x, --x-root[=DISPLAY]: Set the root image to come from X11
+.PP
+\fBNote:\fP
+.RS 4
+The DISPLAY variable is optional, not specifying it will cause X to use the default display (not specifically :0.0)
+.RE
+.PP
+-c, --center: The output points should be centered on the sub-image, rather than the top-left corner.
+.PP
+-o, --sane-tolerance: Set the tolerance using a scale of 1-100, rather than INT_MIN to INT_MAX (100 ~= INT_MAX)
+.SH "Contact Information:"
+.PP
+Questions? Comments? Concerns? Suggestions? Send all feedback to Bradlee Speice at <bspeice@uncc.edu> 

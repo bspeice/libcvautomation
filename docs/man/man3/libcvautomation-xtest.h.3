@@ -1,0 +1,716 @@
+.TH "libcvautomation-xtest.h" 3 "13 Aug 2012" "Version 1.5" "libcvautomation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libcvautomation-xtest.h \- The source code to access the XTest extension inside libcvautomation. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <libcvautomation/libcvautomation.h>\fP
+.br
+
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBIS_CMD\fP(x, y)   strncmp( x, y, strlen( y ) ) == 0"
+.br
+.RI "\fIChecks if string \fC'x'\fP is in \fC'y'\fP. \fP"
+.ti -1c
+.RI "#define \fBCOMMAND_STR_LEN\fP   512"
+.br
+.RI "\fISpecifies the maximum length of a command string. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "Bool \fBxte_XTestSupported\fP (Display *displayLocation)"
+.br
+.RI "\fICheck if the XTest extension is supported. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_mouseLocation\fP (Display *displayLocation)"
+.br
+.RI "\fIGrab the current location of the mouse. \fP"
+.ti -1c
+.RI "void \fBxte_clickMouse\fP (Display *displayLocation, int mouseButton)"
+.br
+.RI "\fIClick the mouse in its current location. \fP"
+.ti -1c
+.RI "void \fBxte_clickMouseXY\fP (Display *displayLocation, int xLocation, int yLocation, int mouseButton)"
+.br
+.RI "\fIClick the mouse button at an absolute location. \fP"
+.ti -1c
+.RI "void \fBxte_clickMouseRXY\fP (Display *displayLocation, int xIncrement, int yIncrement, int mouseButton)"
+.br
+.RI "\fIClick the mouse button at a relative location. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_clickMouseImage\fP (Display *displayLocation, IplImage *subImage, int mouseButton, int searchMethod, int tolerance)"
+.br
+.RI "\fIClick the mouse based on location of an image. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_clickMouseImage_location\fP (Display *displayLocation, const char *fileName, int mouseButton, int searchMethod, int tolerance)"
+.br
+.RI "\fIClick the mouse based on the location of an image from file. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_clickMouseImage_center\fP (Display *displayLocation, IplImage *subImage, int mouseButton, int searchMethod, int tolerance)"
+.br
+.RI "\fIClick the mouse based on center location of an image. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_clickMouseImage_location_center\fP (Display *displayLocation, const char *fileName, int mouseButton, int searchMethod, int tolerance)"
+.br
+.RI "\fIClick the mouse based on the center location of an image from file. \fP"
+.ti -1c
+.RI "void \fBxte_hoverMouseXY\fP (Display *displayLocation, int xLocation, int yLocation)"
+.br
+.RI "\fIMove the mouse to a location, but do not click it. \fP"
+.ti -1c
+.RI "void \fBxte_hoverMouseRXY\fP (Display *displayLocation, int xIncrement, int yIncrement)"
+.br
+.RI "\fIMove the mouse to a relative location, but do not click it. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_hoverMouseImage\fP (Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance)"
+.br
+.RI "\fIMove the mouse based on location of an image. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_hoverMouseImage_location\fP (Display *displayLocation, const char *filename, int searchMethod, int tolerance)"
+.br
+.RI "\fIMove the mouse based on location of an image from file. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_hoverMouseImage_center\fP (Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance)"
+.br
+.RI "\fIMove the mouse based on center location of an image. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_hoverMouseImage_location_center\fP (Display *displayLocation, const char *fileName, int searchMethod, int tolerance)"
+.br
+.RI "\fIMove the mouse based on the center location of an image from file. \fP"
+.ti -1c
+.RI "void \fBxte_mouseDown\fP (Display *displayLocation, int mouseButton)"
+.br
+.RI "\fIPress a mouse button down, and do not release it. \fP"
+.ti -1c
+.RI "void \fBxte_mouseUp\fP (Display *displayLocation, int mouseButton)"
+.br
+.RI "\fIRelease a mouse button. \fP"
+.ti -1c
+.RI "void \fBxte_mouseJiggle\fP (Display *displayLocation)"
+.br
+.RI "\fIJiggle the mouse in place. \fP"
+.ti -1c
+.RI "void \fBxte_mouseScrollUp\fP (Display *displayLocation)"
+.br
+.RI "\fIScroll the mouse up. \fP"
+.ti -1c
+.RI "void \fBxte_mouseScrollDown\fP (Display *displayLocation)"
+.br
+.RI "\fIScroll the mouse down. \fP"
+.ti -1c
+.RI "void \fBxte_clickKey\fP (Display *displayLocation, char *key)"
+.br
+.RI "\fIPress and release a keyboard key. \fP"
+.ti -1c
+.RI "void \fBxte_clickKeyStr\fP (Display *displayLocation, char *string)"
+.br
+.RI "\fIInput a string of characters to the X Server. \fP"
+.ti -1c
+.RI "void \fBxte_keyDown\fP (Display *displayLocation, char *key)"
+.br
+.RI "\fIPress a key down, but do not release it. \fP"
+.ti -1c
+.RI "void \fBxte_keyUp\fP (Display *displayLocation, char *key)"
+.br
+.RI "\fIRelease a key. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_waitForImage\fP (Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout)"
+.br
+.RI "\fIWait for an image to show up on screen. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_waitForImage_location\fP (Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout)"
+.br
+.RI "\fIWait for an image from file to show up on screen. \fP"
+.ti -1c
+.RI "\fBcvaPoint\fP \fBxte_commandString\fP (Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout)"
+.br
+.RI "\fIExecute a command where the command is coming from a string. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The source code to access the XTest extension inside libcvautomation. 
+
+This source file builds in the necessary functionality to drive the X11 server in libcvautomation 
+.PP
+\fBAuthor:\fP
+.RS 4
+Bradlee Speice 
+.RE
+.PP
+
+.PP
+Definition in file \fBlibcvautomation-xtest.h\fP.
+.SH "Define Documentation"
+.PP 
+.SS "#define IS_CMD(x, y)   strncmp( x, y, strlen( y ) ) == 0"
+.PP
+Checks if string \fC'x'\fP is in \fC'y'\fP. 
+.PP
+Performs a safe check to see if x is in y - this way, you can check that \fC'command'\fP is inside \fC'command argument'\fP 
+.SH "Function Documentation"
+.PP 
+.SS "Bool xte_XTestSupported (Display * displayLocation)"
+.PP
+Check if the XTest extension is supported. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display to check if XTest is supported on 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True if XTest is supported, False otherwise 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+The program using this library is responsible for checking to see if XTest is supported. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_mouseLocation (Display * displayLocation)"
+.PP
+Grab the current location of the mouse. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to grab the mouse location from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBcvaPoint\fP with the current location of the mouse 
+.RE
+.PP
+
+.SS "void xte_clickMouse (Display * displayLocation, int mouseButton)"
+.PP
+Click the mouse in its current location. 
+.PP
+Perform a mouse-down and mouse-up event on button \fCmouseButton\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click the mouse on 
+.br
+\fImouseButton\fP The mouse button to click 
+.RE
+.PP
+
+.SS "void xte_clickMouseXY (Display * displayLocation, int xLocation, int yLocation, int mouseButton)"
+.PP
+Click the mouse button at an absolute location. 
+.PP
+Move the mouse to location (\fCxLocation\fP, \fCyLocation\fP ) and then click button \fCmouseButton\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click the mouse on 
+.br
+\fIxLocation\fP The X-coordinate to move the mouse to before clicking 
+.br
+\fIyLocation\fP The Y-location to move the mouse to before clicking 
+.br
+\fImouseButton\fP The mouse button to click 
+.RE
+.PP
+
+.SS "void xte_clickMouseRXY (Display * displayLocation, int xIncrement, int yIncrement, int mouseButton)"
+.PP
+Click the mouse button at a relative location. 
+.PP
+Move the mouse horizontally \fCxIncrement\fP and vertically \fCyIncrement\fP before clicking button \fCmouseButton\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click the mouse on 
+.br
+\fIxIncrement\fP Move the mouse horizontally this many pixels - positive value is motion to the right 
+.br
+\fIyIncrement\fP Move the mouse vertically this many pixels - positive value is motion downwards 
+.br
+\fImouseButton\fP The mouse button to click 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_clickMouseImage (Display * displayLocation, IplImage * subImage, int mouseButton, int searchMethod, int tolerance)"
+.PP
+Click the mouse based on location of an image. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding \fCsubImage\fP in this display, moving the mouse to that location, and then clicking \fCmouseButton\fP. The return value can be ignored, the mouse will already have been clicked there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click the mouse on 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to find in the root X11 window 
+.br
+\fImouseButton\fP The mouse button to click 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_clickMouseImage_location (Display * displayLocation, const char * fileName, int mouseButton, int searchMethod, int tolerance)"
+.PP
+Click the mouse based on the location of an image from file. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding the sub image from \fCfileName\fP in this display, moving the mouse to that location, and then clicking \fCmouseButton\fP. The return value can be ignored, the mouse will already have been clicked there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click the mouse on 
+.br
+\fIfileName\fP The file name from which to load the sub-image 
+.br
+\fImouseButton\fP The mouse button to click 
+.br
+\fIsearchMethod\fP The search method to use when searching for the sub image in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for the sub image in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_clickMouseImage_center (Display * displayLocation, IplImage * subImage, int mouseButton, int searchMethod, int tolerance)"
+.PP
+Click the mouse based on center location of an image. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding the center of \fCsubImage\fP in this display, moving the mouse to that location, and then clicking \fCmouseButton\fP. The return value can be ignored, the mouse will already have been clicked there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click the mouse on 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to find in the root X11 window 
+.br
+\fImouseButton\fP The mouse button to click 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_clickMouseImage_location_center (Display * displayLocation, const char * fileName, int mouseButton, int searchMethod, int tolerance)"
+.PP
+Click the mouse based on the center location of an image from file. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding the center location of the sub image from \fCfileName\fP in this display, moving the mouse to that location, and then clicking \fCmouseButton\fP. The return value can be ignored, the mouse will already have been clicked there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click the mouse on 
+.br
+\fIfileName\fP The file name from which to load the sub-image 
+.br
+\fImouseButton\fP The mouse button to click 
+.br
+\fIsearchMethod\fP The search method to use when searching for the sub image in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for the sub image in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was clicked. This will be (-1,-1) if there was an error, in which case the mouse will not have been clicked. 
+.RE
+.PP
+
+.SS "void xte_hoverMouseXY (Display * displayLocation, int xLocation, int yLocation)"
+.PP
+Move the mouse to a location, but do not click it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to move the mouse 
+.br
+\fIxLocation\fP The X-coordinate of which to move the mouse 
+.br
+\fIyLocation\fP The Y-coordinate of which to move the mouse 
+.RE
+.PP
+
+.SS "void xte_hoverMouseRXY (Display * displayLocation, int xIncrement, int yIncrement)"
+.PP
+Move the mouse to a relative location, but do not click it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to move the mouse 
+.br
+\fIxIncrement\fP How far to move the mouse horizontally. Positive values indicate motion to the right. 
+.br
+\fIyIncrement\fP How far to move the mouse vertically. Positive values indicate motion downward. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_hoverMouseImage (Display * displayLocation, IplImage * subImage, int searchMethod, int tolerance)"
+.PP
+Move the mouse based on location of an image. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding \fCsubImage\fP in this display, and then moving the mouse to that location. The return value can be ignored, the mouse will already have been moved there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to move the mouse on 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to find in the root X11 window 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_hoverMouseImage_location (Display * displayLocation, const char * filename, int searchMethod, int tolerance)"
+.PP
+Move the mouse based on location of an image from file. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding the sub image from \fCfileName\fP in this display, and then moving the mouse to that location. The return value can be ignored, the mouse will already have been moved there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to move the mouse on 
+.br
+\fIfilename\fP The file name from which to load the sub-image 
+.br
+\fIsearchMethod\fP The search method to use when searching for the sub image in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for the sub image in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_hoverMouseImage_center (Display * displayLocation, IplImage * subImage, int searchMethod, int tolerance)"
+.PP
+Move the mouse based on center location of an image. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding the center of \fCsubImage\fP in this display, and then moving the mouse to that location. The return value can be ignored, the mouse will already have been moved there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to move the mouse on 
+.br
+\fIsubImage\fP The sub image (in IplImage format) to find in the root X11 window 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCsubImage\fP in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_hoverMouseImage_location_center (Display * displayLocation, const char * fileName, int searchMethod, int tolerance)"
+.PP
+Move the mouse based on the center location of an image from file. 
+.PP
+Wraps grabbing the X11 root window of \fCdisplayLocation\fP, finding the center location of the sub image from \fCfileName\fP in this display, and then moving the mouse to that location. The return value can be ignored, the mouse will already have been moved there. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to move the mouse on 
+.br
+\fIfileName\fP The file name from which to load the sub-image 
+.br
+\fIsearchMethod\fP The search method to use when searching for the sub image in the root X11 window 
+.br
+\fItolerance\fP The tolerance to use when searching for the sub image in the root X11 window 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of where the mouse was moved. This will be (-1,-1) if there was an error, in which case the mouse will not have been moved. 
+.RE
+.PP
+
+.SS "void xte_mouseDown (Display * displayLocation, int mouseButton)"
+.PP
+Press a mouse button down, and do not release it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to push a mouse button down 
+.br
+\fImouseButton\fP The mouse button to push down 
+.RE
+.PP
+
+.SS "void xte_mouseUp (Display * displayLocation, int mouseButton)"
+.PP
+Release a mouse button. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to release a mouse button 
+.br
+\fImouseButton\fP The mouse button to release 
+.RE
+.PP
+
+.SS "void xte_mouseJiggle (Display * displayLocation)"
+.PP
+Jiggle the mouse in place. 
+.PP
+This moves the mouse down and right one pixel, and then back. This may be needed to activate menu items, etc. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to move the mouse 
+.RE
+.PP
+
+.SS "void xte_mouseScrollUp (Display * displayLocation)"
+.PP
+Scroll the mouse up. 
+.PP
+This moves the mouse scroll wheel up one rotation, which may be multiple lines. What this really does is click mouse button 4. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to scroll the mouse 
+.RE
+.PP
+
+.SS "void xte_mouseScrollDown (Display * displayLocation)"
+.PP
+Scroll the mouse down. 
+.PP
+This moves the mouse scroll wheel down one rotation, which may be multiple lines. What this really does is click mouse button 5. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to scroll the mouse 
+.RE
+.PP
+
+.SS "void xte_clickKey (Display * displayLocation, char * key)"
+.PP
+Press and release a keyboard key. 
+.PP
+This method allows you to press and release a key, where the key may be \fC'a'\fP, \fC'b'\fP, or maybe something fancy like \fC'space'\fP. Please see \fBXTest Key Strings\fP for a full list of keys. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to click a key 
+.br
+\fIkey\fP The key to click as a string 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBXTest Key Strings\fP 
+.RE
+.PP
+
+.SS "void xte_clickKeyStr (Display * displayLocation, char * string)"
+.PP
+Input a string of characters to the X Server. 
+.PP
+Instead of specifying a single character to enter at a time (\fC'a'\fP, \fC'space'\fP) this function allows you to enter an entire string (\fC'Hello\fP, World!') at a time. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to enter a key string on 
+.br
+\fIstring\fP The key string to input to the X Server 
+.RE
+.PP
+
+.SS "void xte_keyDown (Display * displayLocation, char * key)"
+.PP
+Press a key down, but do not release it. 
+.PP
+This method allows you to push down a key, where the key may be \fC'a'\fP, \fC'b'\fP, or maybe something fancy like \fC'space'\fP. Please see \fBXTest Key Strings\fP for a full list of keys. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to push down a key 
+.br
+\fIkey\fP The key to click as a string 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBXTest Key Strings\fP 
+.RE
+.PP
+
+.SS "void xte_keyUp (Display * displayLocation, char * key)"
+.PP
+Release a key. 
+.PP
+This method allows you to release a key, where the key may be \fC'a'\fP, \fC'b'\fP, or maybe something fancy like \fC'space'\fP. Please see \fBXTest Key Strings\fP for a full list of keys. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to release a key 
+.br
+\fIkey\fP The key to click as a string 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBXTest Key Strings\fP 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_waitForImage (Display * displayLocation, IplImage * subImage, int searchMethod, int tolerance, int timeout)"
+.PP
+Wait for an image to show up on screen. 
+.PP
+This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to search for an image 
+.br
+\fIsubImage\fP The sub image to search for 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCtolerance\fP 
+.br
+\fItimeout\fP The time (in seconds) to search for the image 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_waitForImage_location (Display * displayLocation, const char * fileName, int searchMethod, int tolerance, int timeout)"
+.PP
+Wait for an image from file to show up on screen. 
+.PP
+This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to search for an image 
+.br
+\fIfileName\fP The file to load an image from before searching 
+.br
+\fIsearchMethod\fP The search method to use when searching for \fCsubImage\fP 
+.br
+\fItolerance\fP The tolerance to use when searching for \fCtolerance\fP 
+.br
+\fItimeout\fP The time (in seconds) to search for the image 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+
+.SS "\fBcvaPoint\fP xte_commandString (Display * displayLocation, char * commandString, int mouseButton, int searchMethod, int tolerance, int timeout)"
+.PP
+Execute a command where the command is coming from a string. 
+.PP
+This function allows you to input a command to libcvautomation from a string. For example, to click a mouse button, you would use the \fCcommand\fP 'mouseclick'. Please note that some \fCcommand\fPs may need arguments to the string, and some may use function arguments. See \fBxte_commandString() Command Strings\fP for a full list of command and arguments 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdisplayLocation\fP The Display of which to operate on 
+.br
+\fIcommandString\fP The command string to execute - limit to \fBCOMMAND_STR_LEN\fP characters 
+.br
+\fImouseButton\fP The mouse button to click if it is needed by the command being executed 
+.br
+\fIsearchMethod\fP The search method to use if it is needed by the command being executed 
+.br
+\fItolerance\fP The tolerance to use if it is needed by the command being executed 
+.br
+\fItimeout\fP The time in seconds to wait for an image to be displayed when using the \fCwaitfor\fP command. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBxte_commandString() Command Strings\fP 
+.PP
+\fBLibcv Search Methods\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcvautomation from the source code.
