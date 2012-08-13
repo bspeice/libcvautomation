@@ -6,7 +6,7 @@
 Summary: GUI Automation and Testing tool based on OpenCV and XTest
 Name: libcvautomation
 Version: %{VERSION}
-Release: %{PATCHLEVEL}
+Release: %{PATCHLEVEL}%{?dist}
 Source: https://github.com/DjBushido/libcvautomation/%{name}-%{VERSION}.tar.gz
 URL: http://djbushido.github.com/libcvautomation/
 Vendor: MOSAIC at University of North Carolina at Charlotte
@@ -15,6 +15,9 @@ License: BSD 2-clause
 Group: Development/Libraries
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+#Technically if we're missing the atrpms config the build will already have
+#messed up since %{?dist} won't be expanded, but make sure that we do have them.
+BuildRequires: atrpms-rpm-config
 BuildRequires: libXtst-devel
 BuildRequires: libX11-devel
 BuildRequires: opencv-devel
@@ -59,6 +62,15 @@ Requires: %{name} = %{version}-%{release}
 %description doc
 libcvautomation-doc contains the HTML documentation for libcvautomation.
 
+%package python
+Summary: Python bindings for libcvautomation
+Group: Python
+Requires: %{name} = %{version}-%{release}
+
+%description python
+libcvautomation-python contains the libcvautomation python module for
+interfacing with libcvautomation using the python language.
+
 %prep
 %setup -q
 
@@ -95,6 +107,9 @@ rm -rf $RPM_BUILD_ROOT
 %files doc
 %attr(644, root, root) /usr/share/libcvautomation/html/*
 %attr(755, root, root) /usr/share/libcvautomation/html/installdox
+
+%files python
+%attr(644, root, root) /usr/lib/python*/site-packages/*
 
 %changelog
 * Mon Aug 13 2012 Bradlee Speice <bspeice@uncc.edu> 1.5-1
