@@ -1,7 +1,7 @@
 EXTRA_DIST = libcvautomation.py
 
 install-data-local: setup.py
-	$(Python) setup.py install --prefix=$(RPM_BUILD_ROOT)/$(prefix) --exec-prefix=$(RPM_BUILD_ROOT)/$(exec_prefix)
+	$(Python) setup.py install --prefix=$(DESTDIR)/$(prefix) --exec-prefix=$(DESTDIR)/$(exec_prefix)
     
 ##Unfortunately, we can't really uninstall the python file.
 ##The python dist-utils don't tell us where it got installed

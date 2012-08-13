@@ -16,11 +16,11 @@
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-
 %:
 	dh $@
 
 override_dh_install:
 	find debian/tmp/usr/lib -name "*.la" -exec \
 	sed -i -e "s,^dependency_libs=.*,dependency_libs=''," {} \;
+	find debian/tmp/usr/lib -name "*.pyc" -exec rm {} \;
 	dh_install
