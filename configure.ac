@@ -110,8 +110,21 @@ AC_ARG_WITH(python, [  --with-python           Install python support for libcva
 #Check if we should distribute Python
 if test "$with_python" != "no"; then
 	AC_CHECK_PROGS([Python], [python], [missing])
+	AC_CHECK_PROGS([Swig], [swig], [missing])
+	AM_PATH_PYTHON([2.4])
+	m4_include([m4/m4_ax_python_devel.m4])
+	AX_PYTHON_DEVEL([>= '2.4'])
 	AC_CONFIG_FILES([python/Makefile] [python/setup.py])
 fi
+if test "$Python" == "missing"; then
+	echo "Could not find a suitable Python program. Disabling building python support..."
+	with_python="no"
+fi
+if test "$Swig" == "missing"; then
+	echo "Could not find a suitable SWIG program. Disabling building python support..."
+	with_python="no"
+fi
+
 AM_CONDITIONAL(BUILD_PYTHON, [test "$with_python" != "no"]) #true unless --without-python
 
 # Checks for library functions.

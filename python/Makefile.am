@@ -1,16 +1,10 @@
-EXTRA_DIST = libcvautomation.py
+pyexec_LTLIBRARIES = _libcvautomation.la
+_libcvautomation_la_SOURCES = libcvautomation-swig.c
+_libcvautomation_la_LDFLAGS = -avoid-version -module $(PYTHON_LDFLAGS)
+_libcvautomation_la_LIBADD = -lcvautomation
+_libcvautomation_la_CFLAGS = $(PYTHON_CPPFLAGS) -I$(top_srcdir)/include
 
-install-data-local: setup.py
-	$(Python) setup.py install --prefix=$(DESTDIR)/$(prefix) --exec-prefix=$(DESTDIR)/$(exec_prefix)
-    
-##Unfortunately, we can't really uninstall the python file.
-##The python dist-utils don't tell us where it got installed
-##to, so we can't uninstall it.
-##uninstall-local:
+python_PYTHON = libcvautomation.py
 
-CLEANFILES = setup.py
-
-all-local: libcvautomation.py
-clean-local:
-	rm -rf setup.py
-
+libcvautomation-swig.c: libcvautomation.swig
+	$(Swig) -I$(top_srcdir)/include -python -o libcvautomation-swig.c -outdir . libcvautomation.swig
