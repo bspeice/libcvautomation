@@ -114,7 +114,7 @@ if test "$with_python" != "no"; then
 	AM_PATH_PYTHON([2.4])
 	m4_include([m4/m4_ax_python_devel.m4])
 	AX_PYTHON_DEVEL([>= '2.4'])
-	AC_CONFIG_FILES([python/Makefile] [python/setup.py])
+	AC_CONFIG_FILES([python/Makefile])
 fi
 if test "$Python" == "missing"; then
 	echo "Could not find a suitable Python program. Disabling building python support..."
