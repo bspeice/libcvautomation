@@ -774,6 +774,20 @@ cvaPoint xte_waitForImage ( Display *displayLocation, IplImage *subImage, int se
 	cvaPoint resultPoint;
 	resultPoint.x = resultPoint.y = -1;
 
+	/* The next conditional bears some discussion. Due to the way template matching works,
+	 * if the tolerance is INT_MAX or INT_MIN (depending on the search method) you will
+	 * *always* get a result back. Thus, while your intentions may be good, you kill
+	 * the point of waiting until an image appears. Please tune your tolerance values. */
+	if ((searchMethod == CV_TM_SQDIFF && tolerance == INT_MAX) ||
+		(searchMethod == CV_TM_SQDIFF_NORMED && tolerance == INT_MAX) ||
+		(searchMethod == CV_TM_CCORR && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCORR_NORMED && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCOEFF && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCOEFF_NORMED && tolerance == INT_MIN) )
+		
+		fprintf( stderr, "Passing a bad tolerance value to xte_waitForImage()...\n" );
+
+
 	int localTime = 0;
 	while ( localTime < timeout )
 	{
@@ -823,14 +837,90 @@ cvaPoint xte_waitForImage_location ( Display *displayLocation, const char *fileN
 		if ( resultPoint.x != -1 && resultPoint.y != -1 )
 			return resultPoint;
 
-		sleep( 1 );
-		localTime++;
+		sleep( 1 ); localTime++;
 	}
 
 	/* Return error, we couldn't find the image */
 	return resultPoint;
 }		/* -----  end of function xte_waitForImage_location  ----- */
 
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  xte_waitForImage_center
+ *  Description:  Wait for an image to show up on screen, return the center point
+ * =====================================================================================
+ */
+cvaPoint xte_waitForImage_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout )
+{
+	cvaPoint resultPoint;
+	resultPoint.x = resultPoint.y = -1;
+
+	/* The next conditional bears some discussion. Due to the way template matching works,
+	 * if the tolerance is INT_MAX or INT_MIN (depending on the search method) you will
+	 * *always* get a result back. Thus, while your intentions may be good, you kill
+	 * the point of waiting until an image appears. Please tune your tolerance values. */
+	if ((searchMethod == CV_TM_SQDIFF && tolerance == INT_MAX) ||
+		(searchMethod == CV_TM_SQDIFF_NORMED && tolerance == INT_MAX) ||
+		(searchMethod == CV_TM_CCORR && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCORR_NORMED && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCOEFF && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCOEFF_NORMED && tolerance == INT_MIN) )
+		
+		fprintf( stderr, "Passing a bad tolerance value to xte_waitForImage_center()...\n" );
+
+	int localTime = 0;
+	while ( localTime < timeout )
+	{
+		resultPoint = matchSubImage_X11_center( displayLocation, subImage, searchMethod, tolerance );
+
+		if ( resultPoint.x != -1 && resultPoint.y != -1 )
+			return resultPoint;
+
+		sleep( 1 ); localTime++;
+	}
+
+	/* Return error, we couldn't find the image */
+	return resultPoint;
+}		/* ----- end of function xte_waitForImage_center ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  xte_waitForImage_location_center
+ *  Description:  Wait for an image from file to show up on screen, return the center point
+ * =====================================================================================
+ */
+cvaPoint xte_waitForImage_location_center ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout )
+{
+	cvaPoint resultPoint;
+	resultPoint.x = resultPoint.y = -1;
+
+	/* The next conditional bears some discussion. Due to the way template matching works,
+	 * if the tolerance is INT_MAX or INT_MIN (depending on the search method) you will
+	 * *always* get a result back. Thus, while your intentions may be good, you kill
+	 * the point of waiting until an image appears. Please tune your tolerance values. */
+	if ((searchMethod == CV_TM_SQDIFF && tolerance == INT_MAX) ||
+		(searchMethod == CV_TM_SQDIFF_NORMED && tolerance == INT_MAX) ||
+		(searchMethod == CV_TM_CCORR && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCORR_NORMED && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCOEFF && tolerance == INT_MIN) ||
+		(searchMethod == CV_TM_CCOEFF_NORMED && tolerance == INT_MIN) )
+		
+		fprintf( stderr, "Passing a bad tolerance value to xte_waitForImage_location_center()...\n" );
+
+	int localTime = 0;
+	while ( localTime < timeout )
+	{
+		resultPoint = matchSubImage_X11_location_center( displayLocation, fileName, searchMethod, tolerance );
+
+		if ( resultPoint.x != -1 && resultPoint.y != -1 )
+			return resultPoint;
+
+		sleep( 1 ); localTime++;
+	}
+
+	/* Return error, we couldn't find the image */
+	return resultPoint;
+}		/* -----  end of function xte_waitForImage_location_center  ----- */
 
 /* 
  * ===  FUNCTION  ======================================================================

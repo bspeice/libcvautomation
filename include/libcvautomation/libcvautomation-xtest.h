@@ -109,6 +109,12 @@ cvaPoint xte_waitForImage ( Display *displayLocation, IplImage *subImage, int se
 /* Wait for an image from file to show up on screen */
 cvaPoint xte_waitForImage_location ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout );
 
+/* Wait for an image to show up on screen, return the center point */
+cvaPoint xte_waitForImage_center( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout );
+
+/* Wait for an image from file to show up on screen, return the center point */
+cvaPoint xte_waitForImage_location_center( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout );
+
 /* Use one of the functions by command name */
 cvaPoint xte_commandString ( Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout );
 
@@ -662,6 +668,7 @@ Wait for an image to show up on screen. For example, this can be used to make su
  * \param key The key to click as a string
  * \see \ref xtest_key_strings
  */
+
 /** \fn cvaPoint xte_waitForImage ( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout );
  * \brief Wait for an image to show up on screen
  * \details This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy.
@@ -675,6 +682,28 @@ Wait for an image to show up on screen. For example, this can be used to make su
 
 /** \fn cvaPoint xte_waitForImage_location ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout );
  * \brief Wait for an image from file to show up on screen
+ * \details This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy.
+ * \param displayLocation The Display of which to search for an image
+ * \param fileName The file to load an image from before searching
+ * \param searchMethod The search method to use when searching for \c subImage
+ * \param tolerance The tolerance to use when searching for \c tolerance
+ * \param timeout The time (in seconds) to search for the image
+ * \see \ref libcvautomation_search_methods
+ */
+
+/** \fn cvaPoint xte_waitForImage_center ( Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout );
+ * \brief Wait for an image to show up on screen, return the center point
+ * \details This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy.
+ * \param displayLocation The Display of which to search for an image
+ * \param subImage The sub image to search for
+ * \param searchMethod The search method to use when searching for \c subImage
+ * \param tolerance The tolerance to use when searching for \c tolerance
+ * \param timeout The time (in seconds) to search for the image
+ * \see \ref libcvautomation_search_methods
+ */
+
+/** \fn cvaPoint xte_waitForImage_location_center ( Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout );
+ * \brief Wait for an image from file to show up on screen, return the center point
  * \details This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy.
  * \param displayLocation The Display of which to search for an image
  * \param fileName The file to load an image from before searching
