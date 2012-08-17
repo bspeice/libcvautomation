@@ -37,7 +37,7 @@ Description: Example programs to demonstrate libcvautomation functionality
 
 Package: libcvautomation-python
 Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7
-Architecture: all
+Architecture: any
 Description: Python bindings for libcvautomation
  Contains the python libcvautomation module to allow python code to interface
  with libcvautomation.

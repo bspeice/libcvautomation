@@ -23,4 +23,5 @@ override_dh_install:
 	find debian/tmp/usr/lib -name "*.la" -exec \
 	sed -i -e "s,^dependency_libs=.*,dependency_libs=''," {} \;
 	find debian/tmp/usr/lib -name "*.pyc" -exec rm {} \;
+	find debian/tmp/usr/lib -name "*.pyo" -exec rm {} \;
 	dh_install

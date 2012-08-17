@@ -1,6 +1,6 @@
 pyexec_LTLIBRARIES = _libcvautomation.la
 _libcvautomation_la_SOURCES = libcvautomation-swig.c
-_libcvautomation_la_LDFLAGS = -avoid-version -module $(PYTHON_LDFLAGS)
+_libcvautomation_la_LDFLAGS = -avoid-version -module $(PYTHON_LDFLAGS) -L$(top_srcdir)/libcvautomation/.libs
 _libcvautomation_la_LIBADD = -lcvautomation
 _libcvautomation_la_CFLAGS = $(PYTHON_CPPFLAGS) -I$(top_srcdir)/include
 
