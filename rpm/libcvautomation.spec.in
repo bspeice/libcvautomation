@@ -109,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755, root, root) /usr/share/libcvautomation/html/installdox
 
 %files python
-%attr(644, root, root) /usr/lib/python*/site-packages/*
+%attr(644, root, root) /usr/lib*/python*/site-packages/*
 
 %changelog
 * Mon Aug 13 2012 Bradlee Speice <bspeice@uncc.edu> 1.5-1
