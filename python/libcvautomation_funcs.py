@@ -32,16 +32,27 @@ import libcvautomation
 #  Set up the logging options
 #-------------------------------------------------------------------------------
 
-from sys import _current_frames #For getting the function that called us
+_use_frame_trace=None
+try:
+	from sys import _current_frames #For getting the function that called us
+	global _use_frame_trace
+	_use_frame_trace = True
+except:
+	global _use_frame_trace
+	_use_frame_trace = False
+
 import time
 
 def _get_caller():
-	current_frame = sys._current_frames().values()[0] #Current frame
-	caller_frame = current_frame.f_back.f_back #Go back two frames to make sure
-											   #we don't get the name of the function that just called us.
+	if _use_frame_trace:
+		current_frame = sys._current_frames().values()[0] #Current frame
+		caller_frame = current_frame.f_back.f_back #Go back two frames to make sure
+												   #we don't get the name of the function that just called us.
 
-	caller_name = caller_frame.f_globals['__name__'] #And get the name
-	return caller_name
+		caller_name = caller_frame.f_globals['__name__'] #And get the name
+		return caller_name
+	else:
+		return '[frame trace disabled]'
 
 outfile = '/dev/null'
 def _log_output( message ):
