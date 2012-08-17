@@ -103,6 +103,7 @@ def close_display():
 _search_method_default=0
 _tolerance_default=2250000 #Acceptable values are INT_MIN to INT_MAX
 _timeout_default=5
+_mouse_button_default=1 #Left click
 _libcvautomation_error_location = libcvautomation.cvaPoint
 _libcvautomation_error_location.x = _libcvautomation_error_location.y = -1
 
@@ -110,7 +111,7 @@ _libcvautomation_error_location.x = _libcvautomation_error_location.y = -1
 #  Begin the actual wrapper functions
 #-------------------------------------------------------------------------------
 
-def mouse_down( mouse_button = 1 ): #Default left-click
+def mouse_down( mouse_button = _mouse_button_default ):
 	"""Press a mouse button down, and leave it down."""
 	if check_display():
 		out( 'Mouse button down: ' + mouse_button )
@@ -120,7 +121,7 @@ def mouse_down( mouse_button = 1 ): #Default left-click
 		#Display not open
 		return False
 
-def mouse_up( mouse_button = 1 ): #Default left-click
+def mouse_up( mouse_button = _mouse_button_default ):
 	"""Release a mouse button."""
 	if check_display():
 		out( 'Mouse button up: ' + mouse_button )
@@ -131,7 +132,8 @@ def mouse_up( mouse_button = 1 ): #Default left-click
 		#Display not open
 		return False
 
-def mouse_click( mouse_button = 1 ): #Default left-click
+def mouse_click( mouse_button = _mouse_button_default ):
+key_click "Return"
 	"""Click a mouse button where the mouse is currently located"""
 	if check_display()
 		out( 'Mouse button click: ' + mouse_button )
@@ -141,7 +143,7 @@ def mouse_click( mouse_button = 1 ): #Default left-click
 		#Display not open
 		return False
 
-def mouse_click_xy( x_coord, y_coord, mouse_button = 1 ):
+def mouse_click_xy( x_coord, y_coord, mouse_button = _mouse_button_default ):
 	"""Click a mouse button at an absolute coordinate"""
 	if check_display():
 		out( 'Mouse button xy click: x=' + str(x_coord) + ' y=' + str(y_coord) + ' mouse_button=' + mouse_button )
@@ -157,7 +159,7 @@ def mouse_click_xy( x_coord, y_coord, mouse_button = 1 ):
 		#Display not open
 		return False
 
-def mouse_click_rxy( x_inc, y_inc, mouse_button = 1 ):
+def mouse_click_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 	"""Click a mouse button at a location relative to where it currently is at"""
 	if check_display():
 		out( 'Mouse button rxy click: x=' + str(x_inc) + ' y=' + str(y_inc) + ' mouse_button=' + mouse_button )
@@ -171,7 +173,7 @@ def mouse_click_rxy( x_inc, y_inc, mouse_button = 1 ):
 
 def mouse_click_image( [image_names], search_method = _search_method_default,
 						tolerance = _tolerance_default, timeout = _timeout_default,
-						mouse_button = 1, use_wait = True,
+						mouse_button = _mouse_button_default, use_wait = True,
 						use_center = True ):
 	"""Click a mouse button on an image inside the root X11 window"""
 	if check_display():
@@ -215,7 +217,7 @@ def mouse_click_image( [image_names], search_method = _search_method_default,
 		return False
 
 
-def mouse_doubleclick( mouse_button = 1 ):
+def mouse_doubleclick( mouse_button = _mouse_button_default ):
 	"""Click a mouse button twice where the mouse is currently located"""
 	if check_display()
 		out( 'Mouse button doubleclick: ' + mouse_button )
@@ -227,7 +229,7 @@ def mouse_doubleclick( mouse_button = 1 ):
 		return False
 
 
-def mouse_doubleclick_xy( x_coord, y_coord, mouse_button = 1 ):
+def mouse_doubleclick_xy( x_coord, y_coord, mouse_button = _mouse_button_default ):
 	"""Click a mouse button twice at an absolute coordinate"""
 	if check_display():
 		out( 'Mouse button xy doubleclick: x=' + str(x_coord) + ' y=' + str(y_coord) + ' mouse_button=' + mouse_button )
@@ -244,7 +246,7 @@ def mouse_doubleclick_xy( x_coord, y_coord, mouse_button = 1 ):
 		#Display not open
 		return False
 
-def mouse_doubleclick_rxy( x_inc, y_inc, mouse_button = 1 ):
+def mouse_doubleclick_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 	"""Click a mouse button twice at a location relative to where it currently is at"""
 	if check_display():
 		out( 'Mouse button relative xy doubleclick: x=' + str(x_inc) + ' y=' + str(y_inc) + ' mouse_button=' + mouse_button )
@@ -259,7 +261,7 @@ def mouse_doubleclick_rxy( x_inc, y_inc, mouse_button = 1 ):
 
 def mouse_doubleclick_image( [image_names], search_method = _search_method_default,
 						tolerance = _tolerance_default, timeout = _timeout_default,
-						mouse_button = 1, use_wait = True,
+						mouse_button = _mouse_button_default, use_wait = True,
 						use_center = True ):
 	"""Click a mouse button twice on an image inside the root X11 window"""
 	if check_display():
@@ -336,7 +338,7 @@ def mouse_hover_rxy( x_inc, y_inc ):
 
 def mouse_hover_image( [image_names], search_method = _search_method_default,
 						tolerance = _tolerance_default, timeout = _timeout_default,
-						mouse_button = 1, use_wait = True,
+						mouse_button = _mouse_button_default, use_wait = True,
 						use_center = True ):
 	"""Move the mouse to an image inside the root X11 window"""
 	if check_display():
@@ -516,6 +518,27 @@ def wait_for( [image_names], search_method = _search_method_default,
 	else:
 		#Display not open, but return the same type
 		return {}
+
+def command_string( string, mouse_button = _mouse_button_default, search_method = _search_method_default,
+					tolerance = _tolerance_default, timeout = _timeout_default)
+	"""Execute a libcvautomation command based on a string"""
+	#The return for this function bears a bit of talking about:
+	#	A return of (0, 0) or up is a success
+	#	A return of (-1, -1) is an error that either the command wasn't successful, or the command wasn't recognized
+	#	A return of (-2, -2) indicates that the command didn't need to return anything -
+	#		This helps differentiate between errors and functions like key_click that
+	#		don't really use a point
+
+	if check_display():
+		out( 'Command string: string=' + string + ' search_method=' + str(search_method) +
+				' tolerance=' + str(tolerance) + ' timeout=' + str(timeout) )
+		result_point = libcvautomation.xte_commandString( get_display(), string,
+							mouse_button, search_method,
+							tolerance, timeout )
+		return result_point
+	else:
+		#Display not open, return an error point
+		return _libcvautomation_error_location
 
 ## \file libcvautomation_funcs.py
 # \brief Libcvautomation wrapper for python
