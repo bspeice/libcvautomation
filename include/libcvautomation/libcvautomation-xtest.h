@@ -435,7 +435,7 @@ Scroll the mouse up 1 time - depending on window manager settings, etc., this ma
 \code 'mouselocation' \endcode
 Return the current location of the mouse pointer.
 
-\section keyboard_functions Keyboard Functions
+\section keyclick Key Click
 \code 'keyclick <key_name>' \endcode
 Push and release a keyboard key. This can be a key like \c 'a', \c 'b', or something fancy like \c 'space'. Please see \ref xtest_key_strings for a full list of special keys.
 
