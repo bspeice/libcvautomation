@@ -326,6 +326,7 @@ def mouse_doubleclick_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 # \note \c use_wait must be set to \c True for this parameter to have any effect
 # \param mouse_button The mouse button to click after finding an image
 # \param use_wait Set to \c True to make this function wait \c timeout seconds before giving up finding an image.
+# \param use_center Set to \c True to make this function return the center coordinate of the matched image. Setting to \c False will use the top-left corner.
 # \note If set to \c False, this function will go through the list of \c image_names once before giving up.
 # \returns Return \c False if the X11 display was not opened before execution or no images were found, and \c True otherwise
 def mouse_doubleclick_image( [image_names], search_method = _search_method_default,
@@ -400,7 +401,6 @@ def mouse_hover_xy( x_coord, y_coord ):
 # \note A positive increment moves the mouse right, a negative increment moves the mouse left
 # \param y_inc The increment to move the mouse vertically
 # \note A positive increment moves the mouse down, a negative increment moves the mouse up
-# \param mouse_button The mouse button to click after moving
 # \returns Return \c False if the X11 display was not opened before execution, and \c True otherwise
 def mouse_hover_rxy( x_inc, y_inc ):
 	if _check_display():
@@ -421,6 +421,7 @@ def mouse_hover_rxy( x_inc, y_inc ):
 # \note \c use_wait must be set to \c True for this parameter to have any effect
 # \param use_wait Set to \c True to make this function wait \c timeout seconds before giving up finding an image.
 # \note If set to \c False, this function will go through the list of \c image_names once before giving up.
+# \param use_center Set to \c True to make this function return the center coordinate of the matched image. Setting to \c False will use the top-left corner.
 # \returns Return \c False if the X11 display was not opened before execution or no images were found, and \c True otherwise
 def mouse_hover_image( [image_names], search_method = _search_method_default,
 						tolerance = _tolerance_default, timeout = _timeout_default,
@@ -643,6 +644,7 @@ def wait_for( [image_names], search_method = _search_method_default,
 # \returns A cvaPoint class with the following points:<br>(0, 0) or up indicates a success.<br>(-1, -1) indicates either the command was not successful, or that the command was not recognized.<br>(-2, -2) indicates that the command did not need to return anything - For example, commands like \ref mousejiggle don't normally return a value.
 def command_string( string, mouse_button = _mouse_button_default, search_method = _search_method_default,
 					tolerance = _tolerance_default, timeout = _timeout_default)
+
 	#The return for this function bears a bit of talking about:
 	#	A return of (0, 0) or up is a success
 	#	A return of (-1, -1) is an error that either the command wasn't successful, or the command wasn't recognized
