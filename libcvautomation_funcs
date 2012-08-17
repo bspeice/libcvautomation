@@ -66,13 +66,13 @@ err ()
 #-------------------------------------------------------------------------------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  mousedown
+#          NAME:  mouse_down
 #   DESCRIPTION:  Push the mouse button down, and leave it there.
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-mousedown ()
+mouse_down ()
 {
 	if [ -n "$1" ]; then
 		eval $CVAINPUT -s 'mousedown $1' >> $OUTFILE >> $OUTFILE
@@ -80,16 +80,16 @@ mousedown ()
 		eval $CVAINPUT -s 'mousedown 1' >> $OUTFILE >> $OUTFILE
 	fi
 	return $?
-}	# ----------  end of function mousedown  ----------
+}	# ----------  end of function mouse_down  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  mouseup
+#          NAME:  mouse_up
 #   DESCRIPTION:  Release a mouse button
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-mouseup ()
+mouse_up ()
 {
 	if [ -n "$1" ]; then
 		eval $CVAINPUT -s 'mouseup $1' >> $OUTFILE >> $OUTFILE
@@ -97,16 +97,16 @@ mouseup ()
 		eval $CVAINPUT -s 'mouseup 1' >> $OUTFILE >> $OUTFILE
 	fi
 	return $?
-}	# ----------  end of function mouseup  ----------
+}	# ----------  end of function mouse_up  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  click
+#          NAME:  mouse_click
 #   DESCRIPTION:  Click the mouse where it is currently located
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-click ()
+mouse_click ()
 {
 	if [ -n "$1" ]; then
 		eval '$CVAINPUT -s "mouseclick $1" >> $OUTFILE >> $OUTFILE'
@@ -114,15 +114,15 @@ click ()
 		eval '$CVAINPUT -s "mouseclick 1" >> $OUTFILE >> $OUTFILE'
 	fi
 	return $?
-}	# ----------  end of function click  ----------
+}	# ----------  end of function mouse_click  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  click_xy
+#          NAME:  mouse_click_xy
 #   DESCRIPTION:  Click a specific point on the screen
 #    PARAMETERS:  x-location, y-location
 #       RETURNS:  
 #-------------------------------------------------------------------------------
-click_xy ()
+mouse_click_xy ()
 {
 	if [ -z "$1" ]; then
 		out "Did not specify an X location, assuming (0, 0)"
@@ -146,16 +146,16 @@ click_xy ()
 	fi
 
 	return $?
-}	# ----------  end of function click_xy  ----------
+}	# ----------  end of function mouse_click_xy  ----------
 
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  clickr_xy
+#          NAME:  mouse_click_rxy
 #   DESCRIPTION:  Click a point on the screen relative to where the mouse is at
 #    PARAMETERS:  X increment, Y increment
 #       RETURNS:  
 #-------------------------------------------------------------------------------
-clickr_xy ()
+mouse_click_rxy ()
 {
 	if [ -z "$1" ]; then
 		out "Did not specify an X increment, assuming (0, 0)"
@@ -180,16 +180,16 @@ clickr_xy ()
 	fi
 
 	return $?
-}	# ----------  end of function clickr_xy  ----------
+}	# ----------  end of function mouse_click_rxy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  click_i
+#          NAME:  mouse_click_image
 #   DESCRIPTION:  Click a point based on a screenshot
 #    PARAMETERS:  Location of screenshot, optional index to use if multiple
 #					matches are found
 #       RETURNS:  
 #-------------------------------------------------------------------------------
-click_i ()
+mouse_click_image ()
 {
 	RETURN_CODE=255
 	COMMAND_LINE=""
@@ -256,44 +256,44 @@ click_i ()
 	fi
 
 	return $RETURN_CODE
-}	# ----------  end of function click_i  ----------
+}	# ----------  end of function mouse_click_image  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  rightclick_i
+#          NAME:  mouse_rightclick_image
 #   DESCRIPTION:  Exactly like click_i, but click the right mouse button
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-rightclick_i ()
+mouse_rightclick_image ()
 {
 	hover_i $@ && click 3
-}	# ----------  end of function rightclick_i  ----------
+}	# ----------  end of function mouse_rightclick_image  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  doubleclick
+#          NAME:  mouse_doubleclick
 #   DESCRIPTION:  Click the mouse twice
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-doubleclick ()
+mouse_doubleclick ()
 {
 	if [ -n "$1" ]; then
 		click $1 && click $1
 	else
 		click && click
 	fi
-}	# ----------  end of function doubleclick  ----------
+}	# ----------  end of function mouse_doubleclick  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  doubleclick_xy
+#          NAME:  mouse_doubleclick_xy
 #   DESCRIPTION:  Click the mouse twice on a specific location
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-doubleclick_xy ()
+mouse_doubleclick_xy ()
 {
 	if [ -z "$1" ]; then
 		out "Did not specify an X location, assuming (0, 0)"
@@ -317,16 +317,16 @@ doubleclick_xy ()
 	fi
 
 	return $?
-}	# ----------  end of function doubleclick_xy  ----------
+}	# ----------  end of function mouse_doubleclick_xy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  doubleclickr_xy
+#          NAME:  mouse_doubleclick_rxy
 #   DESCRIPTION:  Click the mouse twice on a relative location
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-doubleclickr_xy ()
+mouse_doubleclick_rxy ()
 {
 	if [ -z "$1" ]; then
 		out "Did not specify an X increment, assuming (0, 0)"
@@ -351,10 +351,10 @@ doubleclickr_xy ()
 	fi
 
 	return $?
-}	# ----------  end of function doubleclickr_xy  ----------
+}	# ----------  end of function mouse_doubleclick_rxy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  doubleclick_i
+#          NAME:  mouse_doubleclick_image
 #   DESCRIPTION:  Double-click an image - moves to image first and then
 #					executes a double-click to make sure that it is
 #					compatible with multiple image arguments
@@ -362,10 +362,10 @@ doubleclickr_xy ()
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-doubleclick_i ()
+mouse_doubleclick_image ()
 {
 	hover_i "$@" && click && click
-}	# ----------  end of function doubleclick_i  ----------
+}	# ----------  end of function mouse_doubleclick_image  ----------
 
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -428,13 +428,13 @@ image_location ()
 
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  hover_xy
+#          NAME:  mouse_hover_xy
 #   DESCRIPTION:  Move the mouse to location X Y
 #    PARAMETERS:  X_LOC, Y_LOC
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-hover_xy ()
+mouse_hover_xy ()
 {
 	if [ -z "$1" ]; then
 		out "Did not provide an X location, assuming 0..."
@@ -455,16 +455,16 @@ hover_xy ()
 	eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE'
 
 	return $?
-}	# ----------  end of function hover_xy  ----------
+}	# ----------  end of function mouse_hover_xy  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  hoverr_xy
+#          NAME:  mouse_hover_rxy
 #   DESCRIPTION:  Move the mouse over X and up Y
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-hoverr_xy ()
+mouse_hover_rxy ()
 {
 	if [ -z "$1" ]; then
 		out "Did not provide an X increment, assuming 0..."
@@ -485,17 +485,17 @@ hoverr_xy ()
 	eval '$CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE'
 
 	return $?
-}	# ----------  end of function hoverr_xy  ----------
+}	# ----------  end of function mouse_hover_rxy  ----------
 
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  hover_i
+#          NAME:  mouse_hover_image
 #   DESCRIPTION:  Move the mouse to the center of image on root window
 #    PARAMETERS:  PNG File name
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-hover_i ()
+mouse_hover_image ()
 {
 	RETURN_CODE=255
 
@@ -560,63 +560,63 @@ hover_i ()
 	fi
 
 	return $RETURN_CODE
-}	# ----------  end of function hover_i  ----------
+}	# ----------  end of function mouse_hover_image  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  jiggle_mouse
-#   DESCRIPTION:  Moves the mouse up-right 1 pixel, and then back - necessary
+#          NAME:  mouse_jiggle
+#   DESCRIPTION:  Moves the mouse down-right 1 pixel, and then back - necessary
 #					for activation some widgets
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-jiggle_mouse ()
+mouse_jiggle ()
 {
-	out "jiggle_mouse"
+	out "mouse_jiggle"
 	eval '$CVAINPUT -s "mousejiggle" >> $OUTFILE'
 
 	return $?
-}	# ----------  end of function jiggle_mouse  ----------
+}	# ----------  end of function mouse_jiggle  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  mouse_scrollu
+#          NAME:  mouse_scroll_up
 #   DESCRIPTION:  Scroll the mouse wheel up one
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-mouse_scrollu ()
+mouse_scroll_up ()
 {
 	out "mouse_scrollu"
 	eval '$CVAINPUT -s "mousescrollu" >> $OUTFILE'
 	
 	return $?
-}	# ----------  end of function mouse_scrollu  ----------
+}	# ----------  end of function mouse_scroll_up  ----------
 
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  mouse_scrolld
+#          NAME:  mouse_scroll_down
 #   DESCRIPTION:  Scroll the mouse wheel down one
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-mouse_scrolld ()
+mouse_scroll_down ()
 {
-	out "mouse_scrolld"
+	out "mouse_scroll_down"
 	eval '$CVAINPUT -s "mousescrolld" >> $OUTFILE'
 
 	return $?
-}	# ----------  end of function mouse_scrolld  ----------
+}	# ----------  end of function mouse_scroll_down  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  dragndrop
+#          NAME:  mouse_drag_n_drop
 #   DESCRIPTION:  Drag one image to another image
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-dragndrop ()
+mouse_drag_n_drop ()
 {
 	if [ -z "$1" ]; then
 		err "dragndrop: Did not give me an image to drag!"
@@ -636,16 +636,16 @@ dragndrop ()
 		hover_i "$2" || err "dragndrop: Could not find image to drag to!"
 		mouseup
 	fi
-}	# ----------  end of function dragndrop  ----------
+}	# ----------  end of function mouse_drag_n_drop  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  key_str
+#          NAME:  key_string
 #   DESCRIPTION:  Simulate pressing keys according to $1
 #    PARAMETERS:  String of text as $1
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-key_str ()
+key_string ()
 {
 	COMMAND_LINE=""
 	if [ -z "$1" ]; then
@@ -659,7 +659,7 @@ key_str ()
 	eval "$CVAINPUT $COMMAND_LINE >> $OUTFILE"
 
 	return $?
-}	# ----------  end of function key_str  ----------
+}	# ----------  end of function key_string  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  key_down
@@ -723,13 +723,13 @@ key_click ()
 }	# ----------  end of function key_press  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  waitfor
+#          NAME:  wait_for
 #   DESCRIPTION:  Wait for an image to be displayed
 #    PARAMETERS:  
 #       RETURNS:  
 #-------------------------------------------------------------------------------
 
-waitfor ()
+wait_for ()
 {
 	if [ -z "$1" ]; then
 		err "Did not give me an image to find..."
