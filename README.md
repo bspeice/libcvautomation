@@ -36,7 +36,7 @@ Once you have it, just `./configure; make; make install`
 
 
 ## Where we're headed ##
-At this point, most everything is functionally done. I'll develop python bindings to make interfacing with the library simpler, but it will be mostly bugfixes until I can get to those. If there are any suggestions, please let me know!
+At this point, pretty much everything is functionally done. Python bindings to make interfacing with the library simpler have been developed, and it should mostly be bugfixes from here out. If there are any suggestions, please let me know!
 
 ## Get in contact ##
 If you have a suggestion, comment, question, concern, or otherwise, feel free to email me at <bspeice@uncc.edu>. This product is developed with the community in mind, so if there's any feedback to be had I welcome it.
