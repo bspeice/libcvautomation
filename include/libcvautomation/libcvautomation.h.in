@@ -115,7 +115,9 @@ typedef struct {
  *
  * \section main_using Using Libcvautomation And Writing Application Tests
  * So how does one go about using libcvautomation? <br>
- * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that \c cva-match and \c cva-input are installed). Python bindings are on their way too. <br>
+ * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that \c cva-match and \c cva-input are installed). Python bindings are even included too! <br>
+ * Bash wrapper documentation: \ref wrapper_functions <br>
+ * Python wrapper documentation: \ref libcvautomation_funcs.py <br>
  * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that. I've provided code to give you a basic idea of how they work.
  * \section questions Questions? Comments? Concerns?
  * Please send any feedback to <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>. Pull requests can be submitted to <a href="https://github.com/DjBushido/libcvautomation">my github repository</a>.*/
@@ -130,7 +132,7 @@ typedef struct {
  * Basically what happens is that for whenever you need to do image recognition, OpenCV is used to find the images, and XTest is used to generate any events needed. Libcvautomation is mostly a wrapper to integrate both of these products, but also adds some functions like matchSubImage_X11() that allow you to match an image against the X11 root window in place. This means no more <tt>'xwd | convert "<out_name>"'</tt>.
  * \section main_using Using Libcvautomation And Writing Application Tests
  * So how does one go about using libcvautomation? <br>
- * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that cva-match and cva-input are installed). Python bindings are on their way too. <br>
+ * I'm so glad you asked! I've provided a few reference programs - \c cva-match and \c cva-input - that can be used to demonstrate most of libcvautomation's capabilities. I've even provided a BASH wrapper to make it incredibly easy to use BASH with libcvautomation as well (requires that cva-match and cva-input are installed). Python bindings are even included too! <br>
  * Finally, if you want to know how to write your own application tests, please see \ref writing_app_tests for more information on that. I've provided code to give you a basic idea of how they work.
  * \section questions Questions? Comments? Concerns?
  * Please send any feedback to <<a href="mailto:bspeice@uncc.edu">bspeice@uncc.edu</a>>. Pull requests can be submitted to <a href="https://github.com/DjBushido/libcvautomation">my github repository</a>.*/

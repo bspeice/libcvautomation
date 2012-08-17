@@ -17,7 +17,8 @@ notify the developer at <bspeice@uncc.edu>"""
 
 ## \file libcvautomation_funcs.py
 # \brief Libcvautomation wrapper for python
-# \details This source file is designed to give high-level access to libcvautomation using Python. It was modeled after the Bash wrapper, but allows for access to all the extra features of Python.
+# \details This source file is designed to give high-level access to libcvautomation using Python. It was modeled after the Bash wrapper, but allows for access to all the extra features of Python.<br>To use:
+# \code import libcvautomation_funcs \endcode
 # \author Bradlee Speice
 
 ## \package libcvautomation_funcs
