@@ -33,12 +33,11 @@ import libcvautomation
 #-------------------------------------------------------------------------------
 
 _use_frame_trace=None
+
 try:
 	from sys import _current_frames #For getting the function that called us
-	global _use_frame_trace
 	_use_frame_trace = True
 except:
-	global _use_frame_trace
 	_use_frame_trace = False
 
 import time
@@ -61,16 +60,12 @@ def _log_output( message ):
 
 	#with open(outfile, 'a') as outfile_handle
 	outfile_handle = open(outfile, 'a')
-	outfile_handle.__enter__()
-	try:
-		#Logfile format:
-		# <hour>:<minute>:<second> <function_name>: <message>
-		outfile_handle.write(time.stftime('%I:%M:%S '))
-		outfile_handle.write(_get_caller() + ' ')
-		outfile_handle.write(message)
-		outfile_handle.write('\n')
-	finally:
-		outfile_handle.__exit__()
+	#Logfile format:
+	# <hour>:<minute>:<second> <function_name>: <message>
+	outfile_handle.write(time.strftime('%I:%M:%S '))
+	outfile_handle.write(_get_caller() + ' ')
+	outfile_handle.write(message)
+	outfile_handle.write('\n')
 
 
 #-------------------------------------------------------------------------------
@@ -83,7 +78,7 @@ def _check_display():
 	global X11_display
 
 	if X11_display is None:
-		out( 'Trying to call ' + get_caller() + ' with no open display!' )
+		_log_output( 'Trying to call ' + _get_caller() + ' with no open display!' )
 		return False
 	else:
 		return True
@@ -108,7 +103,7 @@ def open_display( display_name='' ):
 	if X11_display is None:
 		return False
 	else:
-		out( 'Opened display with name: ' + display_name )
+		_log_output('Opened display with name: ' + display_name )
 		return True
 
 ## \brief Close a display currently in use by libcvautomation_funcs
@@ -117,7 +112,7 @@ def open_display( display_name='' ):
 def close_display():
 	global X11_display
 	if X11_display is None:
-		out( 'Trying to close a display that has already been closed.' )
+		_log_output('Trying to close a display that has already been closed.' )
 	else:
 		libcvautomation.cvaCloseDisplay( X11_display )
 		X11_display=None
@@ -145,7 +140,7 @@ _libcvautomation_error_location.x = _libcvautomation_error_location.y = -1
 def mouse_down( mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button down: ' + mouse_button )
-		libcvautomation.xte_mouseDown( get_display(), mouse_button )
+		libcvautomation.xte_mouseDown(_get_display(), mouse_button )
 		return True
 	else:
 		#Display not open
@@ -157,7 +152,7 @@ def mouse_down( mouse_button = _mouse_button_default ):
 def mouse_up( mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button up: ' + mouse_button )
-		libcvautomation.xte_mouseUp( get_display(), mouse_button )
+		libcvautomation.xte_mouseUp(_get_display(), mouse_button )
 
 		return True
 	else:
@@ -170,7 +165,7 @@ def mouse_up( mouse_button = _mouse_button_default ):
 def mouse_click( mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button click: ' + mouse_button )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
 		return True
 	else:
 		#Display not open
@@ -185,12 +180,12 @@ def mouse_click( mouse_button = _mouse_button_default ):
 def mouse_click_xy( x_coord, y_coord, mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button xy click: x=' + str(x_coord) + ' y=' + str(y_coord) + ' mouse_button=' + mouse_button )
-		current_location = libcvautomation.xte_mouseLocation( get_display() )
+		current_location = libcvautomation.xte_mouseLocation(_get_display() )
 		x_increment = x_coord - current_location.x
 		y_increment = y_coord - current_location.y
 
-		libcvautomation.xte_hoverMouseRXY( get_display(), x_increment, y_increment )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
+		libcvautomation.xte_hoverMouseRXY(_get_display(), x_increment, y_increment )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
 
 		return True
 	else:
@@ -208,8 +203,8 @@ def mouse_click_xy( x_coord, y_coord, mouse_button = _mouse_button_default ):
 def mouse_click_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button rxy click: x=' + str(x_inc) + ' y=' + str(y_inc) + ' mouse_button=' + mouse_button )
-		libcvautomation.xte_hoverMouseRXY( get_display(), x_inc, y_inc )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
+		libcvautomation.xte_hoverMouseRXY(_get_display(), x_inc, y_inc )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
 
 		return True
 	else:
@@ -242,10 +237,10 @@ def mouse_click_image( image_names, search_method = _search_method_default,
 			while loop_check < timeout:
 				for image in image_names:
 					if use_center:
-						image_location = libcvautomation.xte_clickMouseImage_location_center( get_display(),
+						image_location = libcvautomation.xte_clickMouseImage_location_center(_get_display(),
 											image, mouse_button, search_method, tolerance )
 					else:
-						image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
+						image_location = libcvautomation.xte_clickMouseImage_location(_get_display(),
 											image, mouse_button, search_method, tolerance )
 
 					if image_location != _libcvautomation_error_location:
@@ -257,10 +252,10 @@ def mouse_click_image( image_names, search_method = _search_method_default,
 			#Just cycle through the images once
 			for image in image_names:
 				if use_center:
-					image_location = libcvautomation.xte_clickMouseImage_location_center( get_display(),
+					image_location = libcvautomation.xte_clickMouseImage_location_center(_get_display(),
 											image, mouse_button, search_method, tolerance )
 				else:
-					image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
+					image_location = libcvautomation.xte_clickMouseImage_location(_get_display(),
 											image, mouse_button, search_method, tolerance )
 
 				if image_location != _libcvautomation_error_location:
@@ -277,7 +272,7 @@ def mouse_click_image( image_names, search_method = _search_method_default,
 def mouse_doubleclick( mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button doubleclick: ' + mouse_button )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
 
 		return True
 	else:
@@ -294,13 +289,13 @@ def mouse_doubleclick( mouse_button = _mouse_button_default ):
 def mouse_doubleclick_xy( x_coord, y_coord, mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button xy doubleclick: x=' + str(x_coord) + ' y=' + str(y_coord) + ' mouse_button=' + mouse_button )
-		current_location = libcvautomation.xte_mouseLocation( get_display() )
+		current_location = libcvautomation.xte_mouseLocation(_get_display() )
 		x_increment = x_coord - current_location.x
 		y_increment = y_coord - current_location.y
 
-		libcvautomation.xte_hoverMouseRXY( get_display(), x_increment, y_increment )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
+		libcvautomation.xte_hoverMouseRXY(_get_display(), x_increment, y_increment )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
 
 		return True
 	else:
@@ -318,9 +313,9 @@ def mouse_doubleclick_xy( x_coord, y_coord, mouse_button = _mouse_button_default
 def mouse_doubleclick_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 	if _check_display():
 		_log_output( 'Mouse button relative xy doubleclick: x=' + str(x_inc) + ' y=' + str(y_inc) + ' mouse_button=' + mouse_button )
-		libcvautomation.xte_hoverMouseRXY( get_display(), x_inc, y_inc )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
-		libcvautomation.xte_clickMouse( get_display(), mouse_button )
+		libcvautomation.xte_hoverMouseRXY(_get_display(), x_inc, y_inc )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
+		libcvautomation.xte_clickMouse(_get_display(), mouse_button )
 
 		return True
 	else:
@@ -355,17 +350,17 @@ def mouse_doubleclick_image( image_names, search_method = _search_method_default
 			while loop_check < timeout:
 				for image in image_names:
 					if use_center:
-						image_location = libcvautomation.xte_clickMouseImage_location_center( get_display(),
+						image_location = libcvautomation.xte_clickMouseImage_location_center(_get_display(),
 											image, mouse_button, search_method, tolerance )
 					else:
-						image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
+						image_location = libcvautomation.xte_clickMouseImage_location(_get_display(),
 											image, mouse_button, search_method, tolerance )
 
 					if image_location != _libcvautomation_error_location:
 						#Make sure to click twice once we've found the image
 						#Technically assumes that the system mouse timeout is less than
 						#the time it takes to do two boolean compares - I think this is pretty safe
-						libcvautomation.xte_clickMouse( get_display(), mouse_button )
+						libcvautomation.xte_clickMouse(_get_display(), mouse_button )
 						#We've found our image, break out of the for loop and while loop
 						return True
 
@@ -374,10 +369,10 @@ def mouse_doubleclick_image( image_names, search_method = _search_method_default
 			#Just cycle through the images once
 			for image in image_names:
 				if use_center:
-					image_location = libcvautomation.xte_clickMouseImage_location_center( get_display(),
+					image_location = libcvautomation.xte_clickMouseImage_location_center(_get_display(),
 											image, mouse_button, search_method, tolerance )
 				else:
-					image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
+					image_location = libcvautomation.xte_clickMouseImage_location(_get_display(),
 											image, mouse_button, search_method, tolerance )
 
 				if image_location != _libcvautomation_error_location:
@@ -395,11 +390,11 @@ def mouse_doubleclick_image( image_names, search_method = _search_method_default
 def mouse_hover_xy( x_coord, y_coord ):
 	if _check_display():
 		_log_output( 'Mouse button hover xy: x=' + str(x_coord) + ' y=' + str(y_coord) + ' mouse_button=' + mouse_button )
-		current_location = libcvautomation.xte_mouseLocation( get_display() )
+		current_location = libcvautomation.xte_mouseLocation(_get_display() )
 		x_increment = x_coord - current_location.x
 		y_increment = y_coord - current_location.y
 
-		libcvautomation.xte_hoverMouseRXY( get_display(), x_increment, y_increment )
+		libcvautomation.xte_hoverMouseRXY(_get_display(), x_increment, y_increment )
 
 		return True
 	else:
@@ -415,7 +410,7 @@ def mouse_hover_xy( x_coord, y_coord ):
 def mouse_hover_rxy( x_inc, y_inc ):
 	if _check_display():
 		_log_output( 'Mouse button hover relative xy: x=' + str(x_inc) + ' y=' + str(y_inc) )
-		libcvautomation.xte_hoverMouseRXY( get_display(), x_inc, y_inc )
+		libcvautomation.xte_hoverMouseRXY(_get_display(), x_inc, y_inc )
 
 		return True
 	else:
@@ -448,10 +443,10 @@ def mouse_hover_image( image_names, search_method = _search_method_default,
 			while loop_check < timeout:
 				for image in image_names:
 					if use_center:
-						image_location = libcvautomation.xte_hoverMouseImage_location_center( get_display(),
+						image_location = libcvautomation.xte_hoverMouseImage_location_center(_get_display(),
 											image, mouse_button, search_method, tolerance )
 					else:
-						image_location = libcvautomation.xte_hoverMouseImage_location( get_display(),
+						image_location = libcvautomation.xte_hoverMouseImage_location(_get_display(),
 											image, mouse_button, search_method, tolerance )
 
 					if image_location != _libcvautomation_error_location:
@@ -463,10 +458,10 @@ def mouse_hover_image( image_names, search_method = _search_method_default,
 			#Just cycle through the images once
 			for image in image_names:
 				if use_center:
-					image_location = libcvautomation.xte_hoverMouseImage_location_center( get_display(),
+					image_location = libcvautomation.xte_hoverMouseImage_location_center(_get_display(),
 											image, mouse_button, search_method, tolerance )
 				else:
-					image_location = libcvautomation.xte_hoverMouseImage_location( get_display(),
+					image_location = libcvautomation.xte_hoverMouseImage_location(_get_display(),
 											image, mouse_button, search_method, tolerance )
 
 				if image_location != _libcvautomation_error_location:
@@ -483,7 +478,7 @@ def mouse_jiggle():
 	"""Jiggle the mouse in place"""
 	if _check_display():
 		_log_output( 'Mouse button jiggle' )
-		libcvautomation.xte_mouseJiggle( get_display() )
+		libcvautomation.xte_mouseJiggle(_get_display() )
 		return True
 	else:
 		#Display not open
@@ -495,7 +490,7 @@ def mouse_jiggle():
 def mouse_scroll_up():
 	if _check_display():
 		_log_output( 'Mouse scroll up' )
-		libcvautomation.xte_mouseScrollUp( get_display() )
+		libcvautomation.xte_mouseScrollUp(_get_display() )
 		return True
 	else:
 		#Display not open
@@ -507,7 +502,7 @@ def mouse_scroll_up():
 def mouse_scroll_down():
 	if _check_display():
 		_log_output( 'Mouse scroll down' )
-		libcvautomation.xte_mouseScrollDown( get_display() )
+		libcvautomation.xte_mouseScrollDown(_get_display() )
 		return True
 	else:
 		#Display not open
@@ -541,7 +536,7 @@ def mouse_drag_n_drop( drag_image, drag_to, use_center = True ):
 def key_string( string ):
 	if _check_display():
 		_log_output( 'Key string enter: string=' + string )
-		libcvautomation.xte_clickKeyStr( get_display(), string )
+		libcvautomation.xte_clickKeyStr(_get_display(), string )
 		return True
 	else:
 		#Display not open
@@ -554,7 +549,7 @@ def key_string( string ):
 def key_down( key_name ):
 	if _check_display():
 		_log_output( 'Key button down: key_name=' + key_name )
-		libcvautomation.xte_keyDown( get_display(), key_name )
+		libcvautomation.xte_keyDown(_get_display(), key_name )
 		return True
 	else:
 		#Display not open
@@ -567,7 +562,7 @@ def key_down( key_name ):
 def key_up( key_name ):
 	if _check_display():
 		_log_output( 'Key button up: key_name=' + key_name )
-		libcvautomation.xte_keyUp( get_display(), key_name )
+		libcvautomation.xte_keyUp(_get_display(), key_name )
 		return True
 	else:
 		#Display not open
@@ -580,7 +575,7 @@ def key_up( key_name ):
 def key_click( key_name ):
 	if _check_display():
 		_log_output( 'Key button click: key_name=' + key_name )
-		libcvautomation.xte_keyDown( get_display(), key_name )
+		libcvautomation.xte_keyDown(_get_display(), key_name )
 		return True
 	else:
 		#Display not open
@@ -600,12 +595,12 @@ def image_location( image_names, search_method = _search_method_default,
 		_log_output( 'Locate image (image_location): image_names=' + image_names )
 		if use_center:
 			for image in image_names:
-				image_location = libcvautomation.matchSubImage_X11_center( get_display(), image,
+				image_location = libcvautomation.matchSubImage_X11_center(_get_display(), image,
 									search_method, tolerance )
 				location_array += [image, image_location]
 		else:
 			for image in image_names:
-				image_location = libcvautomation.matchSubImage_X11( get_display(), image,
+				image_location = libcvautomation.matchSubImage_X11(_get_display(), image,
 									search_method, tolerance )
 				location_array += [image, image_location]
 
@@ -629,12 +624,12 @@ def wait_for( image_names, search_method = _search_method_default,
 		_log_output( 'Locate image (wait_for): image_names=' + image_names )
 		if use_center:
 			for image in image_names:
-				image_location = libcvautomation.waitForImage_location( get_display(), image,
+				image_location = libcvautomation.waitForImage_location(_get_display(), image,
 										search_method, tolerance, timeout )
 				location_array += [image, image_location]
 		else:
 			for image in image_names:
-				image_location = libcvautomation.waitForImage_location_center( get_display(), image,
+				image_location = libcvautomation.waitForImage_location_center(_get_display(), image,
 										search_method, tolerance, timeout )
 				location_array += [image, image_location]
 		
@@ -665,7 +660,7 @@ def command_string( string, mouse_button = _mouse_button_default, search_method 
 	if _check_display():
 		_log_output( 'Command string: string=' + string + ' search_method=' + str(search_method) +
 				' tolerance=' + str(tolerance) + ' timeout=' + str(timeout) )
-		result_point = libcvautomation.xte_commandString( get_display(), string,
+		result_point = libcvautomation.xte_commandString(_get_display(), string,
 							mouse_button, search_method,
 							tolerance, timeout )
 		return result_point
