@@ -4,7 +4,7 @@ _libcvautomation_la_LDFLAGS = -avoid-version -module $(PYTHON_LDFLAGS)
 _libcvautomation_la_LIBADD = -lcvautomation
 _libcvautomation_la_CFLAGS = $(PYTHON_CPPFLAGS) -I$(top_srcdir)/include
 
-python_PYTHON = libcvautomation.py
+python_PYTHON = libcvautomation.py libcvautomation_funcs.py
 
 libcvautomation-swig.c: libcvautomation.swig
 	$(Swig) -I$(top_srcdir)/include -python -o libcvautomation-swig.c -outdir . libcvautomation.swig
