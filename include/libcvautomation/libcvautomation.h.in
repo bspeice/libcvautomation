@@ -350,80 +350,89 @@ typedef struct {
  *
  * \section appendix_functions Functions
  * \subsection appendix_click Click the mouse
- * \code mousedown [mouse-button] \endcode
+ * \code mouse_down [mouse-button] \endcode
  * Push the mouse button down where it is currently located, and leave it down.
  * Optionally specify a mouse button to push down
  * <br><br>
  *
- * \code mouseup [mouse-button] \endcode
- * \code click [mouse-button] \endcode
+ * \code mouse_up [mouse-button] \endcode
+ * Release a mouse button.
+ * Optionally specify a mouse button to release (default button 1).
+ * <br><br>
+ *
+ * \code mouse_click [mouse-button] \endcode
  * Release the mouse button
  * Optionally specify a mouse button to release
  * <br><br>
  *
- * \code click_xy <x-coordinate> <y-coordinate> [mouse-button] \endcode
+ * \code mouse_click_xy <x-coordinate> <y-coordinate> [mouse-button] \endcode
  * Click the mouse on an absolute point on screen
  * Optionally specify a mouse button to click
  * 	\note The actual process is to move the mouse to the given location, then click there.
  * <br><br>
  *
- * \code clickr_xy <x-increment> <y-increment> [mouse-button] \endcode
+ * \code mouse_click_rxy <x-increment> <y-increment> [mouse-button] \endcode
  * Click the mouse on the screen relative to where the mouse is at
  * Optionally specify a mouse button to click
  *  \note The actual process is to move the mouse the given distance, then click there.
  *  \note Also, note that a positive \c x-increment moves the mouse to the right, and a positive \c y-increment moves the mouse down.
  * <br><br>
  *
- * \code click_i <filename> [filename-2] ... [filename-n] \endcode
+ * \code mouse_click_image <filename> [filename-2] ... [filename-n] \endcode
  * Click the mouse on a screenshot from \c filename
  * Optionally specify multiple files to search in.
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref appendix_variables for more information on these.
  * <br><br>
  *
- * \code doubleclick [mouse-button] \endcode
+ * \code mouse_doubleclick [mouse-button] \endcode
  * Click the mouse twice
  * Optionally specify a mouse button to click
  * <br><br>
  *
- * \code doubleclick_xy [mouse-button] \endcode
+ * \code mouse_doubleclick_xy [mouse-button] \endcode
  * Click the mouse twice on an absolute point on screen
  * Optionally specify a mouse button to click
  * 	\note The actual process is to move the mouse to the given location, then click there.
  * <br><br>
  *
- * \code doubleclick_i <filename> [filename-2] ... [filename-n] \endcode
+ * \code mouse_doubleclick_rxy [mouse-button] \endcode
+ * Click the mouse twice on a relative point on screen
+ * Optionally specify a mouse button to click
+ * <br><br>
+ *
+ * \code mouse_doubleclick_image <filename> [filename-2] ... [filename-n] \endcode
  * Click the mouse twice on a screenshot from \c filename
  * Optionally specify multiple files to search in.
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref appendix_variables for more information on these.
  * <br><br>
  *
  * \subsection appendix_move Move the mouse
- * \code hover_xy <x-coordinate> <y-increment> \endcode
+ * \code mouse_hover_xy <x-coordinate> <y-increment> \endcode
  * Move the mouse to a location on screen using absolute positioning
  * <br><br>
  *
- * \code hoverr_xy <x-increment> <y-increment> \endcode
+ * \code mouse_hover_rxy <x-increment> <y-increment> \endcode
  * Move the mouse to a location on screen using relative positioning
  *  \note Note that a positive \c x-increment moves the mouse to the right, and a positive \c y-increment moves the mouse down.
  * <br><br>
  *
- * \code hover_i <filename> [filename-2] ... [filename-n] \endcode
+ * \code mouse_hover_image <filename> [filename-2] ... [filename-n] \endcode
  * Move the mouse to a location on screen based on screenshot
  * Optionally specify multiple files to search in.
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref appendix_variables for more information on these.
  * <br><br>
  *
- * \code jiggle_mouse \endcode
+ * \code mouse_jiggle \endcode
  * Very simple wrapper to move the mouse 1 pixel right and 1 pixel down - useful for activating menu items.
  * <br><br>
  *
- * \code mouse_scrollu \endcode
+ * \code mouse_scroll_up \endcode
  * Scroll the mouse wheel up one
  *
- * \code mouse_scrolld \endcode
+ * \code mouse_scroll_down \endcode
  * Scroll the mouse wheel down one
  *
- * \code dragndrop \endcode
+ * \code mouse_drag_n_drop \endcode
  * Drag one image to another - i.e. drag a file to a folder.
  * \warning This function accepts only two arguments unlike other image functions - the first argument is the image to drag, the second is the image to drag to.
  *
@@ -433,12 +442,12 @@ typedef struct {
  * 	\note This is affected by the \c CENTER, \c TOLERANCE, and \c SEARCH_METHOD variables. See \ref appendix_variables for more information on these.
  * <br><br>
  *
- * \code waitfor <filename> \endcode
+ * \code wait_for <filename> \endcode
  * Wait for an image to display on screen, and then return
  *  \note This is affected by the \c TOLERANCE, \c SEARCH_METHOD, and \c TIMEOUT variables. See \ref appendix_variables for more information on these.
  *
  * \subsection appendix_keyboard Click the keyboard
- * \code key_str "<string>" \endcode
+ * \code key_string "<string>" \endcode
  * Enter a string of characters on the keyboard rather than a single character at a time.
  *  \warning This function <b>does not</b> accept key strings like "Space" as \c key_down, \c key_up, and \c key_click do. If you pass in "Space", that is exactly what will be typed.
  * <br><br>
@@ -459,9 +468,6 @@ typedef struct {
  * <br><br>
  *
  * \subsection appendix_utilities Useful extras
- * \code run_process "<process-name>" \endcode
- * Start a process on the system, background it, and return the PID of the created process.
- * <br><br>
  *
  * \code is_running "<process-name>" \endcode
  * \code is_running "<process-id>" \endcode
