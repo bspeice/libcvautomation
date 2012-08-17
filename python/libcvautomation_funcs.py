@@ -32,7 +32,7 @@ import libcvautomation
 #  Set up the logging options
 #-------------------------------------------------------------------------------
 
-from sys import _current_frames() #For getting the function that called us
+from sys import _current_frames #For getting the function that called us
 import time
 
 def _get_caller():
@@ -54,8 +54,8 @@ def _log_output( message ):
 	try:
 		#Logfile format:
 		# <hour>:<minute>:<second> <function_name>: <message>
-		outfile_handle.write(time.stftime('%I:%M:%S ')
-		outfile_handle.write(get_caller + ' ')
+		outfile_handle.write(time.stftime('%I:%M:%S '))
+		outfile_handle.write(_get_caller() + ' ')
 		outfile_handle.write(message)
 		outfile_handle.write('\n')
 	finally:
@@ -94,15 +94,15 @@ def _get_display(): #Intended to be unsafe (and a bit faster)-
 def open_display( display_name='' ):
 	global X11_display
 	X11_display = libcvautomation.cvaOpenDisplay( display_name )
-	if X11_display not is Nothing:
+	if X11_display is None:
+		return False
+	else:
 		out( 'Opened display with name: ' + display_name )
 		return True
-	else:
-		return False
 
 ## \brief Close a display currently in use by libcvautomation_funcs
 # \details This closes the currently open display. All functions used after this will fail unless you open another display. Use \ref libcvautomation_funcs::open_display() to open the new display.
-# \returns Nothing
+# \returns None
 def close_display():
 	global X11_display
 	if X11_display is None:
@@ -157,8 +157,7 @@ def mouse_up( mouse_button = _mouse_button_default ):
 # \param mouse_button The number of the mouse button to click
 # \returns Return \c False if the X11 display was not opened before execution, and \c True otherwise
 def mouse_click( mouse_button = _mouse_button_default ):
-key_click "Return"
-	if _check_display()
+	if _check_display():
 		_log_output( 'Mouse button click: ' + mouse_button )
 		libcvautomation.xte_clickMouse( get_display(), mouse_button )
 		return True
@@ -217,7 +216,7 @@ def mouse_click_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 # \param use_wait Set to \c True to make this function wait \c timeout seconds before giving up finding an image.
 # \note If set to \c False, this function will go through the list of \c image_names once before giving up.
 # \returns Return \c False if the X11 display was not opened before execution or there were no images found, and \c True otherwise
-def mouse_click_image( [image_names], search_method = _search_method_default,
+def mouse_click_image( image_names, search_method = _search_method_default,
 						tolerance = _tolerance_default, timeout = _timeout_default,
 						mouse_button = _mouse_button_default, use_wait = True):
 	if _check_display():
@@ -238,7 +237,7 @@ def mouse_click_image( [image_names], search_method = _search_method_default,
 						image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
 											image, mouse_button, search_method, tolerance )
 
-					if image_location != _libcvautomation_error_location
+					if image_location != _libcvautomation_error_location:
 						#We've found our image, break out of the for loop and while loop
 						return True
 
@@ -253,7 +252,7 @@ def mouse_click_image( [image_names], search_method = _search_method_default,
 					image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
 											image, mouse_button, search_method, tolerance )
 
-				if image_location != _libcvautomation_error_location
+				if image_location != _libcvautomation_error_location:
 					#We've found our image, break out of the for loop
 					return True
 	else:
@@ -265,7 +264,7 @@ def mouse_click_image( [image_names], search_method = _search_method_default,
 # \param mouse_button The number of the mouse button to click twice
 # \returns Return \c False if the X11 display was not opened before execution, and \c True otherwise
 def mouse_doubleclick( mouse_button = _mouse_button_default ):
-	if _check_display()
+	if _check_display():
 		_log_output( 'Mouse button doubleclick: ' + mouse_button )
 		libcvautomation.xte_clickMouse( get_display(), mouse_button )
 
@@ -329,7 +328,7 @@ def mouse_doubleclick_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 # \param use_center Set to \c True to make this function return the center coordinate of the matched image. Setting to \c False will use the top-left corner.
 # \note If set to \c False, this function will go through the list of \c image_names once before giving up.
 # \returns Return \c False if the X11 display was not opened before execution or no images were found, and \c True otherwise
-def mouse_doubleclick_image( [image_names], search_method = _search_method_default,
+def mouse_doubleclick_image( image_names, search_method = _search_method_default,
 						tolerance = _tolerance_default, timeout = _timeout_default,
 						mouse_button = _mouse_button_default, use_wait = True,
 						use_center = True ):
@@ -351,7 +350,7 @@ def mouse_doubleclick_image( [image_names], search_method = _search_method_defau
 						image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
 											image, mouse_button, search_method, tolerance )
 
-					if image_location != _libcvautomation_error_location
+					if image_location != _libcvautomation_error_location:
 						#Make sure to click twice once we've found the image
 						#Technically assumes that the system mouse timeout is less than
 						#the time it takes to do two boolean compares - I think this is pretty safe
@@ -370,7 +369,7 @@ def mouse_doubleclick_image( [image_names], search_method = _search_method_defau
 					image_location = libcvautomation.xte_clickMouseImage_location( get_display(),
 											image, mouse_button, search_method, tolerance )
 
-				if image_location != _libcvautomation_error_location
+				if image_location != _libcvautomation_error_location:
 					#We've found our image, break out of the for loop
 					return True
 
@@ -404,7 +403,7 @@ def mouse_hover_xy( x_coord, y_coord ):
 # \returns Return \c False if the X11 display was not opened before execution, and \c True otherwise
 def mouse_hover_rxy( x_inc, y_inc ):
 	if _check_display():
-		_log_output( 'Mouse button hover relative xy: x=': + str(x_inc) + ' y=' + str(y_inc) )
+		_log_output( 'Mouse button hover relative xy: x=' + str(x_inc) + ' y=' + str(y_inc) )
 		libcvautomation.xte_hoverMouseRXY( get_display(), x_inc, y_inc )
 
 		return True
@@ -423,7 +422,7 @@ def mouse_hover_rxy( x_inc, y_inc ):
 # \note If set to \c False, this function will go through the list of \c image_names once before giving up.
 # \param use_center Set to \c True to make this function return the center coordinate of the matched image. Setting to \c False will use the top-left corner.
 # \returns Return \c False if the X11 display was not opened before execution or no images were found, and \c True otherwise
-def mouse_hover_image( [image_names], search_method = _search_method_default,
+def mouse_hover_image( image_names, search_method = _search_method_default,
 						tolerance = _tolerance_default, timeout = _timeout_default,
 						use_wait = True, use_center = True ):
 	if _check_display():
@@ -444,7 +443,7 @@ def mouse_hover_image( [image_names], search_method = _search_method_default,
 						image_location = libcvautomation.xte_hoverMouseImage_location( get_display(),
 											image, mouse_button, search_method, tolerance )
 
-					if image_location != _libcvautomation_error_location
+					if image_location != _libcvautomation_error_location:
 						#We've found our image, break out of the for loop and while loop
 						return True
 
@@ -459,7 +458,7 @@ def mouse_hover_image( [image_names], search_method = _search_method_default,
 					image_location = libcvautomation.xte_hoverMouseImage_location( get_display(),
 											image, mouse_button, search_method, tolerance )
 
-				if image_location != _libcvautomation_error_location
+				if image_location != _libcvautomation_error_location:
 					#We've found our image, break out of the for loop
 					return True
 	else:
@@ -583,7 +582,7 @@ def key_click( key_name ):
 # \param use_center Set to \c True to return the center coordinate of an image. Set to \c False to use the top-left corner of an image
 # \warning Unlike libcvautomation_funcs::wait_for(), this method will not wait for an image to show up before looking for it.
 # \returns A dictionary pairing each image name with a cvaPoint class indicating the location it was found at (a point of (-1, -1) indicates the image was not found), or an empty dictionary if the X11 display was not opened before execution.
-def image_location( [image_names], search_method = _search_method_default,
+def image_location( image_names, search_method = _search_method_default,
 						tolerance = _tolerance_default,	use_center = True ):
 	if _check_display():
 		location_array = {}
@@ -611,7 +610,7 @@ def image_location( [image_names], search_method = _search_method_default,
 # \param timeout The time (in seconds) to wait when searching for an image on the root X11 window
 # \param use_center Set to \c True to return the center coordinate of an image. Set to \c False to use the top-left corner of an image
 # \returns A dictionary pairing each image name with a cvaPoint class indicating the location it was found at (a point of (-1, -1) indicates the image was not found), or an empty dictionary if the X11 display was not opened before execution.
-def wait_for( [image_names], search_method = _search_method_default,
+def wait_for( image_names, search_method = _search_method_default,
 				tolerance = _tolerance_default, timeout = _timeout_default,
 				use_center = True ):
 	if _check_display():
@@ -643,7 +642,7 @@ def wait_for( [image_names], search_method = _search_method_default,
 # \param timeout The timeout (in seconds) to use, if applicable
 # \returns A cvaPoint class with the following points:<br>(0, 0) or up indicates a success.<br>(-1, -1) indicates either the command was not successful, or that the command was not recognized.<br>(-2, -2) indicates that the command did not need to return anything - For example, commands like \ref mousejiggle don't normally return a value.
 def command_string( string, mouse_button = _mouse_button_default, search_method = _search_method_default,
-					tolerance = _tolerance_default, timeout = _timeout_default)
+					tolerance = _tolerance_default, timeout = _timeout_default):
 
 	#The return for this function bears a bit of talking about:
 	#	A return of (0, 0) or up is a success
