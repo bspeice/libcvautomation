@@ -226,18 +226,18 @@ typedef struct {
  *
  * start_libreoffice_writer ()
  * {
- *	click_i "screens/gnome-menu.png" "screens/kde-menu.png"
- *	click_i "screens/gnome-officeMenu.png" "screens/kde-officeMenu.png"
- *	hover_i "screens/gnome-LibreOfficeWriter.png" "screens/kde-LibreOfficeWriter.png"
- *	jiggle_mouse
- *	click
+ *	mouse_click_image "screens/gnome-menu.png" "screens/kde-menu.png"
+ *	mouse_click_image "screens/gnome-officeMenu.png" "screens/kde-officeMenu.png"
+ *	mouse_hover_image "screens/gnome-LibreOfficeWriter.png" "screens/kde-LibreOfficeWriter.png"
+ *	mouse_jiggle
+ *	mouse_click
  * }
  *
  * close_libreoffice_writer()
  * {
- * 	click_i "screens/gnome-fileMenu.png" "screens/kde-fileMenu.png"
- * 	click_i "screens/gnome-fileExit.png" "screens/kde-fileExit.png"
- * 	click_i "screens/gnome-discard.png" "screens/kde-discard.png"
+ * 	mouse_click_image "screens/gnome-fileMenu.png" "screens/kde-fileMenu.png"
+ * 	mouse_click_image "screens/gnome-fileExit.png" "screens/kde-fileExit.png"
+ * 	mouse_click_image "screens/gnome-discard.png" "screens/kde-discard.png"
  * }
  *
  * start_libreoffice_writer
@@ -260,11 +260,11 @@ typedef struct {
  * \code
  * start_libreoffice_writer ()
  * {
- *	click_i "screens/gnome-menu.png" "screens/kde-menu.png"
- *	click_i "screens/gnome-officeMenu.png" "screens/kde-officeMenu.png"
- *	hover_i "screens/gnome-LibreOfficeWriter.png" "screens/kde-LibreOfficeWriter.png"
- *	jiggle_mouse
- *	click
+ *	mouse_click_image "screens/gnome-menu.png" "screens/kde-menu.png"
+ *	mouse_click_image "screens/gnome-officeMenu.png" "screens/kde-officeMenu.png"
+ *	mouse_hover_image "screens/gnome-LibreOfficeWriter.png" "screens/kde-LibreOfficeWriter.png"
+ *	mouse_jiggle
+ *	mouse_click
  * }
  * \endcode
  * <li>This is the actual body of work done by libcvautomation
@@ -281,9 +281,9 @@ typedef struct {
  * \code
  * close_libreoffice_writer()
  * {
- * 	click_i "screens/gnome-fileMenu.png" "screens/kde-fileMenu.png"
- * 	click_i "screens/gnome-fileExit.png" "screens/kde-fileExit.png"
- * 	click_i "screens/gnome-discard.png" "screens/kde-discard.png"
+ * 	mouse_click_image "screens/gnome-fileMenu.png" "screens/kde-fileMenu.png"
+ * 	mouse_click_image "screens/gnome-fileExit.png" "screens/kde-fileExit.png"
+ * 	mouse_click_image "screens/gnome-discard.png" "screens/kde-discard.png"
  * }
  * \endcode
  * <li>Use the \c click_i function to close down LibreOffice writer - Find the "File" menu, click "Exit", and then make sure to discard all changes.
