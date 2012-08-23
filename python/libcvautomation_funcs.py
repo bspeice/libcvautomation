@@ -556,6 +556,18 @@ def mouse_drag_n_drop( drag_image, drag_to, use_center = True ):
 		#Display not open
 		raise LibcvDisplayNotOpen( _get_caller() )
 
+## \brief Get the current location of the mouse
+# \details This function will return the current location of the mouse as two variables - i.e. `x, y = mouse_location()`. This is a Python-specific function.
+# \returns Two variables for the \c x and \c y locations
+def mouse_location():
+	if _check_display():
+		current_location = libcvautomation.xte_mouseLocation( _get_display() )
+		_log_output( 'Mouse location: x=' + str(current_location.x) + ' y=' + str(current_location.y) )
+		return current_location.x, current_location.y
+	else:
+		#Display not open
+		raise LibcvDisplayNotOpen( _get_caller() )
+
 ## \brief Enter a string of text on the keyboard
 # \details This function will simulate pressing the keys exactly as they are entered - unlike libcvautomation_funcs::key_down, libcvautomation_funcs::key_up, and libcvautomation_funcs::key_click, this function will display exactly what you entered: A string of \c '!' will produce a \c ! as a keypress.
 # \param string The string of text to enter on the keyboard
