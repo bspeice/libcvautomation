@@ -36,7 +36,7 @@ import libcvautomation
 _use_frame_trace=None
 
 try:
-	from sys import _current_frames #For getting the function that called us
+	import inspect #For getting the function that called us
 	_use_frame_trace = True
 except:
 	_use_frame_trace = False
@@ -45,14 +45,26 @@ import time
 
 def _get_caller():
 	if _use_frame_trace:
-		current_frame = sys._current_frames().values()[0] #Current frame
-		caller_frame = current_frame.f_back.f_back #Go back two frames to make sure
-												   #we don't get the name of the function that just called us.
-
-		caller_name = caller_frame.f_globals['__name__'] #And get the name
+		caller_name = inspect.stack()[2][3] #This requires a bit of explanation -
+											#	The way inspect.stack works, we can actually use 'absolute'
+											#	positioning in the stack. The [2] indicates the frame
+											#	two levels above us, not specifically the second frame.
+											#	The [3] is the name of said function.
 		return caller_name
 	else:
 		return '[frame trace disabled]'
+
+def _get_name():
+	if _use_frame_trace:
+		caller_name = inspect.stack()[1][3] #This requires a bit of explanation -
+											#	The way inspect.stack works, we can actually use 'absolute'
+											#	positioning in the stack. The [1] indicates the frame
+											#	immediately above us, not specifically the first frame.
+											#	The [3] is the name of said function.
+		return caller_name
+	else:
+		return '[frame trace disabled]'
+	
 
 outfile = '/dev/null'
 def _log_output( message ):
@@ -159,7 +171,7 @@ def mouse_down( mouse_button = _mouse_button_default ):
 		libcvautomation.xte_mouseDown( _get_display(), mouse_button )
 		return True
 	else:
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Release a mouse button
 # \param mouse_button The number of the mouse button to release
@@ -172,7 +184,7 @@ def mouse_up( mouse_button = _mouse_button_default ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Press and release a mouse button
 # \param mouse_button The number of the mouse button to click
@@ -184,7 +196,7 @@ def mouse_click( mouse_button = _mouse_button_default ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Click a mouse button at an absolute location
 # \details Move the mouse to a location given by an x and y coordinate before clicking
@@ -205,7 +217,7 @@ def mouse_click_xy( x_coord, y_coord, mouse_button = _mouse_button_default ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Click a mouse button at a relative location
 # \details Move the mouse horizontally and vertically by an increment, and then click the mouse
@@ -224,7 +236,7 @@ def mouse_click_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Click a mouse button on an image inside the root X11 window
 # \details For each image in \c image_names, search for it inside the root X11 window. Return once a match has been found, or the timeout value has been exceeded
@@ -281,7 +293,7 @@ def mouse_click_image( image_names, search_method = _search_method_default,
 		raise LibcvImageNotFound( image_names )
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 
 ## \brief Press and release a mouse button twice
@@ -295,7 +307,7 @@ def mouse_doubleclick( mouse_button = _mouse_button_default ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 
 ## \brief Click a mouse button twice at an absolute location
@@ -318,7 +330,7 @@ def mouse_doubleclick_xy( x_coord, y_coord, mouse_button = _mouse_button_default
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Click a mouse button twice at a relative location
 # \details Move the mouse horizontally and vertically by an increment, and then click the mouse twice
@@ -338,7 +350,7 @@ def mouse_doubleclick_rxy( x_inc, y_inc, mouse_button = _mouse_button_default ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Click a mouse button twice on an image inside the root X11 window
 # \details For each image in \c image_names, search for it inside the root X11 window. Return once a match has been found, or the timeout value has been exceeded
@@ -400,7 +412,7 @@ def mouse_doubleclick_image( image_names, search_method = _search_method_default
 		raise LibcvImageNotFound( image_names )
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Move the mouse to a given coordinate, and leave it there
 # \param x_coord The X-coordinate to move the mouse to
@@ -418,7 +430,7 @@ def mouse_hover_xy( x_coord, y_coord ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Move the mouse by a given increment, and leave it there
 # \param x_inc The increment to move the mouse horizontally
@@ -434,7 +446,7 @@ def mouse_hover_rxy( x_inc, y_inc ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Move the mouse to an image inside the root X11 window
 # \details For each image in \c image_names, search for it inside the root X11 window. Return once a match has been found, or the timeout value has been exceeded
@@ -491,7 +503,7 @@ def mouse_hover_image( image_names, search_method = _search_method_default,
 		raise LibcvImageNotFound( image_names )
 	else:
 		#Display not open or no image found
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Jiggle the mouse in place
 # \details Move the mouse right and down 1 pixel, and back. Useful for activating menu entries, etc.
@@ -504,7 +516,7 @@ def mouse_jiggle():
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Scroll the mouse wheel up
 # \details This is the same as pressing mouse button 4
@@ -516,7 +528,7 @@ def mouse_scroll_up():
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Scroll the mouse wheel down
 # \details This is the same as pressing mouse button 5
@@ -528,7 +540,7 @@ def mouse_scroll_down():
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Drag and drop one image to another
 # \param drag_image The image to drag from
@@ -554,7 +566,7 @@ def mouse_drag_n_drop( drag_image, drag_to, use_center = True ):
 			raise LibcvImageNotFound( drag_to )
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Get the current location of the mouse
 # \details This function will return the current location of the mouse as two variables - i.e. `x, y = mouse_location()`. This is a Python-specific function.
@@ -566,7 +578,7 @@ def mouse_location():
 		return current_location.x, current_location.y
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Enter a string of text on the keyboard
 # \details This function will simulate pressing the keys exactly as they are entered - unlike libcvautomation_funcs::key_down, libcvautomation_funcs::key_up, and libcvautomation_funcs::key_click, this function will display exactly what you entered: A string of \c '!' will produce a \c ! as a keypress.
@@ -579,7 +591,7 @@ def key_string( string ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Press a key down on the keyboard, and leave it down
 # \param key_name The name of the key to press down. Unlike libcvautomation_funcs::key_string, this command will press a single key corresponding to the string you give it - for example, \c 'a', \c 'b', or something fancy like \c 'space'.
@@ -592,7 +604,7 @@ def key_down( key_name ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Release a key on the keyboard
 # \param key_name The name of the key to release. Unlike libcvautomation_funcs::key_string, this command will press a single key corresponding to the string you give it - for example, \c 'a', \c 'b', or something fancy like \c 'space'.
@@ -605,7 +617,7 @@ def key_up( key_name ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Press and release a key on the keyboard
 # \param key_name The name of the key to click. Unlike libcvautomation_funcs::key_string, this command will press a single key corresponding to the string you give it - for example, \c 'a', \c 'b', or something fancy like \c 'space'.
@@ -618,7 +630,7 @@ def key_click( key_name ):
 		return True
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Get the location of an image on the screen
 # \param image_names List of image names to search for in the root X11 window
@@ -646,7 +658,7 @@ def image_location( image_names, search_method = _search_method_default,
 		return location_array
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Get the location of an image on the screen, waiting for it to show up
 # \param image_names List of image names to search for in the root X11 window
@@ -675,7 +687,7 @@ def wait_for( image_names, search_method = _search_method_default,
 		return location_array
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
 
 ## \brief Execute a libcvautomation command based on a string
 # \details This is a handler for the xte_commandString() function. 
@@ -710,4 +722,4 @@ def command_string( string, mouse_button = _mouse_button_default, search_method 
 			
 	else:
 		#Display not open
-		raise LibcvDisplayNotOpen( _get_caller() )
+		raise LibcvDisplayNotOpen( _get_name() )
