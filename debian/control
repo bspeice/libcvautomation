@@ -2,7 +2,7 @@ Source: libcvautomation
 Section: devel
 Priority: extra
 Maintainer: Bradlee Speice <bspeice@uncc.edu>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, pkg-config, libpcre3, libx11-dev, libxtst-dev, libopencv-core-dev, libopencv-highgui-dev, libopencv-imgproc-dev, doxygen
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, pkg-config, libpcre3, libx11-dev, libxtst-dev, libopencv-core-dev, libopencv-highgui-dev, libopencv-imgproc-dev, doxygen, python-dev
 Standards-Version: 3.9.3
 Homepage: http://djbushido.github.com/libcvautomation/
 
@@ -36,7 +36,7 @@ Description: Example programs to demonstrate libcvautomation functionality
  as well as a BASH wrapper to write application tests from BASH.
 
 Package: libcvautomation-python
-Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7
+Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7, ${source:Version}
 Architecture: any
 Description: Python bindings for libcvautomation
  Contains the python libcvautomation module to allow python code to interface
