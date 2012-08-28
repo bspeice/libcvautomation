@@ -114,7 +114,6 @@ if test "$with_python" != "no"; then
 	AM_PATH_PYTHON([2.4])
 	m4_include([m4/m4_ax_python_devel.m4])
 	AX_PYTHON_DEVEL([>= '2.4'])
-	AC_CONFIG_FILES([python/Makefile])
 fi
 if test "$Python" == "missing"; then
 	echo "Could not find a suitable Python program. Disabling building python support..."
@@ -126,6 +125,11 @@ if test "$Swig" == "missing"; then
 fi
 
 AM_CONDITIONAL(BUILD_PYTHON, [test "$with_python" != "no"]) #true unless --without-python
+
+if test "$with_python" != "no"; then
+	#Only generate the config if both python and swig are available
+	AC_CONFIG_FILES([python/Makefile])
+fi
 
 # Checks for library functions.
 AC_FUNC_MALLOC
