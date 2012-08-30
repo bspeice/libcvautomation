@@ -91,12 +91,12 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %files
-%attr(755, root, root) /usr/lib64/*.la
-%attr(755, root, root) /usr/lib64/*.so*
+%attr(755, root, root) /usr/lib*/*.la
+%attr(755, root, root) /usr/lib*/*.so*
 %attr(644, root, root) /usr/share/man/man3/*
 
 %files devel
-%attr(644, root, root) /usr/lib64/pkgconfig/*
+%attr(644, root, root) /usr/lib*/pkgconfig/*
 %attr(644, root, root) /usr/include/libcvautomation/*
 
 %files examples
