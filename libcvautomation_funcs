@@ -23,6 +23,11 @@
 #  an area of the screen based on an image.
 #-------------------------------------------------------------------------------
 
+#-------------------------------------------------------------------------------
+#  NOTE: Due to the way loops work in this script, you may NOT use spaces
+#	in file names.
+#-------------------------------------------------------------------------------
+
 #Make sure all the programs we will need are in the right place
 CVAMATCH=`which cva-match` || echo "Could not find the cva-match program..." &>2 #Needed for image recognition
 CVAINPUT=`which cva-input` || echo "Could not find the cva-input program..." &>2 #Needed to manipulate mouse and keyboard
@@ -75,9 +80,9 @@ err ()
 mouse_down ()
 {
 	if [ -n "$1" ]; then
-		eval $CVAINPUT -s 'mousedown $1' >> $OUTFILE >> $OUTFILE
+		eval $CVAINPUT -s 'mousedown "$1"' >> $OUTFILE
 	else
-		eval $CVAINPUT -s 'mousedown 1' >> $OUTFILE >> $OUTFILE
+		eval $CVAINPUT -s 'mousedown 1' >> $OUTFILE
 	fi
 	return $?
 }	# ----------  end of function mouse_down  ----------
@@ -92,9 +97,9 @@ mouse_down ()
 mouse_up ()
 {
 	if [ -n "$1" ]; then
-		eval $CVAINPUT -s 'mouseup $1' >> $OUTFILE >> $OUTFILE
+		eval $CVAINPUT -s 'mouseup "$1"' >> $OUTFILE
 	else
-		eval $CVAINPUT -s 'mouseup 1' >> $OUTFILE >> $OUTFILE
+		eval $CVAINPUT -s 'mouseup 1' >> $OUTFILE
 	fi
 	return $?
 }	# ----------  end of function mouse_up  ----------
@@ -109,9 +114,9 @@ mouse_up ()
 mouse_click ()
 {
 	if [ -n "$1" ]; then
-		eval '$CVAINPUT -s "mouseclick $1" >> $OUTFILE >> $OUTFILE'
+		eval '$CVAINPUT -s "mouseclick \"$1\"" >> $OUTFILE'
 	else
-		eval '$CVAINPUT -s "mouseclick 1" >> $OUTFILE >> $OUTFILE'
+		eval '$CVAINPUT -s "mouseclick 1" >> $OUTFILE'
 	fi
 	return $?
 }	# ----------  end of function mouse_click  ----------
@@ -137,7 +142,7 @@ mouse_click_xy ()
 		Y_LOC=$2
 	fi
 
-	out "click_xy: " $X_LOC $Y_LOC
+	out "mouse_click_xy: " $X_LOC $Y_LOC
 
 	if [ -n "$3" ]; then
 		eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" -s "mouseclick $3" >> $OUTFILE'
@@ -171,7 +176,7 @@ mouse_click_rxy ()
 		Y_INC=$2
 	fi
 
-	out "clickr_xy: " $1 $2
+	out "mouse_click_rxy: " $1 $2
 
 	if [ -n "$3" ]; then
 		eval '$CVAINPUT -s "mouserxy $1 $2" -s "mouseclick 1" >> $OUTFILE'
@@ -198,7 +203,7 @@ mouse_click_image ()
 		return 255
 	fi
 		
-	out "click_i: matching $@"
+	out "mouse_click_image: matching $@"
 
 	if [ -n "$USE_CENTER" ]; then
 		center="c"
@@ -226,7 +231,7 @@ mouse_click_image ()
 		#I don't like this syntax, but 'for loop in {1..$OLD_TIMEOUT}' doesn't work
 		for loop in `seq 1 $OLD_TIMEOUT`
 		do
-			for x in $@
+			for x in "$@"
 			do
 					
 				CVA_RETURN=`waitfor "$x"`
@@ -238,7 +243,7 @@ mouse_click_image ()
 				if [ $CVA_RETURN -eq 0 ]; then
 					#We found the image, click it
 					TIMEOUT=$OLD_TIMEOUT
-					eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick $x' >> $OUTFILE"
+					eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick \"$x\"' >> $OUTFILE"
 					return $?
 				fi
 			done
@@ -247,7 +252,7 @@ mouse_click_image ()
 		#We'll get here if we don't find a match
 		TIMEOUT=$OLD_TIMEOUT
 	else
-		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick $x' >> $OUTFILE"
+		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s 'i${center}mouseclick \"$x\"' >> $OUTFILE"
 		CVA_RETURN=$?
 
 		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
@@ -267,7 +272,8 @@ mouse_click_image ()
 
 mouse_rightclick_image ()
 {
-	hover_i $@ && click 3
+	out "mouse_rightclick_image: $@"
+	mouse_hover_image "$@" && click 3
 }	# ----------  end of function mouse_rightclick_image  ----------
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -279,10 +285,12 @@ mouse_rightclick_image ()
 
 mouse_doubleclick ()
 {
+	out "mouse_doubleclick: $1"
+
 	if [ -n "$1" ]; then
-		click $1 && click $1
+		mouse_click "$1" && mouse_click "$1"
 	else
-		click && click
+		mouse_click && mouse_click
 	fi
 }	# ----------  end of function mouse_doubleclick  ----------
 
@@ -296,24 +304,24 @@ mouse_doubleclick ()
 mouse_doubleclick_xy ()
 {
 	if [ -z "$1" ]; then
-		out "Did not specify an X location, assuming (0, 0)"
+		err "Did not specify an X location, assuming (0, 0)"
 		X_LOC=0
 		Y_LOC=0
 	else
 		X_LOC=$1
 	fi
 	if [ -z "$2" ]; then
-		out "Did not specify a Y location, assuming ($1, 0)"
+		err "Did not specify a Y location, assuming ($1, 0)"
 	else
 		Y_LOC=$2
 	fi
 
-	out "doubleclick_xy $X_LOC $Y_LOC"
+	out "mouse_doubleclick_xy $X_LOC $Y_LOC"
 
 	if [ -n "$3" ]; then
-		click_xy "$X_LOC" "$Y_LOC" "$3" && click "$3"
+		mouse_click_xy "$X_LOC" "$Y_LOC" "$3" && mouse_click "$3"
 	else
-		click_xy "$X_LOC" "$Y_LOC" && click
+		mouse_click_xy "$X_LOC" "$Y_LOC" && mouse_click
 	fi
 
 	return $?
@@ -329,25 +337,25 @@ mouse_doubleclick_xy ()
 mouse_doubleclick_rxy ()
 {
 	if [ -z "$1" ]; then
-		out "Did not specify an X increment, assuming (0, 0)"
+		err "Did not specify an X increment, assuming (0, 0)"
 		X_INC=0
 		Y_INC=0
 	else
-		X_INC=$1
+		X_INC="$1"
 	fi
 
 	if [ -z "$2" ]; then
-		out "Did not specify a Y increment, assuming ($X_INC, 0)"
+		err "Did not specify a Y increment, assuming ($X_INC, 0)"
 	else
-		Y_INC=$2
+		Y_INC="$2"
 	fi
 
 	out "doubleclickr_xy: $X_INC $Y_INC"
 
 	if [ -n "$3" ]; then
-		clickr_xy "$X_INC" "$Y_INC" "$3" && click "$3"
+		mouse_clickr_xy "$X_INC" "$Y_INC" "$3" && mouse_click "$3"
 	else
-		clickr_xy "$1" "$2" && click
+		mouse_clickr_xy "$1" "$2" && mouse_click
 	fi
 
 	return $?
@@ -364,7 +372,8 @@ mouse_doubleclick_rxy ()
 
 mouse_doubleclick_image ()
 {
-	hover_i "$@" && click && click
+	out "mouse_doubleclick_image: $@"
+	mouse_hover_image "$@" && mouse_click && mouse_click
 }	# ----------  end of function mouse_doubleclick_image  ----------
 
 
@@ -384,9 +393,9 @@ image_location ()
 	fi
 
 	#Build the command line arguments
-	for x in $@
+	for x in "$@"
 	do
-		COMMAND_LINE+="-s $x "
+		COMMAND_LINE+="-s \"$x\" "
 	done
 
 	#Find our sub-image
@@ -437,20 +446,20 @@ image_location ()
 mouse_hover_xy ()
 {
 	if [ -z "$1" ]; then
-		out "Did not provide an X location, assuming 0..."
+		err "Did not provide an X location, assuming 0..."
 		X_LOC=0
 	else
 		X_LOC=$1
 	fi
 
 	if [ -z "$2" ]; then
-		out "Did not provide a Y location, assuming 0..."
+		err "Did not provide a Y location, assuming 0..."
 		Y_LOC=0
 	else
 		Y_LOC=$2
 	fi
 
-	out "hover_xy: $X_LOC $Y_LOC"
+	out "mouse_hover_xy: $X_LOC $Y_LOC"
 
 	eval '$CVAINPUT -s "mousexy $X_LOC $Y_LOC" >> $OUTFILE'
 
@@ -467,20 +476,20 @@ mouse_hover_xy ()
 mouse_hover_rxy ()
 {
 	if [ -z "$1" ]; then
-		out "Did not provide an X increment, assuming 0..."
+		err "Did not provide an X increment, assuming 0..."
 		X_INC=0
 	else
 		X_INC=$1
 	fi
 
 	if [ -z "$2" ]; then
-		out "Did not provide a Y increment, assuming 0..."
+		err "Did not provide a Y increment, assuming 0..."
 		Y_INC=0
 	else
 		Y_INC=$1
 	fi
 
-	out "hoverr_xy: $X_INC $Y_INC"
+	out "mouse_hover_rxy: $X_INC $Y_INC"
 
 	eval '$CVAINPUT -s "mouserxy $X_INC $Y_INC" >> $OUTFILE'
 
@@ -530,7 +539,7 @@ mouse_hover_image ()
 		#I don't like this syntax, but 'for loop in {1..$OLD_TIMEOUT}' doesn't work
 		for loop in `seq 1 $OLD_TIMEOUT`
 		do
-			for x in $@
+			for x in "$@"
 			do
 				CVA_RETURN=`waitfor "$x"`
 
@@ -540,7 +549,7 @@ mouse_hover_image ()
 
 				if [ $CVA_RETURN -eq 0 ]; then
 					#We found the image, click it
-					eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
+					eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage \"$x\"' >> $OUTFILE"
 
 					TIMEOUT=$OLD_TIMEOUT
 					return $?
@@ -551,7 +560,7 @@ mouse_hover_image ()
 		#We'll get here if we didn't find a match
 		TIMEOUT=$OLD_TIMEOUT
 	else
-		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage $x' >> $OUTFILE"
+		eval "$CVAINPUT $TOLERANCE_OPTION $TOLERANCE --search-method $SEARCH_METHOD -s '${center}mouseimage \"$x\"' >> $OUTFILE"
 		CVA_RETURN=$?
 
 		if [ $CVA_RETURN -lt $RETURN_CODE ]; then
@@ -619,22 +628,22 @@ mouse_scroll_down ()
 mouse_drag_n_drop ()
 {
 	if [ -z "$1" ]; then
-		err "dragndrop: Did not give me an image to drag!"
+		err "mouse_drag_n_drop: Did not give me an image to drag!"
 		return 255
 	elif [ -z "$2" ]; then
-		err "dragndrop: Did not give me an image to drag to!"
+		err "mouse_drag_n_drop: Did not give me an image to drag to!"
 		return 255
 	fi
 
 	#We have our images to find, hover over the first, mousedown, and then
 	#hover over the other one, and mouseup.
-	hover_i "$1" 
+	mouse_hover_image "$1" 
 	if [ $? -ne 0 ]; then
-		err "dragndrop: Could not find image to drag!"
+		err "mouse_drag_n_drop: Could not find image to drag!"
 	else
-		mousedown 1
-		hover_i "$2" || err "dragndrop: Could not find image to drag to!"
-		mouseup
+		mouse_down 1
+		mouse_hover_image "$2" || err "mouse_drag_n_drop: Could not find image to drag to!"
+		mouse_up
 	fi
 }	# ----------  end of function mouse_drag_n_drop  ----------
 
@@ -653,6 +662,9 @@ key_string ()
 		return 255
 	fi
 
+	#We use $* instead of $@ because they expand a bit differently -
+	#	"$*" -> "$1 $2 $3"
+	#	"$@" -> "$1" "$2" "$3"
 	COMMAND_LINE="-s 'keystring $*'"
 
 	out "key_str: \"$*\""
@@ -735,18 +747,18 @@ wait_for ()
 		err "Did not give me an image to find..."
 	fi
 
-	out "waitfor: $1"
+	out "wait_for: $1"
 
 	if [ -n "$USE_SANE_TOLERANCE" ]; then
 		if [ -z "$TOLERANCE" ]; then
 			TOLERANCE=$INT_MAX
 		fi
-		eval '$CVAINPUT -o $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
+		eval '$CVAINPUT -o $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor \"$1\"" >> $OUTFILE'
 	else
 		if [ -z "$TOLERANCE" ]; then
 			TOLERANCE=$INT_MAX
 		fi
-		eval '$CVAINPUT -t $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor $1" >> $OUTFILE'
+		eval '$CVAINPUT -t $TOLERANCE --search-method $SEARCH_METHOD --timeout $TIMEOUT -s "waitfor \"$1\"" >> $OUTFILE'
 	fi
 
 	RETURN_CODE=$?
