@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.5</span>
+   &#160;<span id="projectnumber">2.0</span>
    </div>
    
   </td>
@@ -54,6 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -138,8 +139,8 @@ Mouse Scroll Up</h2>
 Mouse Location</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;mouselocation&#39;</span> 
 </pre></div><p> Return the current location of the mouse pointer.</p>
-<h2><a class="anchor" id="keyboard_functions"></a>
-Keyboard Functions</h2>
+<h2><a class="anchor" id="keyclick"></a>
+Key Click</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;keyclick &lt;key_name&gt;&#39;</span> 
 </pre></div><p> Push and release a keyboard key. This can be a key like <code>'a'</code>, <code>'b'</code>, or something fancy like <code>'space'</code>. Please see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of special keys.</p>
 <h2><a class="anchor" id="keydown"></a>
@@ -154,7 +155,7 @@ Key Button Up</h2>
 Keyboard Input String</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;keystring &lt;string&gt;&#39;</span> 
 </pre></div><p> Input a string of text to the X11 server. For example, inputting 'Hello, world!" will act as if you typed 'Hello, world!' from the keyboard. </p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Unlike <a class="el" href="xtest_command_strings.html#keydown">Key Button Down</a>, <a class="el" href="xtest_command_strings.html#keyup">Key Button Up</a>, and keyclick, this function can not handle special keys like 'space'.</dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Unlike <a class="el" href="xtest_command_strings.html#keydown">Key Button Down</a>, <a class="el" href="xtest_command_strings.html#keyup">Key Button Up</a>, and <a class="el" href="xtest_command_strings.html#keyclick">Key Click</a>, this function can not handle special keys like 'space'.</dd></dl>
 <h2><a class="anchor" id="waitfor"></a>
 Wait for Image</h2>
 <div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;waitfor &lt;image_name&gt;&#39;</span> 
@@ -165,7 +166,7 @@ Wait for Image</h2>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -177,7 +178,7 @@ Wait for Image</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 13 2012 09:14:32 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 11 2012 17:42:49 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.5</span>
+   &#160;<span id="projectnumber">2.0</span>
    </div>
    
   </td>
@@ -54,6 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -157,6 +158,10 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an image to show up on screen.  <a href="#abfbad79445cce59c95940649210f1b31"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a3f474b9f3ae44e2fcf8997a2a806139e">xte_waitForImage_location</a> (Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an image from file to show up on screen.  <a href="#a3f474b9f3ae44e2fcf8997a2a806139e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a6c246fab2cf1e45eb11f519d805e0fb2">xte_waitForImage_center</a> (Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an image to show up on screen, return the center point.  <a href="#a6c246fab2cf1e45eb11f519d805e0fb2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#ac95300b7c9f5310967e8ffe793c9c8e9">xte_waitForImage_location_center</a> (Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an image from file to show up on screen, return the center point.  <a href="#ac95300b7c9f5310967e8ffe793c9c8e9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcvaPoint.html">cvaPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libcvautomation-xtest_8h.html#a7ea1430ed90d3166f8d9fbb4e240a28f">xte_commandString</a> (Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a command where the command is coming from a string.  <a href="#a7ea1430ed90d3166f8d9fbb4e240a28f"></a><br/></td></tr>
 </table>
@@ -1347,6 +1352,124 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a6c246fab2cf1e45eb11f519d805e0fb2"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_waitForImage_center" ref="a6c246fab2cf1e45eb11f519d805e0fb2" args="(Display *displayLocation, IplImage *subImage, int searchMethod, int tolerance, int timeout)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#a6c246fab2cf1e45eb11f519d805e0fb2">xte_waitForImage_center</a> </td>
+          <td>(</td>
+          <td class="paramtype">Display *&#160;</td>
+          <td class="paramname"><em>displayLocation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IplImage *&#160;</td>
+          <td class="paramname"><em>subImage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>searchMethod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tolerance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Wait for an image to show up on screen, return the center point. </p>
+<p>This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">displayLocation</td><td>The Display of which to search for an image </td></tr>
+    <tr><td class="paramname">subImage</td><td>The sub image to search for </td></tr>
+    <tr><td class="paramname">searchMethod</td><td>The search method to use when searching for <code>subImage</code> </td></tr>
+    <tr><td class="paramname">tolerance</td><td>The tolerance to use when searching for <code>tolerance</code> </td></tr>
+    <tr><td class="paramname">timeout</td><td>The time (in seconds) to search for the image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac95300b7c9f5310967e8ffe793c9c8e9"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_waitForImage_location_center" ref="ac95300b7c9f5310967e8ffe793c9c8e9" args="(Display *displayLocation, const char *fileName, int searchMethod, int tolerance, int timeout)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcvaPoint.html">cvaPoint</a> <a class="el" href="libcvautomation-xtest_8h.html#ac95300b7c9f5310967e8ffe793c9c8e9">xte_waitForImage_location_center</a> </td>
+          <td>(</td>
+          <td class="paramtype">Display *&#160;</td>
+          <td class="paramname"><em>displayLocation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>searchMethod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tolerance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Wait for an image from file to show up on screen, return the center point. </p>
+<p>This method allows you to search for an image on screen and wait for it to show up - this way you can make sure an image exists, and then respond to it. Also makes error checking easy. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">displayLocation</td><td>The Display of which to search for an image </td></tr>
+    <tr><td class="paramname">fileName</td><td>The file to load an image from before searching </td></tr>
+    <tr><td class="paramname">searchMethod</td><td>The search method to use when searching for <code>subImage</code> </td></tr>
+    <tr><td class="paramname">tolerance</td><td>The tolerance to use when searching for <code>tolerance</code> </td></tr>
+    <tr><td class="paramname">timeout</td><td>The time (in seconds) to search for the image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="libcvautomation_search_methods.html">Libcv Search Methods</a> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a7ea1430ed90d3166f8d9fbb4e240a28f"></a><!-- doxytag: member="libcvautomation&#45;xtest.h::xte_commandString" ref="a7ea1430ed90d3166f8d9fbb4e240a28f" args="(Display *displayLocation, char *commandString, int mouseButton, int searchMethod, int tolerance, int timeout)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1421,7 +1544,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1433,7 +1556,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 13 2012 09:14:32 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 11 2012 17:42:49 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

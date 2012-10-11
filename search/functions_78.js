@@ -25,6 +25,8 @@ var searchData=
   ['xte_5fmousescrollup',['xte_mouseScrollUp',['../libcvautomation-xtest_8h.html#a18f5cc7307329ce2e13ceb25b274822b',1,'libcvautomation-xtest.h']]],
   ['xte_5fmouseup',['xte_mouseUp',['../libcvautomation-xtest_8h.html#a317610586ac31c5c501290099b7ebf63',1,'libcvautomation-xtest.h']]],
   ['xte_5fwaitforimage',['xte_waitForImage',['../libcvautomation-xtest_8h.html#abfbad79445cce59c95940649210f1b31',1,'libcvautomation-xtest.h']]],
+  ['xte_5fwaitforimage_5fcenter',['xte_waitForImage_center',['../libcvautomation-xtest_8h.html#a6c246fab2cf1e45eb11f519d805e0fb2',1,'libcvautomation-xtest.h']]],
   ['xte_5fwaitforimage_5flocation',['xte_waitForImage_location',['../libcvautomation-xtest_8h.html#a3f474b9f3ae44e2fcf8997a2a806139e',1,'libcvautomation-xtest.h']]],
+  ['xte_5fwaitforimage_5flocation_5fcenter',['xte_waitForImage_location_center',['../libcvautomation-xtest_8h.html#ac95300b7c9f5310967e8ffe793c9c8e9',1,'libcvautomation-xtest.h']]],
   ['xte_5fxtestsupported',['xte_XTestSupported',['../libcvautomation-xtest_8h.html#af5b751f28a87f6ca4c1b3969c2ddb7f4',1,'libcvautomation-xtest.h']]]
 ];

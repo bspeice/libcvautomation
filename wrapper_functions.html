@@ -34,7 +34,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">libcvautomation
-   &#160;<span id="projectnumber">1.5</span>
+   &#160;<span id="projectnumber">2.0</span>
    </div>
    
   </td>
@@ -54,6 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -108,7 +109,7 @@ Wait</h3>
 Output and Debugging</h3>
 <div class="fragment"><pre class="fragment"> OUTFILE
  ERRFILE 
-</pre></div><p> These files control the reporting of libcvautomation_funcs. The wrapper generates a decent amount of output to help in debugging application tests, and by default these get redirected to /dev/null. To instead redirect them to a file, you can do something like this: </p>
+</pre></div><p> These files control the reporting of <a class="el" href="namespacelibcvautomation__funcs.html" title="Namespace to contain all of the features needed to use the libcvautomation_funcs wrapper.">libcvautomation_funcs</a>. The wrapper generates a decent amount of output to help in debugging application tests, and by default these get redirected to /dev/null. To instead redirect them to a file, you can do something like this: </p>
 <div class="fragment"><pre class="fragment"> OUTFILE=`mktemp`; echo <span class="stringliteral">&quot;Logfile: &quot;</span> $OUTFILE
  ERRFILE=`mktemp`; echo <span class="stringliteral">&quot;Error file: &quot;</span> $ERR_FILE 
 </pre></div><p> This will redirect the output and error output to a file you own, and inform you of what that file is.</p>
@@ -116,71 +117,78 @@ Output and Debugging</h3>
 Functions</h2>
 <h3><a class="anchor" id="appendix_click"></a>
 Click the mouse</h3>
-<div class="fragment"><pre class="fragment"> mousedown [mouse-button] 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a44d208a38c591e8b9eb5aff0051f4414" title="Press a mouse button down.">mouse_down</a> [mouse-button] 
 </pre></div><p> Push the mouse button down where it is currently located, and leave it down. Optionally specify a mouse button to push down <br/>
 <br/>
 </p>
-<div class="fragment"><pre class="fragment"> mouseup [mouse-button] 
-</pre></div> <div class="fragment"><pre class="fragment"> click [mouse-button] 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a4046c72b33ac57e1d39431c9cc888d44" title="Release a mouse button.">mouse_up</a> [mouse-button] 
+</pre></div><p> Release a mouse button. Optionally specify a mouse button to release (default button 1). <br/>
+<br/>
+</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#af4d9b2f324c23336b83399f7fd71852e" title="Press and release a mouse button.">mouse_click</a> [mouse-button] 
 </pre></div><p> Release the mouse button Optionally specify a mouse button to release <br/>
 <br/>
 </p>
-<div class="fragment"><pre class="fragment"> click_xy &lt;x-coordinate&gt; &lt;y-coordinate&gt; [mouse-button] 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#ab98166fb3931d7cd7fbbad6a0986d46b" title="Click a mouse button at an absolute location.">mouse_click_xy</a> &lt;x-coordinate&gt; &lt;y-coordinate&gt; [mouse-button] 
 </pre></div><p> Click the mouse on an absolute point on screen Optionally specify a mouse button to click </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>The actual process is to move the mouse to the given location, then click there. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> clickr_xy &lt;x-increment&gt; &lt;y-increment&gt; [mouse-button] 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a633ee669989a44fa6f23fdbd9881a39e" title="Click a mouse button at a relative location.">mouse_click_rxy</a> &lt;x-increment&gt; &lt;y-increment&gt; [mouse-button] 
 </pre></div><p> Click the mouse on the screen relative to where the mouse is at Optionally specify a mouse button to click </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>The actual process is to move the mouse the given distance, then click there. </dd>
 <dd>
 Also, note that a positive <code>x-increment</code> moves the mouse to the right, and a positive <code>y-increment</code> moves the mouse down. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> click_i &lt;filename&gt; [filename-2] ... [filename-n] 
+<div class="fragment"><pre class="fragment"> mouse_click_image &lt;filename&gt; [filename-2] ... [filename-n] 
 </pre></div><p> Click the mouse on a screenshot from <code>filename</code> Optionally specify multiple files to search in. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>CENTER</code>, <code>TOLERANCE</code>, and <code>SEARCH_METHOD</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> doubleclick [mouse-button] 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a65604797ddffcbbfc2efcb470a54a353" title="Press and release a mouse button twice.">mouse_doubleclick</a> [mouse-button] 
 </pre></div><p> Click the mouse twice Optionally specify a mouse button to click <br/>
 <br/>
 </p>
-<div class="fragment"><pre class="fragment"> doubleclick_xy [mouse-button] 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#aa15713c985a8799f4866bd13acfa2e17" title="Click a mouse button twice at an absolute location.">mouse_doubleclick_xy</a> [mouse-button] 
 </pre></div><p> Click the mouse twice on an absolute point on screen Optionally specify a mouse button to click </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>The actual process is to move the mouse to the given location, then click there. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> doubleclick_i &lt;filename&gt; [filename-2] ... [filename-n] 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#abca5903b1e4208d1c019272f2e05ebdc" title="Click a mouse button twice at a relative location.">mouse_doubleclick_rxy</a> [mouse-button] 
+</pre></div><p> Click the mouse twice on a relative point on screen Optionally specify a mouse button to click <br/>
+<br/>
+</p>
+<div class="fragment"><pre class="fragment"> mouse_doubleclick_image &lt;filename&gt; [filename-2] ... [filename-n] 
 </pre></div><p> Click the mouse twice on a screenshot from <code>filename</code> Optionally specify multiple files to search in. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>CENTER</code>, <code>TOLERANCE</code>, and <code>SEARCH_METHOD</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these. <br/>
 <br/>
 </dd></dl>
 <h3><a class="anchor" id="appendix_move"></a>
 Move the mouse</h3>
-<div class="fragment"><pre class="fragment"> hover_xy &lt;x-coordinate&gt; &lt;y-increment&gt; 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a6585a90832b64e0b75669d458576a98f" title="Move the mouse to a given coordinate, and leave it there.">mouse_hover_xy</a> &lt;x-coordinate&gt; &lt;y-increment&gt; 
 </pre></div><p> Move the mouse to a location on screen using absolute positioning <br/>
 <br/>
 </p>
-<div class="fragment"><pre class="fragment"> hoverr_xy &lt;x-increment&gt; &lt;y-increment&gt; 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a28bf60ba05cbec59985f9655d70ee583" title="Move the mouse by a given increment, and leave it there.">mouse_hover_rxy</a> &lt;x-increment&gt; &lt;y-increment&gt; 
 </pre></div><p> Move the mouse to a location on screen using relative positioning </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>Note that a positive <code>x-increment</code> moves the mouse to the right, and a positive <code>y-increment</code> moves the mouse down. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> hover_i &lt;filename&gt; [filename-2] ... [filename-n] 
+<div class="fragment"><pre class="fragment"> mouse_hover_image &lt;filename&gt; [filename-2] ... [filename-n] 
 </pre></div><p> Move the mouse to a location on screen based on screenshot Optionally specify multiple files to search in. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>CENTER</code>, <code>TOLERANCE</code>, and <code>SEARCH_METHOD</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> jiggle_mouse 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a7c2ecbf863dcd5e4af933f38752e81e5" title="Jiggle the mouse in place.">mouse_jiggle</a> 
 </pre></div><p> Very simple wrapper to move the mouse 1 pixel right and 1 pixel down - useful for activating menu items. <br/>
 <br/>
 </p>
-<div class="fragment"><pre class="fragment"> mouse_scrollu 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a47b44363958312c387e135e9ae484dc0" title="Scroll the mouse wheel up.">mouse_scroll_up</a> 
 </pre></div><p> Scroll the mouse wheel up one</p>
-<div class="fragment"><pre class="fragment"> mouse_scrolld 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#aef8e77ffd828b6803a918cc061d0b92b" title="Scroll the mouse wheel down.">mouse_scroll_down</a> 
 </pre></div><p> Scroll the mouse wheel down one</p>
-<div class="fragment"><pre class="fragment"> dragndrop 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#af3b5f4b294fd2f429e70de18848e1ea8" title="Drag and drop one image to another.">mouse_drag_n_drop</a> 
 </pre></div><p> Drag one image to another - i.e. drag a file to a folder. </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This function accepts only two arguments unlike other image functions - the first argument is the image to drag, the second is the image to drag to.</dd></dl>
 <h3><a class="anchor" id="appendix_find"></a>
@@ -190,37 +198,33 @@ Find an Image</h3>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>CENTER</code>, <code>TOLERANCE</code>, and <code>SEARCH_METHOD</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> waitfor &lt;filename&gt; 
+<div class="fragment"><pre class="fragment"> wait_for &lt;filename&gt; 
 </pre></div><p> Wait for an image to display on screen, and then return </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is affected by the <code>TOLERANCE</code>, <code>SEARCH_METHOD</code>, and <code>TIMEOUT</code> variables. See <a class="el" href="wrapper_functions.html#appendix_variables">Environment Variables</a> for more information on these.</dd></dl>
 <h3><a class="anchor" id="appendix_keyboard"></a>
 Click the keyboard</h3>
-<div class="fragment"><pre class="fragment"> key_str <span class="stringliteral">&quot;&lt;string&gt;&quot;</span> 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a12177cc9e099247f535f9c87409d4259" title="Enter a string of text on the keyboard.">key_string</a> <span class="stringliteral">&quot;&lt;string&gt;&quot;</span> 
 </pre></div><p> Enter a string of characters on the keyboard rather than a single character at a time. </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This function <b>does not</b> accept key strings like "Space" as <code>key_down</code>, <code>key_up</code>, and <code>key_click</code> do. If you pass in "Space", that is exactly what will be typed. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> key_down <span class="stringliteral">&quot;&lt;key-name&gt;&quot;</span> 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a75c43acfa38dea829ce26494c7d0bf3f" title="Press a key down on the keyboard, and leave it down.">key_down</a> <span class="stringliteral">&quot;&lt;key-name&gt;&quot;</span> 
 </pre></div><p> Press a key down and leave it down </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This function accepts special keys like "Space" - see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of characters allowed. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> key_up <span class="stringliteral">&quot;&lt;key-name&gt;&quot;</span> 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#ab12bbd622fcf5e9bb7ae31e86731d9a3" title="Release a key on the keyboard.">key_up</a> <span class="stringliteral">&quot;&lt;key-name&gt;&quot;</span> 
 </pre></div><p> Release a key </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This function accepts special keys like "Space" - see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of characters allowed. <br/>
 <br/>
 </dd></dl>
-<div class="fragment"><pre class="fragment"> key_click <span class="stringliteral">&quot;&lt;key-name&gt;&quot;</span> 
+<div class="fragment"><pre class="fragment"> <a class="code" href="namespacelibcvautomation__funcs.html#a8f69f7246688b01ac3cfb8dd8d70c955" title="Press and release a key on the keyboard.">key_click</a> <span class="stringliteral">&quot;&lt;key-name&gt;&quot;</span> 
 </pre></div><p> Press a key down and then release it immediately after </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>This function accepts special keys like "Space" - see <a class="el" href="xtest_key_strings.html">XTest Key Strings</a> for a full list of characters allowed. <br/>
 <br/>
 </dd></dl>
 <h3><a class="anchor" id="appendix_utilities"></a>
 Useful extras</h3>
-<div class="fragment"><pre class="fragment"> run_process <span class="stringliteral">&quot;&lt;process-name&gt;&quot;</span> 
-</pre></div><p> Start a process on the system, background it, and return the PID of the created process. <br/>
-<br/>
-</p>
 <div class="fragment"><pre class="fragment"> is_running <span class="stringliteral">&quot;&lt;process-name&gt;&quot;</span> 
 </pre></div> <div class="fragment"><pre class="fragment"> is_running <span class="stringliteral">&quot;&lt;process-id&gt;&quot;</span> 
 </pre></div><p> Check if a program name or PID is currently running</p>
@@ -233,7 +237,7 @@ Useful extras</h3>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -245,7 +249,7 @@ Useful extras</h3>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 13 2012 09:14:32 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 11 2012 17:42:49 for libcvautomation by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
