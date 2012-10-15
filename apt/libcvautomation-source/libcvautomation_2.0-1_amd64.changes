@@ -1,0 +1,62 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Fri, 17 Aug 2012 16:45:00 -0500
+Source: libcvautomation
+Binary: libcvautomation-dev libcvautomation-doc libcvautomation-examples libcvautomation-python
+Architecture: source amd64 all
+Version: 2.0-1
+Distribution: precise
+Urgency: low
+Maintainer: Bradlee Speice <bspeice@uncc.edu>
+Changed-By: Bradlee Speice <bspeice@uncc.edu>
+Description: 
+ libcvautomation-dev - GUI Automation and Testing Library
+ libcvautomation-doc - documentation for libcvautomation
+ libcvautomation-examples - Example programs to demonstrate libcvautomation functionality
+ libcvautomation-python - Python bindings for libcvautomation
+Changes: 
+ libcvautomation (2.0-1) precise; urgency=low
+ .
+   * Release version 2.0-1 of libcvautomation
+   * Now includes Python support (2.x)!
+   * Rename functions in Bash wrapper
+   * Add some minor missing functions in main library
+   * Bugfixes
+Checksums-Sha1: 
+ a91c0af632ca9e84b221670b57a19637c2438cb7 1769 libcvautomation_2.0-1.dsc
+ a5887e8b2d1486ad252cc2e59143a2136fa4b809 611270 libcvautomation_2.0.orig.tar.gz
+ 4608ac66165f3382eff0130e977ef38fe3803f46 3131 libcvautomation_2.0-1.debian.tar.gz
+ f66873e3d4c3640a8854e9f4ce163bc728994dd5 65128 libcvautomation-dev_2.0-1_amd64.deb
+ 9b5dfd78484b79b198c4d8d1daa36fc9c8898c05 120220 libcvautomation-doc_2.0-1_all.deb
+ 86f77558093e77bb469cc70792a877ec11f957a5 15032 libcvautomation-examples_2.0-1_amd64.deb
+ 3170275f83fc65e260d0fbd74aa6cfce76a34159 55168 libcvautomation-python_2.0-1_amd64.deb
+Checksums-Sha256: 
+ 5fcac0917c3dfc01e5fc2b516a09005deb4ea2428ba515abf13ec93b2905b527 1769 libcvautomation_2.0-1.dsc
+ 329596eb366e3dfaaae69c2a78d2a6086f7912851a09ee0b3a827f52f297c2c4 611270 libcvautomation_2.0.orig.tar.gz
+ faee92c6902382fb5299d035e503a343cc08d0ba6792318fb7feed27a9423972 3131 libcvautomation_2.0-1.debian.tar.gz
+ ba4b038f58bf8ec9245a9d55c55837832cfdda542843b523b719cd456cfb726f 65128 libcvautomation-dev_2.0-1_amd64.deb
+ 50f7b9ee496fe900745a1eea9379214504095c1689fdd30f53847e115a7ab017 120220 libcvautomation-doc_2.0-1_all.deb
+ 29120069c818e7363cc5c2c0c85579c1058b79f6284313efcb2d6b8024fa0f9e 15032 libcvautomation-examples_2.0-1_amd64.deb
+ 75ac0f34b17feb364ad3aa84213e71b5c16d6014483b6157da13f6051a7b3c6a 55168 libcvautomation-python_2.0-1_amd64.deb
+Files: 
+ 72c79309af8cd8fc5beb03b1693d10e6 1769 devel extra libcvautomation_2.0-1.dsc
+ 689f556272afbbe0d041704d1578ea0d 611270 devel extra libcvautomation_2.0.orig.tar.gz
+ 43cc0fe69edbcc355889da9d39df0bdf 3131 devel extra libcvautomation_2.0-1.debian.tar.gz
+ a7fc786c7f8b5154b06fb38c518add84 65128 libdevel extra libcvautomation-dev_2.0-1_amd64.deb
+ 15d9ae09bc78bb0da133444b309dbc31 120220 doc extra libcvautomation-doc_2.0-1_all.deb
+ 505e4b655c913c6feb4f54d62b1049b0 15032 devel extra libcvautomation-examples_2.0-1_amd64.deb
+ e5edb15316e436e3aca9917209de0412 55168 devel extra libcvautomation-python_2.0-1_amd64.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iQEcBAEBAgAGBQJQfAKCAAoJEOwnvCHfYiWqBdgH/jgiKMD36BWO3Z/C8tH7lHDr
+tQCVPw/4EOopQCX4FjrPxATkugKxFMdpH2jULUI1U7ogBb+6Rw+yjACG1KfsbZhC
+9ueSUSMwy9NJnmN+n7LHTIHa1HhGeFp37QcdmuU/6HdtyW+Rkry13QOswI6lNOlF
+BESDIvJHmwDmwN1T0jg/1BA7qf7qLDlRa5xGHJWU5zw5MO5AAm64niLpnVyPSjZ8
+wIch/9jChGBDAXB2KmgceXIBZaHpveqnWu2hpYMeUvPkE4t7sA3B9VgpSd5bdTuP
+PshajkRLHW1wagcW7hLgmYJpWZi58CY/Bu5vBPHLsUhW6bts8XOdQCZBn5NGhJM=
+=14Ih
+-----END PGP SIGNATURE-----
