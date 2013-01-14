@@ -28,9 +28,9 @@ fi
 
 echo
 echo "Finding the red circle in the OpenCV logo..."
-echo "The red circle is located at: `$CVAMATCH -r opencvlogo.png -s redcircle.png -p ', ' | cut -d',' -f2-`"
+echo "The red circle is located at: `$CVA_MATCH -r opencvlogo.png -s redcircle.png -p ', ' | cut -d',' -f2-`"
 echo "Finding the blue circle in the OpenCV logo..."
-echo "The blue circle is located at: `$CVAMATCH -r opencvlogo.png -s bluecircle.png -p ', ' | cut -d',' -f2-`"
+echo "The blue circle is located at: `$CVA_MATCH -r opencvlogo.png -s bluecircle.png -p ', ' | cut -d',' -f2-`"
 echo "Finding the green circle in the OpenCV logo..."
-echo "The green circle is located at: `$CVAMATCH -r opencvlogo.png -s greencircle.png -p ', ' | cut -d',' -f2-`"
+echo "The green circle is located at: `$CVA_MATCH -r opencvlogo.png -s greencircle.png -p ', ' | cut -d',' -f2-`"
 echo
