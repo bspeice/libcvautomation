@@ -93,7 +93,7 @@ cvaPoint matchSubImage_X11( Display *displayLocation, IplImage *subImage, int se
 	X_IPL = cvCreateImage( imageSize, IPL_DEPTH_8U, 3 ); /* 3 channels - RGB */
 
 	/* This if block converts the X root window to an IPL image. See you on the other side! */
-	unsigned int x, y; /* To be used later */
+	int x, y; /* To be used later */
 
 	if ( screen->depths->depth == 24 )
 	{
@@ -284,7 +284,7 @@ cvaPoint matchSubImage_X11_center( Display *displayLocation, IplImage *subImage,
 	X_IPL = cvCreateImage( imageSize, IPL_DEPTH_8U, 3 ); /* 3 channels - RGB */
 
 	/* This if block converts the X root window to an IPL image. See you on the other side! */
-	unsigned int x, y; /* To be used later */
+	int x, y; /* To be used later */
 
 	if ( screen->depths->depth == 24 )
 	{
