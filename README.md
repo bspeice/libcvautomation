@@ -34,6 +34,9 @@ Place the following lines into your `/etc/apt/sources.list`:
 The tarball can be downloaded from the [downloads](https://github.com/DjBushido/libcvautomation/downloads) page.
 Once you have it, just `./configure; make; make install`
 
+## API Documentation ##
+Github hosts the documentation, and it can be found [here](https://djbushido.github.com/libcvautomation/)
+
 
 ## Where we're headed ##
 At this point, pretty much everything is functionally done. Python bindings to make interfacing with the library simpler have been developed, and it should mostly be bugfixes from here out. If there are any suggestions, please let me know!
