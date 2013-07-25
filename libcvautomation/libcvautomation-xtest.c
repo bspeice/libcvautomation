@@ -505,7 +505,10 @@ void xte_clickKey ( Display *displayLocation, char *key )
 
 	ks = XStringToKeysym( key );
 	if ( ks == NoSymbol )
-		return;
+    {
+        fprintf( stderr, "Key '%s' is an unknown key\n", key );
+        return;
+    }
 
 	kc = XKeysymToKeycode( displayLocation, ks );
 
