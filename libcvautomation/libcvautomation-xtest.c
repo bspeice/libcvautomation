@@ -504,8 +504,7 @@ void xte_clickKey ( Display *displayLocation, char *key )
 	KeySym ks;
 
 	ks = XStringToKeysym( key );
-	if ( ks == NoSymbol )
-    {
+    if ( ks == NoSymbol ) {
         fprintf( stderr, "Key '%s' is an unknown key\n", key );
         return;
     }
