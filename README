@@ -19,7 +19,7 @@ Place the following content into a file named `/etc/yum.repos.d/libcvautomation.
 
 	[libcvautomation]
 	name=Libcvautomation RPM repository
-	baseurl=http://djbushido.github.com/libcvautomation/rpm
+	baseurl=http://djbushido.github.io/libcvautomation/rpm
 	enabled=1
 	gpgcheck=0 
 
@@ -27,15 +27,15 @@ Place the following content into a file named `/etc/yum.repos.d/libcvautomation.
 Place the following lines into your `/etc/apt/sources.list`:
 
 	#Libcvautomation Repository
-	deb http://djbushido.github.com/libcvautomation/apt libcvautomation/
-	deb-src http://djbushido.github.com/libcvautomation/apt libcvautomation-source/ 
+	deb http://djbushido.github.io/libcvautomation/apt libcvautomation/
+	deb-src http://djbushido.github.io/libcvautomation/apt libcvautomation-source/ 
 
 #### Tarball ####
 The tarball can be downloaded from the [downloads](https://github.com/DjBushido/libcvautomation/downloads) page.
 Once you have it, just `./configure; make; make install`
 
 ## API Documentation ##
-Github hosts the documentation, and it can be found [here](https://djbushido.github.com/libcvautomation/)
+Github hosts the documentation, and it can be found [here](https://djbushido.github.io/libcvautomation/)
 
 
 ## Where we're headed ##
